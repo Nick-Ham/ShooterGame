@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpyobjpxnx1dt"]
+
+[ext_resource type="Script" path="res://Scenes/FPSView.gd" id="1_bmyg8"]
+[ext_resource type="PackedScene" uid="uid://dw2shj3bwdrsl" path="res://Scenes/Guns/ShortGun.tscn" id="2_yuvnn"]
+[ext_resource type="Script" path="res://Scripts/Components/HeldWeaponFollow.gd" id="3_qu211"]
+[ext_resource type="Script" path="res://Scripts/Components/HeadBob.gd" id="4_huifd"]
+[ext_resource type="Script" path="res://Scripts/Reticle.gd" id="5_86rpy"]
+
+[node name="FPSView" type="Camera3D" node_paths=PackedStringArray("subViewport", "viewportCamera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66893e-05, -5.96046e-08, 0.00271118)
+cull_mask = 1047553
+current = true
+fov = 80.0
+script = ExtResource("1_bmyg8")
+subViewport = NodePath("SubViewportContainer/SubViewport")
+viewportCamera = NodePath("SubViewportContainer/SubViewport/Camera3D")
+
+[node name="Hands" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, -0.11, -0.445)
+
+[node name="GunJiggler" type="Node3D" parent="Hands"]
+script = ExtResource("3_qu211")
+
+[node name="HeadBob" type="Node" parent="Hands/GunJiggler" node_paths=PackedStringArray("target")]
+script = ExtResource("4_huifd")
+isPrimary = false
+target = NodePath("../Pivot")
+amplitudeY = 0.008
+amplitudeX = 0.005
+
+[node name="Pivot" type="Node3D" parent="Hands/GunJiggler"]
+
+[node name="ShortGun" parent="Hands/GunJiggler/Pivot" instance=ExtResource("2_yuvnn")]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+cull_mask = 2
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Reticle" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_86rpy")
+metadata/_edit_use_anchors_ = true

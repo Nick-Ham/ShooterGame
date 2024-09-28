@@ -1,0 +1,251 @@
+[gd_scene load_steps=28 format=3 uid="uid://3khvdhi6xjou"]
+
+[ext_resource type="Script" path="res://Scripts/Player/StepSoundController.gd" id="1_863d4"]
+[ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_56hl0"]
+[ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="2_sjpk7"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerController.gd" id="3_2w6yp"]
+[ext_resource type="Resource" uid="uid://t78dxd6n3sr2" path="res://Data/DefaultTestGun.tres" id="3_nf6i3"]
+[ext_resource type="Script" path="res://Scripts/Components/HeadLean.gd" id="4_6ny3q"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerCharacterStateManager.gd" id="4_8v6om"]
+[ext_resource type="Script" path="res://Scripts/Components/Punch.gd" id="4_dh8ax"]
+[ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateDefault.gd" id="5_018c5"]
+[ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateInAir.gd" id="5_t1r06"]
+[ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateJumping.gd" id="6_58h4i"]
+[ext_resource type="Script" path="res://Scenes/FPSView.gd" id="6_knxow"]
+[ext_resource type="Script" path="res://Scripts/Components/HeldWeaponFollow.gd" id="7_atuhb"]
+[ext_resource type="Script" path="res://Scripts/Components/HeadBobSettings.gd" id="7_cdgt3"]
+[ext_resource type="Script" path="res://Scripts/WeaponStates/WeaponStateManager.gd" id="7_rhfs6"]
+[ext_resource type="Script" path="res://Scripts/WeaponStates/WeaponStateDefault.gd" id="8_mphu6"]
+[ext_resource type="Script" path="res://Scripts/Components/HeadBob.gd" id="8_t41f4"]
+[ext_resource type="PackedScene" uid="uid://dw2shj3bwdrsl" path="res://Scenes/Guns/ShortGun.tscn" id="8_xch2u"]
+[ext_resource type="Script" path="res://Scripts/Reticle.gd" id="9_xcwwv"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerHeadPunchController.gd" id="11_gj7m3"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerSoundController.gd" id="13_32xeu"]
+[ext_resource type="AudioStream" uid="uid://c12i0eymy6qov" path="res://Assets/Audio/Steps/StepsRandomizer.tres" id="14_j633g"]
+[ext_resource type="AudioStream" uid="uid://y7ylwct4yro8" path="res://Assets/Audio/Thuds/ThudsRandomizer.tres" id="16_b7esa"]
+[ext_resource type="AudioStream" uid="uid://byeppnbhc472f" path="res://Assets/Audio/Gunshots/Gunshot1TestRandomizer.tres" id="22_t04j0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_22kd6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_44yk3"]
+height = 1.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v53qw"]
+radius = 0.25
+height = 1.5
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("fpsViewCamera", "neck")]
+script = ExtResource("3_2w6yp")
+fpsViewCamera = NodePath("../Neck/HeadBobAndPunchPivot/LeanPivot/FPSView")
+neck = NodePath("../Neck")
+
+[node name="WeaponManager" type="Node" parent="."]
+script = ExtResource("2_56hl0")
+defaultWeapon = ExtResource("3_nf6i3")
+
+[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir")]
+script = ExtResource("4_8v6om")
+stateDefault = NodePath("CharacterStateDefault")
+stateJumping = NodePath("CharacterStateJumping")
+stateInAir = NodePath("CharacterStateInAir")
+
+[node name="CharacterStateDefault" type="Node" parent="CharacterStateManager"]
+script = ExtResource("5_018c5")
+acceleration = 24000.0
+maxSpeed = 4.0
+friction = 6000.0
+
+[node name="HeadBobSettings" type="Node" parent="CharacterStateManager/CharacterStateDefault"]
+script = ExtResource("7_cdgt3")
+
+[node name="CharacterStateInAir" type="Node" parent="CharacterStateManager"]
+script = ExtResource("5_t1r06")
+acceleration = 10000.0
+maxSpeed = 4.0
+friction = 0.0
+
+[node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
+script = ExtResource("6_58h4i")
+maxSpeed = 4.0
+
+[node name="WeaponStateManager" type="Node" parent="." node_paths=PackedStringArray("weaponManager", "stateDefault")]
+script = ExtResource("7_rhfs6")
+weaponManager = NodePath("../WeaponManager")
+stateDefault = NodePath("WeaponStateDefault")
+
+[node name="WeaponStateDefault" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("shootSoundPlayer", "shootRecoilPunch")]
+script = ExtResource("8_mphu6")
+shootSoundPlayer = NodePath("../../ShootPlayer")
+shootRecoilPunch = NodePath("../../Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPunch")
+
+[node name="HeadPunchController" type="Node" parent="." node_paths=PackedStringArray("stateManager", "stateInAir", "headPunch")]
+script = ExtResource("11_gj7m3")
+stateManager = NodePath("../CharacterStateManager")
+stateInAir = NodePath("../CharacterStateManager/CharacterStateInAir")
+headPunch = NodePath("../HeadPunch")
+
+[node name="HeadPunch" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("4_dh8ax")
+target = NodePath("../Neck/HeadBobAndPunchPivot")
+
+[node name="HeadBob" type="Node" parent="." node_paths=PackedStringArray("target", "stateManager")]
+script = ExtResource("8_t41f4")
+target = NodePath("../Neck/HeadBobAndPunchPivot")
+stateManager = NodePath("../CharacterStateManager")
+
+[node name="HeadLean" type="Node" parent="." node_paths=PackedStringArray("target", "stateManager")]
+script = ExtResource("4_6ny3q")
+target = NodePath("../Neck/HeadBobAndPunchPivot/LeanPivot")
+stateManager = NodePath("../CharacterStateManager")
+
+[node name="CollisionShapeStanding" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_22kd6")
+
+[node name="CollisionShapeStanding2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_44yk3")
+disabled = true
+
+[node name="StandingNeckPosition" type="Marker3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5, 0)
+
+[node name="CrouchingNeckPosition" type="Marker3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, 0)
+
+[node name="Neck" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5, 0)
+
+[node name="HeadBobAndPunchPivot" type="Node3D" parent="Neck"]
+
+[node name="LeanPivot" type="Node3D" parent="Neck/HeadBobAndPunchPivot"]
+
+[node name="DecorHead" type="CSGSphere3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.234992, 0)
+layers = 4
+radius = 0.169382
+
+[node name="FPSView" type="Camera3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot" node_paths=PackedStringArray("subViewport", "viewportCamera", "headPunch", "characterStateManager")]
+cull_mask = 1047553
+current = true
+script = ExtResource("6_knxow")
+subViewport = NodePath("SubViewportContainer/SubViewport")
+viewportCamera = NodePath("SubViewportContainer/SubViewport/Camera3D")
+headPunch = NodePath("../../../../HeadPunch")
+characterStateManager = NodePath("../../../../CharacterStateManager")
+
+[node name="Hands" type="Node3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, -0.11, -0.445)
+
+[node name="HeldWeaponFollow" type="Node3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands"]
+script = ExtResource("7_atuhb")
+
+[node name="RecoilPivot" type="Node3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow"]
+
+[node name="Pivot" type="Node3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPivot"]
+
+[node name="ShortGun" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPivot/Pivot" instance=ExtResource("8_xch2u")]
+
+[node name="HeadBob" type="Node" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow" node_paths=PackedStringArray("target", "stateManager")]
+script = ExtResource("8_t41f4")
+isPrimary = false
+target = NodePath("../RecoilPivot/Pivot")
+stateManager = NodePath("../../../../../../../CharacterStateManager")
+amplitudeY = 0.008
+amplitudeX = 0.005
+
+[node name="RecoilPunch" type="Node" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow" node_paths=PackedStringArray("target")]
+script = ExtResource("4_dh8ax")
+target = NodePath("../RecoilPivot")
+punchLerpSpeed = 30.0
+punchDecayLerpSpeed = 15.0
+maxTranslation = Vector3(0.05, 0.05, 0.3)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="SubViewport" type="SubViewport" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/SubViewportContainer/SubViewport"]
+cull_mask = 2
+
+[node name="Control" type="Control" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Reticle" type="CenterContainer" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_xcwwv")
+metadata/_edit_use_anchors_ = true
+
+[node name="PhysicsInterpolator3D" type="Node3D" parent="."]
+script = ExtResource("2_sjpk7")
+
+[node name="DecorCapsule" type="MeshInstance3D" parent="PhysicsInterpolator3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+layers = 4
+mesh = SubResource("CapsuleMesh_v53qw")
+skeleton = NodePath("../..")
+
+[node name="PlayerSoundController" type="Node" parent="." node_paths=PackedStringArray("stateManager", "jumpStreamPlayer", "landingStreamPlayer")]
+script = ExtResource("13_32xeu")
+stateManager = NodePath("../CharacterStateManager")
+jumpStreamPlayer = NodePath("../JumpPlayer")
+landingStreamPlayer = NodePath("../LandingPlayer")
+
+[node name="StepSoundController" type="Node" parent="." node_paths=PackedStringArray("audioStreamPlayer", "headBob")]
+script = ExtResource("1_863d4")
+audioStreamPlayer = NodePath("../FootstepPlayer")
+headBob = NodePath("../HeadBob")
+
+[node name="FootstepPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("14_j633g")
+volume_db = -10.0
+pitch_scale = 0.75
+max_polyphony = 2
+bus = &"WorldSFX"
+
+[node name="JumpPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("14_j633g")
+volume_db = 10.0
+pitch_scale = 1.1
+bus = &"WorldSFX"
+
+[node name="LandingPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("16_b7esa")
+volume_db = -10.0
+bus = &"WorldSFX"
+
+[node name="ShootPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("22_t04j0")
+volume_db = -17.0
+max_polyphony = 3
+bus = &"WorldSFX"
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+visible = false

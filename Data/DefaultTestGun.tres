@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3 uid="uid://t78dxd6n3sr2"]
+
+[ext_resource type="Script" path="res://Types/WeaponData.gd" id="1_tcp32"]
+
+[resource]
+script = ExtResource("1_tcp32")
+weaponName = "DefaultTestGun"
+defaultDamage = 25.0
+firingDelay = 0.25
+magazineSize = 15
+recoilLerpSpeed = 30.0
+recoilDecaySpeed = 15.0
+maxRecoilRotation = Vector3(10, 5, 5)
+maxRecoilTranslation = Vector3(0.05, 0.05, 0.3)
+recoilRotationPitchRange = Vector2(2.5, 10)
+recoilRotationYawRange = Vector2(-3, 3)
+recoilRotationRollRange = Vector2(-0.2, 0.2)
+recoilTranslationForwardRange = Vector2(0.05, 0.1)
+recoilTranslationRightRange = Vector2(-0.01, 0.01)
+recoilTranslationUpRange = Vector2(0, 0)
