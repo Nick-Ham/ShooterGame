@@ -18,7 +18,7 @@
 [ext_resource type="Script" path="res://Scripts/WeaponStates/WeaponStateDefault.gd" id="8_mphu6"]
 [ext_resource type="Script" path="res://Scripts/Components/HeadBob.gd" id="8_t41f4"]
 [ext_resource type="PackedScene" uid="uid://dw2shj3bwdrsl" path="res://Scenes/Guns/ShortGun.tscn" id="8_xch2u"]
-[ext_resource type="Script" path="res://Scripts/Reticle.gd" id="9_xcwwv"]
+[ext_resource type="Script" path="res://Scripts/Player/Reticle.gd" id="9_xcwwv"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHeadPunchController.gd" id="11_gj7m3"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerSoundController.gd" id="13_32xeu"]
 [ext_resource type="AudioStream" uid="uid://c12i0eymy6qov" path="res://Assets/Audio/Steps/StepsRandomizer.tres" id="14_j633g"]
@@ -128,14 +128,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.234992, 0)
 layers = 4
 radius = 0.169382
 
-[node name="FPSView" type="Camera3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot" node_paths=PackedStringArray("subViewport", "viewportCamera", "headPunch", "characterStateManager")]
+[node name="FPSView" type="Camera3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot" node_paths=PackedStringArray("subViewport", "viewportCamera", "aimRayCast", "headPunch", "characterStateManager")]
 cull_mask = 1047553
 current = true
 script = ExtResource("6_knxow")
 subViewport = NodePath("SubViewportContainer/SubViewport")
 viewportCamera = NodePath("SubViewportContainer/SubViewport/Camera3D")
+aimRayCast = NodePath("AimRayCastDeprecated")
+cameraRayLayer = 9
 headPunch = NodePath("../../../../HeadPunch")
 characterStateManager = NodePath("../../../../CharacterStateManager")
+
+[node name="AimRayCastDeprecated" type="RayCast3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView"]
+target_position = Vector3(0, 0, -1000)
 
 [node name="Hands" type="Node3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, -0.11, -0.445)
@@ -189,19 +194,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="Reticle" type="CenterContainer" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Control"]
+[node name="Reticle" type="CenterContainer" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Control" node_paths=PackedStringArray("weaponStateManager", "weaponManager")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_xcwwv")
-metadata/_edit_use_anchors_ = true
+weaponStateManager = NodePath("../../../../../../WeaponStateManager")
+weaponManager = NodePath("../../../../../../WeaponManager")
 
 [node name="PhysicsInterpolator3D" type="Node3D" parent="."]
 script = ExtResource("2_sjpk7")

@@ -12,6 +12,7 @@ resource_name = "LowPassFilter"
 cutoff_hz = 2400.0
 
 [resource]
+bus/0/volume_db = -10.5185
 bus/1/name = &"WorldSFX"
 bus/1/solo = false
 bus/1/mute = false

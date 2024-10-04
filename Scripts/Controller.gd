@@ -21,5 +21,5 @@ static func getController(inParent : Node3D) -> Controller:
 func getIsShooting() -> bool:
 	return false
 
-func getAimCastResult() -> RayCastResult:
+func getAimCastResult(_inBloom : float = 0.0) -> RayCastResult:
 	return RayCastResult.new()

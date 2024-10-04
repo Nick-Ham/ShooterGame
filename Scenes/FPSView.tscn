@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dw2shj3bwdrsl" path="res://Scenes/Guns/ShortGun.tscn" id="2_yuvnn"]
 [ext_resource type="Script" path="res://Scripts/Components/HeldWeaponFollow.gd" id="3_qu211"]
 [ext_resource type="Script" path="res://Scripts/Components/HeadBob.gd" id="4_huifd"]
-[ext_resource type="Script" path="res://Scripts/Reticle.gd" id="5_86rpy"]
+[ext_resource type="Script" path="res://Scripts/Player/Reticle.gd" id="5_86rpy"]
 
 [node name="FPSView" type="Camera3D" node_paths=PackedStringArray("subViewport", "viewportCamera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66893e-05, -5.96046e-08, 0.00271118)

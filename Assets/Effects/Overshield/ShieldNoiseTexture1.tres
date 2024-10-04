@@ -1,0 +1,8 @@
+[gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://df1bc1rio2pc5"]
+
+[ext_resource type="FastNoiseLite" uid="uid://ccx8roc7qwln8" path="res://Assets/Effects/Overshield/ShieldNoise1.tres" id="1_gd8uq"]
+
+[resource]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = ExtResource("1_gd8uq")

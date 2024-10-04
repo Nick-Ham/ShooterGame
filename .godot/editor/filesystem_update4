@@ -1,3 +1,13 @@
-res://AudioBusLayout.tres
-res://Scenes/TestScene.tscn
+res://Game/AudioBusLayout.tres
+res://Prototyping/TestEnemy/TestEnemy.tscn
+res://Data/DefaultTestGun.tres
 res://Assets/Audio/Gunshots/Gunshot1TestRandomizer.tres
+res://Assets/Effects/Overshield/OvershieldMaterialShader.tres
+res://Assets/Materials/OvershieldMaterial.tres
+res://Assets/Effects/ImpactParticles.tres
+res://Scripts/Components/OvershieldController.gd
+res://Scenes/TestScene2.tscn
+res://Scenes/TestScene.tscn
+res://Scenes/Player.tscn
+res://Scenes/DefaultGameScene.tscn
+res://Scripts/Components/Health.gd

@@ -18,6 +18,7 @@ var controller : Controller = null
 var character : CharacterBody3D = null
 
 signal state_changed(lastState : WeaponState, newState : WeaponState)
+signal weapon_fired
 
 func _ready() -> void:
 	assert(weaponManager)
@@ -63,3 +64,6 @@ func changeState(inNewState : WeaponState) -> void:
 
 func getWeaponManager() -> WeaponManager:
 	return weaponManager
+
+func getCurrentBloomValue() -> float:
+	return currentState.getCurrentBloomValue()

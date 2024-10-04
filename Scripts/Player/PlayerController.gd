@@ -55,7 +55,7 @@ func _unhandled_input(event : InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	inputDirection = Vector2()
-	inputDirection = Input.get_vector("Right", "Left", "Backward", "Forward")
+	inputDirection = Input.get_vector("Right", "Left", "Backward", "Forward").normalized()
 	input_direction_changed.emit(inputDirection)
 	isShooting = Input.is_action_pressed("Shoot")
 
@@ -71,8 +71,8 @@ func disableCameraControl() -> void:
 func getInputDirection() -> Vector2:
 	return inputDirection
 
-func getAimCastResult() -> RayCastResult:
-	return fpsViewCamera.getCameraCastResult()
+func getAimCastResult(inBloom : float = 0.0) -> RayCastResult:
+	return fpsViewCamera.getCameraCastResult(inBloom)
 
 static func getController(inNode : Node) -> Controller:
 	var controller : Controller = null

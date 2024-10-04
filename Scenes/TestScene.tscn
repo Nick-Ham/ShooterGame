@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcjon2gry5eu7"]
+[gd_scene load_steps=10 format=3 uid="uid://bcjon2gry5eu7"]
 
+[ext_resource type="Script" path="res://Scripts/Level.gd" id="1_0xiba"]
 [ext_resource type="PackedScene" uid="uid://3khvdhi6xjou" path="res://Scenes/Player.tscn" id="1_rxbss"]
 [ext_resource type="PackedScene" uid="uid://djrdomjwtuthy" path="res://Debug/DebugLoggerView.tscn" id="2_wleqp"]
+[ext_resource type="PackedScene" uid="uid://var64sd7lpfi" path="res://Prototyping/TestEnemy/TestEnemy.tscn" id="4_e2qur"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owqe0"]
 albedo_color = Color(0.4, 0.2, 0.2, 1)
@@ -14,17 +16,20 @@ sky_material = SubResource("ProceduralSkyMaterial_ed7v1")
 [sub_resource type="Environment" id="Environment_v12ng"]
 background_mode = 2
 sky = SubResource("Sky_ib4yn")
+glow_enabled = true
+glow_blend_mode = 1
 
 [sub_resource type="PrismMesh" id="PrismMesh_cqi6t"]
 size = Vector3(14.855, 1.195, 5.805)
 
-[node name="Node3D" type="Node3D"]
+[node name="Level" type="Node3D"]
+script = ExtResource("1_0xiba")
 
 [node name="Floor" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.59111, -0.5, -0.892807)
 use_collision = true
 collision_mask = 0
-size = Vector3(50, 1, 50)
+size = Vector3(111.795, 1, 77.4605)
 material = SubResource("StandardMaterial3D_owqe0")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -46,14 +51,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32743, 0)
 [node name="SetDressing" type="Node3D" parent="."]
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="SetDressing"]
-transform = Transform3D(0.347847, 0.936051, -0.0530076, -0.889202, 0.347303, 0.297826, 0.29719, -0.0564635, 0.953147, 20.9652, 5.73222, 3.8147e-06)
+transform = Transform3D(0.347847, 0.936051, -0.0530076, -0.889202, 0.347303, 0.297826, 0.29719, -0.0564635, 0.953147, 49.9911, 5.73222, 3.8147e-06)
 use_collision = true
 collision_mask = 0
 size = Vector3(29.75, 1, 50)
 material = SubResource("StandardMaterial3D_owqe0")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="SetDressing"]
-transform = Transform3D(0.349324, -0.937002, 0, 0.937002, 0.349324, 0, 0, 0, 1, -21.0393, 6.93291, 0)
+transform = Transform3D(0.349324, -0.937002, 0, 0.937002, 0.349324, 0, 0, 0, 1, -43.3474, 6.93291, 0)
 use_collision = true
 collision_mask = 0
 size = Vector3(32.7784, 1, 50)
@@ -110,3 +115,82 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75, 2.5, -0.5)
 layers = 3
 light_color = Color(1, 0, 0, 1)
 light_energy = 5.0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="SetDressing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3468, 0, 11.0975)
+use_collision = true
+collision_mask = 0
+radius = 1.0
+height = 6.0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="SetDressing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.07482, 0, 12.5448)
+use_collision = true
+collision_mask = 0
+radius = 1.0
+height = 6.0
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="SetDressing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.14802, 0, 21.2014)
+use_collision = true
+collision_mask = 0
+radius = 1.0
+height = 6.0
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="SetDressing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.07719, 0, 23.384)
+use_collision = true
+collision_mask = 0
+radius = 1.0
+height = 6.0
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="SetDressing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.12915, 0, 26.9323)
+use_collision = true
+collision_mask = 0
+radius = 3.0
+height = 12.0
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="SetDressing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7692, 0, 10.3192)
+use_collision = true
+collision_mask = 0
+radius = 3.0
+height = 12.0
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="SetDressing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4706, 0, 16.1165)
+use_collision = true
+collision_mask = 0
+radius = 3.0
+height = 12.0
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="SetDressing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1508, 0, 34.6029)
+use_collision = true
+collision_mask = 0
+radius = 7.0
+height = 20.0
+sides = 12
+
+[node name="CSGCylinder3D9" type="CSGCylinder3D" parent="SetDressing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7391, 0, 42.6704)
+use_collision = true
+collision_mask = 0
+radius = 7.0
+height = 20.0
+sides = 12
+
+[node name="CSGCylinder3D10" type="CSGCylinder3D" parent="SetDressing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.903, 0, 36.4738)
+use_collision = true
+collision_mask = 0
+radius = 7.0
+height = 20.0
+sides = 12
+
+[node name="TestEnemy" parent="." instance=ExtResource("4_e2qur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87567, 0, 7.53176)
+
+[node name="TestEnemy2" parent="." instance=ExtResource("4_e2qur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87567, 0, 19.9735)

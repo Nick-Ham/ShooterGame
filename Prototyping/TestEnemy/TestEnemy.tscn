@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://var64sd7lpfi"]
+
+[ext_resource type="Script" path="res://Prototyping/TestEnemy/TestEnemy.gd" id="1_wlui3"]
+[ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="2_pyuek"]
+[ext_resource type="Script" path="res://Scripts/Components/ImpactMaterialProvider.gd" id="3_2tnc7"]
+[ext_resource type="Material" uid="uid://cshrsd50ahrsx" path="res://Assets/Materials/OvershieldMaterial.tres" id="3_60o03"]
+[ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="4_t8nrh"]
+[ext_resource type="Script" path="res://Scripts/Components/OvershieldController.gd" id="5_ldvlv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pqss1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_swq4a"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_h4u0i"]
+
+[sub_resource type="Animation" id="Animation_06qja"]
+resource_name = "HitOvershield"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OvershieldMaterialController:flashScalar")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1.51572, 1),
+"update": 0,
+"values": [5.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_dna7g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OvershieldMaterialController:flashScalar")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rraee"]
+_data = {
+"HitOvershield": SubResource("Animation_06qja"),
+"RESET": SubResource("Animation_dna7g")
+}
+
+[node name="TestEnemy" type="CharacterBody3D"]
+collision_layer = 4
+script = ExtResource("1_wlui3")
+
+[node name="CollisionShapeStanding" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_pqss1")
+
+[node name="HitBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47563, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("SphereShape3D_swq4a")
+
+[node name="PhysicsInterpolator3D" type="Node3D" parent="."]
+script = ExtResource("2_pyuek")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysicsInterpolator3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material_overlay = ExtResource("3_60o03")
+mesh = SubResource("SphereMesh_h4u0i")
+
+[node name="ImpactMaterialProvider" type="Node" parent="."]
+script = ExtResource("3_2tnc7")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_t8nrh")
+maxHealth = 10.0
+
+[node name="OvershieldHealth" type="Node" parent="."]
+script = ExtResource("4_t8nrh")
+maxHealth = 10.0
+
+[node name="OvershieldMaterialController" type="Node" parent="." node_paths=PackedStringArray("health", "animationPlayer", "shieldMeshes")]
+script = ExtResource("5_ldvlv")
+health = NodePath("../OvershieldHealth")
+animationPlayer = NodePath("../OvershieldAnimationPlayer")
+shieldMeshes = NodePath("../PhysicsInterpolator3D")
+flashScalar = 5.0
+
+[node name="OvershieldAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rraee")
+}

@@ -17,3 +17,6 @@ func handleOnShootChanged(_inIsShooting : bool) -> void:
 
 func getStateManager() -> WeaponStateManager:
 	return get_parent() as WeaponStateManager
+
+func getCurrentBloomValue() -> float:
+	return 0.0

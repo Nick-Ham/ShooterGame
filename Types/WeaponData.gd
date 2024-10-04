@@ -7,8 +7,13 @@ class_name WeaponData
 
 @export_category("WeaponStats")
 @export var defaultDamage : float = 25.0
-@export var firingDelay : float = 0.25
+@export var firingDelay : float = 0.1
 @export var magazineSize : int = 15
+@export var baseBloomRadius : float = 0.0
+@export var maxBloomRadius : float = 0.003
+@export var bloomDecaySpeed : float = 20.0
+## Bloom curve x-axis is time sustaining fire. y-axis is multiplier against bloom radius.
+@export var bloomCurve : Curve = Curve.new()
 
 @export_category("GeneralWeaponRecoil")
 @export var recoilLerpSpeed : float = 30.0
@@ -46,3 +51,6 @@ func getRandomRecoilTranslation() -> Vector3:
 	var recoilTranslationUp : float = RandUtil.randf_range_vector2(recoilTranslationUpRange)
 
 	return Vector3(recoilTranslationRight, recoilTranslationUp, recoilTranslationForward)
+
+func getBloomRadiusAtTime(inTime : float) -> float:
+	return remap(bloomCurve.sample(clampf(inTime, 0.0, 1.0)), 0.0, 1.0, baseBloomRadius, maxBloomRadius)

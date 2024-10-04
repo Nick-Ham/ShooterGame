@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://yhnlbm0n7ipy"]
+
+[ext_resource type="Texture2D" uid="uid://2kik8cms6e4w" path="res://Assets/Effects/BulletImpact.png" id="1_4dgc4"]
+[ext_resource type="Script" path="res://Scripts/Effects/Impact.gd" id="1_nlvc8"]
+[ext_resource type="PackedScene" uid="uid://ctnqhkb11qrsk" path="res://Scenes/Effects/ImpactParticles.tscn" id="2_s75oh"]
+
+[node name="Impact" type="Node3D" node_paths=PackedStringArray("decal", "delayFadeTimer", "fadeDurationTimer")]
+script = ExtResource("1_nlvc8")
+decal = NodePath("Decal")
+particlesScene = ExtResource("2_s75oh")
+delayFadeTimer = NodePath("DelayFade")
+fadeDurationTimer = NodePath("FadeDuration")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+size = Vector3(0.25, 0.25, 0.25)
+texture_albedo = ExtResource("1_4dgc4")
+
+[node name="DelayFade" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="FadeDuration" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

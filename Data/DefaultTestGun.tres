@@ -1,13 +1,21 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=2 format=3 uid="uid://t78dxd6n3sr2"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://t78dxd6n3sr2"]
 
 [ext_resource type="Script" path="res://Types/WeaponData.gd" id="1_tcp32"]
+
+[sub_resource type="Curve" id="Curve_sm1oi"]
+_data = [Vector2(0, 0), 0.0, 2.20145, 0, 0, Vector2(0.329193, 0.815887), 2.16185, 2.16185, 0, 0, Vector2(0.614907, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.992335), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [resource]
 script = ExtResource("1_tcp32")
 weaponName = "DefaultTestGun"
 defaultDamage = 25.0
-firingDelay = 0.25
+firingDelay = 0.1
 magazineSize = 15
+baseBloomRadius = 0.0
+maxBloomRadius = 0.003
+bloomDecaySpeed = 20.0
+bloomCurve = SubResource("Curve_sm1oi")
 recoilLerpSpeed = 30.0
 recoilDecaySpeed = 15.0
 maxRecoilRotation = Vector3(10, 5, 5)
