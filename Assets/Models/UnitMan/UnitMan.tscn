@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://beguxrfcmdl8g"]
+
+[ext_resource type="PackedScene" uid="uid://rgcf0k0s7kry" path="res://Assets/Models/UnitMan/UnitMan.gltf" id="1_ypsvq"]
+
+[node name="UnitMan" instance=ExtResource("1_ypsvq")]

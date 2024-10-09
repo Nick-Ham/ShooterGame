@@ -1,0 +1,59 @@
+[gd_scene load_steps=12 format=3 uid="uid://cpurlnxl3pclx"]
+
+[ext_resource type="Script" path="res://Scripts/Character.gd" id="1_t215t"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/RobotWalkerController.gd" id="2_4sat2"]
+[ext_resource type="Script" path="res://Scripts/Player/CharacterStateManager.gd" id="3_nv3fu"]
+[ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateDefault.gd" id="4_a0gpi"]
+[ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateInAir.gd" id="5_wviwu"]
+[ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateJumping.gd" id="6_w4vp6"]
+[ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="7_34icv"]
+[ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robot/Robot.tscn" id="8_8vwp4"]
+[ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="9_gli1f"]
+[ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Overshield.tscn" id="10_hrsr4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uc3a3"]
+radius = 0.75
+height = 1.75
+
+[node name="RobotWalker" type="CharacterBody3D"]
+collision_layer = 4
+script = ExtResource("1_t215t")
+
+[node name="RobotWalkerController" type="Node" parent="."]
+script = ExtResource("2_4sat2")
+
+[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir")]
+script = ExtResource("3_nv3fu")
+enableLogging = true
+loggerCategory = "RobotWalker:StateManager:State"
+stateDefault = NodePath("CharacterStateDefault")
+stateJumping = NodePath("CharacterStateJumping")
+stateInAir = NodePath("CharacterStateInAir")
+
+[node name="CharacterStateDefault" type="Node" parent="CharacterStateManager"]
+script = ExtResource("4_a0gpi")
+
+[node name="CharacterStateInAir" type="Node" parent="CharacterStateManager"]
+script = ExtResource("5_wviwu")
+
+[node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
+script = ExtResource("6_w4vp6")
+
+[node name="PhysicsInterpolator3D" type="Node3D" parent="."]
+script = ExtResource("7_34icv")
+
+[node name="Robot" parent="PhysicsInterpolator3D" instance=ExtResource("8_8vwp4")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_uc3a3")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("9_gli1f")
+
+[node name="OvershieldHealth" parent="." instance=ExtResource("10_hrsr4")]
+
+[node name="OvershieldMaterialController" parent="OvershieldHealth" index="1" node_paths=PackedStringArray("shieldMeshes")]
+shieldMeshes = NodePath("../../PhysicsInterpolator3D")
+
+[editable path="OvershieldHealth"]

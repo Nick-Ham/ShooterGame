@@ -18,6 +18,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var leanDirection : Vector2 = stateManager.getCurrentState().getLeanDirection()
 	leanDirection *= PI * maxLeanDegrees / 180.0
-	targetLean = Vector3(leanDirection.y, 0.0, leanDirection.x)
+	targetLean = Vector3(leanDirection.y, 0.0, -leanDirection.x)
 
 	target.rotation = lerp(target.rotation, targetLean, clampf(delta * leanLerpSpeed, 0.0, 1.0))

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://ni1ih76dcbhb"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d0qxs"]
+particle_flag_align_y = true
+particle_flag_damping_as_friction = true
+emission_shape_scale = Vector3(0.15, 0.15, 0.15)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 8.0
+damping_min = 7.734
+damping_max = 13.424
+turbulence_noise_strength = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqjak"]
+cull_mode = 2
+albedo_color = Color(0.97048, 0.974973, 0.971797, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.0
+backlight = Color(0, 0.636559, 0.681904, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_r814i"]
+material = SubResource("StandardMaterial3D_tqjak")
+size = Vector2(0.015, 0.05)
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+emitting = false
+lifetime = 0.1
+one_shot = true
+explosiveness = 0.71
+process_material = SubResource("ParticleProcessMaterial_d0qxs")
+draw_pass_1 = SubResource("QuadMesh_r814i")

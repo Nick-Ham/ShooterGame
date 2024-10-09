@@ -36,7 +36,7 @@ func on_state_changed(inPreviousState : CharacterState, inNewState : CharacterSt
 
 		var velocityScalar : float = log(stateInAir.getLastVelocity().length() + 1) * onLandPunchVelocityScalar
 
-		headPunch.addRotationPunch(Vector3(onLandPunchStrength.y, 0.0, punchX) * velocityScalar)
+		headPunch.addRotationPunch(Vector3(onLandPunchStrength.y, 0.0, -punchX) * velocityScalar)
 		return
 
 	return

@@ -1,8 +1,10 @@
 extends WeaponState
 class_name WeaponStateDefault
 
+@export_category("Ref")
 @export var shootSoundPlayer : AudioStreamPlayer3D
 @export var shootRecoilPunch : Punch
+@export var damage : Damage
 
 var readyToFire : bool = true
 
@@ -65,21 +67,23 @@ func shoot() -> void:
 	if !aimCastResult.hitSuccess:
 		return
 
-	var game : Game = get_tree().current_scene as Game
-	var level : Level = game.getLevel()
-	var environmentalEffectManager : EnvironmentEffectManager = level.getEnvironmentalEffectManager()
+	drawDebug(aimCastResult)
 
-	environmentalEffectManager.addBulletImpact(aimCastResult.hitPosition, aimCastResult.hitNormal)
+	var colliderAsHitbox : Hitbox = aimCastResult.collider as Hitbox
 
-	if showDebugImpacts:
-		PrototypingUtil.spawnDebugSphere(aimCastResult.hitPosition)
-
-	if showDebugTrails:
-		var originOffset : Vector3 = aimCastResult.rayOrigin - (aimCastResult.rayOrigin - aimCastResult.hitPosition).normalized()
-		PrototypingUtil.spawnDebugTrail([originOffset, aimCastResult.hitPosition])
+	if colliderAsHitbox:
+		handleHitEnemy(aimCastResult)
+	else:
+		handleHitEnvironment(aimCastResult)
 
 	isCurrentlyShooting = true
 	weapon_fired.emit()
+
+func handleHitEnemy(hitResult : RayCastResult) -> void:
+	damage.dealDamage(Character.getOwningCharacter(hitResult.collider))
+	var hitBox : Hitbox = hitResult.collider as Hitbox
+	if hitBox:
+		hitBox.addImpact(hitResult.hitPosition, hitResult.hitNormal)
 
 func handleOnShootChanged(inIsShooting : bool) -> void:
 	if !inIsShooting:
@@ -89,3 +93,18 @@ func handleOnShootChanged(inIsShooting : bool) -> void:
 
 func getCurrentBloomValue() -> float:
 	return bloomBuildup
+
+func handleHitEnvironment(rayCastResult : RayCastResult) -> void:
+	var game : Game = get_tree().current_scene as Game
+	var level : Level = game.getLevel()
+	var environmentalEffectManager : EnvironmentEffectManager = level.getEnvironmentalEffectManager()
+
+	environmentalEffectManager.addBulletImpact(rayCastResult.hitPosition, rayCastResult.hitNormal)
+
+func drawDebug(rayCastResult : RayCastResult) -> void:
+	if showDebugImpacts:
+		PrototypingUtil.spawnDebugSphere(rayCastResult.hitPosition)
+
+	if showDebugTrails:
+		var originOffset : Vector3 = rayCastResult.rayOrigin - (rayCastResult.rayOrigin - rayCastResult.hitPosition).normalized()
+		PrototypingUtil.spawnDebugTrail([originOffset, rayCastResult.hitPosition])

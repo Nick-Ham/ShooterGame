@@ -3,7 +3,7 @@ extends Node
 class_name OvershieldMaterialController
 
 @export_category("Ref")
-@export var health : Health
+@export var health : OvershieldHealth
 @export var animationPlayer : AnimationPlayer
 @export var shieldMeshes : Node3D:
 	set(newShieldMeshesNode):
@@ -14,23 +14,29 @@ class_name OvershieldMaterialController
 @export var colorShift : float = 1.0:
 	set(inColorShift):
 		colorShift = clampf(inColorShift, 0.0, 1.0)
-		updateMaterialProperty("ColorShift", inColorShift)
+		updateMaterialProperty(colorShiftPropertyKey, inColorShift)
 
 @export var shieldStrength : float = 1.0:
 	set(inShieldStrength):
 		shieldStrength = clampf(inShieldStrength, 0.0, 1.0)
-		updateMaterialProperty("ShieldStrengthSwitch", inShieldStrength)
+		updateMaterialProperty(shieldStrengthPropertyKey, inShieldStrength)
 
-@export var flashScalar : float = 1.0:
-	set(inFlashScalar):
-		flashScalar = inFlashScalar
-		updateMaterialProperty("FlashScalar", inFlashScalar)
+@export var flashStrength : float = 1.0:
+	set(inFlashStrength):
+		flashStrength = inFlashStrength
+		updateMaterialProperty(flashStrengthPropertyKey, inFlashStrength)
 
 var trackedMeshes : Array[GeometryInstance3D]
-@onready var material : ShaderMaterial = preload("res://Assets/Materials/OvershieldMaterial.tres")
+var materialResource : ShaderMaterial = preload("res://Assets/Materials/OvershieldMaterial.tres")
+@onready var material : ShaderMaterial = materialResource.duplicate()
 
+const colorShiftPropertyKey : String = "ColorShift"
+const shieldStrengthPropertyKey : String = "ShieldStrengthSwitch"
+const flashStrengthPropertyKey : String = "FlashStrength"
 
 const hitFlashAnimationKey : String = "HitOvershield"
+const shieldBreakAnimationKey : String = "ShieldBreak"
+const shieldResettingAnimationKey : String = "ShieldReset"
 
 func _exit_tree() -> void:
 	resetTrackedMeshes()
@@ -41,13 +47,44 @@ func _ready() -> void:
 	assert(shieldMeshes)
 
 	Util.safeConnect(health.health_damaged, on_health_damaged)
+	Util.safeConnect(health.health_restored, on_health_restored)
+	Util.safeConnect(health.health_depleted, on_health_depleted)
+	Util.safeConnect(health.shield_resetting, on_shield_resetting)
 
 	updateTrackedMeshes()
 
-func on_health_damaged(inDamage : float, remainingHealth : float) -> void:
-	animationPlayer.play(hitFlashAnimationKey)
+func on_health_damaged(_inDamage : float, _remainingHealth : float) -> void:
+	if animationPlayer.current_animation == hitFlashAnimationKey and animationPlayer.is_playing():
+		animationPlayer.seek(0)
+	else:
+		animationPlayer.play(hitFlashAnimationKey)
+
+	refreshMaterialParams()
+
+func on_shield_resetting()-> void:
+	animationPlayer.play(shieldResettingAnimationKey)
+
+	refreshMaterialParams()
+
+func on_health_restored(_inAmount : float, _inNewHealth : float) -> void:
+	refreshMaterialParams()
+
+func on_health_depleted(_inHealth : Health) -> void:
+	animationPlayer.play(shieldBreakAnimationKey)
+
+	refreshMaterialParams()
+
+func refreshMaterialParams() -> void:
+	colorShift = health.getCurrentHealth() / health.getMaxHealth()
+
+	updateMaterialProperty(colorShiftPropertyKey, colorShift)
+	updateMaterialProperty(shieldStrengthPropertyKey, shieldStrength)
+	updateMaterialProperty(flashStrengthPropertyKey, flashStrength)
 
 func updateMaterialProperty(inPropertyName : String, inPropertyValue : float) -> void:
+	if !material:
+		return
+
 	material.set_shader_parameter(inPropertyName, inPropertyValue)
 
 func resetTrackedMeshes() -> void:
@@ -68,3 +105,5 @@ func updateTrackedMeshes() -> void:
 
 	for mesh : GeometryInstance3D in trackedMeshes:
 		mesh.material_overlay = material
+
+	refreshMaterialParams()

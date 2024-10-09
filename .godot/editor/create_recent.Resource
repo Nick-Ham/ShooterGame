@@ -1,2 +1,3 @@
+StandardMaterial3D
 WeaponData
 AudioStreamRandomizer

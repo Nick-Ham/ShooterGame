@@ -15,7 +15,7 @@ static func lerpToVector(inNode : Node3D, upVector : Vector3, inDirectionVector 
 	var initialScale : Vector3 = inNode.scale
 
 	var axis : Vector3 = forwardVector.cross(inDirectionVector.normalized()).normalized()
-	var angleToTarget : float = acos(forwardVector.dot(inDirectionVector))
+	var angleToTarget : float = acos(forwardVector.dot(inDirectionVector.normalized()))
 
 	var rotationQuat : Quaternion = Quaternion(axis, angleToTarget)
 
@@ -28,7 +28,7 @@ static func lerpToVector(inNode : Node3D, upVector : Vector3, inDirectionVector 
 	var rightVector : Vector3 = -upVector.cross(forwardVector).normalized()
 	var correctedUpVector : Vector3 = forwardVector.cross(rightVector).normalized()
 
-	inNode.transform.basis = Basis(rightVector, correctedUpVector, inDirectionVector)
+	inNode.transform.basis = Basis(rightVector, correctedUpVector, inDirectionVector.normalized())
 
 	inNode.scale = initialScale
 

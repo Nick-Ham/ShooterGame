@@ -1,9 +1,13 @@
-res://Scenes
-res://Assets/Effects/Overshield
 res://Assets/Materials
-res://Prototyping/Elite
-res://Assets/Effects
+res://Scenes
+res://Scenes/Enemies
+res://Assets/Models/Robot/Animations
+res://Assets/Models/Robot
+res://Assets/Models/UnitMan
 res://Scenes/Effects
+res://Scripts/Components
+res://Assets/Effects/Overshield
+res://Assets/Effects
 res://Scripts/Effects
 res://Scripts
 res://Prototyping
@@ -13,6 +17,5 @@ res://Assets/Audio/Gunshots
 res://Assets/Audio/Pops
 res://Assets/Audio/Thuds
 res://Assets/Audio/Steps
-res://Scripts/Components
 res://Scenes/Guns
 res://Debug

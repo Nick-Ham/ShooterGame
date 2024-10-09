@@ -2,6 +2,7 @@ extends Node
 class_name WeaponStateManager
 
 @export_category("Config")
+@export var loggingEnabled : bool = false
 @export var loggerCategory : String = "Weapon:StateManager:State"
 @export var weaponManager : WeaponManager
 
@@ -30,7 +31,8 @@ func _ready() -> void:
 	if controller:
 		bindToController(controller)
 
-	DebugLogger.registerTrackedValue(loggerCategory)
+	if loggingEnabled:
+		DebugLogger.registerTrackedValue(loggerCategory)
 
 	changeState(stateDefault)
 
@@ -59,7 +61,9 @@ func changeState(inNewState : WeaponState) -> void:
 
 	currentState.stateEntering()
 
-	DebugLogger.updateTrackedValue(loggerCategory, currentState.getStateKey())
+	if loggingEnabled:
+		DebugLogger.updateTrackedValue(loggerCategory, currentState.getStateKey())
+
 	state_changed.emit(lastState, currentState)
 
 func getWeaponManager() -> WeaponManager:

@@ -55,7 +55,7 @@ func _unhandled_input(event : InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	inputDirection = Vector2()
-	inputDirection = Input.get_vector("Right", "Left", "Backward", "Forward").normalized()
+	inputDirection = Input.get_vector("Left", "Right", "Forward", "Backward").normalized()
 	input_direction_changed.emit(inputDirection)
 	isShooting = Input.is_action_pressed("Shoot")
 

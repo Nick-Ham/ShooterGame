@@ -1,12 +1,13 @@
-[gd_scene load_steps=28 format=3 uid="uid://3khvdhi6xjou"]
+[gd_scene load_steps=29 format=3 uid="uid://3khvdhi6xjou"]
 
+[ext_resource type="Script" path="res://Scripts/Character.gd" id="1_2vnqn"]
 [ext_resource type="Script" path="res://Scripts/Player/StepSoundController.gd" id="1_863d4"]
 [ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_56hl0"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="2_sjpk7"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.gd" id="3_2w6yp"]
 [ext_resource type="Resource" uid="uid://t78dxd6n3sr2" path="res://Data/DefaultTestGun.tres" id="3_nf6i3"]
 [ext_resource type="Script" path="res://Scripts/Components/HeadLean.gd" id="4_6ny3q"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerCharacterStateManager.gd" id="4_8v6om"]
+[ext_resource type="Script" path="res://Scripts/Player/CharacterStateManager.gd" id="4_8v6om"]
 [ext_resource type="Script" path="res://Scripts/Components/Punch.gd" id="4_dh8ax"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateDefault.gd" id="5_018c5"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateInAir.gd" id="5_t1r06"]
@@ -19,6 +20,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/HeadBob.gd" id="8_t41f4"]
 [ext_resource type="PackedScene" uid="uid://dw2shj3bwdrsl" path="res://Scenes/Guns/ShortGun.tscn" id="8_xch2u"]
 [ext_resource type="Script" path="res://Scripts/Player/Reticle.gd" id="9_xcwwv"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="11_2nbkh"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHeadPunchController.gd" id="11_gj7m3"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerSoundController.gd" id="13_32xeu"]
 [ext_resource type="AudioStream" uid="uid://c12i0eymy6qov" path="res://Assets/Audio/Steps/StepsRandomizer.tres" id="14_j633g"]
@@ -26,8 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://byeppnbhc472f" path="res://Assets/Audio/Gunshots/Gunshot1TestRandomizer.tres" id="22_t04j0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_22kd6"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_44yk3"]
+radius = 0.3
 height = 1.5
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v53qw"]
@@ -36,6 +37,7 @@ height = 1.5
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
+script = ExtResource("1_2vnqn")
 
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("fpsViewCamera", "neck")]
 script = ExtResource("3_2w6yp")
@@ -76,10 +78,14 @@ script = ExtResource("7_rhfs6")
 weaponManager = NodePath("../WeaponManager")
 stateDefault = NodePath("WeaponStateDefault")
 
-[node name="WeaponStateDefault" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("shootSoundPlayer", "shootRecoilPunch")]
+[node name="WeaponStateDefault" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("shootSoundPlayer", "shootRecoilPunch", "damage")]
 script = ExtResource("8_mphu6")
 shootSoundPlayer = NodePath("../../ShootPlayer")
 shootRecoilPunch = NodePath("../../Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPunch")
+damage = NodePath("Damage")
+
+[node name="Damage" type="Node" parent="WeaponStateManager/WeaponStateDefault"]
+script = ExtResource("11_2nbkh")
 
 [node name="HeadPunchController" type="Node" parent="." node_paths=PackedStringArray("stateManager", "stateInAir", "headPunch")]
 script = ExtResource("11_gj7m3")
@@ -102,13 +108,8 @@ target = NodePath("../Neck/HeadBobAndPunchPivot/LeanPivot")
 stateManager = NodePath("../CharacterStateManager")
 
 [node name="CollisionShapeStanding" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_22kd6")
-
-[node name="CollisionShapeStanding2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
-shape = SubResource("CapsuleShape3D_44yk3")
-disabled = true
+shape = SubResource("CapsuleShape3D_22kd6")
 
 [node name="StandingNeckPosition" type="Marker3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5, 0)
@@ -117,7 +118,7 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, 0)
 
 [node name="Neck" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="HeadBobAndPunchPivot" type="Node3D" parent="Neck"]
 
@@ -185,6 +186,7 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/SubViewportContainer/SubViewport"]
 cull_mask = 2
+current = true
 
 [node name="Control" type="Control" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView"]
 layout_mode = 3
@@ -249,6 +251,3 @@ stream = ExtResource("22_t04j0")
 volume_db = -17.0
 max_polyphony = 3
 bus = &"WorldSFX"
-
-[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
-visible = false

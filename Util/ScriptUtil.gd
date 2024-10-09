@@ -8,6 +8,7 @@ static func safeConnect(inSignal : Signal, inCallable : Callable) -> void:
 
 static func getChildOfType(inParent : Node, inType : Script) -> Node:
 	for child : Node in inParent.get_children():
+		var instanceOf : bool = is_instance_of(child, inType)
 		if is_instance_of(child, inType):
 			return child
 

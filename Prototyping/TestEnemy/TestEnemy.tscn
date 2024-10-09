@@ -1,58 +1,53 @@
-[gd_scene load_steps=13 format=3 uid="uid://var64sd7lpfi"]
+[gd_scene load_steps=16 format=3 uid="uid://var64sd7lpfi"]
 
 [ext_resource type="Script" path="res://Prototyping/TestEnemy/TestEnemy.gd" id="1_wlui3"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox.gd" id="2_8n4xo"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="2_pyuek"]
-[ext_resource type="Script" path="res://Scripts/Components/ImpactMaterialProvider.gd" id="3_2tnc7"]
-[ext_resource type="Material" uid="uid://cshrsd50ahrsx" path="res://Assets/Materials/OvershieldMaterial.tres" id="3_60o03"]
+[ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robot/Robot.tscn" id="4_5otkf"]
 [ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="4_t8nrh"]
-[ext_resource type="Script" path="res://Scripts/Components/OvershieldController.gd" id="5_ldvlv"]
+[ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Overshield.tscn" id="6_wwyyv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pqss1"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_swq4a"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_1oj5o"]
+size = Vector3(0.374084, 1.81581, 0.271759)
 
-[sub_resource type="SphereMesh" id="SphereMesh_h4u0i"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rc1q5"]
+animation = &"walk_backward"
 
-[sub_resource type="Animation" id="Animation_06qja"]
-resource_name = "HitOvershield"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OvershieldMaterialController:flashScalar")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1.51572, 1),
-"update": 0,
-"values": [5.0, 1.0]
-}
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n6awn"]
+animation = &"walk_forward"
 
-[sub_resource type="Animation" id="Animation_dna7g"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OvershieldMaterialController:flashScalar")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [5.0]
-}
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ero21"]
+animation = &"walk_right"
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rraee"]
-_data = {
-"HitOvershield": SubResource("Animation_06qja"),
-"RESET": SubResource("Animation_dna7g")
-}
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c2xkp"]
+animation = &"walk_left"
 
-[node name="TestEnemy" type="CharacterBody3D"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ciahj"]
+animation = &"default"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_tbqon"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_rc1q5")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_n6awn")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_ero21")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_c2xkp")
+blend_point_3/pos = Vector2(-1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_ciahj")
+blend_point_4/pos = Vector2(0, 0)
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_qb4fj"]
+nodes/MoveDirection/node = SubResource("AnimationNodeBlendSpace2D_tbqon")
+nodes/MoveDirection/position = Vector2(0, 140)
+node_connections = [&"output", 0, &"MoveDirection"]
+
+[node name="TestEnemy" type="CharacterBody3D" node_paths=PackedStringArray("modelAnimationTree")]
 collision_layer = 4
 script = ExtResource("1_wlui3")
+modelAnimationTree = NodePath("AnimationTree")
 
 [node name="CollisionShapeStanding" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -62,37 +57,55 @@ shape = SubResource("CapsuleShape3D_pqss1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47563, 0)
 collision_layer = 8
 collision_mask = 0
+script = ExtResource("2_8n4xo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
-shape = SubResource("SphereShape3D_swq4a")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000213623, -0.559954, 0.0114594)
+shape = SubResource("BoxShape3D_1oj5o")
 
 [node name="PhysicsInterpolator3D" type="Node3D" parent="."]
 script = ExtResource("2_pyuek")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysicsInterpolator3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-material_overlay = ExtResource("3_60o03")
-mesh = SubResource("SphereMesh_h4u0i")
+[node name="Robot" parent="PhysicsInterpolator3D" instance=ExtResource("4_5otkf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="ImpactMaterialProvider" type="Node" parent="."]
-script = ExtResource("3_2tnc7")
+[node name="LeftLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="0"]
+transform = Transform3D(0.984808, -0.137764, -0.10571, 0.173648, 0.7813, 0.599513, 0, -0.608761, 0.793353, 0, -0.0625, 0)
+
+[node name="LeftLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.247151, -0.525831, -0.0198207)
+
+[node name="LeftLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.258819, -0.965926, 0, 0.965926, -0.258819, 0, -0.34375, 0.0625)
+
+[node name="LeftFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner/LeftLegLower" index="0"]
+transform = Transform3D(0.984822, -0.173566, 0.000200477, 0.160251, 0.908828, -0.385163, 0.066669, 0.379349, 0.922849, 0, 0.375, 0)
+
+[node name="RightLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="1"]
+transform = Transform3D(0.984808, 0.137764, 0.10571, -0.17101, 0.875141, 0.452641, -0.0301537, -0.463841, 0.885405, 0, -0.0625, 0)
+
+[node name="RightLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper" index="0"]
+transform = Transform3D(0.999542, 0.025504, 0.0162952, 0.0204175, -0.170788, -0.985096, -0.0223408, 0.984977, -0.171231, -0.247151, -0.525831, -0.0198207)
+
+[node name="RightLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner" index="0"]
+transform = Transform3D(0.999542, 0.00913909, -0.0288526, -0.0223409, -0.420327, -0.907097, -0.0204176, 0.907326, -0.419931, 0, -0.34375, 0.0625)
+
+[node name="RightFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower" index="0"]
+transform = Transform3D(0.984797, 0.150534, 0.0866857, -0.160381, 0.97963, 0.120841, -0.0667291, -0.132907, 0.98888, 0.00188168, 0.387245, -0.00166134)
+
+[node name="Head" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0)
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_t8nrh")
 maxHealth = 10.0
 
-[node name="OvershieldHealth" type="Node" parent="."]
-script = ExtResource("4_t8nrh")
-maxHealth = 10.0
+[node name="OvershieldHealth" parent="." instance=ExtResource("6_wwyyv")]
 
-[node name="OvershieldMaterialController" type="Node" parent="." node_paths=PackedStringArray("health", "animationPlayer", "shieldMeshes")]
-script = ExtResource("5_ldvlv")
-health = NodePath("../OvershieldHealth")
-animationPlayer = NodePath("../OvershieldAnimationPlayer")
-shieldMeshes = NodePath("../PhysicsInterpolator3D")
-flashScalar = 5.0
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../PhysicsInterpolator3D/Robot")
+tree_root = SubResource("AnimationNodeBlendTree_qb4fj")
+anim_player = NodePath("../PhysicsInterpolator3D/Robot/AnimationPlayer")
+parameters/MoveDirection/blend_position = Vector2(0, 0)
 
-[node name="OvershieldAnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_rraee")
-}
+[editable path="PhysicsInterpolator3D/Robot"]

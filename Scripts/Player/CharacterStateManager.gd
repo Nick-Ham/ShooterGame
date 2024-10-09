@@ -2,6 +2,7 @@ extends Node
 class_name CharacterStateManager
 
 @export_category("Config")
+@export var enableLogging : bool = false
 @export var loggerCategory : String = "Player:StateManager:State"
 
 @export_category("States")
@@ -26,6 +27,9 @@ signal head_punch_triggered(punch : Vector2)
 
 const minSpeed : float = 0.08
 
+const maxDelta : float = 0.1
+const updatePhysicsInProcess : bool = true
+
 func _ready() -> void:
 	if !character:
 		character = get_parent() as CharacterBody3D
@@ -34,7 +38,8 @@ func _ready() -> void:
 
 	assert(character, "CharacterStateManager only valid on a Character3D")
 
-	DebugLogger.registerTrackedValue(loggerCategory)
+	if enableLogging:
+		DebugLogger.registerTrackedValue(loggerCategory)
 
 	controller = Controller.getController(character)
 	if controller:
@@ -61,12 +66,13 @@ func on_input_direction_changed(inputDirection : Vector2) -> void:
 func on_jump_changed(inIsJumping : bool) -> void:
 	currentState.handleOnJumpChanged(inIsJumping)
 
-func _physics_process(_delta: float) -> void:
-	return
-	#currentState.update_physics(_delta)
-
 func _process(delta: float) -> void:
-	currentState.update_physics(delta)
+	if updatePhysicsInProcess:
+		currentState.update_physics(clampf(delta, 0.0, maxDelta))
+
+func _physics_process(delta: float) -> void:
+	if !updatePhysicsInProcess:
+		currentState.update_physics(delta)
 
 func getCharacterController() -> Controller:
 	return Controller.getController(character)
@@ -86,7 +92,8 @@ func changeState(inNewState : CharacterState) -> void:
 	currentState = inNewState
 	currentState.stateEntering()
 
-	DebugLogger.updateTrackedValue(loggerCategory, currentState.name)
+	if enableLogging:
+		DebugLogger.updateTrackedValue(loggerCategory, currentState.name)
 
 	state_changed.emit(lastState, currentState)
 
