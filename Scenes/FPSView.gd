@@ -54,6 +54,10 @@ func getCameraCastResult(inBloom : float = 0.0) -> RayCastResult:
 	rayQuery.collide_with_bodies = true
 	rayQuery.collide_with_areas = true
 
+	var character : Character = characterStateManager.getCharacter() as Character
+	var hitboxes : Array[Hitbox] = Hitbox.getHitboxes(character)
+	rayQuery.exclude = Hitbox.getHitboxRIDs(hitboxes)
+
 	var result : Dictionary = spaceState.intersect_ray(rayQuery)
 
 	if result.is_empty():

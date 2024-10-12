@@ -22,7 +22,7 @@ backlight = Color(0, 0.636559, 0.681904, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_xiy7r"]
 material = SubResource("StandardMaterial3D_6rnow")
-size = Vector2(0.01, 0.25)
+size = Vector2(0.03, 0.12)
 
 [node name="GPUParticles3D" type="GPUParticles3D"]
 cast_shadow = 0

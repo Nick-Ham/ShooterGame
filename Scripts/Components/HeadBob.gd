@@ -32,13 +32,16 @@ func _enter_tree() -> void:
 
 	Util.safeConnect(stateManager.state_changed, on_state_changed)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	updateHeadBob(delta)
+
+func updateHeadBob(inDelta : float) -> void:
 	var offset : Vector2 = getTotalOffset(stateManager.getCurrentSpeed(), stateManager.getCurrentMaxSpeed())
 
-	checkStep(delta)
+	checkStep(inDelta)
 
 	var offsetAsVec3 : Vector3 = Vector3(offset.x, offset.y, 0)
-	target.position = lerp(target.position, offsetAsVec3, clampf(lerpConstant * delta, 0.0, 1.0))
+	target.position = lerp(target.position, offsetAsVec3, clampf(lerpConstant * inDelta, 0.0, 1.0))
 
 func getTotalOffsetWave() -> Vector2:
 	var offset : Vector2 = Vector2()

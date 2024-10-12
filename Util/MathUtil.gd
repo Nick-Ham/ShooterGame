@@ -19,19 +19,19 @@ static func lerpToVector(inNode : Node3D, upVector : Vector3, inDirectionVector 
 
 	var rotationQuat : Quaternion = Quaternion(axis, angleToTarget)
 
-	var currentQuat : Quaternion = inNode.transform.basis.get_rotation_quaternion()
+	var currentQuat : Quaternion = inNode.global_transform.basis.get_rotation_quaternion()
 	var newQuat : Quaternion = rotationQuat * currentQuat
 
-	inNode.transform.basis = Basis(currentQuat.slerp(newQuat, inLerpWeight))
-	forwardVector = inNode.transform.basis.z
+	inNode.global_transform.basis = Basis(currentQuat.slerp(newQuat, inLerpWeight))
+	forwardVector = inNode.global_transform.basis.z
 
 	var rightVector : Vector3 = -upVector.cross(forwardVector).normalized()
 	var correctedUpVector : Vector3 = forwardVector.cross(rightVector).normalized()
 
-	inNode.transform.basis = Basis(rightVector, correctedUpVector, inDirectionVector.normalized())
+	inNode.global_transform.basis = Basis(rightVector, correctedUpVector, inDirectionVector.normalized())
 
 	inNode.scale = initialScale
 
 static func lerpLookAt(inNode : Node3D, upVector : Vector3, inGlobalPosition : Vector3, inLerpWeight : float) -> void:
-	var inDirectionVector : Vector3 = (inGlobalPosition - inNode.global_transform.origin).normalized()
+	var inDirectionVector : Vector3 = (inGlobalPosition - inNode.global_position).normalized()
 	lerpToVector(inNode, upVector, inDirectionVector, inLerpWeight)

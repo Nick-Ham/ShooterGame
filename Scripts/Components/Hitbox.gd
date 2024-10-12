@@ -24,3 +24,25 @@ func addImpact(inHitPosition : Vector3, inHitNormal : Vector3) -> void:
 		return
 
 	ImpactHelper.createMetalImpact(self, inHitPosition, inHitNormal)
+
+
+static func getHitboxes(inParent : Node) -> Array[Hitbox]:
+	var allChildren : Array[Node] = Util.getChildrenRecursive(inParent)
+	var hitboxes : Array[Hitbox] = []
+
+	for child : Node in allChildren:
+		var childAsHitbox : Hitbox = child as Hitbox
+		if !childAsHitbox:
+			continue
+
+		hitboxes.append(child)
+
+	return hitboxes
+
+static func getHitboxRIDs(inHitboxes : Array[Hitbox]) -> Array[RID]:
+	var hitboxRIDs : Array[RID] = []
+
+	for hitbox : Hitbox in inHitboxes:
+		hitboxRIDs.append(hitbox.get_rid())
+
+	return hitboxRIDs

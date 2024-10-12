@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://3khvdhi6xjou"]
+[gd_scene load_steps=31 format=3 uid="uid://3khvdhi6xjou"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_2vnqn"]
 [ext_resource type="Script" path="res://Scripts/Player/StepSoundController.gd" id="1_863d4"]
@@ -25,10 +25,15 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerSoundController.gd" id="13_32xeu"]
 [ext_resource type="AudioStream" uid="uid://c12i0eymy6qov" path="res://Assets/Audio/Steps/StepsRandomizer.tres" id="14_j633g"]
 [ext_resource type="AudioStream" uid="uid://y7ylwct4yro8" path="res://Assets/Audio/Thuds/ThudsRandomizer.tres" id="16_b7esa"]
+[ext_resource type="Script" path="res://Scripts/Components/Hitbox.gd" id="17_0i7jp"]
 [ext_resource type="AudioStream" uid="uid://byeppnbhc472f" path="res://Assets/Audio/Gunshots/Gunshot1TestRandomizer.tres" id="22_t04j0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_22kd6"]
 radius = 0.3
+height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_brmud"]
+radius = 0.25
 height = 1.5
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v53qw"]
@@ -36,12 +41,13 @@ radius = 0.25
 height = 1.5
 
 [node name="Player" type="CharacterBody3D"]
+physics_interpolation_mode = 1
 collision_layer = 2
 script = ExtResource("1_2vnqn")
 
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("fpsViewCamera", "neck")]
 script = ExtResource("3_2w6yp")
-fpsViewCamera = NodePath("../Neck/HeadBobAndPunchPivot/LeanPivot/FPSView")
+fpsViewCamera = NodePath("../Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView")
 neck = NodePath("../Neck")
 
 [node name="WeaponManager" type="Node" parent="."]
@@ -56,18 +62,14 @@ stateInAir = NodePath("CharacterStateInAir")
 
 [node name="CharacterStateDefault" type="Node" parent="CharacterStateManager"]
 script = ExtResource("5_018c5")
-acceleration = 24000.0
-maxSpeed = 4.0
-friction = 6000.0
 
 [node name="HeadBobSettings" type="Node" parent="CharacterStateManager/CharacterStateDefault"]
 script = ExtResource("7_cdgt3")
 
 [node name="CharacterStateInAir" type="Node" parent="CharacterStateManager"]
 script = ExtResource("5_t1r06")
-acceleration = 10000.0
-maxSpeed = 4.0
-friction = 0.0
+acceleration = 35.0
+friction = 5.0
 
 [node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
 script = ExtResource("6_58h4i")
@@ -81,7 +83,7 @@ stateDefault = NodePath("WeaponStateDefault")
 [node name="WeaponStateDefault" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("shootSoundPlayer", "shootRecoilPunch", "damage")]
 script = ExtResource("8_mphu6")
 shootSoundPlayer = NodePath("../../ShootPlayer")
-shootRecoilPunch = NodePath("../../Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPunch")
+shootRecoilPunch = NodePath("../../Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPunch")
 damage = NodePath("Damage")
 
 [node name="Damage" type="Node" parent="WeaponStateManager/WeaponStateDefault"]
@@ -95,21 +97,30 @@ headPunch = NodePath("../HeadPunch")
 
 [node name="HeadPunch" type="Node" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("4_dh8ax")
-target = NodePath("../Neck/HeadBobAndPunchPivot")
+target = NodePath("../Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot")
 
 [node name="HeadBob" type="Node" parent="." node_paths=PackedStringArray("target", "stateManager")]
 script = ExtResource("8_t41f4")
-target = NodePath("../Neck/HeadBobAndPunchPivot")
+target = NodePath("../Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot")
 stateManager = NodePath("../CharacterStateManager")
 
 [node name="HeadLean" type="Node" parent="." node_paths=PackedStringArray("target", "stateManager")]
 script = ExtResource("4_6ny3q")
-target = NodePath("../Neck/HeadBobAndPunchPivot/LeanPivot")
+target = NodePath("../Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot")
 stateManager = NodePath("../CharacterStateManager")
 
 [node name="CollisionShapeStanding" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_22kd6")
+
+[node name="HitboxStanding" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("17_0i7jp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxStanding"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_brmud")
 
 [node name="StandingNeckPosition" type="Marker3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5, 0)
@@ -120,16 +131,19 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, 
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="HeadBobAndPunchPivot" type="Node3D" parent="Neck"]
+[node name="PhysicsInterpolator3D" type="Node3D" parent="Neck"]
+script = ExtResource("2_sjpk7")
 
-[node name="LeanPivot" type="Node3D" parent="Neck/HeadBobAndPunchPivot"]
+[node name="HeadBobAndPunchPivot" type="Node3D" parent="Neck/PhysicsInterpolator3D"]
 
-[node name="DecorHead" type="CSGSphere3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot"]
+[node name="LeanPivot" type="Node3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot"]
+
+[node name="DecorHead" type="CSGSphere3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.234992, 0)
 layers = 4
 radius = 0.169382
 
-[node name="FPSView" type="Camera3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot" node_paths=PackedStringArray("subViewport", "viewportCamera", "aimRayCast", "headPunch", "characterStateManager")]
+[node name="FPSView" type="Camera3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot" node_paths=PackedStringArray("subViewport", "viewportCamera", "aimRayCast", "headPunch", "characterStateManager")]
 cull_mask = 1047553
 current = true
 script = ExtResource("6_knxow")
@@ -137,40 +151,40 @@ subViewport = NodePath("SubViewportContainer/SubViewport")
 viewportCamera = NodePath("SubViewportContainer/SubViewport/Camera3D")
 aimRayCast = NodePath("AimRayCastDeprecated")
 cameraRayLayer = 9
-headPunch = NodePath("../../../../HeadPunch")
-characterStateManager = NodePath("../../../../CharacterStateManager")
+headPunch = NodePath("../../../../../HeadPunch")
+characterStateManager = NodePath("../../../../../CharacterStateManager")
 
-[node name="AimRayCastDeprecated" type="RayCast3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView"]
+[node name="AimRayCastDeprecated" type="RayCast3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView"]
 target_position = Vector3(0, 0, -1000)
 
-[node name="Hands" type="Node3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView"]
+[node name="Hands" type="Node3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, -0.11, -0.445)
 
-[node name="HeldWeaponFollow" type="Node3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands"]
+[node name="HeldWeaponFollow" type="Node3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands"]
 script = ExtResource("7_atuhb")
 
-[node name="RecoilPivot" type="Node3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow"]
+[node name="RecoilPivot" type="Node3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow"]
 
-[node name="Pivot" type="Node3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPivot"]
+[node name="Pivot" type="Node3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPivot"]
 
-[node name="ShortGun" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPivot/Pivot" instance=ExtResource("8_xch2u")]
+[node name="ShortGun" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPivot/Pivot" instance=ExtResource("8_xch2u")]
 
-[node name="HeadBob" type="Node" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow" node_paths=PackedStringArray("target", "stateManager")]
+[node name="HeadBob" type="Node" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow" node_paths=PackedStringArray("target", "stateManager")]
 script = ExtResource("8_t41f4")
 isPrimary = false
 target = NodePath("../RecoilPivot/Pivot")
-stateManager = NodePath("../../../../../../../CharacterStateManager")
+stateManager = NodePath("../../../../../../../../CharacterStateManager")
 amplitudeY = 0.008
 amplitudeX = 0.005
 
-[node name="RecoilPunch" type="Node" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow" node_paths=PackedStringArray("target")]
+[node name="RecoilPunch" type="Node" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow" node_paths=PackedStringArray("target")]
 script = ExtResource("4_dh8ax")
 target = NodePath("../RecoilPivot")
 punchLerpSpeed = 30.0
 punchDecayLerpSpeed = 15.0
 maxTranslation = Vector3(0.05, 0.05, 0.3)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -178,17 +192,17 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="SubViewport" type="SubViewport" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/SubViewportContainer/SubViewport"]
 cull_mask = 2
 current = true
 
-[node name="Control" type="Control" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView"]
+[node name="Control" type="Control" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -197,7 +211,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Reticle" type="CenterContainer" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/Control" node_paths=PackedStringArray("weaponStateManager", "weaponManager")]
+[node name="Reticle" type="CenterContainer" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/Control" node_paths=PackedStringArray("weaponStateManager", "weaponManager")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -205,8 +219,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("9_xcwwv")
-weaponStateManager = NodePath("../../../../../../WeaponStateManager")
-weaponManager = NodePath("../../../../../../WeaponManager")
+weaponStateManager = NodePath("../../../../../../../WeaponStateManager")
+weaponManager = NodePath("../../../../../../../WeaponManager")
 
 [node name="PhysicsInterpolator3D" type="Node3D" parent="."]
 script = ExtResource("2_sjpk7")

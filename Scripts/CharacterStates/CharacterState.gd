@@ -2,11 +2,11 @@ extends Node
 class_name CharacterState
 
 @export_category("Config")
-@export var acceleration : float = 2200.0
+@export var acceleration : float = 55.0
 @export var maxSpeed : float = 2.0
 @export var maxSpeedEnforcement : float = 10.0
-@export var friction : float = 300.0
-@export var staticFrictionScalar : float = 2.0
+@export var friction : float = 15.0
+@export var slowingFrictionScalar : float = 1.0
 @export var jumpVelocity : float = 4.5
 
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -33,37 +33,20 @@ func update_physics(delta : float) -> void:
 
 	var character : CharacterBody3D = getStateManager().getCharacter()
 
-	var direction : Vector3 = convertInputToDirection(getStateManager().getLastInputDirection(), character.transform.basis)
+	var direction : Vector2 = getStateManager().getLastInputDirection()
+	var directionVec3 : Vector3 = Vector3(direction.x, 0.0, direction.y)
+	var addedVelocity : Vector3 = character.global_transform.basis * directionVec3 * acceleration * delta
 
-	var addedVelocity : Vector3 = calculateAddedPlanarVelocity(direction, delta)
 	character.velocity += addedVelocity
-	character.velocity = clampVelocityPlanar(character.velocity, delta)
 
 	if character.is_on_floor() or character.is_on_wall():
 		if is_zero_approx(direction.length_squared()):
-			character.velocity = applyFriction(character.velocity, delta, staticFrictionScalar)
+			character.velocity += getFriction(character.velocity, delta)
 		else:
-			character.velocity = applyFriction(character.velocity, delta, 1.0)
+			character.velocity += getFriction(character.velocity, delta, true)
 
+	character.velocity = clampVelocityPlanar(character.velocity, delta)
 	character.move_and_slide()
-
-func getStateManager() -> CharacterStateManager:
-	return get_parent() as CharacterStateManager
-
-func applyGravity(delta : float) -> void:
-	if not getStateManager().getCharacter().is_on_floor():
-		getStateManager().getCharacter().velocity.y -= gravity * delta
-
-func calculateAddedPlanarVelocity(inDirection : Vector3, delta : float) -> Vector3:
-	var addedVelocity : Vector3 = Vector3()
-	if inDirection:
-		addedVelocity.x += inDirection.x * acceleration * delta * delta
-		addedVelocity.z += inDirection.z * acceleration * delta * delta
-
-	return addedVelocity
-
-func convertInputToDirection(inInputDirection : Vector2, inBasis : Basis) -> Vector3:
-	return (inBasis * Vector3(inInputDirection.x, 0, inInputDirection.y)).normalized()
 
 func clampVelocityPlanar(inVelocity : Vector3, delta : float) -> Vector3:
 	var velocity2D : Vector2 = Vector2(inVelocity.x, inVelocity.z)
@@ -72,13 +55,21 @@ func clampVelocityPlanar(inVelocity : Vector3, delta : float) -> Vector3:
 
 	return result
 
-func applyFriction(inVelocity : Vector3, delta : float, scalar : float) -> Vector3:
-	var frictionDirection : Vector3 = -inVelocity.normalized()
-	var length : float = inVelocity.length()
-	var speedMultiplier : float = (length / maxSpeed) + 1
-	var outVelocity : Vector3 = frictionDirection * friction * scalar * speedMultiplier * delta * delta
+func getFriction(inVelocity : Vector3, inDelta : float, isAccelerating : bool = false) -> Vector3:
+	var speed : float = inVelocity.length()
 
-	return outVelocity + inVelocity
+	var scaledFriction : float = friction if isAccelerating else friction * slowingFrictionScalar
+	var totalFriction : Vector3 = clamp(inDelta * scaledFriction, 0.0, speed) * -inVelocity.normalized()
+	var planarizedFriction : Vector3 = Vector3(totalFriction.x, 0.0, totalFriction.z)
+
+	return planarizedFriction
+
+func applyGravity(delta : float) -> void:
+	if not getStateManager().getCharacter().is_on_floor():
+		getStateManager().getCharacter().velocity += gravity * Vector3.DOWN * delta
+
+func getStateManager() -> CharacterStateManager:
+	return get_parent() as CharacterStateManager
 
 func getLeanDirection() -> Vector2:
 	return Vector2(getStateManager().getLastInputDirection().x, 0)

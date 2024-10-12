@@ -42,6 +42,9 @@ func _exit_tree() -> void:
 	resetTrackedMeshes()
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+
 	assert(health)
 	assert(animationPlayer)
 	assert(shieldMeshes)
@@ -75,6 +78,9 @@ func on_health_depleted(_inHealth : Health) -> void:
 	refreshMaterialParams()
 
 func refreshMaterialParams() -> void:
+	if Engine.is_editor_hint():
+		return
+
 	colorShift = health.getCurrentHealth() / health.getMaxHealth()
 
 	updateMaterialProperty(colorShiftPropertyKey, colorShift)

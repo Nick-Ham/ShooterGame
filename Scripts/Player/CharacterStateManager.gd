@@ -28,7 +28,7 @@ signal head_punch_triggered(punch : Vector2)
 const minSpeed : float = 0.08
 
 const maxDelta : float = 0.1
-const updatePhysicsInProcess : bool = true
+const updatePhysicsInProcess : bool = false
 
 func _ready() -> void:
 	if !character:

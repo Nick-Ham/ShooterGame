@@ -1,6 +1,17 @@
 extends CharacterBody3D
 class_name Character
 
+@export_category("CharacterConfig")
+@export var headHeight : float = 1.5
+
+func getHeadHeight() -> float:
+	return headHeight
+
+func getHeadGlobalPosition() -> Vector3:
+	var headPosition : Vector3 = global_position
+	headPosition.y += getHeadHeight()
+	return headPosition
+
 static func getOwningCharacter(inNode : Node) -> Character:
 	if inNode == null:
 		return null
