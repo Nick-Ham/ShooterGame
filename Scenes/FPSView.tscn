@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dpyobjpxnx1dt"]
 
-[ext_resource type="Script" path="res://Scenes/FPSView.gd" id="1_bmyg8"]
+[ext_resource type="Script" path="res://Scripts/Player/FPSView.gd" id="1_bmyg8"]
 [ext_resource type="PackedScene" uid="uid://dw2shj3bwdrsl" path="res://Scenes/Guns/ShortGun.tscn" id="2_yuvnn"]
 [ext_resource type="Script" path="res://Scripts/Components/HeldWeaponFollow.gd" id="3_qu211"]
 [ext_resource type="Script" path="res://Scripts/Components/HeadBob.gd" id="4_huifd"]

@@ -1,7 +1,7 @@
 extends BTNode
 class_name BTSelector
 
-func updateNode(inDelta : float) -> BehaviorTree.TreeResult:
+func updateNode(inDelta : float) -> BTTickResult:
 	var children : Array[Node] = get_children()
 	children.reverse()
 
@@ -10,19 +10,19 @@ func updateNode(inDelta : float) -> BehaviorTree.TreeResult:
 		if !is_instance_valid(currentBTNode):
 			continue
 
-		var result : BehaviorTree.TreeResult = currentBTNode.updateNode(inDelta)
+		var result : BTTickResult = currentBTNode.updateNode(inDelta)
 
-		match result:
-			BehaviorTree.TreeResult.SUCCESS:
+		match result.tickResult:
+			TickResult.SUCCESS:
+				return succeed()
+
+			TickResult.FAILURE:
 				continue
 
-			BehaviorTree.TreeResult.FAILURE:
-				continue
-
-			BehaviorTree.TreeResult.RUNNING:
-				return BehaviorTree.TreeResult.RUNNING
+			TickResult.RUNNING:
+				return result
 
 			_:
 				continue
 
-	return BehaviorTree.TreeResult.FAILURE
+	return fail()

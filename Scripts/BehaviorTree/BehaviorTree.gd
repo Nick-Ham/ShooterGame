@@ -5,15 +5,13 @@ class_name BehaviorTree
 @export var enabled : bool = true
 
 var rootNode : BTNode = null
+var runningNode : BTNode = null
 
-enum TreeResult {
-	SUCCESS,
-	FAILURE,
-	RUNNING
-}
+var shouldReset : bool = false
 
 func _ready() -> void:
-	rootNode = get_child(0)
+	rootNode = Util.getChildOfType(self, BTNode)
+	process_physics_priority = -1
 
 func _physics_process(delta: float) -> void:
 	if !enabled:
@@ -22,4 +20,26 @@ func _physics_process(delta: float) -> void:
 	if !is_instance_valid(rootNode):
 		return
 
-	var result : TreeResult = rootNode.updateNode(delta)
+	var controller : AIController = Util.getChildOfType(get_parent(), AIController)
+	if !controller:
+		push_warning("Behavior tree enabled with no AIController")
+		return
+
+	if shouldReset:
+		shouldReset = false
+		runningNode = null
+
+	var nodeToUpdate : BTNode = runningNode if is_instance_valid(runningNode) else rootNode
+	var result : BTNode.BTTickResult = nodeToUpdate.updateNode(delta)
+
+	match result.tickResult:
+		BTNode.TickResult.RUNNING:
+			runningNode = result.nodeSource
+		_:
+			runningNode = null
+
+func interrupt() -> void:
+	shouldReset = true
+
+func getActiveNode() -> BTNode:
+	return runningNode

@@ -9,6 +9,7 @@ point_count = 4
 [resource]
 script = ExtResource("1_tcp32")
 weaponName = "DefaultTestGun"
+isProjectile = false
 defaultDamage = 25.0
 firingDelay = 0.1
 magazineSize = 15

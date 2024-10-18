@@ -5,10 +5,17 @@ class_name Level
 @export var playerCharacter : Character
 
 var environmentalEffectManager : EnvironmentEffectManager
+var environmentEventBus : EnvironmentEventBus
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	environmentalEffectManager = EnvironmentEffectManager.new()
 	add_child(environmentalEffectManager)
+
+	environmentEventBus = EnvironmentEventBus.new()
+	add_child(environmentEventBus)
+
+func getEnvironmentEventBus() -> EnvironmentEventBus:
+	return environmentEventBus
 
 func getEnvironmentalEffectManager() -> EnvironmentEffectManager:
 	return environmentalEffectManager

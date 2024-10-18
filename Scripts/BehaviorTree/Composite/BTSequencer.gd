@@ -1,7 +1,7 @@
 extends BTNode
 class_name BTSequencer
 
-func updateNode(inDelta : float) -> BehaviorTree.TreeResult:
+func updateNode(inDelta : float) -> BTTickResult:
 	var children : Array[Node] = get_children()
 	children.reverse()
 
@@ -10,19 +10,22 @@ func updateNode(inDelta : float) -> BehaviorTree.TreeResult:
 		if !is_instance_valid(currentBTNode):
 			continue
 
-		var result : BehaviorTree.TreeResult = currentBTNode.updateNode(inDelta)
+		var result : BTTickResult = currentBTNode.updateNode(inDelta)
+		if !result:
+			push_error("BTNode should always evaluate to a BTTickResult type. Received null")
+			return
 
-		match result:
-			BehaviorTree.TreeResult.SUCCESS:
+		match result.tickResult:
+			TickResult.SUCCESS:
 				continue
 
-			BehaviorTree.TreeResult.FAILURE:
-				return BehaviorTree.TreeResult.FAILURE
+			TickResult.FAILURE:
+				return fail()
 
-			BehaviorTree.TreeResult.RUNNING:
-				return BehaviorTree.TreeResult.RUNNING
+			TickResult.RUNNING:
+				return result
 
 			_:
 				continue
 
-	return BehaviorTree.TreeResult.FAILURE
+	return fail()

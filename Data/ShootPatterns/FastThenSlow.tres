@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AIShootPattern" load_steps=2 format=3 uid="uid://dvc8vuveolu44"]
+
+[ext_resource type="Script" path="res://Types/AIShootPattern.gd" id="1_prdvj"]
+
+[resource]
+script = ExtResource("1_prdvj")
+patternName = "FastThenSlow"
+shotPattern = Array[float]([0.2, 0.2, 0.2, 0.8, 1.0])
+useRandomInitialPosition = true

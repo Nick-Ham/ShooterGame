@@ -90,10 +90,14 @@ F1={
 
 [layer_names]
 
+3d_render/layer_1="Default"
+3d_render/layer_2="Hands"
+3d_render/layer_3="Player"
 3d_physics/layer_1="Environment"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Enemy"
 3d_physics/layer_4="Hitbox"
+3d_physics/layer_5="Projectiles"
 
 [physics]
 

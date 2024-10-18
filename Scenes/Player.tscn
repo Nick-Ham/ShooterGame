@@ -12,11 +12,11 @@
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateDefault.gd" id="5_018c5"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateInAir.gd" id="5_t1r06"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateJumping.gd" id="6_58h4i"]
-[ext_resource type="Script" path="res://Scenes/FPSView.gd" id="6_knxow"]
+[ext_resource type="Script" path="res://Scripts/Player/FPSView.gd" id="6_knxow"]
 [ext_resource type="Script" path="res://Scripts/Components/HeldWeaponFollow.gd" id="7_atuhb"]
 [ext_resource type="Script" path="res://Scripts/Components/HeadBobSettings.gd" id="7_cdgt3"]
-[ext_resource type="Script" path="res://Scripts/WeaponStates/WeaponStateManager.gd" id="7_rhfs6"]
-[ext_resource type="Script" path="res://Scripts/WeaponStates/WeaponStateDefault.gd" id="8_mphu6"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="7_rhfs6"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefault.gd" id="8_mphu6"]
 [ext_resource type="Script" path="res://Scripts/Components/HeadBob.gd" id="8_t41f4"]
 [ext_resource type="PackedScene" uid="uid://dw2shj3bwdrsl" path="res://Scenes/Guns/ShortGun.tscn" id="8_xch2u"]
 [ext_resource type="Script" path="res://Scripts/Player/Reticle.gd" id="9_xcwwv"]
@@ -34,7 +34,7 @@ height = 1.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_brmud"]
 radius = 0.25
-height = 1.5
+height = 1.75
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v53qw"]
 radius = 0.25
@@ -68,8 +68,10 @@ script = ExtResource("7_cdgt3")
 
 [node name="CharacterStateInAir" type="Node" parent="CharacterStateManager"]
 script = ExtResource("5_t1r06")
-acceleration = 35.0
-friction = 5.0
+acceleration = 15.0
+maxSpeed = 2.5
+maxSpeedEnforcement = 5.0
+friction = 2.0
 
 [node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
 script = ExtResource("6_58h4i")
@@ -116,10 +118,11 @@ shape = SubResource("CapsuleShape3D_22kd6")
 [node name="HitboxStanding" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 0
+monitoring = false
 script = ExtResource("17_0i7jp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxStanding"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("CapsuleShape3D_brmud")
 
 [node name="StandingNeckPosition" type="Marker3D" parent="."]
@@ -143,19 +146,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.234992, 0)
 layers = 4
 radius = 0.169382
 
-[node name="FPSView" type="Camera3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot" node_paths=PackedStringArray("subViewport", "viewportCamera", "aimRayCast", "headPunch", "characterStateManager")]
+[node name="FPSView" type="Camera3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot" node_paths=PackedStringArray("subViewport", "viewportCamera", "headPunch", "characterStateManager")]
 cull_mask = 1047553
 current = true
 script = ExtResource("6_knxow")
 subViewport = NodePath("SubViewportContainer/SubViewport")
 viewportCamera = NodePath("SubViewportContainer/SubViewport/Camera3D")
-aimRayCast = NodePath("AimRayCastDeprecated")
-cameraRayLayer = 9
 headPunch = NodePath("../../../../../HeadPunch")
 characterStateManager = NodePath("../../../../../CharacterStateManager")
-
-[node name="AimRayCastDeprecated" type="RayCast3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView"]
-target_position = Vector3(0, 0, -1000)
 
 [node name="Hands" type="Node3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, -0.11, -0.445)
@@ -262,6 +260,9 @@ bus = &"WorldSFX"
 
 [node name="ShootPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("22_t04j0")
-volume_db = -17.0
+volume_db = -17.5
 max_polyphony = 3
 bus = &"WorldSFX"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.706736, 0.286414, -0.646909, 0, 0.914388, 0.404838, 0.707477, -0.286114, 0.646231, -2.59444, 3.74238, 1.96478)

@@ -1,0 +1,348 @@
+[gd_scene load_steps=41 format=3 uid="uid://cpurlnxl3pclx"]
+
+[ext_resource type="Script" path="res://Scripts/Character.gd" id="1_t215t"]
+[ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_lgn8u"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/AIController.gd" id="2_n60v3"]
+[ext_resource type="Script" path="res://Scripts/Player/CharacterStateManager.gd" id="3_nv3fu"]
+[ext_resource type="Resource" uid="uid://05st06xuv7q1" path="res://Data/PlasmaBolter.tres" id="3_nyrer"]
+[ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateDefault.gd" id="4_a0gpi"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="4_pmxvx"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefaultProjectile.gd" id="5_4e3ff"]
+[ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateInAir.gd" id="5_wviwu"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="6_p63f4"]
+[ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateJumping.gd" id="6_w4vp6"]
+[ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="7_34icv"]
+[ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robot/Robot.tscn" id="8_8vwp4"]
+[ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="9_gli1f"]
+[ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Overshield.tscn" id="10_hrsr4"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/AnimationController.gd" id="11_8pn5y"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/BehaviorTree.gd" id="12_yuoqv"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Composite/BTSelector.gd" id="13_7n237"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Composite/BTSequencer.gd" id="14_djmc6"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Conditions/BTHasTargetCondition.gd" id="15_o0jy5"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Decorators/BTInverter.gd" id="16_7arpo"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/NavigationController.gd" id="19_8dulv"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTAcquireTarget.gd" id="25_2c285"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTLookForTarget.gd" id="25_4klt8"]
+[ext_resource type="AudioStream" uid="uid://dm3ef8byt1qnj" path="res://Assets/Audio/Gunshots/Gunshot1Test.ogg" id="26_du224"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Interrupts/BTTargetFoundInterrupter.gd" id="30_sxvwp"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/AIShootController.gd" id="31_b8sev"]
+[ext_resource type="Script" path="res://Scripts/LOSTracker.gd" id="32_tld2l"]
+
+[sub_resource type="GDScript" id="GDScript_3id48"]
+script/source = "extends Node
+class_name Targeter
+
+@export_category(\"Ref\")
+@export var losTracker : LOSTracker
+
+@export_category(\"Config\")
+@export var targetLostTime : float = 2.0
+@export var defaultRememberTargetTime : float = 2.0
+
+var target : Node3D
+var positionOfInterest : Vector3
+
+@onready var owningCharacter : Character = Character.getOwningCharacter(self)
+@onready var lastKnownPosition : Vector3 = get_parent().global_position
+
+signal target_acquired(inTarget : Node3D)
+signal target_lost(inTarget : Node3D)
+
+class TargetInterest:
+	var isInterestPosition : bool = false
+	var interest : Node3D = null
+	var interestPosition : Vector3 = Vector3()
+
+func _ready() -> void:
+	assert(losTracker)
+
+	var level : Level = Game.getGame(get_tree()).getLevel()
+	var environmentEventBus : EnvironmentEventBus = level.getEnvironmentEventBus()
+
+	Util.safeConnect(environmentEventBus.sound_triggered, on_environment_sound_triggered)
+	Util.safeConnect(losTracker.character_lost, on_character_lost)
+
+func getInterest() -> TargetInterest:
+	var interest : TargetInterest = TargetInterest.new()
+
+	if target:
+		interest.interest = target
+		var targetAsCharacter : Character = target as Character
+		if targetAsCharacter:
+			interest.interestPosition = targetAsCharacter.getHeadGlobalPosition()
+			return interest
+
+		interest.interestPosition = target.global_position
+		return interest
+
+	if positionOfInterest.is_zero_approx():
+		return null
+
+	interest.isInterestPosition = true
+	interest.interestPosition = positionOfInterest
+	return interest
+
+
+func on_environment_sound_triggered(inSource : Node3D) -> void:
+	if target:
+		return
+
+	var sourcePosition : Vector3 = inSource.global_position
+	var sourceAsCharacter : Character = inSource as Character
+	if sourceAsCharacter:
+		sourcePosition = sourceAsCharacter.getHeadGlobalPosition()
+
+	positionOfInterest = sourcePosition
+
+func on_character_lost(inCharacter : Character) -> void:
+	if !inCharacter == target:
+		return
+
+	if !target:
+		return
+
+	var currentInterest : TargetInterest = getInterest()
+	positionOfInterest = currentInterest.interestPosition
+
+	var previousTarget : Node3D = target
+	target = null
+	target_lost.emit(previousTarget)
+
+func acquireTarget() -> Node3D:
+	if target:
+		return target
+
+	var visibleCharacters : Array[Character] = losTracker.getVisibleCharacters()
+	for character : Character in visibleCharacters:
+		if character.team == owningCharacter.team:
+			return null
+
+		target = character
+		return target
+
+	return null
+
+func on_target_destroyed(_inCharacter : Character) -> void:
+	return
+
+func hasTarget() -> bool:
+	return is_instance_valid(target)
+
+func getTarget() -> Node3D:
+	return target
+"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uc3a3"]
+radius = 0.75
+height = 1.75
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tqveb"]
+animation = &"walk_backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8btl4"]
+animation = &"walk_forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y7noj"]
+animation = &"walk_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_20il0"]
+animation = &"walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dce72"]
+animation = &"default"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_tbqon"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_tqveb")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_8btl4")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_y7noj")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_20il0")
+blend_point_3/pos = Vector2(-1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_dce72")
+blend_point_4/pos = Vector2(0, 0)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3pyu0"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a540e"]
+graph_offset = Vector2(-394, 56)
+nodes/MoveDirection/node = SubResource("AnimationNodeBlendSpace2D_tbqon")
+nodes/MoveDirection/position = Vector2(0, 140)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_3pyu0")
+nodes/TimeScale/position = Vector2(200, 140)
+nodes/output/position = Vector2(380, 180)
+node_connections = [&"TimeScale", 0, &"MoveDirection", &"output", 0, &"TimeScale"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_41jp0"]
+random_pitch = 1.07
+streams_count = 1
+stream_0/stream = ExtResource("26_du224")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0yxpf"]
+radius = 50.0
+
+[node name="RobotWalker" type="CharacterBody3D" node_paths=PackedStringArray("aimMarker", "aimCast")]
+collision_layer = 4
+script = ExtResource("1_t215t")
+headHeight = 1.25
+team = 1
+aimMarker = NodePath("PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim")
+aimCast = NodePath("PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim/AimRayCast")
+
+[node name="AIController" type="Node" parent="." node_paths=PackedStringArray("aimRayCast")]
+script = ExtResource("2_n60v3")
+aimRayCast = NodePath("../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim/AimRayCast")
+
+[node name="AIShootController" type="Node" parent="."]
+script = ExtResource("31_b8sev")
+
+[node name="WeaponManager" type="Node" parent="."]
+script = ExtResource("2_lgn8u")
+defaultWeapon = ExtResource("3_nyrer")
+
+[node name="WeaponStateManager" type="Node" parent="." node_paths=PackedStringArray("weaponManager", "stateDefault")]
+script = ExtResource("4_pmxvx")
+weaponManager = NodePath("../WeaponManager")
+stateDefault = NodePath("WeaponStateDefaultProjectile")
+
+[node name="WeaponStateDefaultProjectile" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("barrelEnd", "shootSoundPlayer", "damage")]
+script = ExtResource("5_4e3ff")
+barrelEnd = NodePath("../../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim")
+shootSoundPlayer = NodePath("../../ShootPlayer")
+damage = NodePath("Damage")
+
+[node name="Damage" type="Node" parent="WeaponStateManager/WeaponStateDefaultProjectile"]
+script = ExtResource("6_p63f4")
+
+[node name="Targeter" type="Node" parent="." node_paths=PackedStringArray("losTracker")]
+script = SubResource("GDScript_3id48")
+losTracker = NodePath("../LOSTracker")
+
+[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir")]
+script = ExtResource("3_nv3fu")
+enableLogging = true
+loggerCategory = "RobotWalker:StateManager:State"
+stateDefault = NodePath("CharacterStateDefault")
+stateJumping = NodePath("CharacterStateJumping")
+stateInAir = NodePath("CharacterStateInAir")
+
+[node name="CharacterStateDefault" type="Node" parent="CharacterStateManager"]
+script = ExtResource("4_a0gpi")
+acceleration = 45.0
+maxSpeed = 1.75
+maxSpeedEnforcement = 12.0
+friction = 25.0
+
+[node name="CharacterStateInAir" type="Node" parent="CharacterStateManager"]
+script = ExtResource("5_wviwu")
+
+[node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
+script = ExtResource("6_w4vp6")
+
+[node name="PhysicsInterpolator3D" type="Node3D" parent="."]
+script = ExtResource("7_34icv")
+
+[node name="Robot" parent="PhysicsInterpolator3D" instance=ExtResource("8_8vwp4")]
+
+[node name="LeftLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="0"]
+transform = Transform3D(0.984808, -0.137764, -0.10571, 0.173648, 0.7813, 0.599513, 0, -0.608761, 0.793354, 0, -0.0625, 0)
+
+[node name="LeftLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.247151, -0.525831, -0.0198207)
+
+[node name="LeftLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.258819, -0.965926, 0, 0.965926, -0.258819, 0, -0.34375, 0.0625)
+
+[node name="LeftFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner/LeftLegLower" index="0"]
+transform = Transform3D(0.984822, -0.173566, 0.000200477, 0.160251, 0.908829, -0.385163, 0.066669, 0.379349, 0.922849, 0, 0.375, 0)
+
+[node name="RightLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="1"]
+transform = Transform3D(0.984808, 0.137764, 0.10571, -0.17101, 0.875141, 0.452641, -0.0301537, -0.463841, 0.885405, 0, -0.0625, 0)
+
+[node name="RightLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper" index="0"]
+transform = Transform3D(0.999542, 0.025504, 0.0162952, 0.0204175, -0.170788, -0.985096, -0.0223408, 0.984978, -0.171231, -0.247151, -0.525831, -0.0198207)
+
+[node name="RightLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner" index="0"]
+transform = Transform3D(0.999542, 0.00913909, -0.0288526, -0.0223409, -0.420328, -0.907097, -0.0204176, 0.907326, -0.419931, 0, -0.34375, 0.0625)
+
+[node name="RightFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower" index="0"]
+transform = Transform3D(0.984797, 0.150534, 0.0866856, -0.160381, 0.97963, 0.120841, -0.0667291, -0.132907, 0.988879, 0.00188168, 0.387245, -0.00166134)
+
+[node name="Head" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0)
+
+[node name="Aim" type="Marker3D" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.19562e-08, 0.25091, 0.010955)
+
+[node name="AimRayCast" type="RayCast3D" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim"]
+target_position = Vector3(0, 0, 0)
+collide_with_areas = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_uc3a3")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("9_gli1f")
+
+[node name="OvershieldHealth" parent="." instance=ExtResource("10_hrsr4")]
+
+[node name="OvershieldMaterialController" parent="OvershieldHealth" index="1" node_paths=PackedStringArray("shieldMeshes")]
+shieldMeshes = NodePath("../../PhysicsInterpolator3D/Robot/Node/Robot")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../PhysicsInterpolator3D/Robot")
+tree_root = SubResource("AnimationNodeBlendTree_a540e")
+anim_player = NodePath("../PhysicsInterpolator3D/Robot/AnimationPlayer")
+parameters/MoveDirection/blend_position = Vector2(0, 0)
+parameters/TimeScale/scale = 1.0
+
+[node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("modelAnimationTree", "aimPivot")]
+script = ExtResource("11_8pn5y")
+modelAnimationTree = NodePath("../AnimationTree")
+aimPivot = NodePath("../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot")
+
+[node name="BehaviorTree" type="Node" parent="."]
+script = ExtResource("12_yuoqv")
+
+[node name="BTTargetFoundInterrupter" type="Node" parent="BehaviorTree"]
+script = ExtResource("30_sxvwp")
+
+[node name="BTSelector" type="Node" parent="BehaviorTree"]
+script = ExtResource("13_7n237")
+
+[node name="BTSequencer" type="Node" parent="BehaviorTree/BTSelector"]
+script = ExtResource("14_djmc6")
+
+[node name="BTInverter" type="Node" parent="BehaviorTree/BTSelector/BTSequencer"]
+script = ExtResource("16_7arpo")
+
+[node name="BTHasTargetCondition" type="Node" parent="BehaviorTree/BTSelector/BTSequencer/BTInverter"]
+script = ExtResource("15_o0jy5")
+
+[node name="BTAcquireTarget" type="Node" parent="BehaviorTree/BTSelector/BTSequencer"]
+script = ExtResource("25_2c285")
+
+[node name="BTLookForTarget" type="Node" parent="BehaviorTree/BTSelector/BTSequencer"]
+script = ExtResource("25_4klt8")
+
+[node name="ShootPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_41jp0")
+volume_db = -10.0
+max_polyphony = 3
+bus = &"WorldSFX"
+attenuation_filter_db = -5.0
+
+[node name="LOSTracker" type="Area3D" parent="."]
+script = ExtResource("32_tld2l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LOSTracker"]
+shape = SubResource("SphereShape3D_0yxpf")
+
+[node name="NavigationController" type="NavigationAgent3D" parent="."]
+script = ExtResource("19_8dulv")
+
+[editable path="PhysicsInterpolator3D/Robot"]
+[editable path="OvershieldHealth"]

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://05st06xuv7q1"]
+
+[ext_resource type="PackedScene" uid="uid://dero46gvnk3p4" path="res://Scenes/Projectiles/PlasmaBolt.tscn" id="1_860co"]
+[ext_resource type="Script" path="res://Types/WeaponData.gd" id="1_wkbnf"]
+
+[sub_resource type="Curve" id="Curve_hjvab"]
+_data = [Vector2(0, 0), 0.0, 2.20145, 0, 0, Vector2(0.137056, 0.692308), 3.09262, 3.09262, 0, 0, Vector2(0.461929, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.992335), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[resource]
+script = ExtResource("1_wkbnf")
+weaponName = "PlasmaBolter"
+isProjectile = true
+projectileScene = ExtResource("1_860co")
+defaultDamage = 25.0
+firingDelay = 0.1
+magazineSize = 15
+baseBloomRadius = 0.001
+maxBloomRadius = 0.004
+bloomDecaySpeed = 20.0
+bloomCurve = SubResource("Curve_hjvab")
+recoilLerpSpeed = 30.0
+recoilDecaySpeed = 15.0
+maxRecoilRotation = Vector3(10, 5, 5)
+maxRecoilTranslation = Vector3(0.05, 0.05, 0.3)
+recoilRotationPitchRange = Vector2(2.5, 10)
+recoilRotationYawRange = Vector2(-3, 3)
+recoilRotationRollRange = Vector2(-0.2, 0.2)
+recoilTranslationForwardRange = Vector2(0.05, 0.1)
+recoilTranslationRightRange = Vector2(-0.01, 0.01)
+recoilTranslationUpRange = Vector2(0, 0)

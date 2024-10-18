@@ -1,3 +1,9 @@
+res://Data/ShootPatterns
+res://Scripts
+res://Assets/Effects/Overshield
+res://Scripts/EnemyControllers
+res://Data
+res://Scripts/Projectiles
 res://Scenes/Projectiles
 res://Prototyping
 res://Assets/Materials
@@ -8,15 +14,8 @@ res://Assets/Models/Robot
 res://Assets/Models/UnitMan
 res://Scenes/Effects
 res://Scripts/Components
-res://Assets/Effects/Overshield
 res://Assets/Effects
 res://Scripts/Effects
-res://Scripts
-res://Data
 res://
 res://Assets/Audio/Gunshots
 res://Assets/Audio/Pops
-res://Assets/Audio/Thuds
-res://Assets/Audio/Steps
-res://Scenes/Guns
-res://Debug

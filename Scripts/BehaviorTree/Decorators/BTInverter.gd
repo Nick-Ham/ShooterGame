@@ -1,20 +1,23 @@
 extends BTNode
 class_name BTInverter
 
-func updateNode(inDelta : float) -> BehaviorTree.TreeResult:
+func updateNode(inDelta : float) -> BTTickResult:
+	if get_child_count() < 1:
+		return fail()
+
 	var childAsBTNode : BTNode = get_child(0)
 	if !is_instance_valid(childAsBTNode):
-		return BehaviorTree.TreeResult.FAILURE
+		return fail()
 
-	var result : BehaviorTree.TreeResult = childAsBTNode.updateNode(inDelta)
-	match result:
-		BehaviorTree.TreeResult.SUCCESS:
-			return BehaviorTree.TreeResult.FAILURE
+	var result : BTTickResult = childAsBTNode.updateNode(inDelta)
+	match result.tickResult:
+		TickResult.SUCCESS:
+			return fail()
 
-		BehaviorTree.TreeResult.FAILURE:
-			return BehaviorTree.TreeResult.SUCCESS
+		TickResult.FAILURE:
+			return succeed()
 
-		BehaviorTree.TreeResult.RUNNING:
-			return BehaviorTree.TreeResult.RUNNING
+		TickResult.RUNNING:
+			return result
 
-	return BehaviorTree.TreeResult.FAILURE
+	return fail()

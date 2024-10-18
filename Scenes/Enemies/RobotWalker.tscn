@@ -1,25 +1,38 @@
-[gd_scene load_steps=30 format=3 uid="uid://cpurlnxl3pclx"]
+[gd_scene load_steps=45 format=3 uid="uid://cpurlnxl3pclx"]
 
-[ext_resource type="Script" path="res://Scripts/Character.gd" id="1_t215t"]
-[ext_resource type="Script" path="res://Scripts/EnemyControllers/RobotWalker/RobotWalkerController.gd" id="2_4sat2"]
+[ext_resource type="Script" path="res://Scripts/Character.gd" id="1_bbu7p"]
+[ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_lgn8u"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/AIController.gd" id="2_n60v3"]
 [ext_resource type="Script" path="res://Scripts/Player/CharacterStateManager.gd" id="3_nv3fu"]
+[ext_resource type="Resource" uid="uid://05st06xuv7q1" path="res://Data/PlasmaBolter.tres" id="3_nyrer"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/AIInvestigationManager.gd" id="4_7ltbn"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateDefault.gd" id="4_a0gpi"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="4_pmxvx"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefaultProjectile.gd" id="5_4e3ff"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateInAir.gd" id="5_wviwu"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="6_p63f4"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateJumping.gd" id="6_w4vp6"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="7_34icv"]
 [ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robot/Robot.tscn" id="8_8vwp4"]
 [ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="9_gli1f"]
 [ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Overshield.tscn" id="10_hrsr4"]
-[ext_resource type="Script" path="res://Scripts/EnemyControllers/RobotWalker/RobotWalkerAnimationController.gd" id="11_8pn5y"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/AnimationController.gd" id="11_8pn5y"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/BehaviorTree.gd" id="12_yuoqv"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Composite/BTSelector.gd" id="13_7n237"]
-[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTChaseTask.gd" id="14_8goal"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Composite/BTSequencer.gd" id="14_djmc6"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Conditions/BTHasTargetCondition.gd" id="15_o0jy5"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Decorators/BTInverter.gd" id="16_7arpo"]
-[ext_resource type="Script" path="res://Scripts/BehaviorTree/Conditions/BTTargetWithinRangeCondition.gd" id="17_lw5vn"]
-[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTFleeTask.gd" id="19_g1he5"]
-[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTStrafe.gd" id="20_tog0y"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/NavigationController.gd" id="19_8dulv"]
+[ext_resource type="AudioStream" uid="uid://dm3ef8byt1qnj" path="res://Assets/Audio/Gunshots/Gunshot1Test.ogg" id="26_du224"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Conditions/BTHasInvestigations.gd" id="26_ovlfc"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTMoveToInvestigate.gd" id="27_y621p"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTLookForTarget.gd" id="28_nwp6c"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTStrafeAndShoot.gd" id="29_gcn5k"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/Targeter.gd" id="29_wdjxd"]
+[ext_resource type="Resource" uid="uid://dvc8vuveolu44" path="res://Data/ShootPatterns/FastThenSlow.tres" id="30_2uyqy"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Interrupts/BTTargetFoundInterrupter.gd" id="30_sxvwp"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/AIShootController.gd" id="31_b8sev"]
+[ext_resource type="Script" path="res://Scripts/LOSTracker.gd" id="32_tld2l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uc3a3"]
 radius = 0.75
@@ -63,14 +76,57 @@ nodes/TimeScale/position = Vector2(200, 140)
 nodes/output/position = Vector2(380, 180)
 node_connections = [&"TimeScale", 0, &"MoveDirection", &"output", 0, &"TimeScale"]
 
-[node name="RobotWalker" type="CharacterBody3D"]
-collision_layer = 4
-script = ExtResource("1_t215t")
-headHeight = 1.25
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_41jp0"]
+random_pitch = 1.07
+streams_count = 1
+stream_0/stream = ExtResource("26_du224")
 
-[node name="RobotWalkerController" type="Node" parent="." node_paths=PackedStringArray("navAgent")]
-script = ExtResource("2_4sat2")
-navAgent = NodePath("../NavigationAgent3D")
+[sub_resource type="SphereShape3D" id="SphereShape3D_0yxpf"]
+radius = 50.0
+
+[node name="RobotWalker" type="CharacterBody3D" node_paths=PackedStringArray("aimMarker", "aimCast")]
+collision_layer = 4
+script = ExtResource("1_bbu7p")
+team = 1
+aimMarker = NodePath("PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim")
+aimCast = NodePath("PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim/AimRayCast")
+
+[node name="AIController" type="Node" parent="." node_paths=PackedStringArray("aimRayCast")]
+script = ExtResource("2_n60v3")
+aimRayCast = NodePath("../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim/AimRayCast")
+
+[node name="Targeter" type="Node" parent="." node_paths=PackedStringArray("losTracker")]
+script = ExtResource("29_wdjxd")
+losTracker = NodePath("../LOSTracker")
+
+[node name="AIInvestigationManager" type="Node" parent="."]
+script = ExtResource("4_7ltbn")
+
+[node name="AIShootController" type="Node" parent="."]
+script = ExtResource("31_b8sev")
+
+[node name="WeaponManager" type="Node" parent="."]
+script = ExtResource("2_lgn8u")
+defaultWeapon = ExtResource("3_nyrer")
+
+[node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("modelAnimationTree", "aimPivot")]
+script = ExtResource("11_8pn5y")
+modelAnimationTree = NodePath("../AnimationTree")
+aimPivot = NodePath("../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot")
+
+[node name="WeaponStateManager" type="Node" parent="." node_paths=PackedStringArray("weaponManager", "stateDefault")]
+script = ExtResource("4_pmxvx")
+weaponManager = NodePath("../WeaponManager")
+stateDefault = NodePath("WeaponStateDefaultProjectile")
+
+[node name="WeaponStateDefaultProjectile" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("barrelEnd", "shootSoundPlayer", "damage")]
+script = ExtResource("5_4e3ff")
+barrelEnd = NodePath("../../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim")
+shootSoundPlayer = NodePath("../../ShootPlayer")
+damage = NodePath("Damage")
+
+[node name="Damage" type="Node" parent="WeaponStateManager/WeaponStateDefaultProjectile"]
+script = ExtResource("6_p63f4")
 
 [node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir")]
 script = ExtResource("3_nv3fu")
@@ -111,7 +167,7 @@ transform = Transform3D(1, 0, 0, 0, -0.258819, -0.965926, 0, 0.965926, -0.258819
 transform = Transform3D(0.984822, -0.173566, 0.000200477, 0.160251, 0.908829, -0.385163, 0.066669, 0.379349, 0.922849, 0, 0.375, 0)
 
 [node name="RightLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="1"]
-transform = Transform3D(0.984808, 0.137764, 0.10571, -0.17101, 0.875141, 0.452641, -0.0301537, -0.463842, 0.885405, 0, -0.0625, 0)
+transform = Transform3D(0.984808, 0.137764, 0.10571, -0.17101, 0.875141, 0.452641, -0.0301537, -0.463841, 0.885405, 0, -0.0625, 0)
 
 [node name="RightLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper" index="0"]
 transform = Transform3D(0.999542, 0.025504, 0.0162952, 0.0204175, -0.170788, -0.985096, -0.0223408, 0.984978, -0.171231, -0.247151, -0.525831, -0.0198207)
@@ -124,6 +180,17 @@ transform = Transform3D(0.984797, 0.150534, 0.0866856, -0.160381, 0.97963, 0.120
 
 [node name="Head" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0)
+
+[node name="Aim" type="Marker3D" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.19562e-08, 0.25091, 0.010955)
+
+[node name="AimRayCast" type="RayCast3D" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim"]
+target_position = Vector3(0, 0, 0)
+collide_with_areas = true
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.14761)
+radius = 0.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
@@ -144,52 +211,61 @@ anim_player = NodePath("../PhysicsInterpolator3D/Robot/AnimationPlayer")
 parameters/MoveDirection/blend_position = Vector2(0, 0)
 parameters/TimeScale/scale = 1.0
 
-[node name="RobotWalkerAnimationController" type="Node" parent="." node_paths=PackedStringArray("modelAnimationTree", "aimPivot")]
-script = ExtResource("11_8pn5y")
-modelAnimationTree = NodePath("../AnimationTree")
-aimPivot = NodePath("../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-
 [node name="BehaviorTree" type="Node" parent="."]
 script = ExtResource("12_yuoqv")
+
+[node name="BTTargetFoundInterrupter" type="Node" parent="BehaviorTree"]
+script = ExtResource("30_sxvwp")
 
 [node name="BTSelector" type="Node" parent="BehaviorTree"]
 script = ExtResource("13_7n237")
 
-[node name="BTSequencer" type="Node" parent="BehaviorTree/BTSelector"]
+[node name="Search_BTSequencer" type="Node" parent="BehaviorTree/BTSelector"]
 script = ExtResource("14_djmc6")
 
-[node name="BTHasTargetCondition" type="Node" parent="BehaviorTree/BTSelector/BTSequencer"]
-script = ExtResource("15_o0jy5")
-
-[node name="BTSelector" type="Node" parent="BehaviorTree/BTSelector/BTSequencer"]
-script = ExtResource("13_7n237")
-
-[node name="BTSequencer" type="Node" parent="BehaviorTree/BTSelector/BTSequencer/BTSelector"]
-script = ExtResource("14_djmc6")
-
-[node name="BTInverter" type="Node" parent="BehaviorTree/BTSelector/BTSequencer/BTSelector/BTSequencer"]
+[node name="BTInverter" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer"]
 script = ExtResource("16_7arpo")
 
-[node name="BTTargetWithinRangeCondition" type="Node" parent="BehaviorTree/BTSelector/BTSequencer/BTSelector/BTSequencer/BTInverter"]
-script = ExtResource("17_lw5vn")
+[node name="BTHasTargetCondition" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTInverter"]
+script = ExtResource("15_o0jy5")
 
-[node name="BTChaseTask" type="Node" parent="BehaviorTree/BTSelector/BTSequencer/BTSelector/BTSequencer"]
-script = ExtResource("14_8goal")
+[node name="BTSelector" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer"]
+script = ExtResource("13_7n237")
 
-[node name="BTSequencer2" type="Node" parent="BehaviorTree/BTSelector/BTSequencer/BTSelector"]
+[node name="BTSequencer" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector"]
 script = ExtResource("14_djmc6")
 
-[node name="BTTargetWithinRangeCondition" type="Node" parent="BehaviorTree/BTSelector/BTSequencer/BTSelector/BTSequencer2"]
-script = ExtResource("17_lw5vn")
-targetDistance = 7.5
+[node name="BTHasInvestigations" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector/BTSequencer"]
+script = ExtResource("26_ovlfc")
 
-[node name="BTFleeTask" type="Node" parent="BehaviorTree/BTSelector/BTSequencer/BTSelector/BTSequencer2"]
-script = ExtResource("19_g1he5")
+[node name="BTMoveToInvestigate" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector/BTSequencer"]
+script = ExtResource("27_y621p")
 
-[node name="BTStrafe" type="Node" parent="BehaviorTree/BTSelector/BTSequencer/BTSelector"]
-script = ExtResource("20_tog0y")
+[node name="BTLookForTarget" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector/BTSequencer"]
+script = ExtResource("28_nwp6c")
+
+[node name="BTLookForTarget2" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector"]
+script = ExtResource("28_nwp6c")
+
+[node name="BTStrafeAndShoot" type="Node" parent="BehaviorTree/BTSelector"]
+script = ExtResource("29_gcn5k")
+shootPattern = ExtResource("30_2uyqy")
+
+[node name="ShootPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_41jp0")
+volume_db = -10.0
+max_polyphony = 3
+bus = &"WorldSFX"
+attenuation_filter_db = -5.0
+
+[node name="LOSTracker" type="Area3D" parent="."]
+script = ExtResource("32_tld2l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LOSTracker"]
+shape = SubResource("SphereShape3D_0yxpf")
+
+[node name="NavigationController" type="NavigationAgent3D" parent="."]
+script = ExtResource("19_8dulv")
 
 [editable path="PhysicsInterpolator3D/Robot"]
 [editable path="OvershieldHealth"]

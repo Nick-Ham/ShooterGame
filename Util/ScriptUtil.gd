@@ -34,3 +34,14 @@ static func getChildrenRecursive(inParent : Node) -> Array[Node]:
 		foundChildren.append_array(children)
 
 	return foundChildren
+
+static func getParentInTreeOfType(inNode : Node, inType : Script) -> Node:
+	var node : Node = inNode
+
+	while !is_instance_of(node, inType):
+		if node == inNode.get_tree().root:
+			return null
+
+		node = node.get_parent()
+
+	return node

@@ -1,11 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dero46gvnk3p4"]
+[gd_scene load_steps=9 format=3 uid="uid://dero46gvnk3p4"]
 
+[ext_resource type="Script" path="res://Scripts/Projectiles/Projectile.gd" id="1_3xs12"]
 [ext_resource type="Material" uid="uid://cim7dxub5kkxd" path="res://Assets/Materials/GlowingMaterial.tres" id="1_4uo06"]
+[ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="3_g5mm2"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_f3l60"]
 material = ExtResource("1_4uo06")
 radius = 0.015
-height = 0.3
+height = 0.1
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b0toe"]
 direction = Vector3(0, 1, 0)
@@ -23,7 +25,15 @@ albedo_color = Color(1, 0.521973, 0.606912, 1)
 material = SubResource("StandardMaterial3D_yrn4w")
 size = Vector3(0.01, 0.01, 0.01)
 
-[node name="PlasmaBolt" type="CharacterBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_7e7cg"]
+margin = 0.01
+radius = 0.03
+
+[node name="PlasmaBolt" type="CharacterBody3D" node_paths=PackedStringArray("damage", "shapeCast")]
+collision_layer = 16
+script = ExtResource("1_3xs12")
+damage = NodePath("Damage")
+shapeCast = NodePath("ShapeCast3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -31,6 +41,20 @@ mesh = SubResource("CapsuleMesh_f3l60")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.110729, 4.84013e-09)
+amount = 2
 lifetime = 0.25
 process_material = SubResource("ParticleProcessMaterial_b0toe")
 draw_pass_1 = SubResource("BoxMesh_4hja5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.107377)
+shape = SubResource("SphereShape3D_7e7cg")
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("3_g5mm2")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_7e7cg")
+target_position = Vector3(0, 0, -1)
+collision_mask = 9
+collide_with_areas = true

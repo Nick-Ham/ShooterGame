@@ -16,12 +16,12 @@ class_name OvershieldMaterialController
 		colorShift = clampf(inColorShift, 0.0, 1.0)
 		updateMaterialProperty(colorShiftPropertyKey, inColorShift)
 
-@export var shieldStrength : float = 1.0:
+@export var shieldStrength : float = 0.0:
 	set(inShieldStrength):
 		shieldStrength = clampf(inShieldStrength, 0.0, 1.0)
 		updateMaterialProperty(shieldStrengthPropertyKey, inShieldStrength)
 
-@export var flashStrength : float = 1.0:
+@export var flashStrength : float = 3.0:
 	set(inFlashStrength):
 		flashStrength = inFlashStrength
 		updateMaterialProperty(flashStrengthPropertyKey, inFlashStrength)
@@ -37,6 +37,7 @@ const flashStrengthPropertyKey : String = "FlashStrength"
 const hitFlashAnimationKey : String = "HitOvershield"
 const shieldBreakAnimationKey : String = "ShieldBreak"
 const shieldResettingAnimationKey : String = "ShieldReset"
+const shieldRechargedAnimationKey : String = "ShieldRecharged"
 
 func _exit_tree() -> void:
 	resetTrackedMeshes()
@@ -53,8 +54,14 @@ func _ready() -> void:
 	Util.safeConnect(health.health_restored, on_health_restored)
 	Util.safeConnect(health.health_depleted, on_health_depleted)
 	Util.safeConnect(health.shield_resetting, on_shield_resetting)
+	Util.safeConnect(health.shield_recharged, on_shield_recharged)
 
 	updateTrackedMeshes()
+
+func on_shield_recharged() -> void:
+	animationPlayer.play(shieldRechargedAnimationKey)
+
+	refreshMaterialParams()
 
 func on_health_damaged(_inDamage : float, _remainingHealth : float) -> void:
 	if animationPlayer.current_animation == hitFlashAnimationKey and animationPlayer.is_playing():

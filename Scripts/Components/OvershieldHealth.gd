@@ -14,6 +14,7 @@ var timeSinceLastDamage : float = 0.0
 
 signal shield_recharging
 signal shield_resetting
+signal shield_recharged
 
 func _ready() -> void:
 	rechargeDelayTimer.wait_time = rechargeDelay
@@ -46,6 +47,7 @@ func rechargeUpdate(inDelta : float) -> void:
 
 	if isFullHealth():
 		isRecharged = true
+		shield_recharged.emit()
 
 func on_rechargeDelayTimer_timeout() -> void:
 	isRecharging = true

@@ -5,6 +5,10 @@ class_name WeaponData
 @export var weaponName : String = ""
 @export var weaponScene : PackedScene = null
 
+@export_category("WeaponType")
+@export var isProjectile : bool = false
+@export var projectileScene : PackedScene
+
 @export_category("WeaponStats")
 @export var defaultDamage : float = 25.0
 @export var firingDelay : float = 0.1
