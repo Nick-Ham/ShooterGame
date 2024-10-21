@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd05lf0vpso5k"]
+
+[ext_resource type="Script" path="res://Prototyping/Spectator.gd" id="1_i3xfd"]
+[ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="2_wbmfl"]
+
+[node name="Spectator" type="Node3D" node_paths=PackedStringArray("cinemaCam")]
+script = ExtResource("1_i3xfd")
+cinemaCam = NodePath("PhysicsInterpolator3D/Camera3D")
+
+[node name="PhysicsInterpolator3D" type="Node3D" parent="."]
+script = ExtResource("2_wbmfl")
+
+[node name="Camera3D" type="Camera3D" parent="PhysicsInterpolator3D"]
+cull_mask = 7

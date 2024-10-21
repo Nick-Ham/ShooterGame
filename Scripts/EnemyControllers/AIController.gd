@@ -11,9 +11,17 @@ class_name AIController
 @export_flags_3d_physics var shootingAimLayer : int = 9
 
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
+@onready var targeter : Targeter = Util.getChildOfType(owningCharacter, Targeter)
 
 func _ready() -> void:
 	assert(aimRayCast)
+
+func _physics_process(delta: float) -> void:
+	var interest : Targeter.TargetInterest = targeter.getInterest()
+	if !interest:
+		return
+
+	owningCharacter.rotateCharacterToTarget(interest.interestPosition, delta)
 
 func setControlDirectionSmooth(inDirection : Vector2, inDelta : float) -> void:
 	var newInputDirection : Vector2 = inDirection.normalized()

@@ -62,7 +62,7 @@ func getCameraCastResult(inBloom : float = 0.0) -> RayCastResult:
 	rayCastResult.rayEndpoint = endpoint
 
 	if result.is_empty():
-		rayCastResult.hitSucces = false
+		rayCastResult.hitSuccess = false
 		return rayCastResult
 
 	rayCastResult.hitSuccess = true

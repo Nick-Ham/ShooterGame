@@ -54,15 +54,33 @@ func getInterest() -> TargetInterest:
 	return interest
 
 func on_environment_sound_triggered(inSource : Node3D) -> void:
+	## This should really be moved to the investigationManager
+	var investigationManager : AIInvestigationManager = Util.getChildOfType(owningCharacter, AIInvestigationManager)
+	if !investigationManager:
+		push_error("Targeter will not function correctly without an AIInvestigationManager")
+		return
+
 	if target:
 		return
 
-	var sourcePosition : Vector3 = inSource.global_position
-	var sourceAsCharacter : Character = inSource as Character
-	if sourceAsCharacter:
-		sourcePosition = sourceAsCharacter.getHeadGlobalPosition()
+	if inSource == owningCharacter:
+		return
 
-	positionOfInterest = sourcePosition
+	var sourceAsCharacter : Character = inSource as Character
+	if !sourceAsCharacter:
+		return
+
+	if sourceAsCharacter.team == owningCharacter.team:
+		return
+
+	investigationManager.createInvestigation(sourceAsCharacter)
+
+	#var sourcePosition : Vector3 = inSource.global_position
+	#var sourceAsCharacter : Character = inSource as Character
+	#if sourceAsCharacter:
+		#sourcePosition = sourceAsCharacter.getHeadGlobalPosition()
+#
+	#positionOfInterest = sourcePosition
 
 func on_character_lost(inCharacter : Character, inLossReason : LOSTracker.LossReason) -> void:
 	if !inCharacter == target:
@@ -85,7 +103,7 @@ func acquireTarget() -> Node3D:
 	var visibleCharacters : Array[Character] = losTracker.getVisibleCharacters()
 	for character : Character in visibleCharacters:
 		if character.team == owningCharacter.team:
-			return null
+			continue
 
 		target = character
 		target_acquired.emit(target)

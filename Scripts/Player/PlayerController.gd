@@ -53,9 +53,6 @@ func _unhandled_input(event : InputEvent) -> void:
 	if event.is_action_released("Jump"):
 		jump_changed.emit(false)
 
-	if event.is_action_pressed("F1"):
-		Game.getGame(get_tree()).resetCurrentLevel()
-
 func _process(_delta: float) -> void:
 	inputDirection = Vector2()
 	inputDirection = Input.get_vector("Left", "Right", "Forward", "Backward")

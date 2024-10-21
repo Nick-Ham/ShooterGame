@@ -1,4 +1,5 @@
+StandardMaterial3D
+ShaderMaterial
 AIShootPattern
 WeaponData
-StandardMaterial3D
 AudioStreamRandomizer

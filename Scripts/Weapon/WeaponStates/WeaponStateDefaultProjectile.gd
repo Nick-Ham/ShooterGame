@@ -48,6 +48,7 @@ func getStateKey() -> String:
 	return "default"
 
 func shoot() -> void:
+
 	if !readyToFire:
 		return
 	readyToFire = false

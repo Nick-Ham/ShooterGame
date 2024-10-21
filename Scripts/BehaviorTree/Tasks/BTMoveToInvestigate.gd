@@ -30,4 +30,7 @@ func updateNode(inDelta : float) -> BTTickResult:
 	if targeter.acquireTarget():
 		controller.setControlDirection(Vector2())
 
+	targeter.forceUpdatePositionOfInterest(currentInvestigation.positionOfInterest)
+	owningCharacter.rotateCharacterToTarget(currentInvestigation.positionOfInterest, inDelta)
+
 	return run()

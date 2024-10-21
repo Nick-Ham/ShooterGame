@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cpurlnxl3pclx"]
+[gd_scene load_steps=51 format=3 uid="uid://cpurlnxl3pclx"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_bbu7p"]
 [ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_lgn8u"]
@@ -23,8 +23,10 @@
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Conditions/BTHasTargetCondition.gd" id="15_o0jy5"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Decorators/BTInverter.gd" id="16_7arpo"]
 [ext_resource type="Script" path="res://Scripts/EnemyControllers/NavigationController.gd" id="19_8dulv"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Interrupts/BTDamageTakenInterrupter.gd" id="21_nitlh"]
 [ext_resource type="AudioStream" uid="uid://dm3ef8byt1qnj" path="res://Assets/Audio/Gunshots/Gunshot1Test.ogg" id="26_du224"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Conditions/BTHasInvestigations.gd" id="26_ovlfc"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTStopShooting.gd" id="27_nmm6t"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTMoveToInvestigate.gd" id="27_y621p"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTLookForTarget.gd" id="28_nwp6c"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTStrafeAndShoot.gd" id="29_gcn5k"]
@@ -33,6 +35,8 @@
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Interrupts/BTTargetFoundInterrupter.gd" id="30_sxvwp"]
 [ext_resource type="Script" path="res://Scripts/EnemyControllers/AIShootController.gd" id="31_b8sev"]
 [ext_resource type="Script" path="res://Scripts/LOSTracker.gd" id="32_tld2l"]
+[ext_resource type="Script" path="res://Scripts/Components/CharacterRepelArea.gd" id="35_usdsk"]
+[ext_resource type="Material" uid="uid://de6sibg74tk63" path="res://Assets/Materials/DarkMetalMaterial.tres" id="37_xgnoa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uc3a3"]
 radius = 0.75
@@ -83,6 +87,12 @@ stream_0/stream = ExtResource("26_du224")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0yxpf"]
 radius = 50.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0t1dn"]
+height = 1.5
+radius = 0.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_qknnn"]
 
 [node name="RobotWalker" type="CharacterBody3D" node_paths=PackedStringArray("aimMarker", "aimCast")]
 collision_layer = 4
@@ -154,32 +164,8 @@ script = ExtResource("7_34icv")
 
 [node name="Robot" parent="PhysicsInterpolator3D" instance=ExtResource("8_8vwp4")]
 
-[node name="LeftLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="0"]
-transform = Transform3D(0.984808, -0.137764, -0.10571, 0.173648, 0.7813, 0.599513, 0, -0.608761, 0.793354, 0, -0.0625, 0)
-
-[node name="LeftLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper" index="0"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.247151, -0.525831, -0.0198207)
-
-[node name="LeftLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner" index="0"]
-transform = Transform3D(1, 0, 0, 0, -0.258819, -0.965926, 0, 0.965926, -0.258819, 0, -0.34375, 0.0625)
-
-[node name="LeftFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner/LeftLegLower" index="0"]
-transform = Transform3D(0.984822, -0.173566, 0.000200477, 0.160251, 0.908829, -0.385163, 0.066669, 0.379349, 0.922849, 0, 0.375, 0)
-
 [node name="RightLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="1"]
 transform = Transform3D(0.984808, 0.137764, 0.10571, -0.17101, 0.875141, 0.452641, -0.0301537, -0.463841, 0.885405, 0, -0.0625, 0)
-
-[node name="RightLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper" index="0"]
-transform = Transform3D(0.999542, 0.025504, 0.0162952, 0.0204175, -0.170788, -0.985096, -0.0223408, 0.984978, -0.171231, -0.247151, -0.525831, -0.0198207)
-
-[node name="RightLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner" index="0"]
-transform = Transform3D(0.999542, 0.00913909, -0.0288526, -0.0223409, -0.420328, -0.907097, -0.0204176, 0.907326, -0.419931, 0, -0.34375, 0.0625)
-
-[node name="RightFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower" index="0"]
-transform = Transform3D(0.984797, 0.150534, 0.0866856, -0.160381, 0.97963, 0.120841, -0.0667291, -0.132907, 0.988879, 0.00188168, 0.387245, -0.00166134)
-
-[node name="Head" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0)
 
 [node name="Aim" type="Marker3D" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.19562e-08, 0.25091, 0.010955)
@@ -214,6 +200,9 @@ parameters/TimeScale/scale = 1.0
 [node name="BehaviorTree" type="Node" parent="."]
 script = ExtResource("12_yuoqv")
 
+[node name="BTDamageTakenInterrupter" type="Node" parent="BehaviorTree"]
+script = ExtResource("21_nitlh")
+
 [node name="BTTargetFoundInterrupter" type="Node" parent="BehaviorTree"]
 script = ExtResource("30_sxvwp")
 
@@ -237,6 +226,9 @@ script = ExtResource("14_djmc6")
 
 [node name="BTHasInvestigations" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector/BTSequencer"]
 script = ExtResource("26_ovlfc")
+
+[node name="BTStopShooting" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector/BTSequencer"]
+script = ExtResource("27_nmm6t")
 
 [node name="BTMoveToInvestigate" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector/BTSequencer"]
 script = ExtResource("27_y621p")
@@ -267,5 +259,73 @@ shape = SubResource("SphereShape3D_0yxpf")
 [node name="NavigationController" type="NavigationAgent3D" parent="."]
 script = ExtResource("19_8dulv")
 
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 6
+script = ExtResource("35_usdsk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_0t1dn")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.857867, 1.01991, -2.47604)
+mesh = SubResource("BoxMesh_qknnn")
+material = ExtResource("37_xgnoa")
+
+[node name="Robot" parent="." instance=ExtResource("8_8vwp4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.09384, 0, 0)
+
+[node name="Foot" parent="Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner/LeftLegLower/LeftFoot" index="0"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="LegUpper" parent="Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner/LeftLegLower" index="1"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="LegJoiner" parent="Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner" index="1"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="LegUpper2" parent="Robot/Node/Robot/Hip/LeftLegUpper" index="1"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="Foot2" parent="Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower/RightFoot" index="0"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="LegUpper3" parent="Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower" index="1"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="LegJoiner2" parent="Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner" index="1"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="LegUpper4" parent="Robot/Node/Robot/Hip/RightLegUpper" index="1"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="HipJoint" parent="Robot/Node/Robot/Hip" index="2"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="body" parent="Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun" index="0"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="grip" parent="Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun" index="1"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="barrel" parent="Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun" index="2"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="sight" parent="Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun" index="3"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="magazine" parent="Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun" index="4"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="cylinder" parent="Robot/Node/Robot/AimDirectionPivot/Head/GunArm" index="1"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="Body" parent="Robot/Node/Robot/AimDirectionPivot/Head" index="1"]
+material_override = ExtResource("37_xgnoa")
+
+[node name="exhaust" parent="Robot/Node/Robot/AimDirectionPivot/Head" index="2"]
+material_override = ExtResource("37_xgnoa")
+
 [editable path="PhysicsInterpolator3D/Robot"]
 [editable path="OvershieldHealth"]
+[editable path="Robot"]

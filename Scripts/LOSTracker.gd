@@ -2,8 +2,8 @@ extends Area3D
 class_name LOSTracker
 
 @export_category("Config")
-@export var acquireTargetVisionRange : float = PI / 4.0
-@export var loseTargetVisionRange : float = PI / 3.0
+@export var acquireTargetVisionRange : float = PI / 3.0
+@export var loseTargetVisionRange : float = PI / 2.0
 @export_flags_3d_physics var detectorLayer : int = 6
 
 enum LossReason {

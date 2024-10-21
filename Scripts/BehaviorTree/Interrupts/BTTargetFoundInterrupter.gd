@@ -16,7 +16,8 @@ func on_target_acquired(_inTarget : Node3D) -> void:
 	behaviorTree.interrupt()
 
 func on_target_lost(_inTarget : Node3D, _inLossReason : LOSTracker.LossReason) -> void:
-	shootController.addPattern(emptyShootPattern)
+	return
+	#shootController.addPattern(emptyShootPattern)
 
-	var behaviorTree : BehaviorTree = get_parent() as BehaviorTree
-	behaviorTree.interrupt()
+	#var behaviorTree : BehaviorTree = get_parent() as BehaviorTree
+	#behaviorTree.interrupt()

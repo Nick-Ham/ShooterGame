@@ -7,6 +7,10 @@ class_name Game
 var currentLevel : Level = null
 var currentLevelScene : PackedScene = null
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("F1"):
+		Game.getGame(get_tree()).resetCurrentLevel()
+
 func _ready() -> void:
 	changeLevel(initialLevelScene)
 

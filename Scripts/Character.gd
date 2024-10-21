@@ -86,16 +86,15 @@ func getAngleToPosition(inTransform : Transform3D, targetPosition : Vector3) -> 
 	return angle
 
 func rotateCharacterToTarget(inTarget : Vector3, inDelta : float) -> void:
-	var character : Character = get_parent()
-	var characterForward : Vector3 = character.global_basis * Vector3.BACK
+	var characterForward : Vector3 = global_basis * Vector3.BACK
 	var characterForward2D : Vector2 = Vector2(characterForward.x, characterForward.z)
 
-	var vectorToTarget : Vector3 = character.global_position - inTarget
+	var vectorToTarget : Vector3 = global_position - inTarget
 	var vectorToTarget2D : Vector2 = Vector2(vectorToTarget.x, vectorToTarget.z)
 
 	var angleToTarget : float = vectorToTarget2D.normalized().angle_to(characterForward2D.normalized())
 
-	if is_zero_approx(character.velocity.length_squared()) and abs(angleToTarget) < maxAngleFromTarget:
+	if is_zero_approx(velocity.length_squared()) and abs(angleToTarget) < maxAngleFromTarget:
 		return
 
-	character.rotate_y(angleToTarget * inDelta * characterRotationSpeed)
+	rotate_y(angleToTarget * inDelta * characterRotationSpeed)

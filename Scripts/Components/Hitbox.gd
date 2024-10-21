@@ -5,7 +5,12 @@ var shieldImpacts : Array[Impact]
 
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 
+const hitboxLayers : int = 8
+
 func _ready() -> void:
+	collision_mask = 0
+	collision_layer = 8
+
 	var shieldHealth : OvershieldHealth = Util.getChildOfType(owningCharacter, OvershieldHealth)
 	if shieldHealth:
 		Util.safeConnect(shieldHealth.health_depleted, on_shield_depleted)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://3khvdhi6xjou"]
+[gd_scene load_steps=33 format=3 uid="uid://3khvdhi6xjou"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_2vnqn"]
 [ext_resource type="Script" path="res://Scripts/Player/StepSoundController.gd" id="1_863d4"]
@@ -27,6 +27,8 @@
 [ext_resource type="AudioStream" uid="uid://y7ylwct4yro8" path="res://Assets/Audio/Thuds/ThudsRandomizer.tres" id="16_b7esa"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox.gd" id="17_0i7jp"]
 [ext_resource type="AudioStream" uid="uid://byeppnbhc472f" path="res://Assets/Audio/Gunshots/Gunshot1TestRandomizer.tres" id="22_t04j0"]
+[ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="28_583yk"]
+[ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Overshield.tscn" id="29_rmby0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_22kd6"]
 radius = 0.3
@@ -266,3 +268,17 @@ bus = &"WorldSFX"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.706736, 0.286414, -0.646909, 0, 0.914388, 0.404838, 0.707477, -0.286114, 0.646231, -2.59444, 3.74238, 1.96478)
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("28_583yk")
+
+[node name="OvershieldHealth" parent="." instance=ExtResource("29_rmby0")]
+rechargeDelay = 5.0
+rechargeTime = 3.0
+destroyedRechargeDelay = 5.0
+maxHealth = 30.0
+
+[node name="OvershieldMaterialController" parent="OvershieldHealth" index="1" node_paths=PackedStringArray("shieldMeshes")]
+shieldMeshes = NodePath("../../Neck")
+
+[editable path="OvershieldHealth"]

@@ -1,13 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dero46gvnk3p4"]
+[gd_scene load_steps=14 format=3 uid="uid://dero46gvnk3p4"]
 
 [ext_resource type="Script" path="res://Scripts/Projectiles/Projectile.gd" id="1_3xs12"]
-[ext_resource type="Material" uid="uid://cim7dxub5kkxd" path="res://Assets/Materials/GlowingMaterial.tres" id="1_4uo06"]
 [ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="3_g5mm2"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_f3l60"]
-material = ExtResource("1_4uo06")
-radius = 0.015
-height = 0.1
+[ext_resource type="Material" uid="uid://dlxr0hk6awtgc" path="res://Assets/Materials/PlasmaBoltShaderMaterial.tres" id="4_pbdd4"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b0toe"]
 direction = Vector3(0, 1, 0)
@@ -29,18 +24,41 @@ size = Vector3(0.01, 0.01, 0.01)
 margin = 0.01
 radius = 0.03
 
+[sub_resource type="SphereMesh" id="SphereMesh_8ofyx"]
+material = ExtResource("4_pbdd4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_lah7a"]
+material = ExtResource("4_pbdd4")
+radius = 0.35
+height = 2.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_t4s5w"]
+material = ExtResource("4_pbdd4")
+radius = 0.2
+height = 4.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_cfvah"]
+material = ExtResource("4_pbdd4")
+height = 1.546
+
+[sub_resource type="SphereMesh" id="SphereMesh_vigu5"]
+material = ExtResource("4_pbdd4")
+radius = 0.35
+height = 5.232
+
+[sub_resource type="SphereMesh" id="SphereMesh_7datb"]
+material = ExtResource("4_pbdd4")
+radius = 0.2
+height = 8.372
+
 [node name="PlasmaBolt" type="CharacterBody3D" node_paths=PackedStringArray("damage", "shapeCast")]
 collision_layer = 16
 script = ExtResource("1_3xs12")
 damage = NodePath("Damage")
 shapeCast = NodePath("ShapeCast3D")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CapsuleMesh_f3l60")
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.110729, 4.84013e-09)
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.06581e-14, -0.110729)
 amount = 2
 lifetime = 0.25
 process_material = SubResource("ParticleProcessMaterial_b0toe")
@@ -58,3 +76,42 @@ shape = SubResource("SphereShape3D_7e7cg")
 target_position = Vector3(0, 0, -1)
 collision_mask = 9
 collide_with_areas = true
+
+[node name="BoltMesh" type="Node3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, 0.05, 0, -0.05, -2.18557e-09, 0, 0, 0)
+visible = false
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="BoltMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.526705, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_8ofyx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BoltMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.174664, -7.6348e-09)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_lah7a")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BoltMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.897146, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_t4s5w")
+skeleton = NodePath("../..")
+
+[node name="BoltMesh2" type="Node3D" parent="."]
+transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, 0.05, 0, -0.05, -2.18557e-09, 0, 0, 0.00151918)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="BoltMesh2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.526705, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_cfvah")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BoltMesh2"]
+transform = Transform3D(1, 0, 0, 0, 1, 7.10543e-15, 0, -7.10543e-15, 1, 0, -0.807513, -3.52975e-08)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_vigu5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BoltMesh2"]
+transform = Transform3D(1, 0, 0, 0, 1, 7.10543e-15, 0, -7.10543e-15, 1, 0, -2.85393, -8.55338e-08)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_7datb")
+skeleton = NodePath("../..")

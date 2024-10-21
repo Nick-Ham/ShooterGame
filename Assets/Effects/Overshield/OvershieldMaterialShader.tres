@@ -286,6 +286,7 @@ void light() {
 
 }
 "
+graph_offset = Vector2(-519.444, -243.036)
 varyings/vertexPosition = "0,4"
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_e7noy")
 nodes/vertex/2/position = Vector2(-400, 580)
