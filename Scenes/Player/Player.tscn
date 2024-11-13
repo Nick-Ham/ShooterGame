@@ -1,11 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://3khvdhi6xjou"]
+[gd_scene load_steps=36 format=3 uid="uid://3khvdhi6xjou"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_2vnqn"]
 [ext_resource type="Script" path="res://Scripts/Player/StepSoundController.gd" id="1_863d4"]
 [ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_56hl0"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="2_sjpk7"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.gd" id="3_2w6yp"]
-[ext_resource type="Resource" uid="uid://t78dxd6n3sr2" path="res://Data/DefaultTestGun.tres" id="3_nf6i3"]
+[ext_resource type="Resource" uid="uid://t78dxd6n3sr2" path="res://Data/WeaponData/DefaultTestGun.tres" id="3_nf6i3"]
 [ext_resource type="Script" path="res://Scripts/Components/HeadLean.gd" id="4_6ny3q"]
 [ext_resource type="Script" path="res://Scripts/Player/CharacterStateManager.gd" id="4_8v6om"]
 [ext_resource type="Script" path="res://Scripts/Components/Punch.gd" id="4_dh8ax"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/HeadBob.gd" id="8_t41f4"]
 [ext_resource type="PackedScene" uid="uid://dw2shj3bwdrsl" path="res://Scenes/Guns/ShortGun.tscn" id="8_xch2u"]
 [ext_resource type="Script" path="res://Scripts/Player/Reticle.gd" id="9_xcwwv"]
+[ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateDestroyed.gd" id="10_8wix2"]
 [ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="11_2nbkh"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHeadPunchController.gd" id="11_gj7m3"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerSoundController.gd" id="13_32xeu"]
@@ -28,7 +29,9 @@
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox.gd" id="17_0i7jp"]
 [ext_resource type="AudioStream" uid="uid://byeppnbhc472f" path="res://Assets/Audio/Gunshots/Gunshot1TestRandomizer.tres" id="22_t04j0"]
 [ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="28_583yk"]
-[ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Overshield.tscn" id="29_rmby0"]
+[ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Components/Overshield.tscn" id="29_rmby0"]
+[ext_resource type="Script" path="res://Scripts/Components/PlayerHealthManager.gd" id="32_0b4q6"]
+[ext_resource type="Script" path="res://Scripts/Item/ItemManager.gd" id="32_8g535"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_22kd6"]
 radius = 0.3
@@ -44,7 +47,7 @@ height = 1.5
 
 [node name="Player" type="CharacterBody3D"]
 physics_interpolation_mode = 1
-collision_layer = 2
+collision_layer = 6
 script = ExtResource("1_2vnqn")
 
 [node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("fpsViewCamera", "neck")]
@@ -56,11 +59,12 @@ neck = NodePath("../Neck")
 script = ExtResource("2_56hl0")
 defaultWeapon = ExtResource("3_nf6i3")
 
-[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir")]
+[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir", "stateDestroyed")]
 script = ExtResource("4_8v6om")
 stateDefault = NodePath("CharacterStateDefault")
 stateJumping = NodePath("CharacterStateJumping")
 stateInAir = NodePath("CharacterStateInAir")
+stateDestroyed = NodePath("CharacterStateDestroyed")
 
 [node name="CharacterStateDefault" type="Node" parent="CharacterStateManager"]
 script = ExtResource("5_018c5")
@@ -78,6 +82,9 @@ friction = 2.0
 [node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
 script = ExtResource("6_58h4i")
 maxSpeed = 4.0
+
+[node name="CharacterStateDestroyed" type="Node" parent="CharacterStateManager"]
+script = ExtResource("10_8wix2")
 
 [node name="WeaponStateManager" type="Node" parent="." node_paths=PackedStringArray("weaponManager", "stateDefault")]
 script = ExtResource("7_rhfs6")
@@ -154,7 +161,7 @@ current = true
 script = ExtResource("6_knxow")
 subViewport = NodePath("SubViewportContainer/SubViewport")
 viewportCamera = NodePath("SubViewportContainer/SubViewport/Camera3D")
-headPunch = NodePath("../../../../../HeadPunch")
+headPunch = NodePath("Hands/HeldWeaponFollow/RecoilPunch")
 characterStateManager = NodePath("../../../../../CharacterStateManager")
 
 [node name="Hands" type="Node3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView"]
@@ -276,9 +283,17 @@ script = ExtResource("28_583yk")
 rechargeDelay = 5.0
 rechargeTime = 3.0
 destroyedRechargeDelay = 5.0
-maxHealth = 30.0
+maxHealth = 99.0
 
 [node name="OvershieldMaterialController" parent="OvershieldHealth" index="1" node_paths=PackedStringArray("shieldMeshes")]
 shieldMeshes = NodePath("../../Neck")
+
+[node name="PlayerHealthManager" type="Node" parent="." node_paths=PackedStringArray("health", "characterStateManager")]
+script = ExtResource("32_0b4q6")
+health = NodePath("../Health")
+characterStateManager = NodePath("../CharacterStateManager")
+
+[node name="ItemManager" type="Node" parent="."]
+script = ExtResource("32_8g535")
 
 [editable path="OvershieldHealth"]

@@ -8,7 +8,7 @@
 
 [sub_resource type="QuadMesh" id="QuadMesh_gmb8v"]
 material = ExtResource("4_j2hyt")
-size = Vector2(0.25, 1)
+size = Vector2(0.22, 1)
 center_offset = Vector3(0, 0.4, 0)
 
 [sub_resource type="SphereMesh" id="SphereMesh_j01bx"]

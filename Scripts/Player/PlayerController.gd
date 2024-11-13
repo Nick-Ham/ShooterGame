@@ -20,6 +20,10 @@ static var MOUSE_SENSITIVITY_CONST : float = .001
 var character : CharacterBody3D = null
 var isShooting : bool = false
 
+@onready var playerHudScene : PackedScene = preload("res://Scenes/UI/PlayerHUD.tscn")
+
+var playerHud : PlayerHUD = null
+
 func _ready() -> void:
 	if !character:
 		character = get_parent() as CharacterBody3D
@@ -28,7 +32,9 @@ func _ready() -> void:
 	assert(fpsViewCamera, "PlayerController requires an FPSViewCamera to function")
 	assert(neck, "PlayerController requires a neck pivot to function")
 
-	enableCameraControl()
+	playerHud = playerHudScene.instantiate()
+	playerHud.injectPlayer(character)
+	playerHud.initializeMenu(get_tree())
 
 func _unhandled_input(event : InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -61,12 +67,6 @@ func _process(_delta: float) -> void:
 
 func getIsShooting() -> bool:
 	return isShooting
-
-func enableCameraControl() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func disableCameraControl() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func getInputDirection() -> Vector2:
 	return inputDirection

@@ -65,7 +65,6 @@ void light() {
 
 }
 "
-graph_offset = Vector2(-385.909, -122.112)
 modes/cull = 1
 flags/shadows_disabled = true
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_koy8x")

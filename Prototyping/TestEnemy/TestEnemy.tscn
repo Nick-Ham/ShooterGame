@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Prototyping/TestEnemy/TestEnemy.gd" id="1_wlui3"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox.gd" id="2_8n4xo"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="2_pyuek"]
-[ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robot/Robot.tscn" id="4_5otkf"]
+[ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robot/RobotModel.tscn" id="4_5otkf"]
 [ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="4_t8nrh"]
-[ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Overshield.tscn" id="6_wwyyv"]
+[ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Components/Overshield.tscn" id="6_wwyyv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pqss1"]
 

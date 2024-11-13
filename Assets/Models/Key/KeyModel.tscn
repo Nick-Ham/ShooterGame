@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://shxmwpsdxqex"]
+
+[ext_resource type="PackedScene" uid="uid://clsmxmr3d3kfp" path="res://Assets/Models/Key/Key.gltf" id="1_4yhhn"]
+
+[node name="Key" instance=ExtResource("1_4yhhn")]

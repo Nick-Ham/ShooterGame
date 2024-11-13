@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtrny6bm804fr"]
+
+[ext_resource type="PackedScene" uid="uid://deouvoc3gacsl" path="res://Assets/Models/Environment/RollingDoor/RollingDoor.gltf" id="1_4l4se"]
+
+[node name="RollingDoor" instance=ExtResource("1_4l4se")]

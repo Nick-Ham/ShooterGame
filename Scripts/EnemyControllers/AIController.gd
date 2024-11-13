@@ -16,6 +16,11 @@ class_name AIController
 func _ready() -> void:
 	assert(aimRayCast)
 
+	Util.safeConnect(owningCharacter.character_destroyed, on_character_destroyed)
+
+func on_character_destroyed(_inCharacter : Character) -> void:
+	queue_free()
+
 func _physics_process(delta: float) -> void:
 	var interest : Targeter.TargetInterest = targeter.getInterest()
 	if !interest:

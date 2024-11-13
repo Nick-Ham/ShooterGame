@@ -6,12 +6,12 @@ class_name Damage
 
 func dealDamage(inTarget : Node, inModifier : float = 1.0) -> bool:
 	var overshieldHealth : OvershieldHealth = Util.getChildOfType(inTarget, OvershieldHealth)
-	if overshieldHealth:
+	if overshieldHealth and !overshieldHealth.isHealthDepleted:
 		overshieldHealth.takeDamage(damage * inModifier)
 		return true
 
 	var health : Health = Util.getChildOfType(inTarget, Health)
-	if health:
+	if health and !health.isHealthDepleted:
 		health.takeDamage(damage * inModifier)
 		return true
 

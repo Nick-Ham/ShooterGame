@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1tmyhf7b8mkx"]
+
+[ext_resource type="PackedScene" uid="uid://bdnu31j4hng0f" path="res://Assets/Models/SmallRobot/SmallRobot.gltf" id="1_4dopy"]
+[ext_resource type="Material" uid="uid://cim7dxub5kkxd" path="res://Assets/Materials/GlowingMaterial.tres" id="2_x50p2"]
+
+[node name="SmallRobotModel" instance=ExtResource("1_4dopy")]
+
+[node name="FrontLights" parent="Node/SmallRobot/Head" index="0"]
+material_override = ExtResource("2_x50p2")

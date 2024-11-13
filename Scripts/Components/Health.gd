@@ -24,6 +24,9 @@ func getMaxHealth() -> float:
 func getCurrentHealth() -> float:
 	return currentHealth
 
+func getHealthDepleted() -> bool:
+	return isHealthDepleted
+
 func takeDamage(inDamage : float) -> void:
 	if isHealthDepleted:
 		return
@@ -32,7 +35,7 @@ func takeDamage(inDamage : float) -> void:
 
 	health_damaged.emit(inDamage, currentHealth)
 
-	if currentHealth < 0.0:
+	if currentHealth <= 0.0:
 		healthDepleted()
 
 func healthDepleted() -> void:
@@ -47,3 +50,6 @@ func restoreHealth(inAmount : float) -> void:
 		isHealthDepleted = false
 
 	health_restored.emit(inAmount, currentHealth)
+
+func resetHealth() -> void:
+	currentHealth = maxHealth

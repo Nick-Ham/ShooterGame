@@ -4,6 +4,8 @@ class_name BehaviorTree
 @export_category("Config")
 @export var enabled : bool = true
 
+@onready var owningCharacter : Character = Character.getOwningCharacter(self)
+
 var rootNode : BTNode = null
 var runningNode : BTNode = null
 
@@ -12,6 +14,11 @@ var shouldReset : bool = false
 func _ready() -> void:
 	rootNode = Util.getChildOfType(self, BTNode)
 	process_physics_priority = -1
+
+	Util.safeConnect(owningCharacter.character_destroyed, on_character_destroyed)
+
+func on_character_destroyed(_inCharacter : Character) -> void:
+	enabled = false
 
 func _physics_process(delta: float) -> void:
 	if !enabled:

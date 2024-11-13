@@ -54,7 +54,7 @@ default_input_values = [0, Vector4(0, 0, 0, 0), 1, Vector4(1, 1, 1, 1), 2, Vecto
 op_type = 3
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_nwl4q"]
-size = Vector2(1324, 663)
+size = Vector2(1324, 498)
 title = "Alpha"
 attached_nodes = PackedInt32Array(29, 33, 32, 31, 37, 38, 35, 36)
 
@@ -277,7 +277,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-384.805, -77.0702)
 modes/cull = 2
 flags/depth_prepass_alpha = true
 nodes/fragment/0/position = Vector2(600, 140)

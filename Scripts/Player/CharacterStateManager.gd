@@ -9,11 +9,13 @@ class_name CharacterStateManager
 @export var stateDefault : CharacterStateDefault
 @export var stateJumping : CharacterStateJumping
 @export var stateInAir : CharacterStateInAir
+@export var stateDestroyed : CharacterStateDestroyed
 
 @onready var states : Array[CharacterState] = [
 	stateDefault,
 	stateJumping,
-	stateInAir
+	stateInAir,
+	stateDestroyed
 ]
 
 var character : CharacterBody3D = null
@@ -48,6 +50,13 @@ func _ready() -> void:
 	bindToStates()
 
 	changeState(stateDefault)
+
+func forceChangeState(inStateKey : String) -> void:
+	# might want to do something different later
+	for state : CharacterState in states:
+		if state.getStateKey() == inStateKey:
+			changeState(state)
+			break
 
 func addController(inController : Controller) -> void:
 	if !inController:

@@ -7,6 +7,9 @@ class_name Character
 @export var characterRotationSpeed : float = 3.0
 @export var maxAngleFromTarget : float = PI/3.0
 
+@export_group("Physics")
+@export var mass : float = 1.0
+
 @export_category("Team")
 @export_enum("TEAM1", "TEAM2") var team : int = 0
 

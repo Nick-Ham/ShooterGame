@@ -16,7 +16,7 @@ subViewport = NodePath("SubViewportContainer/SubViewport")
 viewportCamera = NodePath("SubViewportContainer/SubViewport/Camera3D")
 
 [node name="Hands" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, -0.11, -0.445)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, -0.12, -0.295)
 
 [node name="GunJiggler" type="Node3D" parent="Hands"]
 script = ExtResource("3_qu211")

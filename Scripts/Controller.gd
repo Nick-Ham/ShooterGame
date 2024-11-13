@@ -23,3 +23,7 @@ func getIsShooting() -> bool:
 
 func getAimCastResult(_inBloom : float = 0.0) -> RayCastResult:
 	return RayCastResult.new()
+
+func detach() -> void:
+	input_direction_changed.emit(Vector2())
+	queue_free()

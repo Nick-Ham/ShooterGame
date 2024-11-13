@@ -48,6 +48,36 @@ func update_physics(delta : float) -> void:
 	character.velocity = clampVelocityPlanar(character.velocity, delta)
 	character.move_and_slide()
 
+	handleRigidBodyCollisions()
+
+func handleRigidBodyCollisions() -> void:
+	var character : Character = Character.getOwningCharacter(self)
+	if !character:
+		push_error("Must be used on type Character")
+		return
+
+	var collisionIndex : int = -1
+	var rigidCollider : RigidBody3D = null
+	var foundCollision : KinematicCollision3D = null
+
+	for i : int in character.get_slide_collision_count():
+		var collision : KinematicCollision3D = character.get_slide_collision(i)
+		var colliderAsRigid : RigidBody3D = collision.get_collider() as RigidBody3D
+		if !colliderAsRigid:
+			continue
+
+		foundCollision  = collision
+		rigidCollider = colliderAsRigid
+		collisionIndex = i
+		break
+
+	if collisionIndex == -1:
+		return
+
+	var pushStrength : float = character.mass * character.get_position_delta().length()
+	var pushForce : Vector3 = pushStrength * -foundCollision.get_normal(collisionIndex)
+	rigidCollider.apply_impulse(pushForce, foundCollision.get_position())
+
 func clampVelocityPlanar(inVelocity : Vector3, delta : float) -> Vector3:
 	var velocity2D : Vector2 = Vector2(inVelocity.x, inVelocity.z)
 	velocity2D = lerp(velocity2D, velocity2D.limit_length(maxSpeed), maxSpeedEnforcement * delta)

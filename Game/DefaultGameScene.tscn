@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://e2q5617q6cek"]
 
 [ext_resource type="Script" path="res://Game/Game.gd" id="1_l1jsu"]
-[ext_resource type="PackedScene" uid="uid://bcjon2gry5eu7" path="res://Prototyping/TestScene.tscn" id="2_qhs1b"]
+[ext_resource type="PackedScene" uid="uid://cpj5rqgrsyfvm" path="res://Scenes/Levels/ProtoLevel1.tscn" id="2_dmee6"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_l1jsu")
-initialLevelScene = ExtResource("2_qhs1b")
+initialLevelScene = ExtResource("2_dmee6")

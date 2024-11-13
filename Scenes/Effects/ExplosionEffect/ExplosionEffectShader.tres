@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=63 format=3 uid="uid://uwiut54n2jk4"]
+[gd_resource type="VisualShader" load_steps=62 format=3 uid="uid://uwiut54n2jk4"]
 
 [ext_resource type="Texture2D" uid="uid://h4j11oeultk8" path="res://Assets/Textures/DirtyCloudNoiseTexture.png" id="1_2dswh"]
 [ext_resource type="Texture2D" uid="uid://1ctrn4hny67o" path="res://Assets/NoiseTextures/CellularBubbly.tres" id="2_tux7h"]
@@ -45,12 +45,12 @@ default_value_enabled = true
 linked_parent_graph_frame = 18
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_o1h3k"]
-size = Vector2(1424, 519)
+size = Vector2(1424, 418)
 title = "Texture"
 attached_nodes = PackedInt32Array(12, 3, 6, 5, 7, 4)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_gx4qn"]
-size = Vector2(1044, 903)
+size = Vector2(1044, 738)
 title = "Emission"
 attached_nodes = PackedInt32Array(11, 10, 14, 9, 13, 16, 15, 2, 37)
 
@@ -73,9 +73,9 @@ texture_type = 1
 linked_parent_graph_frame = 23
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_sfvhf"]
-size = Vector2(1424, 649)
+size = Vector2(1424, 338)
 title = "Alpha"
-attached_nodes = PackedInt32Array(22, 42, 30, 32, 36, 38, 39, 41)
+attached_nodes = PackedInt32Array(22, 42, 41, 32, 36, 38, 39)
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_n433y"]
 linked_parent_graph_frame = 31
@@ -105,13 +105,8 @@ linked_parent_graph_frame = 31
 [sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_uq3jo"]
 linked_parent_graph_frame = 17
 
-[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_to21b"]
-linked_parent_graph_frame = 23
-parameter_name = "OpaqueScalar"
-default_value_enabled = true
-
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_pllrb"]
-size = Vector2(1444, 580)
+size = Vector2(1444, 358)
 title = "Alpha"
 attached_nodes = PackedInt32Array(28, 25, 29, 27, 26)
 
@@ -440,7 +435,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1053.23, 23.7654)
 flags/depth_prepass_alpha = true
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_6onu7")
 nodes/vertex/2/position = Vector2(-660, 60)
@@ -522,8 +516,6 @@ nodes/fragment/28/node = SubResource("VisualShaderNodeMultiplyAdd_hr0cg")
 nodes/fragment/28/position = Vector2(400, -660)
 nodes/fragment/29/node = SubResource("VisualShaderNodeClamp_ebqn8")
 nodes/fragment/29/position = Vector2(620, -640)
-nodes/fragment/30/node = SubResource("VisualShaderNodeFloatParameter_to21b")
-nodes/fragment/30/position = Vector2(240, 1140)
 nodes/fragment/31/node = SubResource("VisualShaderNodeFrame_pllrb")
 nodes/fragment/31/position = Vector2(-620, -700)
 nodes/fragment/32/node = SubResource("VisualShaderNodeSmoothStep_mcxa0")

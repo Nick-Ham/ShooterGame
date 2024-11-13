@@ -24,10 +24,23 @@ var animationDirection : Vector2 = Vector2()
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 @onready var targeter : Targeter = Util.getChildOfType(owningCharacter, Targeter)
 
+var owningCharacterDestroyed : bool = false
+
 func _ready() -> void:
 	assert(stateManager)
 
+	Util.safeConnect(owningCharacter.character_destroyed, on_character_destroyed)
+
+func on_character_destroyed(_inCharacter : Character) -> void:
+	owningCharacterDestroyed = true
+	updateAnimationSpeed(1.0)
+
 func _physics_process(delta: float) -> void:
+	if owningCharacterDestroyed:
+		aimTowardsForwards(delta)
+		modelAnimationTree.set(moveBlendParam, Vector2())
+		return
+
 	var moveDirection : Vector3 = owningCharacter.velocity.normalized() * owningCharacter.global_basis
 	var moveDirectionPlanar : Vector2 = Vector2(moveDirection.x, moveDirection.z)
 

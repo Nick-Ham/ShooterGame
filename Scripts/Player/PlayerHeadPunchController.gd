@@ -28,7 +28,12 @@ func on_state_changed(inPreviousState : CharacterState, inNewState : CharacterSt
 		var punchX : float = 0.0
 		var randRoll : float = randf_range(-abs(onLandPunchStrength.x), abs(onLandPunchStrength.x))
 
-		var inputDirectionX : float = stateManager.getCharacterController().getInputDirection().x
+		var inputDirectionX : float = 0.0
+
+		var controller : Controller = stateManager.getCharacterController()
+		if controller:
+			inputDirectionX = controller.getInputDirection().x
+
 		if is_zero_approx(inputDirectionX):
 			punchX = randRoll
 		else:
