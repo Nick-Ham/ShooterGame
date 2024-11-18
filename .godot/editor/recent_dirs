@@ -1,3 +1,4 @@
+res://Scenes/Environment
 res://Assets/Models/SmallRobot
 res://Prototyping
 res://Assets/Materials
@@ -19,4 +20,3 @@ res://Scripts/EnemyControllers
 res://Data
 res://Scripts/Projectiles
 res://Scenes/Projectiles
-res://Scenes

@@ -1,10 +1,9 @@
+AnimationPlayer
 CSGBox3D
-MeshEvaporator
 GPUParticles3D
 CollisionShape3D
 Area3D
 OccluderInstance3D
-AnimationPlayer
 StaticBody3D
 AreaDoor
 PhysicsInterpolator3D

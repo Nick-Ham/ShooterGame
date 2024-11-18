@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cd05lf0vpso5k"]
 
-[ext_resource type="Script" path="res://Scripts/Spectator.gd" id="1_i3xfd"]
+[ext_resource type="Script" path="res://Scripts/Player/Spectator.gd" id="1_i3xfd"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="2_wbmfl"]
 
 [node name="Spectator" type="Node3D" node_paths=PackedStringArray("cinemaCam")]

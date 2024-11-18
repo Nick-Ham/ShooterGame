@@ -13,6 +13,9 @@ func _ready() -> void:
 	collision_layer = 0
 	collision_mask = collisionBits
 
+func disable() -> void:
+	queue_free()
+
 func _physics_process(delta: float) -> void:
 	var overlappingBodies : Array[Node3D] = get_overlapping_bodies()
 	overlappingBodies.erase(owningCharacter)

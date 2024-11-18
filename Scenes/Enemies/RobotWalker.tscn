@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cpurlnxl3pclx"]
+[gd_scene load_steps=54 format=3 uid="uid://cpurlnxl3pclx"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_bbu7p"]
 [ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_lgn8u"]
@@ -14,9 +14,9 @@
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateJumping.gd" id="6_w4vp6"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="7_34icv"]
 [ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robot/RobotModel.tscn" id="8_8vwp4"]
+[ext_resource type="Script" path="res://Scripts/Enemy/RobotWalker/RobotWalkerAnimationController.gd" id="8_bqjlg"]
 [ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="9_gli1f"]
 [ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Components/Overshield.tscn" id="10_hrsr4"]
-[ext_resource type="Script" path="res://Scripts/EnemyControllers/AnimationController.gd" id="11_8pn5y"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/BehaviorTree.gd" id="12_yuoqv"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Composite/BTSelector.gd" id="13_7n237"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Composite/BTSequencer.gd" id="14_djmc6"]
@@ -92,6 +92,71 @@ radius = 50.0
 height = 1.5
 radius = 0.75
 
+[sub_resource type="Animation" id="Animation_xrc3h"]
+resource_name = "OnDeath"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PhysicsInterpolator3D/Robot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5),
+"transitions": PackedFloat32Array(3.86374, 4.2871, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-1.27504, 0.468597, -0.450948), Vector3(-1.16497, 1.14519, -1.08007)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"explode"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterRepelArea")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_yn0lw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PhysicsInterpolator3D/Robot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_16w04"]
+_data = {
+"OnDeath": SubResource("Animation_xrc3h"),
+"RESET": SubResource("Animation_yn0lw")
+}
+
 [node name="RobotWalker" type="CharacterBody3D" node_paths=PackedStringArray("aimMarker", "aimCast")]
 collision_layer = 4
 script = ExtResource("1_bbu7p")
@@ -117,8 +182,9 @@ script = ExtResource("31_b8sev")
 script = ExtResource("2_lgn8u")
 defaultWeapon = ExtResource("3_nyrer")
 
-[node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("modelAnimationTree", "aimPivot")]
-script = ExtResource("11_8pn5y")
+[node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "modelAnimationTree", "aimPivot")]
+script = ExtResource("8_bqjlg")
+animationPlayer = NodePath("../AnimationPlayer")
 modelAnimationTree = NodePath("../AnimationTree")
 aimPivot = NodePath("../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot")
 
@@ -162,32 +228,33 @@ script = ExtResource("6_w4vp6")
 script = ExtResource("16_jg6l6")
 
 [node name="PhysicsInterpolator3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("7_34icv")
 
 [node name="Robot" parent="PhysicsInterpolator3D" instance=ExtResource("8_8vwp4")]
 
-[node name="LeftLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="0"]
+[node name="LeftLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="1"]
 transform = Transform3D(0.984808, -0.137764, -0.10571, 0.173648, 0.7813, 0.599513, 0, -0.608761, 0.793354, 0, -0.0625, 0)
 
-[node name="LeftLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper" index="0"]
+[node name="LeftLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper" index="1"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.247151, -0.525831, -0.0198207)
 
-[node name="LeftLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner" index="0"]
+[node name="LeftLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner" index="1"]
 transform = Transform3D(1, 0, 0, 0, -0.258819, -0.965926, 0, 0.965926, -0.258819, 0, -0.34375, 0.0625)
 
-[node name="LeftFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner/LeftLegLower" index="0"]
+[node name="LeftFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner/LeftLegLower" index="1"]
 transform = Transform3D(0.984822, -0.173566, 0.000200477, 0.160251, 0.908829, -0.385163, 0.066669, 0.379349, 0.922849, 0, 0.375, 0)
 
-[node name="RightLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="1"]
+[node name="RightLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="2"]
 transform = Transform3D(0.984808, 0.137764, 0.10571, -0.17101, 0.875141, 0.452641, -0.0301537, -0.463841, 0.885405, 0, -0.0625, 0)
 
-[node name="RightLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper" index="0"]
+[node name="RightLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper" index="1"]
 transform = Transform3D(0.999542, 0.025504, 0.0162952, 0.0204175, -0.170788, -0.985096, -0.0223408, 0.984978, -0.171231, -0.247151, -0.525831, -0.0198207)
 
-[node name="RightLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner" index="0"]
+[node name="RightLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner" index="1"]
 transform = Transform3D(0.999542, 0.00913909, -0.0288526, -0.0223409, -0.420328, -0.907097, -0.0204176, 0.907326, -0.419931, 0, -0.34375, 0.0625)
 
-[node name="RightFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower" index="0"]
+[node name="RightFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower" index="1"]
 transform = Transform3D(0.984797, 0.150534, 0.0866856, -0.160381, 0.97963, 0.120841, -0.0667291, -0.132907, 0.988879, 0.00188168, 0.387245, -0.00166134)
 
 [node name="Head" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot" index="0"]
@@ -283,11 +350,11 @@ shape = SubResource("SphereShape3D_0yxpf")
 [node name="NavigationController" type="NavigationAgent3D" parent="."]
 script = ExtResource("19_8dulv")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="CharacterRepelArea" type="Area3D" parent="."]
 collision_layer = 6
 script = ExtResource("35_usdsk")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterRepelArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CylinderShape3D_0t1dn")
 
@@ -295,6 +362,11 @@ shape = SubResource("CylinderShape3D_0t1dn")
 script = ExtResource("38_6sjf6")
 health = NodePath("../Health")
 characterStateManager = NodePath("../CharacterStateManager")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_16w04")
+}
 
 [editable path="PhysicsInterpolator3D/Robot"]
 [editable path="OvershieldHealth"]

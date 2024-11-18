@@ -6,6 +6,14 @@ static var defaultImpactScene : PackedScene = preload("res://Scenes/Effects/Bull
 static var shieldImpactScene : PackedScene = preload("res://Scenes/Effects/ShieldBulletImpact.tscn")
 static var metalImpactScene : PackedScene = preload("res://Scenes/Effects/BulletImpactDecal.tscn")
 
+static var defaultExplosionScene : PackedScene = preload("res://Scenes/Effects/ExplosionEffect/ExplosionEffect.tscn")
+
+static func createExplosion(inParent : Node3D, inHitPosition : Vector3) -> ExplosionEffect:
+	var explosion : ExplosionEffect = defaultExplosionScene.instantiate()
+	inParent.add_child(explosion)
+	explosion.global_position = inHitPosition
+	return explosion
+
 static func createMetalImpact(inParent : Node3D, inHitPosition : Vector3, inHitNormal : Vector3) -> Impact:
 	var metalImpact : Impact = createImpact(inParent, inHitPosition, inHitNormal, metalImpactScene)
 	return metalImpact

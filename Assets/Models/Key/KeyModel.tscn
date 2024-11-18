@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://clsmxmr3d3kfp" path="res://Assets/Models/Key/Key.gltf" id="1_4yhhn"]
 
 [node name="Key" instance=ExtResource("1_4yhhn")]
+
+[node name="Node" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.344491, 0)

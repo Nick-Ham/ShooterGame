@@ -1,7 +1,8 @@
 extends Node
-class_name AnimationController
+class_name RobotWalkerAnimationController
 
 @export_category("Ref")
+@export var animationPlayer : AnimationPlayer
 @export var modelAnimationTree : AnimationTree
 @export var aimPivot : Node3D
 
@@ -26,14 +27,23 @@ var animationDirection : Vector2 = Vector2()
 
 var owningCharacterDestroyed : bool = false
 
+const deathAnimationKey : String = "OnDeath"
+
 func _ready() -> void:
 	assert(stateManager)
+	assert(modelAnimationTree)
+	assert(animationPlayer)
 
 	Util.safeConnect(owningCharacter.character_destroyed, on_character_destroyed)
 
 func on_character_destroyed(_inCharacter : Character) -> void:
 	owningCharacterDestroyed = true
 	updateAnimationSpeed(1.0)
+	animationPlayer.play(deathAnimationKey)
+
+func explode() -> void:
+	var environmentEffectManager : EnvironmentEffectManager = Game.getGame(get_tree()).getLevel().getEnvironmentalEffectManager()
+	environmentEffectManager.addExplosion(owningCharacter.getHeadGlobalPosition())
 
 func _physics_process(delta: float) -> void:
 	if owningCharacterDestroyed:
@@ -62,6 +72,11 @@ func updateLookDirection(inDelta : float) -> void:
 	var forwardRelative : Vector3 = owningCharacter.global_basis * Vector3.BACK
 
 	var angleDifference : float = abs(aimDirection.normalized().angle_to(forwardRelative.normalized()))
+	
+	# This angle 'softening' prevents axis flipping during the lerpToVector method.
+	# Theoretically shouldnt happen, but im not a mathologist
+	if (angleDifference > PI/2.0):
+		aimDirection = (forwardRelative * 1.0 + aimDirection * 0.1).normalized()
 
 	MathUtil.lerpToVector(aimPivot, Vector3.UP, aimDirection, lookSpeed * inDelta)
 	aimPivot.rotation.y = clampf(aimPivot.rotation.y, -abs(maxYawAngle), abs(maxYawAngle))

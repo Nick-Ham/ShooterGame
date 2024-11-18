@@ -2,23 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jyvs777yxd15"
-path="res://.godot/imported/RollingDoor_0.png-bee6efdea684e94101e760127351705b.ctex"
+uid="uid://dsn66bmlmabl3"
+path.s3tc="res://.godot/imported/RollingDoor_0.png-bee6efdea684e94101e760127351705b.s3tc.ctex"
 metadata={
-"vram_texture": false
-}
-generator_parameters={
-"md5": "854ead56b32d41872386db31ca98bda6"
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Models/Environment/RollingDoor/RollingDoor_0.png"
-dest_files=["res://.godot/imported/RollingDoor_0.png-bee6efdea684e94101e760127351705b.ctex"]
+dest_files=["res://.godot/imported/RollingDoor_0.png-bee6efdea684e94101e760127351705b.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

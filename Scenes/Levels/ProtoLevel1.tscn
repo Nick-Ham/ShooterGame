@@ -1,15 +1,14 @@
-[gd_scene load_steps=17 format=3 uid="uid://cpj5rqgrsyfvm"]
+[gd_scene load_steps=13 format=3 uid="uid://cpj5rqgrsyfvm"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Level.gd" id="1_w521k"]
 [ext_resource type="Material" uid="uid://bsms754sxwy0e" path="res://Prototyping/PrototypingTexture.tres" id="2_3qpr4"]
 [ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="3_51m1r"]
 [ext_resource type="Script" path="res://Scripts/Level/PlayerSpawn.gd" id="4_sfj05"]
 [ext_resource type="PackedScene" uid="uid://cpurlnxl3pclx" path="res://Scenes/Enemies/RobotWalker.tscn" id="5_fg55f"]
-[ext_resource type="Script" path="res://Scripts/Item/ItemPickup.gd" id="5_pag5o"]
-[ext_resource type="Resource" uid="uid://lujn6g50joc7" path="res://Data/Items/Key.tres" id="6_yfxf5"]
-[ext_resource type="PackedScene" uid="uid://shxmwpsdxqex" path="res://Assets/Models/Key/KeyModel.tscn" id="6_yx8tq"]
+[ext_resource type="PackedScene" uid="uid://qj38mu6j5wbp" path="res://Scenes/Environment/ItemPickup.tscn" id="5_s5svs"]
+[ext_resource type="Script" path="res://Scripts/Item/KeyItem.gd" id="6_a4axp"]
 [ext_resource type="PackedScene" uid="uid://uq0dr1xpg6a5" path="res://Scenes/Environment/RollingAreaDoor.tscn" id="9_i7ops"]
-[ext_resource type="PackedScene" uid="uid://d1tmyhf7b8mkx" path="res://Assets/Models/SmallRobot/SmallRobotModel.tscn" id="10_37sng"]
+[ext_resource type="PackedScene" uid="uid://cd05lf0vpso5k" path="res://Scenes/Player/Spectator.tscn" id="11_rr6r2"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_gv2ca"]
 vertices = PackedVector3Array(-49.5, 0.5, -49.5, -49.5, 0.5, 49.5, 49.5, 0.5, 49.5, 49.5, 0.5, -49.5)
@@ -18,70 +17,10 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 [sub_resource type="PlaneMesh" id="PlaneMesh_8op73"]
 size = Vector2(100, 100)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_kl3po"]
-height = 3.60338
-
-[sub_resource type="Animation" id="Animation_hvnmk"]
-resource_name = "HoverAndSpin"
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0.602139), Vector3(0, 1.5708, 0.602139), Vector3(0, 3.14159, 0.602139), Vector3(0, 4.71239, 0.602139), Vector3(0, 6.28319, 0.602139)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 1.2, 0), Vector3(0, 1.3, 0), Vector3(0, 1.2, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_4dhno"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0.602139)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 1.11639, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_olq3n"]
-_data = {
-"HoverAndSpin": SubResource("Animation_hvnmk"),
-"RESET": SubResource("Animation_4dhno")
-}
+[sub_resource type="Resource" id="Resource_blgjm"]
+script = ExtResource("6_a4axp")
+doorKey = "door1"
+name = "Door Key"
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_w521k")
@@ -133,33 +72,15 @@ fov = 90.0
 transform = Transform3D(-0.997436, 0, -0.071567, 0, 1, 0, 0.071567, 0, -0.997436, 0, 0.25, 0)
 script = ExtResource("4_sfj05")
 
-[node name="ItemPickup" type="Area3D" parent="." node_paths=PackedStringArray("animationPlayer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.62156)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("5_pag5o")
-item = ExtResource("6_yfxf5")
-animationPlayer = NodePath("AnimationPlayer")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemPickup"]
-shape = SubResource("CylinderShape3D_kl3po")
-
-[node name="Pivot" type="Node3D" parent="ItemPickup"]
-transform = Transform3D(0.824126, -0.566406, 0, 0.566406, 0.824126, 0, 0, 0, 1, 0, 1.11639, 0)
-
-[node name="Key" parent="ItemPickup/Pivot" instance=ExtResource("6_yx8tq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79397e-09, -0.404982, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ItemPickup"]
-libraries = {
-"": SubResource("AnimationLibrary_olq3n")
-}
+[node name="ItemPickup" parent="." instance=ExtResource("5_s5svs")]
+item = SubResource("Resource_blgjm")
 
 [node name="RobotWalker" parent="." instance=ExtResource("5_fg55f")]
 transform = Transform3D(-0.994753, 0, -0.102306, 0, 1, 0, 0.102306, 0, -0.994753, 0, 0, 6.25094)
 
 [node name="RollingAreaDoor" parent="." instance=ExtResource("9_i7ops")]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -6.5, 0, 3.5)
+doorKey = "door1"
 
-[node name="SmallRobotModel" parent="." instance=ExtResource("10_37sng")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2.25)
+[node name="Spectator" parent="." instance=ExtResource("11_rr6r2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39674, 0)
