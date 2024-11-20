@@ -4,7 +4,6 @@ class_name WeaponStateManager
 @export_category("Config")
 @export var loggingEnabled : bool = false
 @export var loggerCategory : String = "Weapon:StateManager:State"
-@export var weaponManager : WeaponManager
 
 @export_category("States")
 @export var stateDefault : WeaponState
@@ -16,24 +15,21 @@ class_name WeaponStateManager
 var currentState : WeaponState = null
 var lastState : WeaponState = null
 var controller : Controller = null
-var character : CharacterBody3D = null
+
+@onready var owningCharacter : Character = Character.getOwningCharacter(self)
 
 signal state_changed(lastState : WeaponState, newState : WeaponState)
 signal weapon_fired
 
 func _ready() -> void:
-	assert(weaponManager)
-
-	if !character:
-		character = get_parent() as CharacterBody3D
-
-	controller = Controller.getController(character)
+	controller = Controller.getController(owningCharacter)
 	if controller:
 		bindToController(controller)
 
 	if loggingEnabled:
 		DebugLogger.registerTrackedValue(loggerCategory)
 
+func readyWeapon() -> void:
 	changeState(stateDefault)
 
 func getIsShooting() -> bool:
@@ -41,6 +37,10 @@ func getIsShooting() -> bool:
 		return false
 
 	return controller.getIsShooting()
+
+func getWeaponData() -> WeaponData:
+	var weapon : Weapon = get_parent() as Weapon
+	return weapon.getWeaponData()
 
 func addController(inController : Controller) -> void:
 	controller = inController
@@ -50,7 +50,8 @@ func bindToController(inController : Controller) -> void:
 	Util.safeConnect(inController.shoot_changed, on_shoot_changed)
 
 func on_shoot_changed(inIsShooting : bool) -> void:
-	currentState.handleOnShootChanged(inIsShooting)
+	if currentState:
+		currentState.handleOnShootChanged(inIsShooting)
 
 func changeState(inNewState : WeaponState) -> void:
 	if currentState:
@@ -64,10 +65,13 @@ func changeState(inNewState : WeaponState) -> void:
 	if loggingEnabled:
 		DebugLogger.updateTrackedValue(loggerCategory, currentState.getStateKey())
 
+	if controller and controller.getIsShooting():
+		currentState.handleOnShootChanged(true)
+
 	state_changed.emit(lastState, currentState)
 
-func getWeaponManager() -> WeaponManager:
-	return weaponManager
-
 func getCurrentBloomValue() -> float:
-	return currentState.getCurrentBloomValue()
+	if currentState:
+		return currentState.getCurrentBloomValue()
+
+	return 0.0

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://bglymodbl3n7o"]
+
+[ext_resource type="Script" path="res://DataTypes/WeaponItem.gd" id="1_1tlm8"]
+[ext_resource type="Resource" uid="uid://t78dxd6n3sr2" path="res://Data/WeaponData/ShortGunWeaponData.tres" id="2_mi8pp"]
+
+[resource]
+script = ExtResource("1_1tlm8")
+weaponData = ExtResource("2_mi8pp")
+name = "Item"

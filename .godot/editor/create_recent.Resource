@@ -1,3 +1,4 @@
+WeaponItem
 Shader
 StandardMaterial3D
 ShaderMaterial

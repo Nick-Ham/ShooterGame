@@ -4,9 +4,9 @@
 [ext_resource type="Material" uid="uid://bsms754sxwy0e" path="res://Prototyping/PrototypingTexture.tres" id="2_3qpr4"]
 [ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="3_51m1r"]
 [ext_resource type="Script" path="res://Scripts/Level/PlayerSpawn.gd" id="4_sfj05"]
-[ext_resource type="PackedScene" uid="uid://cpurlnxl3pclx" path="res://Scenes/Enemies/RobotWalker.tscn" id="5_fg55f"]
 [ext_resource type="PackedScene" uid="uid://qj38mu6j5wbp" path="res://Scenes/Environment/ItemPickup.tscn" id="5_s5svs"]
-[ext_resource type="Script" path="res://Scripts/Item/KeyItem.gd" id="6_a4axp"]
+[ext_resource type="Resource" uid="uid://bglymodbl3n7o" path="res://Data/WeaponItem/ShortGunWeaponItem.tres" id="6_csply"]
+[ext_resource type="Script" path="res://DataTypes/KeyItem.gd" id="9_avope"]
 [ext_resource type="PackedScene" uid="uid://uq0dr1xpg6a5" path="res://Scenes/Environment/RollingAreaDoor.tscn" id="9_i7ops"]
 [ext_resource type="PackedScene" uid="uid://cd05lf0vpso5k" path="res://Scenes/Player/Spectator.tscn" id="11_rr6r2"]
 
@@ -17,8 +17,8 @@ polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 [sub_resource type="PlaneMesh" id="PlaneMesh_8op73"]
 size = Vector2(100, 100)
 
-[sub_resource type="Resource" id="Resource_blgjm"]
-script = ExtResource("6_a4axp")
+[sub_resource type="Resource" id="Resource_mp47a"]
+script = ExtResource("9_avope")
 doorKey = "door1"
 name = "Door Key"
 
@@ -40,6 +40,7 @@ shadow_enabled = true
 environment = ExtResource("3_51m1r")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+visible = false
 navigation_mesh = SubResource("NavigationMesh_gv2ca")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
@@ -73,10 +74,7 @@ transform = Transform3D(-0.997436, 0, -0.071567, 0, 1, 0, 0.071567, 0, -0.997436
 script = ExtResource("4_sfj05")
 
 [node name="ItemPickup" parent="." instance=ExtResource("5_s5svs")]
-item = SubResource("Resource_blgjm")
-
-[node name="RobotWalker" parent="." instance=ExtResource("5_fg55f")]
-transform = Transform3D(-0.994753, 0, -0.102306, 0, 1, 0, 0.102306, 0, -0.994753, 0, 0, 6.25094)
+item = ExtResource("6_csply")
 
 [node name="RollingAreaDoor" parent="." instance=ExtResource("9_i7ops")]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -6.5, 0, 3.5)
@@ -84,3 +82,7 @@ doorKey = "door1"
 
 [node name="Spectator" parent="." instance=ExtResource("11_rr6r2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39674, 0)
+
+[node name="ItemPickup2" parent="." instance=ExtResource("5_s5svs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.75, 0, -1.37844)
+item = SubResource("Resource_mp47a")

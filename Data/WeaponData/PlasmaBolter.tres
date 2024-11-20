@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://05st06xuv7q1"]
 
 [ext_resource type="PackedScene" uid="uid://dero46gvnk3p4" path="res://Scenes/Projectiles/PlasmaBolt.tscn" id="1_860co"]
-[ext_resource type="Script" path="res://Types/WeaponData.gd" id="1_wkbnf"]
+[ext_resource type="Script" path="res://DataTypes/WeaponData.gd" id="1_wkbnf"]
 
 [sub_resource type="Curve" id="Curve_hjvab"]
 _data = [Vector2(0, 0), 0.0, 2.20145, 0, 0, Vector2(0.137056, 0.692308), 3.09262, 3.09262, 0, 0, Vector2(0.461929, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.992335), 0.0, 0.0, 0, 0]

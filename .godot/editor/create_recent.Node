@@ -1,4 +1,9 @@
+Node3D
+WeaponStateDefault
+WeaponStateManager
+PlayerRecoilController
 AnimationPlayer
+AnimationTree
 CSGBox3D
 GPUParticles3D
 CollisionShape3D
@@ -8,6 +13,3 @@ StaticBody3D
 AreaDoor
 PhysicsInterpolator3D
 ItemManager
-Node3D
-ItemPickup
-MeshInstance3D

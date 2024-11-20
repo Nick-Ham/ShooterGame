@@ -3,12 +3,13 @@ class_name WeaponStateDefault
 
 @export_category("Ref")
 @export var shootSoundPlayer : AudioStreamPlayer3D
-@export var shootRecoilPunch : Punch
 @export var damage : Damage
 
 var readyToFire : bool = true
 
 @onready var shootDelayTimer : Timer = Timer.new()
+
+@onready var owningCharacter : Character = Character.getOwningCharacter(self)
 
 const showDebugImpacts : bool = false
 const showDebugTrails : bool = false
@@ -22,7 +23,7 @@ signal weapon_fired
 
 func _ready() -> void:
 	add_child(shootDelayTimer)
-	shootDelayTimer.wait_time = getStateManager().getWeaponManager().getEquippedWeaponData().firingDelay #delayBetweenShots
+	shootDelayTimer.wait_time = getStateManager().getWeaponData().firingDelay #delayBetweenShots
 	Util.safeConnect(shootDelayTimer.timeout, on_shootDelayTimer_timeout)
 
 func on_shootDelayTimer_timeout() -> void:
@@ -38,7 +39,7 @@ func _process(delta: float) -> void:
 	if isCurrentlyShooting:
 		bloomBuildup = clampf(bloomBuildup + delta, 0.0, 1.0)
 	else:
-		var weaponData : WeaponData = getStateManager().getWeaponManager().getEquippedWeaponData()
+		var weaponData : WeaponData = getStateManager().getWeaponData()
 		bloomBuildup = lerpf(bloomBuildup, 0.0, clampf(weaponData.bloomDecaySpeed * delta, 0.0, 1.0))
 
 		if bloomBuildup < minBloomDecay:
@@ -57,12 +58,14 @@ func shoot() -> void:
 	EnvironmentEventBus.addEnvironmentSound(Character.getOwningCharacter(self))
 	shootSoundPlayer.play()
 
-	var equippedWeaponData : WeaponData = getStateManager().getWeaponManager().getEquippedWeaponData()
+	var equippedWeaponData : WeaponData = getStateManager().getWeaponData()
 
-	shootRecoilPunch.addRotationPunch(equippedWeaponData.getRandomRecoilRotation())
-	shootRecoilPunch.addTranslationPunch(equippedWeaponData.getRandomRecoilTranslation())
+	var playerRecoilController : PlayerRecoilController = Util.getChildOfType(owningCharacter, PlayerRecoilController)
+	if playerRecoilController:
+		playerRecoilController.addRecoilRotationPunch(equippedWeaponData.getRandomRecoilRotation())
+		playerRecoilController.addRecoilTranslationPunch(equippedWeaponData.getRandomRecoilTranslation())
 
-	var controller : Controller = Controller.getController(getStateManager().get_parent())
+	var controller : Controller = Util.getChildOfType(owningCharacter, Controller)
 	assert(is_instance_valid(controller), "Shoot triggered on a weaponstate with no valid controller... how did you get here?")
 
 	var aimCastResult : RayCastResult = controller.getAimCastResult(equippedWeaponData.getBloomRadiusAtTime(bloomBuildup))

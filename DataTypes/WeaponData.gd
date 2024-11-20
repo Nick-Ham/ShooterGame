@@ -5,6 +5,9 @@ class_name WeaponData
 @export var weaponName : String = ""
 @export var weaponScene : PackedScene = null
 
+@export_category("WeaponModel")
+@export var weaponModelScene : PackedScene = null
+
 @export_category("WeaponType")
 @export var isProjectile : bool = false
 @export var projectileScene : PackedScene
@@ -38,6 +41,12 @@ class_name WeaponData
 
 static func validateWeapon(inWeaponData : WeaponData) -> bool:
 	if inWeaponData == null:
+		return false
+
+	if !inWeaponData.weaponModelScene:
+		return false
+
+	if !inWeaponData.weaponScene:
 		return false
 
 	return true

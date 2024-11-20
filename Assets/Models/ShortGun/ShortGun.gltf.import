@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://7ko7uax7r2mw"
-path="res://.godot/imported/ShortGun.glb-d8ed63329785d267446e9087fdaa8365.scn"
+uid="uid://35m6mgsawkrm"
+path="res://.godot/imported/ShortGun.gltf-cc71cdf337be3b40b66fee5d3e1615df.scn"
 
 [deps]
 
-source_file="res://Assets/ShortGun.glb"
-dest_files=["res://.godot/imported/ShortGun.glb-d8ed63329785d267446e9087fdaa8365.scn"]
+source_file="res://Assets/Models/ShortGun/ShortGun.gltf"
+dest_files=["res://.godot/imported/ShortGun.gltf-cc71cdf337be3b40b66fee5d3e1615df.scn"]
 
 [params]
 
@@ -19,7 +19,7 @@ nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
 meshes/ensure_tangents=true
-meshes/generate_lods=false
+meshes/generate_lods=true
 meshes/create_shadow_meshes=true
 meshes/light_baking=1
 meshes/lightmap_texel_size=0.2

@@ -2,19 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt7mmywvpd7gj"
-path="res://.godot/imported/ShortGun_0.png-faa4e71950735debaedca34e5b09eb80.ctex"
+uid="uid://dk71jj0ncfa2l"
+path="res://.godot/imported/ShortGun_0.png-bb22c80a4b5c103be24ea035338692ee.ctex"
 metadata={
 "vram_texture": false
 }
 generator_parameters={
-"md5": "c30590e6ef81ea936e97cbf3dce8e9fd"
+"md5": "bfacd37ab387f1af0ed8f59a4b517158"
 }
 
 [deps]
 
-source_file="res://Assets/ShortGun_0.png"
-dest_files=["res://.godot/imported/ShortGun_0.png-faa4e71950735debaedca34e5b09eb80.ctex"]
+source_file="res://Assets/Models/ShortGun/ShortGun_0.png"
+dest_files=["res://.godot/imported/ShortGun_0.png-bb22c80a4b5c103be24ea035338692ee.ctex"]
 
 [params]
 

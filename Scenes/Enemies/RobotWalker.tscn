@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cpurlnxl3pclx"]
+[gd_scene load_steps=51 format=3 uid="uid://cpurlnxl3pclx"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_bbu7p"]
 [ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_lgn8u"]
@@ -7,10 +7,7 @@
 [ext_resource type="Resource" uid="uid://05st06xuv7q1" path="res://Data/WeaponData/PlasmaBolter.tres" id="3_nyrer"]
 [ext_resource type="Script" path="res://Scripts/EnemyControllers/AIInvestigationManager.gd" id="4_7ltbn"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateDefault.gd" id="4_a0gpi"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="4_pmxvx"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefaultProjectile.gd" id="5_4e3ff"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateInAir.gd" id="5_wviwu"]
-[ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="6_p63f4"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateJumping.gd" id="6_w4vp6"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="7_34icv"]
 [ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robot/RobotModel.tscn" id="8_8vwp4"]
@@ -188,20 +185,6 @@ animationPlayer = NodePath("../AnimationPlayer")
 modelAnimationTree = NodePath("../AnimationTree")
 aimPivot = NodePath("../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot")
 
-[node name="WeaponStateManager" type="Node" parent="." node_paths=PackedStringArray("weaponManager", "stateDefault")]
-script = ExtResource("4_pmxvx")
-weaponManager = NodePath("../WeaponManager")
-stateDefault = NodePath("WeaponStateDefaultProjectile")
-
-[node name="WeaponStateDefaultProjectile" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("barrelEnd", "shootSoundPlayer", "damage")]
-script = ExtResource("5_4e3ff")
-barrelEnd = NodePath("../../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim")
-shootSoundPlayer = NodePath("../../ShootPlayer")
-damage = NodePath("Damage")
-
-[node name="Damage" type="Node" parent="WeaponStateManager/WeaponStateDefaultProjectile"]
-script = ExtResource("6_p63f4")
-
 [node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir", "stateDestroyed")]
 script = ExtResource("3_nv3fu")
 enableLogging = true
@@ -228,7 +211,6 @@ script = ExtResource("6_w4vp6")
 script = ExtResource("16_jg6l6")
 
 [node name="PhysicsInterpolator3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("7_34icv")
 
 [node name="Robot" parent="PhysicsInterpolator3D" instance=ExtResource("8_8vwp4")]

@@ -7,17 +7,21 @@ class_name Reticle
 @export var reticleColor : Color = Color.GRAY
 @export var bloomReticleColor : Color = Color.SLATE_GRAY
 
-@export var weaponStateManager : WeaponStateManager
-@export var weaponManager : WeaponManager
-
 const bloomToReticleConst : float = 5500.0
+
+@onready var owningCharacter : Character = Character.getOwningCharacter(self)
 
 var currentWeaponData : WeaponData = null
 
 func _enter_tree() -> void:
-	Util.safeConnect(weaponManager.weapon_equipped, on_weapon_equipped)
+	return
 
 func _ready() -> void:
+	var weaponManager : WeaponManager = Util.getChildOfType(owningCharacter, WeaponManager)
+	assert(weaponManager)
+
+	Util.safeConnect(weaponManager.weapon_equipped, on_weapon_equipped)
+
 	queue_redraw()
 
 func on_weapon_equipped(inWeaponData : WeaponData) -> void:
@@ -33,8 +37,11 @@ func _draw() -> void:
 	var screenCenter : Vector2 = get_viewport().size / 2.0
 	draw_circle(screenCenter, centerDotSize, reticleColor)
 
-	if currentWeaponData:
-		var bloomAtCurve : float = currentWeaponData.bloomCurve.sample(weaponStateManager.getCurrentBloomValue())
+	var weaponManager : WeaponManager = Util.getChildOfType(owningCharacter, WeaponManager)
+	var currentWeapon : Weapon = weaponManager.getEquippedWeapon()
+
+	if currentWeaponData and currentWeapon:
+		var bloomAtCurve : float = currentWeaponData.bloomCurve.sample(currentWeapon.getCurrentBloomValue())
 		var bloomMapped : float = remap(
 				bloomAtCurve,
 				0.0,

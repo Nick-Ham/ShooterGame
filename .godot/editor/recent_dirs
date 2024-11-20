@@ -1,9 +1,12 @@
+res://Scripts/Weapon
+res://Scripts/Weapon/WeaponStates
+res://Data/WeaponItem
+res://Assets/Models/ShortGun
 res://Scenes/Environment
 res://Assets/Models/SmallRobot
 res://Prototyping
 res://Assets/Materials
 res://Assets/Models/Environment/RollingDoor
-res://Data/Items
 res://Assets/Models/Key
 res://Scripts/UI
 res://Scenes/UI
@@ -17,6 +20,3 @@ res://Data/ShootPatterns
 res://Scripts
 res://Assets/Effects/Overshield
 res://Scripts/EnemyControllers
-res://Data
-res://Scripts/Projectiles
-res://Scenes/Projectiles
