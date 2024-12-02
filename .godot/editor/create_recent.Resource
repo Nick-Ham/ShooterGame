@@ -1,8 +1,8 @@
 WeaponItem
+WeaponData
 Shader
 StandardMaterial3D
 ShaderMaterial
 Item
 AIShootPattern
-WeaponData
 AudioStreamRandomizer

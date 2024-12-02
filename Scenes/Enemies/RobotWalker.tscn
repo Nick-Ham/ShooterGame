@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_lgn8u"]
 [ext_resource type="Script" path="res://Scripts/EnemyControllers/AIController.gd" id="2_n60v3"]
 [ext_resource type="Script" path="res://Scripts/Player/CharacterStateManager.gd" id="3_nv3fu"]
-[ext_resource type="Resource" uid="uid://05st06xuv7q1" path="res://Data/WeaponData/PlasmaBolter.tres" id="3_nyrer"]
 [ext_resource type="Script" path="res://Scripts/EnemyControllers/AIInvestigationManager.gd" id="4_7ltbn"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateDefault.gd" id="4_a0gpi"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateInAir.gd" id="5_wviwu"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateJumping.gd" id="6_w4vp6"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="7_34icv"]
+[ext_resource type="Resource" uid="uid://t78dxd6n3sr2" path="res://Data/WeaponData/ShortGunWeaponData.tres" id="7_yv32l"]
 [ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robot/RobotModel.tscn" id="8_8vwp4"]
 [ext_resource type="Script" path="res://Scripts/Enemy/RobotWalker/RobotWalkerAnimationController.gd" id="8_bqjlg"]
 [ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="9_gli1f"]
@@ -175,9 +175,10 @@ script = ExtResource("4_7ltbn")
 [node name="AIShootController" type="Node" parent="."]
 script = ExtResource("31_b8sev")
 
-[node name="WeaponManager" type="Node" parent="."]
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("weaponModelPivot")]
 script = ExtResource("2_lgn8u")
-defaultWeapon = ExtResource("3_nyrer")
+weaponModelPivot = NodePath("../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/WeaponPivot")
+defaultWeapon = ExtResource("7_yv32l")
 
 [node name="AnimationController" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "modelAnimationTree", "aimPivot")]
 script = ExtResource("8_bqjlg")
@@ -242,12 +243,18 @@ transform = Transform3D(0.984797, 0.150534, 0.0866856, -0.160381, 0.97963, 0.120
 [node name="Head" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0)
 
+[node name="Gun" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm" index="1"]
+visible = false
+
 [node name="Aim" type="Marker3D" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.19562e-08, 0.25091, 0.010955)
 
 [node name="AimRayCast" type="RayCast3D" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim"]
 target_position = Vector3(0, 0, 0)
 collide_with_areas = true
+
+[node name="WeaponPivot" type="Node3D" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm" index="2"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 9.15934e-16, -0.156563, -0.104112)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
@@ -312,9 +319,11 @@ script = ExtResource("28_nwp6c")
 [node name="BTLookForTarget2" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector"]
 script = ExtResource("28_nwp6c")
 
-[node name="BTStrafeAndShoot" type="Node" parent="BehaviorTree/BTSelector"]
+[node name="BTStrafeAndShoot" type="Node" parent="BehaviorTree/BTSelector" node_paths=PackedStringArray("leftWallDetector", "rightWallDetector")]
 script = ExtResource("29_gcn5k")
 shootPattern = ExtResource("30_2uyqy")
+leftWallDetector = NodePath("../../../LeftWallDetector")
+rightWallDetector = NodePath("../../../RightWallDetector")
 
 [node name="ShootPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_41jp0")
@@ -349,6 +358,14 @@ characterStateManager = NodePath("../CharacterStateManager")
 libraries = {
 "": SubResource("AnimationLibrary_16w04")
 }
+
+[node name="LeftWallDetector" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26504, 0)
+target_position = Vector3(-1, 0, 0)
+
+[node name="RightWallDetector" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26504, 0)
+target_position = Vector3(1, 0, 0)
 
 [editable path="PhysicsInterpolator3D/Robot"]
 [editable path="OvershieldHealth"]

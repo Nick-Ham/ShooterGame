@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bc4q2yey6jt0b"]
+
+[ext_resource type="Script" path="res://Scripts/Weapon/Weapon.gd" id="1_uchjy"]
+[ext_resource type="PackedScene" uid="uid://btffik0elil28" path="res://Assets/Models/ShortGun/ShortGunModel.tscn" id="2_siokc"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="3_r4hj4"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefaultProjectile.gd" id="4_lsx6g"]
+
+[node name="PlasmaBolterWeapon" type="Node3D" node_paths=PackedStringArray("weaponBarrelEnd")]
+script = ExtResource("1_uchjy")
+weaponBarrelEnd = NodePath("BarrelEnd")
+
+[node name="ShortGunModel" parent="." instance=ExtResource("2_siokc")]
+
+[node name="WeaponStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault")]
+script = ExtResource("3_r4hj4")
+stateDefault = NodePath("WeaponStateDefaultProjectile")
+
+[node name="WeaponStateDefaultProjectile" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("barrelEnd", "shootSoundPlayer")]
+script = ExtResource("4_lsx6g")
+barrelEnd = NodePath("../../BarrelEnd")
+shootSoundPlayer = NodePath("../../ShootSound")
+
+[node name="BarrelEnd" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.225813)
+
+[node name="RayCast3D" type="RayCast3D" parent="BarrelEnd"]
+target_position = Vector3(0, 0, 0)
+
+[node name="ShootSound" type="AudioStreamPlayer3D" parent="."]

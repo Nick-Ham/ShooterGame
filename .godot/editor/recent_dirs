@@ -1,6 +1,6 @@
+res://Data/WeaponItem
 res://Scripts/Weapon
 res://Scripts/Weapon/WeaponStates
-res://Data/WeaponItem
 res://Assets/Models/ShortGun
 res://Scenes/Environment
 res://Assets/Models/SmallRobot

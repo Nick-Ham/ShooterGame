@@ -69,7 +69,7 @@ func updateLookDirection(inDelta : float) -> void:
 
 	var targetLookPosition : Vector3 = currentInterest.interestPosition
 	var aimDirection : Vector3 = aimPivot.global_position - targetLookPosition
-	var forwardRelative : Vector3 = owningCharacter.global_basis * Vector3.BACK
+	var forwardRelative : Vector3 = getForwardVector()
 
 	var angleDifference : float = abs(aimDirection.normalized().angle_to(forwardRelative.normalized()))
 	
@@ -77,6 +77,8 @@ func updateLookDirection(inDelta : float) -> void:
 	# Theoretically shouldnt happen, but im not a mathologist
 	if (angleDifference > PI/2.0):
 		aimDirection = (forwardRelative * 1.0 + aimDirection * 0.1).normalized()
+	else:
+		aimDirection = (forwardRelative * 1.0 + aimDirection * 0.5).normalized()
 
 	MathUtil.lerpToVector(aimPivot, Vector3.UP, aimDirection, lookSpeed * inDelta)
 	aimPivot.rotation.y = clampf(aimPivot.rotation.y, -abs(maxYawAngle), abs(maxYawAngle))
@@ -92,3 +94,17 @@ func updateAnimationSpeed(inCharacterSpeed : float) -> void:
 
 func aimTowardsForwards(inDelta : float) -> void:
 	aimPivot.set_basis(aimPivot.basis.slerp(Basis.IDENTITY, lookSpeed * inDelta))
+
+func getForwardVector() -> Vector3:
+	var characterForward : Vector3 = owningCharacter.global_basis * Vector3.BACK
+	
+	var weaponManager : WeaponManager = Util.getChildOfType(owningCharacter, WeaponManager)
+	if !weaponManager:
+		return characterForward
+	
+	var weapon : Weapon = weaponManager.getEquippedWeapon()
+	if !weapon:
+		return characterForward
+	
+	return weapon.getBarrelEnd().global_basis * Vector3.BACK
+	

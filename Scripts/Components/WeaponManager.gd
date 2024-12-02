@@ -7,6 +7,7 @@ class_name WeaponManager
 
 @export_category("Config")
 @export var defaultWeapon : WeaponData
+@export var useFirstPersonMode : bool
 
 var equippedWeaponData : WeaponData = null
 var equippedWeapon : Weapon = null
@@ -23,7 +24,7 @@ func _ready() -> void:
 	assert(weaponModelPivot)
 
 	if WeaponData.validateWeapon(defaultWeapon):
-		equip(defaultWeapon)
+		equip(defaultWeapon, useFirstPersonMode)
 
 	var itemManager : ItemManager = Util.getChildOfType(owningCharacter, ItemManager)
 	if itemManager:
@@ -34,9 +35,9 @@ func on_item_added(inItem : Item) -> void:
 	if !itemAsWeaponItem:
 		return
 
-	equip(itemAsWeaponItem.weaponData)
+	equip(itemAsWeaponItem.weaponData, useFirstPersonMode)
 
-func equip(inWeaponData : WeaponData) -> void:
+func equip(inWeaponData : WeaponData, firstPersonMode : bool = true) -> void:
 	if !WeaponData.validateWeapon(inWeaponData):
 		return
 
@@ -47,12 +48,13 @@ func equip(inWeaponData : WeaponData) -> void:
 
 	weaponModelPivot.add_child(equippedWeapon)
 
-	setModelVisibilityToHands(equippedWeapon)
+	if firstPersonMode:
+		setModelVisibilityToHands(equippedWeapon)
 
 	if handsAnimationPlayer:
 		handsAnimationPlayer.play(readyWeaponAnimationKey)
 	else:
-		readyWeapon()
+		call_deferred("readyWeapon")
 
 	weapon_equipped.emit(equippedWeaponData)
 

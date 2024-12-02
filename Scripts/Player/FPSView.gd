@@ -9,8 +9,6 @@ class_name FPSView
 @export_category("CameraAimRayConfig")
 @export_flags_3d_physics var cameraRayLayer : int = 9
 
-const cameraRayMax : float = 1000.0
-
 func _ready() -> void:
 	super._ready()
 
@@ -45,7 +43,7 @@ func getCameraCastResult(inBloom : float = 0.0) -> RayCastResult:
 	normalVector = normalVector.rotated(Vector3.UP, pitchAngle)
 	normalVector = normalVector.rotated(Vector3.RIGHT, yawAngle)
 
-	var endpoint : Vector3 = normalVector * cameraRayMax + origin
+	var endpoint : Vector3 = normalVector * WeaponUtil.maxHitScanDistance + origin
 
 	var rayQuery : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, endpoint, cameraRayLayer)
 	rayQuery.collide_with_bodies = true

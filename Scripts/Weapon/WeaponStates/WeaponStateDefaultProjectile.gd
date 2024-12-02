@@ -4,25 +4,30 @@ class_name WeaponStateDefaultProjectile
 @export_category("Ref")
 @export var barrelEnd : Marker3D
 @export var shootSoundPlayer : AudioStreamPlayer3D
-@export var shootRecoilPunch : Punch
-@export var damage : Damage
 
 var readyToFire : bool = true
 
 @onready var shootDelayTimer : Timer = Timer.new()
 
+@onready var owningCharacter : Character = Character.getOwningCharacter(self)
+
 var isCurrentlyShooting : bool = false
 var bloomBuildup : float = 0.0
 
 const minBloomDecay : float = 0.02
-
 const projectileSpawnDistance : float = 0.5
 
 signal weapon_fired
 
+var weaponData : WeaponData
+
 func _ready() -> void:
 	add_child(shootDelayTimer)
-	shootDelayTimer.wait_time = getStateManager().getWeaponManager().getEquippedWeaponData().firingDelay #delayBetweenShots
+	
+	var weaponManager : WeaponManager = Util.getChildOfType(owningCharacter, WeaponManager)
+	weaponData = weaponManager.getEquippedWeaponData()
+	
+	shootDelayTimer.wait_time = weaponData.firingDelay #delayBetweenShots
 	Util.safeConnect(shootDelayTimer.timeout, on_shootDelayTimer_timeout)
 
 func on_shootDelayTimer_timeout() -> void:
@@ -38,7 +43,6 @@ func _process(delta: float) -> void:
 	if isCurrentlyShooting:
 		bloomBuildup = clampf(bloomBuildup + delta, 0.0, 1.0)
 	else:
-		var weaponData : WeaponData = getStateManager().getWeaponManager().getEquippedWeaponData()
 		bloomBuildup = lerpf(bloomBuildup, 0.0, clampf(weaponData.bloomDecaySpeed * delta, 0.0, 1.0))
 
 		if bloomBuildup < minBloomDecay:
@@ -48,7 +52,6 @@ func getStateKey() -> String:
 	return "default"
 
 func shoot() -> void:
-
 	if !readyToFire:
 		return
 	readyToFire = false
@@ -58,16 +61,17 @@ func shoot() -> void:
 	EnvironmentEventBus.addEnvironmentSound(Character.getOwningCharacter(self))
 	shootSoundPlayer.play()
 
-	var equippedWeaponData : WeaponData = getStateManager().getWeaponManager().getEquippedWeaponData()
+	var playerRecoilController : PlayerRecoilController = Util.getChildOfType(owningCharacter, PlayerRecoilController)
+	if playerRecoilController:
+		playerRecoilController.addRecoilRotationPunch(weaponData.getRandomRecoilRotation())
+		playerRecoilController.addRecoilTranslationPunch(weaponData.getRandomRecoilTranslation())
 
-	if is_instance_valid(shootRecoilPunch):
-		shootRecoilPunch.addRotationPunch(equippedWeaponData.getRandomRecoilRotation())
-		shootRecoilPunch.addTranslationPunch(equippedWeaponData.getRandomRecoilTranslation())
-
-	var controller : Controller = Controller.getController(getStateManager().get_parent())
+	var controller : Controller = Util.getChildOfType(owningCharacter, Controller)
 	assert(is_instance_valid(controller), "Shoot triggered on a weaponstate with no valid controller... how did you get here?")
 
-	var projectileInstance : Projectile = equippedWeaponData.projectileScene.instantiate()
+	assert(weaponData, "WeaponState firing without a valid weaponData")
+
+	var projectileInstance : Projectile = weaponData.projectileScene.instantiate()
 
 	var game : Game = Game.getGame(get_tree())
 	var level : Level = game.getLevel()
@@ -77,7 +81,7 @@ func shoot() -> void:
 	projectileInstance.global_position = barrelEnd.global_position
 	setProjectileBasis(projectileInstance, controller, 1.0)
 
-	var bloom : float = equippedWeaponData.getBloomRadiusAtTime(getCurrentBloomValue())
+	var bloom : float = weaponData.getBloomRadiusAtTime(getCurrentBloomValue())
 
 	var pitchAngle : float = randf_range(-1.0, 1.0) * 2 * PI * bloom
 	var yawAngle : float = randf_range(-1.0, 1.0) * 2 * PI * bloom
@@ -120,8 +124,10 @@ func setProjectileBasis(inProjectile : Projectile, inController : Controller, in
 		var vectorTo : Vector3 = inProjectile.global_position - targetPosition
 
 		MathUtil.lerpToVector(inProjectile, Vector3.UP, -vectorTo.normalized(), 1.0)
+		return
 
 	# player rotational functionality
+	inProjectile.global_basis = barrelEnd.global_basis
 
 	return
 

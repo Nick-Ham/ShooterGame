@@ -342,6 +342,7 @@ script = ExtResource("32_8g535")
 script = ExtResource("2_56hl0")
 weaponModelPivot = NodePath("../Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPivot/WeaponModelPivot")
 handsAnimationPlayer = NodePath("../HandsAnimationPlayer")
+useFirstPersonMode = true
 
 [node name="HandsAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

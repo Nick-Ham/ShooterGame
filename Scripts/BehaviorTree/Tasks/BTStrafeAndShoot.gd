@@ -3,8 +3,13 @@ class_name BTStrafeAndShoot
 
 @export_category("Config")
 @export var taskDuration : float = 2.5
-@export var randomDirectionChangeTimeRange : Vector2 = Vector2(0.5, 2.5)
+@export var randomDirectionChangeTimeRange : Vector2 = Vector2(0.5, 4.5)
 @export var shootPattern : AIShootPattern
+
+@export_group("WallDetection")
+@export var useWallDetection : bool = true
+@export var leftWallDetector : RayCast3D
+@export var rightWallDetector : RayCast3D
 
 var isMovingLeft : bool = false
 var isTimeUp : bool = false
@@ -47,9 +52,21 @@ func updateNode(inDelta : float) -> BTTickResult:
 		push_warning("BTNode running without an AIController")
 		return fail()
 
+	if useWallDetection:
+		runWallDetection()
+	
 	var moveDirection : Vector2 = Vector2.LEFT if isMovingLeft else Vector2.RIGHT
 	controller.setControlDirectionSmooth(moveDirection, inDelta)
 
 	shootController.addPattern(shootPattern)
 
 	return run()
+
+func runWallDetection() -> void:
+	if isMovingLeft and leftWallDetector.is_colliding():
+		isMovingLeft = false
+		return
+	
+	if !isMovingLeft and rightWallDetector.is_colliding():
+		isMovingLeft = true
+		return

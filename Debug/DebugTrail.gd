@@ -4,7 +4,7 @@ class_name DebugTrail
 @onready var debugMaterial : StandardMaterial3D = preload("res://Debug/DebugRedMaterial.tres")
 
 const lifetime : float = 2.0
-const trailDetail : float = 0.25
+const trailDetail : float = 100.0 #0.25
 const trailScale : float = 0.005
 
 var points : Array[Vector3] = []

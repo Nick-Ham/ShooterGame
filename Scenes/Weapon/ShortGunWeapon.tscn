@@ -7,8 +7,9 @@
 [ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefault.gd" id="4_rely3"]
 [ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="5_n6iks"]
 
-[node name="ShortGunWeapon" type="Node3D"]
+[node name="ShortGunWeapon" type="Node3D" node_paths=PackedStringArray("weaponBarrelEnd")]
 script = ExtResource("1_jrtc8")
+weaponBarrelEnd = NodePath("Marker3D")
 
 [node name="ShortGunModel" parent="." instance=ExtResource("1_3ivx5")]
 
@@ -29,3 +30,9 @@ damage = NodePath("Damage")
 
 [node name="Damage" type="Node" parent="WeaponStateManager/WeaponStateDefault"]
 script = ExtResource("5_n6iks")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.19078)
+
+[node name="RayCast3D" type="RayCast3D" parent="Marker3D"]
+target_position = Vector3(0, 0, 0)

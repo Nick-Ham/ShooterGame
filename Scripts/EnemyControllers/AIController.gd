@@ -41,3 +41,13 @@ func shoot() -> void:
 	shoot_changed.emit(true)
 	await get_tree().physics_frame
 	shoot_changed.emit(false)
+
+func getAimCastResult(inBloom : float = 0.0) -> RayCastResult:
+	var weaponManager : WeaponManager = Util.getChildOfType(owningCharacter, WeaponManager)
+	assert(weaponManager, "WeaponManager required for AIController to correctly shoot a weapon")
+	
+	var currentWeapon : Weapon = weaponManager.getEquippedWeapon()
+	if !currentWeapon:
+		return null
+	
+	return currentWeapon.getBarrelRayCastResult(inBloom)

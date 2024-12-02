@@ -11,8 +11,8 @@ var readyToFire : bool = true
 
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 
-const showDebugImpacts : bool = false
-const showDebugTrails : bool = false
+const showDebugImpacts : bool = true
+const showDebugTrails : bool = true
 
 var isCurrentlyShooting : bool = false
 var bloomBuildup : float = 0.0
@@ -69,10 +69,10 @@ func shoot() -> void:
 	assert(is_instance_valid(controller), "Shoot triggered on a weaponstate with no valid controller... how did you get here?")
 
 	var aimCastResult : RayCastResult = controller.getAimCastResult(equippedWeaponData.getBloomRadiusAtTime(bloomBuildup))
+	drawDebug(aimCastResult)
+	
 	if !aimCastResult.hitSuccess:
 		return
-
-	drawDebug(aimCastResult)
 
 	var colliderAsHitbox : Hitbox = aimCastResult.collider as Hitbox
 
@@ -107,9 +107,10 @@ func handleHitEnvironment(rayCastResult : RayCastResult) -> void:
 	environmentalEffectManager.addBulletImpact(rayCastResult.hitPosition, rayCastResult.hitNormal)
 
 func drawDebug(rayCastResult : RayCastResult) -> void:
-	if showDebugImpacts:
-		PrototypingUtil.spawnDebugSphere(rayCastResult.hitPosition)
-
 	if showDebugTrails:
-		var originOffset : Vector3 = rayCastResult.rayOrigin - (rayCastResult.rayOrigin - rayCastResult.hitPosition).normalized()
-		PrototypingUtil.spawnDebugTrail([originOffset, rayCastResult.hitPosition])
+		var rayEnd : Vector3 = rayCastResult.hitPosition if rayCastResult.hitSuccess else rayCastResult.rayEndpoint
+		var originOffset : Vector3 = rayCastResult.rayOrigin - (rayCastResult.rayOrigin - rayEnd).normalized()
+		DebugUtil.spawnDebugTrail([originOffset, rayEnd], get_tree())
+
+	if showDebugImpacts and rayCastResult.hitSuccess:
+		DebugUtil.spawnDebugSphere(rayCastResult.hitPosition, get_tree())
