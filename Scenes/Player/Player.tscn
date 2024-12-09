@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://3khvdhi6xjou"]
+[gd_scene load_steps=35 format=3 uid="uid://3khvdhi6xjou"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_2vnqn"]
 [ext_resource type="Script" path="res://Scripts/Player/StepSoundController.gd" id="1_863d4"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://c12i0eymy6qov" path="res://Assets/Audio/Steps/StepsRandomizer.tres" id="14_j633g"]
 [ext_resource type="AudioStream" uid="uid://y7ylwct4yro8" path="res://Assets/Audio/Thuds/ThudsRandomizer.tres" id="16_b7esa"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox.gd" id="17_0i7jp"]
+[ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="18_bxbch"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerRecoilController.gd" id="27_tf472"]
 [ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="28_583yk"]
 [ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Components/Overshield.tscn" id="29_rmby0"]
@@ -275,6 +276,7 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/SubViewportContainer/SubViewport"]
 cull_mask = 2
+environment = ExtResource("18_bxbch")
 current = true
 
 [node name="PhysicsInterpolator3D" type="Node3D" parent="."]
@@ -325,7 +327,7 @@ script = ExtResource("28_583yk")
 rechargeDelay = 5.0
 rechargeTime = 3.0
 destroyedRechargeDelay = 5.0
-maxHealth = 99.0
+maxHealth = 8.0
 
 [node name="OvershieldMaterialController" parent="OvershieldHealth" index="1" node_paths=PackedStringArray("shieldMeshes")]
 shieldMeshes = NodePath("../../Neck")

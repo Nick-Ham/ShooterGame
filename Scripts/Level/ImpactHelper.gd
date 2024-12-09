@@ -1,10 +1,10 @@
 extends Node
 class_name ImpactHelper
 
-static var defaultImpactScene : PackedScene = preload("res://Scenes/Effects/BulletImpactDecal.tscn")
+static var defaultImpactScene : PackedScene = preload("res://Scenes/Effects/BulletImpact.tscn")
 
 static var shieldImpactScene : PackedScene = preload("res://Scenes/Effects/ShieldBulletImpact.tscn")
-static var metalImpactScene : PackedScene = preload("res://Scenes/Effects/BulletImpactDecal.tscn")
+static var metalImpactScene : PackedScene = preload("res://Scenes/Effects/BulletImpact.tscn")
 
 static var defaultExplosionScene : PackedScene = preload("res://Scenes/Effects/ExplosionEffect/ExplosionEffect.tscn")
 

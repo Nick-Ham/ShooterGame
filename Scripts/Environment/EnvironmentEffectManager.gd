@@ -8,4 +8,3 @@ func addBulletImpact(inPosition : Vector3, inImpactNormal : Vector3) -> void:
 func addExplosion(inPosition : Vector3) -> void:
 	var level : Level = get_parent() as Level
 	ImpactHelper.createExplosion(level, inPosition)
-	

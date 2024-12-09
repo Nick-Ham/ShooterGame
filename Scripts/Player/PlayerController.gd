@@ -59,6 +59,12 @@ func _unhandled_input(event : InputEvent) -> void:
 	if event.is_action_released("Jump"):
 		jump_changed.emit(false)
 
+	if event.is_action_pressed("Reload"):
+		reload_changed.emit(true)
+
+	if event.is_action_released("Reload"):
+		reload_changed.emit(false)
+
 func _process(_delta: float) -> void:
 	inputDirection = Vector2()
 	inputDirection = Input.get_vector("Left", "Right", "Forward", "Backward")

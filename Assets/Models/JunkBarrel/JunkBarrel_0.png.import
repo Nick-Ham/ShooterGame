@@ -2,21 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8dv2gv00rbao"
-path.s3tc="res://.godot/imported/ExplosionStreaksTexture.png-036237d33331b240d78b8f0a1811071e.s3tc.ctex"
+uid="uid://ossrdodaphqv"
+path="res://.godot/imported/JunkBarrel_0.png-c4a49e8e89c81892e7f4f3fc3160cba3.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
+}
+generator_parameters={
+"md5": "ce7579cecf85007c593f41cf82d7ef84"
 }
 
 [deps]
 
-source_file="res://Assets/Textures/ExplosionStreaksTexture.png"
-dest_files=["res://.godot/imported/ExplosionStreaksTexture.png-036237d33331b240d78b8f0a1811071e.s3tc.ctex"]
+source_file="res://Assets/Models/JunkBarrel/JunkBarrel_0.png"
+dest_files=["res://.godot/imported/JunkBarrel_0.png-c4a49e8e89c81892e7f4f3fc3160cba3.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

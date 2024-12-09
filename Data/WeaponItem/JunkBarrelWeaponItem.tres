@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://bq8bwbwoj0bc5"]
+
+[ext_resource type="Script" path="res://DataTypes/WeaponItem.gd" id="1_omela"]
+[ext_resource type="Resource" uid="uid://cmmdky6dnc6mm" path="res://Data/WeaponData/JunkBarrelWeaponData.tres" id="2_1h16m"]
+
+[resource]
+script = ExtResource("1_omela")
+weaponData = ExtResource("2_1h16m")
+name = "Item"

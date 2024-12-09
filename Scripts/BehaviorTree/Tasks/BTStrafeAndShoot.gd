@@ -54,7 +54,7 @@ func updateNode(inDelta : float) -> BTTickResult:
 
 	if useWallDetection:
 		runWallDetection()
-	
+
 	var moveDirection : Vector2 = Vector2.LEFT if isMovingLeft else Vector2.RIGHT
 	controller.setControlDirectionSmooth(moveDirection, inDelta)
 
@@ -66,7 +66,7 @@ func runWallDetection() -> void:
 	if isMovingLeft and leftWallDetector.is_colliding():
 		isMovingLeft = false
 		return
-	
+
 	if !isMovingLeft and rightWallDetector.is_colliding():
 		isMovingLeft = true
 		return

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://yhnlbm0n7ipy"]
+
+[ext_resource type="Script" path="res://Scripts/Effects/Impact.gd" id="1_gc4iq"]
+[ext_resource type="PackedScene" uid="uid://ctnqhkb11qrsk" path="res://Scenes/Effects/ImpactParticles.tscn" id="2_riq4l"]
+[ext_resource type="Texture2D" uid="uid://2kik8cms6e4w" path="res://Assets/Effects/BulletImpact.png" id="3_yn7oy"]
+[ext_resource type="AudioStream" uid="uid://divg36w0n4e17" path="res://Assets/Audio/Impacts/DirtImpactRandomizer.tres" id="4_hgf6i"]
+
+[node name="Impact" type="Node3D" node_paths=PackedStringArray("pivot", "decal", "impactPlayer", "delayFadeTimer", "fadeDurationTimer")]
+script = ExtResource("1_gc4iq")
+pivot = NodePath("Pivot")
+decal = NodePath("Pivot/Decal")
+particlesScene = ExtResource("2_riq4l")
+impactPlayer = NodePath("ImpactPlayer")
+delayFadeTimer = NodePath("DelayFade")
+fadeDurationTimer = NodePath("FadeDuration")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="Decal" type="Decal" parent="Pivot"]
+size = Vector3(0.25, 0.25, 0.25)
+texture_albedo = ExtResource("3_yn7oy")
+
+[node name="DelayFade" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="FadeDuration" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="ImpactPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_hgf6i")
+attenuation_model = 1
+volume_db = -10.0

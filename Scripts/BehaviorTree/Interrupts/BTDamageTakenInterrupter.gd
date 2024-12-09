@@ -7,25 +7,29 @@ var healthNodes : Array[Health]
 
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 @onready var targeter : Targeter = Util.getChildOfType(owningCharacter, Targeter)
-@onready var shootController : AIShootController = Util.getChildOfType(owningCharacter, AIShootController)
-@onready var investigationManager : AIInvestigationManager = Util.getChildOfType(owningCharacter, AIInvestigationManager)
 
 func _ready() -> void:
-	var nodes : Array[Node] = Util.getChildrenOfType(owningCharacter, Health)
-	for node : Node in nodes:
-		var nodeAsHealth : Health = node as Health
-		if !nodeAsHealth:
-			continue
+	var level : Level = Game.getGame(get_tree()).getLevel()
+	var environmentalEventBus : EnvironmentEventBus = Util.getChildOfType(level, EnvironmentEventBus)
 
-		healthNodes.append(nodeAsHealth)
+	Util.safeConnect(environmentalEventBus.damage_event, on_damage_event)
 
-
-	for health : Health in healthNodes:
-		Util.safeConnect(health.health_damaged, on_health_damaged)
-
-func on_health_damaged(_damage : float, _newHealth : float) -> void:
-	if targeter.hasTarget():
+func on_damage_event(inSource : Node3D, inTarget : Node3D) -> void:
+	var targetCharacter : Character = inTarget as Character
+	if !targetCharacter:
 		return
+
+	if !targetCharacter == owningCharacter:
+		return
+
+	var sourceCharacter : Character = inSource as Character
+	if !sourceCharacter:
+		return
+
+	if owningCharacter.team == sourceCharacter.team:
+		return
+
+	targeter.acquireTarget(sourceCharacter)
 
 	var behaviorTree : BehaviorTree = get_parent() as BehaviorTree
 	behaviorTree.interrupt()

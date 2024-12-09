@@ -96,7 +96,10 @@ func on_character_lost(inCharacter : Character, inLossReason : LOSTracker.LossRe
 	target = null
 	target_lost.emit(previousTarget, inLossReason)
 
-func acquireTarget() -> Node3D:
+func acquireTarget(inTarget : Node3D = null) -> Node3D:
+	if inTarget:
+		target = inTarget
+
 	if target:
 		return target
 

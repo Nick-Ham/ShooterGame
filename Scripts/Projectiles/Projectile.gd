@@ -10,11 +10,16 @@ class_name Projectile
 
 var projection : Vector3 = Vector3.FORWARD * speed * (1.0 / Engine.physics_ticks_per_second)
 
+var source : Node3D = null
+
 func _ready() -> void:
 	assert(damage)
 
 	shapeCast.target_position = projection
 	shapeCast.collision_mask = 9
+
+func injectSource(inSource : Node3D) -> void:
+	source = inSource
 
 func _physics_process(_delta: float) -> void:
 	projectShape()
@@ -49,7 +54,7 @@ func projectShape() -> void:
 	queue_free()
 
 func handleHitEnemy(hitResult : RayCastResult) -> void:
-	damage.dealDamage(Character.getOwningCharacter(hitResult.collider))
+	damage.dealDamage(Character.getOwningCharacter(hitResult.collider), source)
 	var hitBox : Hitbox = hitResult.collider as Hitbox
 	if hitBox:
 		hitBox.addImpact(hitResult.hitPosition, hitResult.hitNormal)

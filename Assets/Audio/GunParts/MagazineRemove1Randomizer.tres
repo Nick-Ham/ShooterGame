@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://dt00i5wvj2uae"]
+
+[ext_resource type="AudioStream" uid="uid://bgsdkvjvr8qog" path="res://Assets/Audio/GunParts/MagazineRemove1.ogg" id="1_ggao2"]
+
+[resource]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("1_ggao2")

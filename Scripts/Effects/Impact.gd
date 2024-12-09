@@ -8,6 +8,7 @@ class_name Impact
 @export_category("Ref")
 @export var decal : Decal
 @export var particlesScene : PackedScene
+@export var impactPlayer : AudioStreamPlayer3D
 
 @export var delayFadeTimer : Timer
 @export var fadeDurationTimer : Timer
@@ -15,7 +16,7 @@ class_name Impact
 var particlesInstance : GPUParticles3D = null
 var delayFadeEnded : bool = false
 
-const particleChance : float = 0.65
+const particleChance : float = 1.0 #0.65
 
 func _ready() -> void:
 	pivot.transform = pivot.transform.rotated(Vector3.FORWARD, randf_range(0.0, PI * 2))
@@ -25,6 +26,9 @@ func _ready() -> void:
 
 	if !randf() > particleChance and useParticles:
 		spawnParticles()
+
+	if impactPlayer:
+		impactPlayer.play()
 
 	Util.safeConnect(delayFadeTimer.timeout, on_delayFade_timeout)
 	Util.safeConnect(fadeDurationTimer.timeout, on_fadeDuration_timeout)

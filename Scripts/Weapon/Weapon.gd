@@ -3,15 +3,20 @@ class_name Weapon
 
 @export_category("Ref")
 @export var weaponBarrelEnd : Marker3D
-#@export var weaponEndRayCast : RayCast3D
 
 @onready var weaponStateManager : WeaponStateManager = Util.getChildOfType(self, WeaponStateManager)
 
 var currentWeaponData : WeaponData = null
 
+signal ammo_updated(newAmmo : int)
+
 func _ready() -> void:
 	assert(weaponBarrelEnd)
-	#assert(weaponEndRayCast)
+
+	Util.safeConnect(weaponStateManager.ammo_updated, on_ammo_updated)
+
+func on_ammo_updated(inNewAmmo : int) -> void:
+	ammo_updated.emit(inNewAmmo)
 
 func getBarrelEnd() -> Marker3D:
 	return weaponBarrelEnd
@@ -31,12 +36,12 @@ func getCurrentBloomValue() -> float:
 func getBarrelRayCastResult(inBloom : float) -> RayCastResult:
 	var worldReference : World3D = get_world_3d()
 	var spaceState : PhysicsDirectSpaceState3D = worldReference.direct_space_state
-	
+
 	var origin : Vector3 = getBarrelEnd().global_position
-	
+
 	var rayVector : Vector3 = WeaponUtil.getBloomedForward(inBloom) * WeaponUtil.maxHitScanDistance
 	rayVector = global_basis * rayVector
-	
+
 	var endpoint : Vector3 = rayVector + origin
 
 	var rayQuery : PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(origin, endpoint, WeaponUtil.weaponHitScanPhysicsLayer)
@@ -63,3 +68,6 @@ func getBarrelRayCastResult(inBloom : float) -> RayCastResult:
 	rayCastResult.hitNormal = result.get("normal") as Vector3
 
 	return rayCastResult
+
+func getCurrentAmmo() -> int:
+	return weaponStateManager.getCurrentAmmo()

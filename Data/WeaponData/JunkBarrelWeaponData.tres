@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://cmmdky6dnc6mm"]
+
+[ext_resource type="Script" path="res://DataTypes/WeaponData.gd" id="1_2b4i3"]
+[ext_resource type="PackedScene" uid="uid://da7fvlcloss0y" path="res://Assets/Models/JunkBarrel/JunkBarrelModel.tscn" id="2_vy3bt"]
+[ext_resource type="PackedScene" uid="uid://bo25k4ifklv0" path="res://Scenes/Weapon/JunkBarrelWeapon.tscn" id="3_5p5wc"]
+
+[sub_resource type="Curve" id="Curve_mggsb"]
+_data = [Vector2(0, 0), 0.0, 1.91723, 0, 0, Vector2(1, 1), 1.01648, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_2b4i3")
+weaponName = "JunkBarrel"
+weaponScene = ExtResource("3_5p5wc")
+weaponModelScene = ExtResource("2_vy3bt")
+isProjectile = false
+defaultDamage = 300.0
+firingDelay = 0.08
+magazineSize = 35
+baseBloomRadius = 0.002
+maxBloomRadius = 0.01
+bloomDecaySpeed = 1.95
+bloomCurve = SubResource("Curve_mggsb")
+recoilRotationPitchRange = Vector2(25, 133.355)
+recoilRotationYawRange = Vector2(-3, 3)
+recoilRotationRollRange = Vector2(-0.2, 0.2)
+recoilTranslationForwardRange = Vector2(0.1, 0.1)
+recoilTranslationRightRange = Vector2(-0.03, 0.03)
+recoilTranslationUpRange = Vector2(0, 0)

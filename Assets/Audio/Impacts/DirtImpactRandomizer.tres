@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://divg36w0n4e17"]
+
+[ext_resource type="AudioStream" uid="uid://bdymtajheatxk" path="res://Assets/Audio/Impacts/DirtImpact1.ogg" id="1_vx3kh"]
+
+[resource]
+random_pitch = 1.15
+streams_count = 1
+stream_0/stream = ExtResource("1_vx3kh")

@@ -1,6 +1,6 @@
 [gd_resource type="VisualShader" load_steps=36 format=3 uid="uid://dpr4jo3r40t8l"]
 
-[ext_resource type="Texture2D" uid="uid://8dv2gv00rbao" path="res://Assets/Textures/ExplosionStreaksTexture.png" id="1_igatd"]
+[ext_resource type="Texture2D" uid="uid://8dv2gv00rbao" path="res://Assets/Effects/ExplosionStreaksTexture.png" id="1_iefjm"]
 [ext_resource type="Texture2D" uid="uid://1ctrn4hny67o" path="res://Assets/NoiseTextures/CellularBubbly.tres" id="3_im6eb"]
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ddtsq"]
@@ -25,7 +25,7 @@ default_input_values = [0, Vector4(0, 0, 0, 0), 1, Vector4(1, 1, 1, 1), 2, Vecto
 op_type = 3
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8jarc"]
-texture = ExtResource("1_igatd")
+texture = ExtResource("1_iefjm")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_3adot"]

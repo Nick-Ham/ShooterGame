@@ -1,6 +1,9 @@
 extends WeaponState
 class_name WeaponStateDefault
 
+@export_category("Config")
+@export var onOutOfAmmoState : String = "outOfAmmo"
+
 @export_category("Ref")
 @export var shootSoundPlayer : AudioStreamPlayer3D
 @export var damage : Damage
@@ -10,9 +13,11 @@ var readyToFire : bool = true
 @onready var shootDelayTimer : Timer = Timer.new()
 
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
+@onready var equippedWeaponData : WeaponData = getStateManager().getWeaponData()
+@onready var weaponStateManager : WeaponStateManager = get_parent() as WeaponStateManager
 
-const showDebugImpacts : bool = true
-const showDebugTrails : bool = true
+const showDebugImpacts : bool = false
+const showDebugTrails : bool = false
 
 var isCurrentlyShooting : bool = false
 var bloomBuildup : float = 0.0
@@ -33,17 +38,17 @@ func on_shootDelayTimer_timeout() -> void:
 		isCurrentlyShooting = false
 		return
 
+	if !getStateManager().isCurrentState(self):
+		return
+
 	shoot()
 
 func _process(delta: float) -> void:
-	if isCurrentlyShooting:
-		bloomBuildup = clampf(bloomBuildup + delta, 0.0, 1.0)
-	else:
-		var weaponData : WeaponData = getStateManager().getWeaponData()
-		bloomBuildup = lerpf(bloomBuildup, 0.0, clampf(weaponData.bloomDecaySpeed * delta, 0.0, 1.0))
+	var weaponData : WeaponData = getStateManager().getWeaponData()
+	bloomBuildup = lerpf(bloomBuildup, 0.0, clampf(weaponData.bloomDecaySpeed * delta, 0.0, 1.0))
 
-		if bloomBuildup < minBloomDecay:
-			bloomBuildup = 0.0
+	if bloomBuildup < minBloomDecay:
+		bloomBuildup = 0.0
 
 func getStateKey() -> String:
 	return "default"
@@ -53,12 +58,16 @@ func shoot() -> void:
 		return
 	readyToFire = false
 
+	if weaponStateManager.getCurrentAmmo() <= 0:
+		request_change_state.emit(onOutOfAmmoState)
+		return
+
+	weaponStateManager.consumeAmmo(1)
+
 	shootDelayTimer.start()
 
 	EnvironmentEventBus.addEnvironmentSound(Character.getOwningCharacter(self))
 	shootSoundPlayer.play()
-
-	var equippedWeaponData : WeaponData = getStateManager().getWeaponData()
 
 	var playerRecoilController : PlayerRecoilController = Util.getChildOfType(owningCharacter, PlayerRecoilController)
 	if playerRecoilController:
@@ -70,7 +79,9 @@ func shoot() -> void:
 
 	var aimCastResult : RayCastResult = controller.getAimCastResult(equippedWeaponData.getBloomRadiusAtTime(bloomBuildup))
 	drawDebug(aimCastResult)
-	
+
+	bloomBuildup = clampf(bloomBuildup + equippedWeaponData.firingDelay, 0.0, 1.0)
+
 	if !aimCastResult.hitSuccess:
 		return
 
@@ -84,8 +95,11 @@ func shoot() -> void:
 	isCurrentlyShooting = true
 	weapon_fired.emit()
 
+	if weaponStateManager.getCurrentAmmo() <= 0:
+		request_change_state.emit(onOutOfAmmoState)
+
 func handleHitEnemy(hitResult : RayCastResult) -> void:
-	damage.dealDamage(Character.getOwningCharacter(hitResult.collider))
+	damage.dealDamage(Character.getOwningCharacter(hitResult.collider), owningCharacter)
 	var hitBox : Hitbox = hitResult.collider as Hitbox
 	if hitBox:
 		hitBox.addImpact(hitResult.hitPosition, hitResult.hitNormal)
@@ -95,6 +109,19 @@ func handleOnShootChanged(inIsShooting : bool) -> void:
 		return
 
 	shoot()
+
+func handleOnReloadChanged(inIsReloading : bool) -> void:
+	if !inIsReloading:
+		return
+
+	var weaponReloadComponent : WeaponReloadComponent = Util.getChildOfType(weaponStateManager.get_parent(), WeaponReloadComponent)
+	Util.safeConnect(weaponReloadComponent.reload_complete, on_reload_complete)
+	weaponReloadComponent.reload()
+
+	readyToFire = false
+
+func on_reload_complete() -> void:
+	readyToFire = true
 
 func getCurrentBloomValue() -> float:
 	return bloomBuildup

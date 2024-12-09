@@ -72,7 +72,7 @@ func updateLookDirection(inDelta : float) -> void:
 	var forwardRelative : Vector3 = getForwardVector()
 
 	var angleDifference : float = abs(aimDirection.normalized().angle_to(forwardRelative.normalized()))
-	
+
 	# This angle 'softening' prevents axis flipping during the lerpToVector method.
 	# Theoretically shouldnt happen, but im not a mathologist
 	if (angleDifference > PI/2.0):
@@ -97,14 +97,13 @@ func aimTowardsForwards(inDelta : float) -> void:
 
 func getForwardVector() -> Vector3:
 	var characterForward : Vector3 = owningCharacter.global_basis * Vector3.BACK
-	
+
 	var weaponManager : WeaponManager = Util.getChildOfType(owningCharacter, WeaponManager)
 	if !weaponManager:
 		return characterForward
-	
+
 	var weapon : Weapon = weaponManager.getEquippedWeapon()
 	if !weapon:
 		return characterForward
-	
+
 	return weapon.getBarrelEnd().global_basis * Vector3.BACK
-	

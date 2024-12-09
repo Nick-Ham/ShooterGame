@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dordhxi26gi3d"]
 
 [ext_resource type="Script" path="res://Scripts/Level/Level.gd" id="1_ccbgq"]
-[ext_resource type="Material" uid="uid://cam8okonbyq88" path="res://Prototyping/FloorMaterial.tres" id="2_wg8vy"]
+[ext_resource type="Material" uid="uid://cam8okonbyq88" path="res://Assets/Materials/FloorMaterial.tres" id="2_wg8vy"]
 [ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="3_3nqqs"]
 [ext_resource type="PackedScene" uid="uid://3khvdhi6xjou" path="res://Scenes/Player/Player.tscn" id="4_70pb3"]
 [ext_resource type="PackedScene" uid="uid://cpurlnxl3pclx" path="res://Scenes/Enemies/RobotWalker.tscn" id="5_h6idu"]

@@ -1,30 +1,26 @@
 [gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://t78dxd6n3sr2"]
 
 [ext_resource type="Script" path="res://DataTypes/WeaponData.gd" id="1_kjfr1"]
-[ext_resource type="PackedScene" uid="uid://btffik0elil28" path="res://Assets/Models/ShortGun/ShortGunModel.tscn" id="2_wj5r1"]
-[ext_resource type="PackedScene" uid="uid://disidxuo5bonc" path="res://Scenes/Weapon/ShortGunWeapon.tscn" id="3_f1xsx"]
+[ext_resource type="PackedScene" uid="uid://btffik0elil28" path="res://Assets/Models/ShortGun/ShortGunModel.tscn" id="2_ey5fm"]
+[ext_resource type="PackedScene" uid="uid://disidxuo5bonc" path="res://Scenes/Weapon/ShortGunWeapon.tscn" id="3_qqsxj"]
 
-[sub_resource type="Curve" id="Curve_sm1oi"]
-_data = [Vector2(0, 0), 0.0, 2.20145, 0, 0, Vector2(0.329193, 0.815887), 2.16185, 2.16185, 0, 0, Vector2(0.614907, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.992335), 0.0, 0.0, 0, 0]
-point_count = 4
+[sub_resource type="Curve" id="Curve_owbpf"]
+_data = [Vector2(0, 0), 0.0, 0.36112, 0, 0, Vector2(1, 1), 0.910722, 0.0, 0, 0]
+point_count = 2
 
 [resource]
 script = ExtResource("1_kjfr1")
-weaponName = "DefaultTestGun"
-weaponScene = ExtResource("3_f1xsx")
-weaponModelScene = ExtResource("2_wj5r1")
+weaponName = "ShortGun"
+weaponScene = ExtResource("3_qqsxj")
+weaponModelScene = ExtResource("2_ey5fm")
 isProjectile = false
 defaultDamage = 25.0
-firingDelay = 0.1
+firingDelay = 0.4
 magazineSize = 15
-baseBloomRadius = 0.0
-maxBloomRadius = 0.003
-bloomDecaySpeed = 20.0
-bloomCurve = SubResource("Curve_sm1oi")
-recoilLerpSpeed = 30.0
-recoilDecaySpeed = 15.0
-maxRecoilRotation = Vector3(10, 5, 5)
-maxRecoilTranslation = Vector3(0.05, 0.05, 0.3)
+baseBloomRadius = 0.001
+maxBloomRadius = 0.009
+bloomDecaySpeed = 2.0
+bloomCurve = SubResource("Curve_owbpf")
 recoilRotationPitchRange = Vector2(2.5, 10)
 recoilRotationYawRange = Vector2(-3, 3)
 recoilRotationRollRange = Vector2(-0.2, 0.2)

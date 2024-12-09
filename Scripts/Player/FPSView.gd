@@ -40,8 +40,11 @@ func getCameraCastResult(inBloom : float = 0.0) -> RayCastResult:
 	var pitchAngle : float = randf_range(-1.0, 1.0) * 2 * PI * inBloom
 	var yawAngle : float = randf_range(-1.0, 1.0) * 2 * PI * inBloom
 
-	normalVector = normalVector.rotated(Vector3.UP, pitchAngle)
-	normalVector = normalVector.rotated(Vector3.RIGHT, yawAngle)
+	var upVector : Vector3 = self.global_basis.y
+	var rightVector : Vector3 = self.global_basis.x
+
+	normalVector = normalVector.rotated(rightVector, pitchAngle)
+	normalVector = normalVector.rotated(upVector, yawAngle)
 
 	var endpoint : Vector3 = normalVector * WeaponUtil.maxHitScanDistance + origin
 

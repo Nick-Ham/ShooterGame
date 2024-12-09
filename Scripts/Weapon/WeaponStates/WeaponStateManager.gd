@@ -4,12 +4,15 @@ class_name WeaponStateManager
 @export_category("Config")
 @export var loggingEnabled : bool = false
 @export var loggerCategory : String = "Weapon:StateManager:State"
+@export var stateOnOutOfAmmo : String = "outOfAmmo"
 
 @export_category("States")
 @export var stateDefault : WeaponState
+@export var stateOutOfAmmo : WeaponState
 
 @onready var states : Array[WeaponState] = [
-	stateDefault
+	stateDefault,
+	stateOutOfAmmo
 ]
 
 var currentState : WeaponState = null
@@ -20,14 +23,37 @@ var controller : Controller = null
 
 signal state_changed(lastState : WeaponState, newState : WeaponState)
 signal weapon_fired
+signal ammo_updated(newAmmo : int)
+
+var currentAmmo : int = 0
 
 func _ready() -> void:
+	assert(stateDefault)
+	assert(stateOutOfAmmo)
+
 	controller = Controller.getController(owningCharacter)
 	if controller:
 		bindToController(controller)
 
 	if loggingEnabled:
 		DebugLogger.registerTrackedValue(loggerCategory)
+
+	var weaponData : WeaponData = getWeaponData()
+	currentAmmo = weaponData.magazineSize
+
+	bindToStates()
+
+func on_request_change_state(inStateKey : String) -> void:
+	for state : WeaponState in states:
+		if state.getStateKey() == inStateKey:
+			changeState(state)
+			return
+
+	push_error("Attempted to enter non-existent state.")
+
+func bindToStates() -> void:
+	for state : WeaponState in states:
+		state.request_change_state.connect(on_request_change_state)
 
 func readyWeapon() -> void:
 	changeState(stateDefault)
@@ -48,10 +74,15 @@ func addController(inController : Controller) -> void:
 
 func bindToController(inController : Controller) -> void:
 	Util.safeConnect(inController.shoot_changed, on_shoot_changed)
+	Util.safeConnect(inController.reload_changed, on_reload_changed)
 
 func on_shoot_changed(inIsShooting : bool) -> void:
 	if currentState:
 		currentState.handleOnShootChanged(inIsShooting)
+
+func on_reload_changed(inIsReloading : bool) -> void:
+	if currentState:
+		currentState.handleOnReloadChanged(inIsReloading)
 
 func changeState(inNewState : WeaponState) -> void:
 	if currentState:
@@ -65,7 +96,7 @@ func changeState(inNewState : WeaponState) -> void:
 	if loggingEnabled:
 		DebugLogger.updateTrackedValue(loggerCategory, currentState.getStateKey())
 
-	if controller and controller.getIsShooting():
+	if is_instance_valid(controller) and controller.getIsShooting():
 		currentState.handleOnShootChanged(true)
 
 	state_changed.emit(lastState, currentState)
@@ -75,3 +106,27 @@ func getCurrentBloomValue() -> float:
 		return currentState.getCurrentBloomValue()
 
 	return 0.0
+
+func getCurrentAmmo() -> int:
+	return currentAmmo
+
+func consumeAmmo(inAmount : int) -> void:
+	var weaponData : WeaponData = getWeaponData()
+
+	var lastAmmo : int = currentAmmo
+	currentAmmo = clampi(currentAmmo - inAmount, 0, weaponData.magazineSize)
+
+	ammo_updated.emit(currentAmmo)
+
+func setCurrentAmmo(inAmmo : int) -> void:
+	currentAmmo = inAmmo
+	ammo_updated.emit(currentAmmo)
+
+func isCurrentState(inWeaponState : WeaponState) -> bool:
+	if !currentState:
+		return false
+
+	if inWeaponState != currentState:
+		return false
+
+	return true

@@ -23,10 +23,10 @@ var weaponData : WeaponData
 
 func _ready() -> void:
 	add_child(shootDelayTimer)
-	
+
 	var weaponManager : WeaponManager = Util.getChildOfType(owningCharacter, WeaponManager)
 	weaponData = weaponManager.getEquippedWeaponData()
-	
+
 	shootDelayTimer.wait_time = weaponData.firingDelay #delayBetweenShots
 	Util.safeConnect(shootDelayTimer.timeout, on_shootDelayTimer_timeout)
 
@@ -72,6 +72,8 @@ func shoot() -> void:
 	assert(weaponData, "WeaponState firing without a valid weaponData")
 
 	var projectileInstance : Projectile = weaponData.projectileScene.instantiate()
+
+	projectileInstance.injectSource(owningCharacter)
 
 	var game : Game = Game.getGame(get_tree())
 	var level : Level = game.getLevel()

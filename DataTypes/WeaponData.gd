@@ -18,16 +18,16 @@ class_name WeaponData
 @export var magazineSize : int = 15
 @export var baseBloomRadius : float = 0.0
 @export var maxBloomRadius : float = 0.003
-@export var bloomDecaySpeed : float = 20.0
+@export var bloomDecaySpeed : float = 3.0
 ## Bloom curve x-axis is time sustaining fire. y-axis is multiplier against bloom radius.
 @export var bloomCurve : Curve = Curve.new()
 
-@export_category("GeneralWeaponRecoil")
-@export var recoilLerpSpeed : float = 30.0
-@export var recoilDecaySpeed : float = 15.0
+#@export_category("GeneralWeaponRecoil")
+#@export var recoilLerpSpeed : float = 30.0
+#@export var recoilDecaySpeed : float = 15.0
 ## Only absolute value is used
-@export var maxRecoilRotation : Vector3 = Vector3(10, 5, 5)
-@export var maxRecoilTranslation : Vector3 = Vector3(0.05, 0.05, 0.3)
+#@export var maxRecoilRotation : Vector3 = Vector3(10, 5, 5)
+#@export var maxRecoilTranslation : Vector3 = Vector3(0.05, 0.05, 0.3)
 
 @export_category("PerShotRecoil")
 @export_group("Rotation")

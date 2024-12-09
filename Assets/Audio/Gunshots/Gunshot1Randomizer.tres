@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://byeppnbhc472f"]
+
+[ext_resource type="AudioStream" uid="uid://ilukfhlm8faq" path="res://Assets/Audio/Gunshots/Gunshot1.ogg" id="1_onsgu"]
+
+[resource]
+random_pitch = 1.07
+streams_count = 1
+stream_0/stream = ExtResource("1_onsgu")

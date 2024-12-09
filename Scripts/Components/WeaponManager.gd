@@ -17,6 +17,7 @@ const readyWeaponAnimationKey : String = "ReadyWeapon"
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 
 signal weapon_equipped(inWeaponData : WeaponData)
+signal weapon_unequipped
 
 const handsVisualLayer : int = 2
 
@@ -41,6 +42,9 @@ func equip(inWeaponData : WeaponData, firstPersonMode : bool = true) -> void:
 	if !WeaponData.validateWeapon(inWeaponData):
 		return
 
+	if is_instance_valid(equippedWeapon):
+		unequip()
+
 	equippedWeaponData = inWeaponData
 
 	equippedWeapon = equippedWeaponData.weaponScene.instantiate() as Weapon
@@ -54,9 +58,15 @@ func equip(inWeaponData : WeaponData, firstPersonMode : bool = true) -> void:
 	if handsAnimationPlayer:
 		handsAnimationPlayer.play(readyWeaponAnimationKey)
 	else:
-		call_deferred("readyWeapon")
+		call_deferred("readyWeapon") # readyWeapon()
 
 	weapon_equipped.emit(equippedWeaponData)
+
+func unequip() -> void:
+	equippedWeaponData = null
+	equippedWeapon.queue_free()
+
+	weapon_unequipped.emit()
 
 func readyWeapon() -> void:
 	if equippedWeapon:

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://da7fvlcloss0y"]
+
+[ext_resource type="PackedScene" uid="uid://ciqgi2ti7xpjw" path="res://Assets/Models/JunkBarrel/JunkBarrel.gltf" id="1_tnffp"]
+
+[node name="JunkBarrelModel" instance=ExtResource("1_tnffp")]
