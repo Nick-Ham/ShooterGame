@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgmru0t07an1u"]
+
+[ext_resource type="PackedScene" uid="uid://vymj26203n16" path="res://Assets/Models/Environment/Truck/RustyTruckModel.tscn" id="1_tta28"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pugyi"]
+size = Vector3(1, 0.389267, 2.58429)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i868b"]
+size = Vector3(1.00388, 0.470322, 0.734819)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bewl7"]
+size = Vector3(0.0958252, 0.25119, 1.69301)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r8joj"]
+size = Vector3(0.0958252, 0.25119, 1.69301)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_67flw"]
+size = Vector3(0.996277, 0.25119, 0.0889015)
+
+[node name="RustyTruckStatic" type="StaticBody3D"]
+collision_mask = 0
+
+[node name="RustyTruckModel" parent="." instance=ExtResource("1_tta28")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.497059, 0.105133)
+shape = SubResource("BoxShape3D_pugyi")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00184631, 1.14112, 0.844267)
+shape = SubResource("BoxShape3D_i868b")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.452087, 0.817094, -0.341829)
+shape = SubResource("BoxShape3D_bewl7")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.449513, 0.817094, -0.341829)
+shape = SubResource("BoxShape3D_r8joj")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000713021, 0.817094, -1.14388)
+shape = SubResource("BoxShape3D_67flw")

@@ -1,3 +1,6 @@
+res://Assets/Models/Environment/Props
+res://Assets/Models/Environment/Plant
+res://Assets/Models/Environment/Truck
 res://Assets/Audio/Explosion
 res://Assets/Audio/GunParts
 C:/Program Files/JetBrains/JetBrains Rider 2024.3/bin
@@ -17,5 +20,3 @@ res://Scenes/UI
 res://Assets/NoiseTextures
 res://Scripts/Effects
 res://Scenes/Effects
-res://Scripts/Components
-res://Assets/WorldEnvironments

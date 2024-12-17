@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtk5offvsb45x"]
+
+[ext_resource type="PackedScene" uid="uid://40r3kyy1y7tv" path="res://Assets/Models/Environment/Props/StorageBoxModel.tscn" id="1_5er0f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_83pkq"]
+size = Vector3(0.819397, 0.765411, 0.821869)
+
+[node name="StorageBoxStatic" type="StaticBody3D"]
+collision_mask = 0
+
+[node name="StorageBoxModel" parent="." instance=ExtResource("1_5er0f")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00131226, 0.379196, 0.00135803)
+shape = SubResource("BoxShape3D_83pkq")

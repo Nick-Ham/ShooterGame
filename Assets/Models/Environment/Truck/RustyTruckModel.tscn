@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vymj26203n16"]
+
+[ext_resource type="PackedScene" uid="uid://ceauqcwnoyirq" path="res://Assets/Models/Environment/Truck/RustyTruck.gltf" id="1_437x4"]
+
+[node name="RustyTruckModel" instance=ExtResource("1_437x4")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)

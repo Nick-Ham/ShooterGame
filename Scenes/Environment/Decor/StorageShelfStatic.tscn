@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://qkdxkfjogi36"]
+
+[ext_resource type="PackedScene" uid="uid://jd3ydxofmws7" path="res://Assets/Models/Environment/Props/StorageShelfModel.tscn" id="1_wj7de"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3gnpi"]
+size = Vector3(0.994431, 0.0628662, 1.87773)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wsq0x"]
+size = Vector3(0.0644775, 1.94177, 0.191162)
+
+[node name="StorageShelfStatic" type="StaticBody3D"]
+collision_mask = 0
+
+[node name="StorageShelfModel" parent="." instance=ExtResource("1_wj7de")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000762939, 0.0979614, 0.000518799)
+shape = SubResource("BoxShape3D_3gnpi")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000762939, 0.962288, 0.000518799)
+shape = SubResource("BoxShape3D_3gnpi")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00159454, 1.84977, -6.86646e-05)
+shape = SubResource("BoxShape3D_3gnpi")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.531311, 0.967468, 0.906226)
+shape = SubResource("BoxShape3D_wsq0x")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530244, 0.967468, 0.906226)
+shape = SubResource("BoxShape3D_wsq0x")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.530244, 0.967468, -0.904727)
+shape = SubResource("BoxShape3D_wsq0x")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.532634, 0.967468, -0.904727)
+shape = SubResource("BoxShape3D_wsq0x")

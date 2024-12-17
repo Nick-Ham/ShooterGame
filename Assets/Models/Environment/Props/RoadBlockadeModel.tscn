@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyg3l35lddhih"]
+
+[ext_resource type="PackedScene" uid="uid://dfjxbx88c23fm" path="res://Assets/Models/Environment/Props/RoadBlockade.gltf" id="1_tan7w"]
+
+[node name="RoadBlockadeModel" instance=ExtResource("1_tan7w")]

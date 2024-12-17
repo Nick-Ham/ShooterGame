@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://jd3ydxofmws7"]
+
+[ext_resource type="PackedScene" uid="uid://ck527dksppcgl" path="res://Assets/Models/Environment/Props/StorageShelf.gltf" id="1_kwrxp"]
+
+[node name="StorageShelfModel" instance=ExtResource("1_kwrxp")]

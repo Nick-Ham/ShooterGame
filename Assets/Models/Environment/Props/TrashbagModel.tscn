@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsf6bo2wogbgn"]
+
+[ext_resource type="PackedScene" uid="uid://rhbojv5d3yvu" path="res://Assets/Models/Environment/Props/Trashbag.gltf" id="1_254h7"]
+
+[node name="TrashbagModel" instance=ExtResource("1_254h7")]
