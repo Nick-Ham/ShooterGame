@@ -4,10 +4,6 @@ class_name WeaponStateDefault
 @export_category("Config")
 @export var onOutOfAmmoState : String = "outOfAmmo"
 
-@export_category("Ref")
-@export var shootSoundPlayer : AudioStreamPlayer3D
-@export var damage : Damage
-
 var readyToFire : bool = true
 
 @onready var shootDelayTimer : Timer = Timer.new()
@@ -15,6 +11,8 @@ var readyToFire : bool = true
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 @onready var equippedWeaponData : WeaponData = getStateManager().getWeaponData()
 @onready var weaponStateManager : WeaponStateManager = get_parent() as WeaponStateManager
+@onready var weaponAnimationController : WeaponAnimationController = Util.getChildOfType(weaponStateManager.get_parent(), WeaponAnimationController)
+@onready var damage : Damage = Damage.new()
 
 const showDebugImpacts : bool = false
 const showDebugTrails : bool = false
@@ -30,6 +28,9 @@ func _ready() -> void:
 	add_child(shootDelayTimer)
 	shootDelayTimer.wait_time = getStateManager().getWeaponData().firingDelay #delayBetweenShots
 	Util.safeConnect(shootDelayTimer.timeout, on_shootDelayTimer_timeout)
+
+	add_child(damage)
+	damage.damage = equippedWeaponData.defaultDamage / equippedWeaponData.shotCount
 
 func on_shootDelayTimer_timeout() -> void:
 	readyToFire = true
@@ -56,6 +57,7 @@ func getStateKey() -> String:
 func shoot() -> void:
 	if !readyToFire:
 		return
+
 	readyToFire = false
 
 	if weaponStateManager.getCurrentAmmo() <= 0:
@@ -67,7 +69,8 @@ func shoot() -> void:
 	shootDelayTimer.start()
 
 	EnvironmentEventBus.addEnvironmentSound(Character.getOwningCharacter(self))
-	shootSoundPlayer.play()
+
+	weaponAnimationController.playShoot()
 
 	var playerRecoilController : PlayerRecoilController = Util.getChildOfType(owningCharacter, PlayerRecoilController)
 	if playerRecoilController:
@@ -77,20 +80,25 @@ func shoot() -> void:
 	var controller : Controller = Util.getChildOfType(owningCharacter, Controller)
 	assert(is_instance_valid(controller), "Shoot triggered on a weaponstate with no valid controller... how did you get here?")
 
-	var aimCastResult : RayCastResult = controller.getAimCastResult(equippedWeaponData.getBloomRadiusAtTime(bloomBuildup))
-	drawDebug(aimCastResult)
+	var currentBloom : float = 1.0 if equippedWeaponData.useMaxBloom else bloomBuildup
 
-	bloomBuildup = clampf(bloomBuildup + equippedWeaponData.firingDelay, 0.0, 1.0)
+	for currentShot : int in equippedWeaponData.shotCount:
+		var newBloomRadius : float = equippedWeaponData.getBloomRadiusAtTime(currentBloom)
+		var aimCastResult : RayCastResult = controller.getAimCastResult(newBloomRadius)
+		drawDebug(aimCastResult)
 
-	if !aimCastResult.hitSuccess:
-		return
+		if !aimCastResult.hitSuccess:
+			continue
 
-	var colliderAsHitbox : Hitbox = aimCastResult.collider as Hitbox
+		var colliderAsHitbox : Hitbox = aimCastResult.collider as Hitbox
 
-	if colliderAsHitbox:
-		handleHitEnemy(aimCastResult)
-	else:
-		handleHitEnvironment(aimCastResult)
+		if colliderAsHitbox:
+			handleHitEnemy(aimCastResult)
+		else:
+			handleHitEnvironment(aimCastResult)
+
+	if !equippedWeaponData.useMaxBloom:
+		bloomBuildup = clampf(bloomBuildup + equippedWeaponData.firingDelay, 0.0, 1.0)
 
 	isCurrentlyShooting = true
 	weapon_fired.emit()

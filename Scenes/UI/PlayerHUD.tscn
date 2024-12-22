@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt25rffiq21ij"]
+[gd_scene load_steps=3 format=3 uid="uid://bt25rffiq21ij"]
 
 [ext_resource type="Script" path="res://Scripts/UI/PlayerHUD.gd" id="1_j8bj0"]
+[ext_resource type="Script" path="res://Prototyping/FPSDisplay.gd" id="2_3teit"]
 
 [node name="PlayerHUD" type="CanvasLayer" node_paths=PackedStringArray("shieldBar", "ammoLabel")]
 script = ExtResource("1_j8bj0")
@@ -65,3 +66,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 35
 text = "0 / 0"
+
+[node name="FPSDisplay" type="Label" parent="."]
+offset_left = 35.0
+offset_top = 36.0
+offset_right = 133.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 24
+text = "test"
+script = ExtResource("2_3teit")

@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource("1_7i3go")
 weaponData = ExtResource("2_nditm")
-name = "Item"
+name = "Plasma Bolter"

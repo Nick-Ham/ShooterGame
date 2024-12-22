@@ -8,9 +8,12 @@ class_name WeaponStateOutOfAmmo
 @export var stateOnReload : String = "default"
 
 @onready var weaponStateManager : WeaponStateManager = get_parent() as WeaponStateManager
+@onready var weaponReloadComponent : WeaponReloadComponent = Util.getChildOfType(weaponStateManager.get_parent(), WeaponReloadComponent)
 
 func _ready() -> void:
-	return
+	assert(weaponReloadComponent)
+
+	Util.safeConnect(weaponReloadComponent.reload_complete, on_reload_complete)
 
 func stateEntering() -> void:
 	emptyFirePlayer.play()
@@ -25,8 +28,6 @@ func handleOnReloadChanged(inIsReloading : bool) -> void:
 	if !inIsReloading:
 		return
 
-	var weaponReloadComponent : WeaponReloadComponent = Util.getChildOfType(weaponStateManager.get_parent(), WeaponReloadComponent)
-	Util.safeConnect(weaponReloadComponent.reload_complete, on_reload_complete)
 	weaponReloadComponent.reload()
 
 func on_reload_complete() -> void:

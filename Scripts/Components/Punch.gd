@@ -6,7 +6,7 @@ class_name Punch
 ## Multiplied against delta. Clamped to 1.0 per second.
 @export var punchLerpSpeed : float = 7.0
 @export var punchDecayLerpSpeed : float = 4.0
-@export var maxRotation : Vector3 = Vector3(10.0, 5.0, 5.0)
+@export var maxRotation : Vector3 = Vector3(50.0, 5.0, 5.0)
 @export var maxTranslation : Vector3 = Vector3(0.05, 0.05, 0.05)
 
 var currentTargetRotation : Vector3 = Vector3()

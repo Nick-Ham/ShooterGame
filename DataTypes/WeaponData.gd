@@ -8,7 +8,9 @@ class_name WeaponData
 @export_category("WeaponModel")
 @export var weaponModelScene : PackedScene = null
 
-@export_category("WeaponType")
+@export_category("WeaponTypeConfig")
+@export var useMaxBloom : bool = false
+@export var shotCount : int = 1
 @export var isProjectile : bool = false
 @export var projectileScene : PackedScene
 

@@ -42,7 +42,7 @@ project/assembly_name="Shooter"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/proto_shape/plugin.cfg")
+enabled=PackedStringArray("res://addons/proto_shape/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [input]
 

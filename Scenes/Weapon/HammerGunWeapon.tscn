@@ -1,0 +1,138 @@
+[gd_scene load_steps=15 format=3 uid="uid://qeh27jig7xvv"]
+
+[ext_resource type="Script" path="res://Scripts/Weapon/Weapon.gd" id="1_qhirt"]
+[ext_resource type="AudioStream" uid="uid://byeppnbhc472f" path="res://Assets/Audio/Gunshots/Gunshot1Randomizer.tres" id="2_bnqkb"]
+[ext_resource type="AudioStream" uid="uid://cu7qmxna0l3kt" path="res://Assets/Audio/Clicks/MetalClick.ogg" id="3_fm26l"]
+[ext_resource type="AudioStream" uid="uid://vwi8t88n7qdj" path="res://Assets/Audio/GunParts/MagazineInsert1Randomizer.tres" id="4_e6j67"]
+[ext_resource type="AudioStream" uid="uid://dt00i5wvj2uae" path="res://Assets/Audio/GunParts/MagazineRemove1Randomizer.tres" id="5_vaux1"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponReloadComponent.gd" id="6_rdarp"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponAnimationController.gd" id="7_ko6gl"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="7_lak4u"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefault.gd" id="8_gaswq"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateOutOfAmmo.gd" id="10_rrxyf"]
+[ext_resource type="PackedScene" uid="uid://c34hxdni7tr37" path="res://Assets/Models/HammerGun/HammerGunModel.tscn" id="11_8pf86"]
+
+[sub_resource type="Animation" id="Animation_2oko0"]
+resource_name = "reload"
+length = 1.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MagazineInsertPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MagazineRemovePlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_yqo6u"]
+resource_name = "shoot"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShootPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6qihg"]
+_data = {
+"reload": SubResource("Animation_2oko0"),
+"shoot": SubResource("Animation_yqo6u")
+}
+
+[node name="HammerGunWeapon" type="Node3D" node_paths=PackedStringArray("weaponBarrelEnd")]
+script = ExtResource("1_qhirt")
+weaponBarrelEnd = NodePath("Marker3D")
+
+[node name="ShootPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_bnqkb")
+volume_db = -18.0
+max_polyphony = 3
+bus = &"WorldSFX"
+
+[node name="EmptyFirePlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_fm26l")
+volume_db = -15.0
+max_polyphony = 3
+bus = &"WorldSFX"
+
+[node name="MagazineInsertPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_e6j67")
+volume_db = 2.0
+max_db = 5.0
+max_polyphony = 3
+bus = &"WorldSFX"
+
+[node name="MagazineRemovePlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_vaux1")
+volume_db = 2.0
+max_db = 5.0
+max_polyphony = 3
+bus = &"WorldSFX"
+
+[node name="WeaponReloadComponent" type="Node" parent="."]
+script = ExtResource("6_rdarp")
+
+[node name="WeaponAnimationController" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "audioAnimationPlayer")]
+script = ExtResource("7_ko6gl")
+animationPlayer = NodePath("../HammerGunModel/AnimationPlayer")
+audioAnimationPlayer = NodePath("../AudioAnimationPlayer")
+
+[node name="WeaponStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateOutOfAmmo")]
+script = ExtResource("7_lak4u")
+stateDefault = NodePath("WeaponStateDefault")
+stateOutOfAmmo = NodePath("WeaponStateOutOfAmmo")
+
+[node name="WeaponStateOutOfAmmo" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("emptyFirePlayer")]
+script = ExtResource("10_rrxyf")
+emptyFirePlayer = NodePath("../../EmptyFirePlayer")
+
+[node name="WeaponStateDefault" type="Node" parent="WeaponStateManager"]
+script = ExtResource("8_gaswq")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106143, -0.0895716, -0.420595)
+
+[node name="RayCast3D" type="RayCast3D" parent="Marker3D"]
+target_position = Vector3(0, 0, 0)
+
+[node name="AudioAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6qihg")
+}
+
+[node name="HammerGunModel" parent="." instance=ExtResource("11_8pf86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0961731, -0.0268655, -0.341512)
+
+[node name="HammerGun" parent="HammerGunModel/Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1875, 0.44375)
+
+[editable path="HammerGunModel"]

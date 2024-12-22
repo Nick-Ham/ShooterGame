@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv73byy5tvm33"]
+
+[ext_resource type="PackedScene" uid="uid://ibofml1wgudt" path="res://Assets/Models/Effects/MuzzleFlash.gltf" id="1_hyfqu"]
+[ext_resource type="PackedScene" uid="uid://c34hxdni7tr37" path="res://Assets/Models/HammerGun/HammerGunModel.tscn" id="2_luaf3"]
+
+[node name="MuzzleFlashModel" instance=ExtResource("1_hyfqu")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.331841)
+light_color = Color(0.935376, 0.847844, 0.760283, 1)
+light_energy = 3.0
+omni_range = 0.482
+
+[node name="HammerGunModel" parent="." index="2" instance=ExtResource("2_luaf3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0620571, 0.60005)

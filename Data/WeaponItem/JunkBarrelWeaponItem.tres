@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource("1_omela")
 weaponData = ExtResource("2_1h16m")
-name = "Item"
+name = "Junk Barrel"

@@ -27,11 +27,11 @@ func _ready() -> void:
 	playerDetector.collision_mask = playerDetectorCollisionMask
 
 	animationPlayer.speed_scale = animationSpeed
-	
+
 	lockDoor()
-	
+
 	Util.safeConnect(playerDetector.body_entered, on_body_entered)
-	
+
 	var eventBus : EnvironmentEventBus = Game.getGame(get_tree()).getLevel().getEnvironmentEventBus()
 	Util.safeConnect(eventBus.item_picked_up, on_item_picked_up)
 
@@ -47,10 +47,10 @@ func on_item_picked_up(_inSource : Node3D, inItem : Item) -> void:
 	var itemAsKey : KeyItem = inItem as KeyItem
 	if !itemAsKey:
 		return
-	
+
 	if itemAsKey.doorKey != doorKey:
 		return
-	
+
 	unlockDoor()
 
 func openDoor() -> void:
@@ -64,23 +64,23 @@ func on_body_entered(_inBody : Node3D) -> void:
 func tryOpenDoor() -> void:
 	if isOpen:
 		return
-	
+
 	if isLocked:
 		animationPlayer.play(failOpenAnimKey)
 		return
-	
+
 	var nodes : Array[Node3D] = playerDetector.get_overlapping_bodies()
 	for node : Node3D in nodes:
 		var itemManager : ItemManager = Util.getChildOfType(node, ItemManager)
 		if !itemManager:
 			continue
-		
+
 		for item : Item in itemManager.getItems():
 			var keyItem : KeyItem = item as KeyItem
 			if !keyItem || keyItem.doorKey != doorKey:
 				continue
-			
+
 			openDoor()
 			return
-	
+
 	return

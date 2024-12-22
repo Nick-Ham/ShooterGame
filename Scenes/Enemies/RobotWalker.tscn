@@ -269,10 +269,10 @@ shape = SubResource("CapsuleShape3D_uc3a3")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("9_gli1f")
-maxHealth = 5.0
+maxHealth = 100.0
 
 [node name="OvershieldHealth" parent="." instance=ExtResource("10_hrsr4")]
-maxHealth = 5.0
+maxHealth = 50.0
 
 [node name="OvershieldMaterialController" parent="OvershieldHealth" index="1" node_paths=PackedStringArray("shieldMeshes")]
 shieldMeshes = NodePath("../../PhysicsInterpolator3D/Robot/Node/Robot")

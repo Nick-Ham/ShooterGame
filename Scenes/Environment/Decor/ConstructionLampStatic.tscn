@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://ducl4d44vge6q"]
+
+[ext_resource type="PackedScene" uid="uid://0pkiqkylkwwl" path="res://Assets/Models/Environment/Props/ConstructionLampModel.tscn" id="1_15v6u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lqeqf"]
+size = Vector3(0.1, 1.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2fuq8"]
+size = Vector3(0.743823, 0.258545, 0.210498)
+
+[node name="ConstructionLampStatic" type="StaticBody3D"]
+collision_mask = 0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.257443, 1.74619, -0.272053)
+light_bake_mode = 1
+omni_range = 0.492723
+omni_attenuation = 0.079
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.248876, 1.74619, -0.272053)
+light_bake_mode = 1
+omni_range = 0.492723
+omni_attenuation = 0.079
+
+[node name="ConstructionLamp" parent="." instance=ExtResource("1_15v6u")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="ConstructionLamp/Node/ConstructionLamp/RightLampSconce/RightLamp2" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00643483, 0.0944619, -0.147246)
+layers = 3
+light_color = Color(0.999999, 0.900412, 0.56635, 1)
+light_energy = 15.0
+shadow_enabled = true
+spot_range = 40.0
+spot_angle = 34.174
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="ConstructionLamp/Node/ConstructionLamp/LeftLampSconce/LeftLamp2" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0056574, 0.0920365, -0.143597)
+layers = 3
+light_color = Color(0.999999, 0.900412, 0.56635, 1)
+light_energy = 15.0
+shadow_enabled = true
+spot_range = 40.0
+spot_angle = 34.174
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88584, 0)
+shape = SubResource("BoxShape3D_lqeqf")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00360109, 1.7405, -0.00104981)
+shape = SubResource("BoxShape3D_2fuq8")
+
+[editable path="ConstructionLamp"]

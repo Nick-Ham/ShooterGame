@@ -1,29 +1,22 @@
 extends Node
 class_name WeaponReloadComponent
 
-@export_category("Ref")
-@export var weaponAnimationPlayer : AnimationPlayer
-@export var audioAnimationPlayer : AnimationPlayer
-
 @onready var weaponStateManager : WeaponStateManager = Util.getChildOfType(get_parent(), WeaponStateManager)
-
-const weaponReloadAnimationKey : String = "reload"
+@onready var weaponAnimationController : WeaponAnimationController = Util.getChildOfType(get_parent(), WeaponAnimationController)
 
 signal reload_complete
 
 func _ready() -> void:
-	assert(weaponAnimationPlayer)
-	assert(audioAnimationPlayer)
-
-	Util.safeConnect(weaponAnimationPlayer.animation_finished, on_reload_animation_finished)
+	Util.safeConnect(weaponAnimationController.reload_ended, on_reload_ended)
 
 func reload() -> void:
+	if weaponStateManager.getCurrentAmmo() == weaponStateManager.getWeaponData().magazineSize:
+		return
+
 	weaponStateManager.setCurrentAmmo(0)
 
-	weaponAnimationPlayer.play(weaponReloadAnimationKey)
-	audioAnimationPlayer.play(weaponReloadAnimationKey)
+	weaponAnimationController.playReload()
 
-func on_reload_animation_finished(_inAnimationName : String) -> void:
+func on_reload_ended() -> void:
 	weaponStateManager.setCurrentAmmo(weaponStateManager.getWeaponData().magazineSize)
-
 	reload_complete.emit()

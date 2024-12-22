@@ -103,7 +103,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1.36604),
 "update": 0,
-"values": [50.0, 0.0]
+"values": [35.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_x5r73"]
@@ -276,10 +276,9 @@ libraries = {
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.131376, 0)
-light_color = Color(0.994267, 0.421988, 0, 1)
+light_color = Color(0.998893, 0.714544, 0.473118, 1)
 light_energy = 0.0
 omni_range = 3.5
-omni_attenuation = 0.5
 
 [node name="Projectiles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.860178, 0)
@@ -331,6 +330,6 @@ pitch_scale = 0.7
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.523135, 0)
-light_color = Color(1, 0.652627, 0.561407, 1)
+light_color = Color(1, 0.82982, 0.784273, 1)
 light_energy = 0.0
 omni_range = 12.4331

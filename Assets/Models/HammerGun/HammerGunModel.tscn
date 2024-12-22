@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c34hxdni7tr37"]
+
+[ext_resource type="PackedScene" uid="uid://p3sqoyf71m5p" path="res://Assets/Models/HammerGun/HammerGun.gltf" id="1_og3wf"]
+
+[node name="HammerGunModel" instance=ExtResource("1_og3wf")]
+
+[node name="Trigger2" parent="Node/HammerGun" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.999048, 0.0436194, 0, -0.0436194, 0.999048, -9.02056e-17, 0.0625, -0.15625)

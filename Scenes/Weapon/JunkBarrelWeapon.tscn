@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bo25k4ifklv0"]
+[gd_scene load_steps=16 format=3 uid="uid://bo25k4ifklv0"]
 
 [ext_resource type="Script" path="res://Scripts/Weapon/Weapon.gd" id="1_52m3y"]
 [ext_resource type="AudioStream" uid="uid://cdel5wf3bfrw0" path="res://Assets/Audio/Gunshots/Gunshot2Randomizer.tres" id="2_ukqud"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="6_4metp"]
 [ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateOutOfAmmo.gd" id="6_bqdll"]
 [ext_resource type="PackedScene" uid="uid://da7fvlcloss0y" path="res://Assets/Models/JunkBarrel/JunkBarrelModel.tscn" id="6_u7whc"]
+[ext_resource type="Script" path="res://Scripts/Weapon/WeaponAnimationController.gd" id="12_0rd3o"]
 
 [sub_resource type="Animation" id="Animation_2oko0"]
 resource_name = "reload"
@@ -44,9 +45,28 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_my5c4"]
+resource_name = "shoot"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShootPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6qihg"]
 _data = {
-"reload": SubResource("Animation_2oko0")
+"reload": SubResource("Animation_2oko0"),
+"shoot": SubResource("Animation_my5c4")
 }
 
 [node name="JunkBarrelWeapon" type="Node3D" node_paths=PackedStringArray("weaponBarrelEnd")]
@@ -79,10 +99,13 @@ max_db = 5.0
 max_polyphony = 3
 bus = &"WorldSFX"
 
-[node name="WeaponReloadComponent" type="Node" parent="." node_paths=PackedStringArray("weaponAnimationPlayer", "audioAnimationPlayer")]
-script = ExtResource("3_eemdt")
-weaponAnimationPlayer = NodePath("../JunkBarrelModel/AnimationPlayer")
+[node name="WeaponAnimationController" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "audioAnimationPlayer")]
+script = ExtResource("12_0rd3o")
+animationPlayer = NodePath("../JunkBarrelModel/AnimationPlayer")
 audioAnimationPlayer = NodePath("../AudioAnimationPlayer")
+
+[node name="WeaponReloadComponent" type="Node" parent="."]
+script = ExtResource("3_eemdt")
 
 [node name="WeaponStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateOutOfAmmo")]
 script = ExtResource("4_8lui8")

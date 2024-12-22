@@ -1,0 +1,514 @@
+[gd_scene load_steps=29 format=3 uid="uid://1tb0vhhnlh01"]
+
+[ext_resource type="Script" path="res://Scripts/Level/Level.gd" id="1_yerh5"]
+[ext_resource type="Script" path="res://Scripts/Level/PlayerSpawn.gd" id="2_7uywm"]
+[ext_resource type="Texture2D" uid="uid://wa6pwwyl74i4" path="res://Assets/Textures/DesertDuneTexture.png" id="2_h82c0"]
+[ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="3_iqy2s"]
+[ext_resource type="Material" uid="uid://vkesurhhkqwo" path="res://Assets/Materials/MetalTileMaterial.tres" id="4_glscd"]
+[ext_resource type="Material" uid="uid://cam8okonbyq88" path="res://Assets/Materials/FloorMaterial.tres" id="5_opk5q"]
+[ext_resource type="Script" path="res://addons/proto_shape/proto_ramp/proto_ramp.gd" id="6_x570s"]
+[ext_resource type="PackedScene" uid="uid://qkdxkfjogi36" path="res://Scenes/Environment/Decor/StorageShelfStatic.tscn" id="7_xhnnc"]
+[ext_resource type="PackedScene" uid="uid://dtk5offvsb45x" path="res://Scenes/Environment/Decor/StorageBoxStatic.tscn" id="8_ffutk"]
+[ext_resource type="PackedScene" uid="uid://ducl4d44vge6q" path="res://Scenes/Environment/Decor/ConstructionLampStatic.tscn" id="9_bxino"]
+[ext_resource type="PackedScene" uid="uid://cgmru0t07an1u" path="res://Scenes/Environment/Decor/RustyTruckStatic.tscn" id="10_vmqs7"]
+[ext_resource type="PackedScene" uid="uid://c8tq6ifdv4bex" path="res://Scenes/Environment/Decor/DumpsterStatic.tscn" id="12_t8t72"]
+[ext_resource type="PackedScene" uid="uid://ut5g41twg2x4" path="res://Scenes/Environment/Decor/TrashbagStatic.tscn" id="13_qguhb"]
+[ext_resource type="PackedScene" uid="uid://dqmeryl4yeo0d" path="res://Assets/Models/Environment/Rocks/Rock1Static.tscn" id="14_3esui"]
+[ext_resource type="PackedScene" uid="uid://d2qjhqp4jpee5" path="res://Assets/Models/Environment/Rocks/MassiveRock1Static.tscn" id="15_08h5l"]
+[ext_resource type="PackedScene" uid="uid://478h2rn35hke" path="res://Assets/Models/Environment/Plant/AgaveModel.tscn" id="16_n8tcb"]
+
+[sub_resource type="Gradient" id="Gradient_ons3a"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3yehu"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_35xw2"]
+seamless = true
+color_ramp = SubResource("Gradient_ons3a")
+noise = SubResource("FastNoiseLite_3yehu")
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_elgcg"]
+_shader_parameters = {
+"blend_sharpness": 0.87,
+"height_blending": false,
+"macro_variation1": Color(0.843184, 0.843184, 0.843184, 1),
+"macro_variation2": Color(1, 1, 1, 1),
+"noise1_angle": 0.0,
+"noise1_offset": Vector2(0.5, 0.5),
+"noise1_scale": 0.4,
+"noise2_scale": 0.076,
+"noise3_scale": 0.225,
+"noise_texture": SubResource("NoiseTexture2D_35xw2"),
+"vertex_normals_distance": 128.0
+}
+texture_filtering = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2s6mo"]
+transparency = 4
+cull_mode = 2
+vertex_color_use_as_albedo = true
+backlight_enabled = true
+backlight = Color(0.5, 0.5, 0.5, 1)
+distance_fade_mode = 1
+distance_fade_min_distance = 960.0
+distance_fade_max_distance = 480.0
+
+[sub_resource type="Terrain3DMeshAsset" id="Terrain3DMeshAsset_6od0x"]
+height_offset = 0.5
+density = 10.0
+material_override = SubResource("StandardMaterial3D_2s6mo")
+generated_type = 1
+
+[sub_resource type="Image" id="Image_5ys34"]
+data = {
+"data": PackedByteArray(255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 123, 85, 85, 85, 85),
+"format": "DXT5 RGBA8",
+"height": 64,
+"mipmaps": true,
+"width": 64
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_et2xx"]
+image = SubResource("Image_5ys34")
+
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_87y3x"]
+name = "DesertDuneTexture"
+albedo_texture = ExtResource("2_h82c0")
+normal_texture = SubResource("ImageTexture_et2xx")
+uv_scale = 0.4
+
+[sub_resource type="Terrain3DAssets" id="Terrain3DAssets_ht0rg"]
+mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_6od0x")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_87y3x")])
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_4mowe"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0e8x7"]
+size = Vector2(40, 55)
+
+[node name="DesertLevel" type="Node3D"]
+script = ExtResource("1_yerh5")
+
+[node name="Terrain3D" type="Terrain3D" parent="."]
+data_directory = "res://Data/TerrainData/DesertLevel"
+material = SubResource("Terrain3DMaterial_elgcg")
+assets = SubResource("Terrain3DAssets_ht0rg")
+collision_mask = 0
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+transform = Transform3D(0.995731, 0, -0.092301, 0, 1, 0, 0.092301, 0, 0.995731, 406.354, 1.10593, 649.041)
+script = ExtResource("2_7uywm")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_iqy2s")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.144731, 0.977545, 0.153165, 0.879287, -0.198053, 0.433162, 0.453769, 0.0719832, -0.888207, 0, 10.6556, 0)
+light_energy = 0.4
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(-0.00563742, 0, 0.999984, 0, 1, 0, -0.999984, 0, -0.00563742, 406.759, 0.555319, 624.891)
+navigation_mesh = SubResource("NavigationMesh_4mowe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.3934, 0.1, 13.8809)
+visible = false
+mesh = SubResource("PlaneMesh_0e8x7")
+
+[node name="Warehouse" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="OuterWalls" type="Node3D" parent="NavigationRegion3D/Warehouse"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.1, 1.81)
+use_collision = true
+collision_mask = 0
+size = Vector3(5, 1, 1.05)
+material = ExtResource("4_glscd")
+
+[node name="Floor" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -2.54384, 0.100332, 5.11473)
+material_override = ExtResource("5_opk5q")
+use_collision = true
+collision_mask = 0
+size = Vector3(31.6995, 1, 32)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1, 1.88)
+use_collision = true
+collision_mask = 0
+size = Vector3(5, 1, 0.35)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.412275, 0.55, 1.88)
+use_collision = true
+collision_mask = 0
+size = Vector3(0.877246, 3.5, 0.35)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -3.0965, 0.55, 1.88)
+use_collision = true
+collision_mask = 0
+size = Vector3(25.9649, 5.5, 0.35)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, 0.653719, 1.64572, 5.07865)
+use_collision = true
+collision_mask = 0
+size = Vector3(31.6652, 5.5, 0.35)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, -2.54537, 2.27251, 5.07865)
+use_collision = true
+collision_mask = 0
+size = Vector3(31.6652, 0.831055, 32.3409)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -2.50314, 1.64572, 1.88)
+use_collision = true
+collision_mask = 0
+size = Vector3(31.8985, 5.5, 0.35)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(-8.74228e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.74228e-09, 0.654034, 0.55, 5.045)
+use_collision = true
+collision_mask = 0
+size = Vector3(32, 5.5, 0.35)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(-8.74228e-09, 0, -0.2, 0, 0.2, 0, 0.2, 0, -8.74228e-09, -5.66909, 1.13252, 5.045)
+use_collision = true
+collision_mask = 0
+size = Vector3(32, 11.3252, 0.35)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(0.2, 0, -1.77636e-15, 0, 0.2, 0, 1.77636e-15, 0, 0.2, -2.50392, 1.13252, 8.18168)
+use_collision = true
+collision_mask = 0
+size = Vector3(31.9458, 11.3252, 0.610388)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.559156, 0.55, 1.88)
+use_collision = true
+collision_mask = 0
+size = Vector3(0.655, 5.5, 0.35)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.407725, 0.55, 1.88)
+use_collision = true
+collision_mask = 0
+size = Vector3(0.877246, 3.5, 0.35)
+material = ExtResource("4_glscd")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.000128174, 0.100761, 1.71348)
+collision_mask = 0
+size = Vector3(5.00739, 1.01494, 0.1)
+material = ExtResource("5_opk5q")
+
+[node name="ProtoRamp" type="CSGCombiner3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.11)
+use_collision = true
+script = ExtResource("6_x570s")
+type = 0
+width = 1.0
+height = 0.201
+depth = 0.601
+anchor = 0
+anchor_fixed = true
+material = ExtResource("5_opk5q")
+
+[node name="IndoorDecor" type="Node3D" parent="NavigationRegion3D/Warehouse"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="StorageShelfStatic" parent="NavigationRegion3D/Warehouse/IndoorDecor" instance=ExtResource("7_xhnnc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.08585, 1, 15.0203)
+
+[node name="StorageBoxStatic" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0.0108383, 0, 0.999941, 0, 1, 0, -0.999941, 0, 0.0108383, 0, 0.135359, -0.35)
+
+[node name="StorageBoxStatic2" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic" instance=ExtResource("8_ffutk")]
+transform = Transform3D(-0.995702, 0, -0.092614, 0, 1, 0, 0.092614, 0, -0.995702, 0, 0.135359, 0.549999)
+
+[node name="StorageBoxStatic3" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0.0729771, 0, -0.997334, 0, 1, 0, 0.997334, 0, 0.0729771, 0, 1.00661, -0.450001)
+
+[node name="StorageBoxStatic4" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0.996204, 0, -0.0870514, 0, 1, 0, 0.0870514, 0, 0.996204, 0, 1.00661, 0.449999)
+
+[node name="StorageShelfStatic4" parent="NavigationRegion3D/Warehouse/IndoorDecor" instance=ExtResource("7_xhnnc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.23585, 1, 15.5703)
+
+[node name="StorageBoxStatic5" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic4" instance=ExtResource("8_ffutk")]
+transform = Transform3D(-0.00935491, 0, -0.999956, 0, 1, 0, 0.999956, 0, -0.00935491, -0.0361919, 0.135359, 0.529258)
+
+[node name="StorageBoxStatic6" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic4" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0.995564, 0, 0.0940909, 0, 1, 0, -0.0940909, 0, 0.995564, -0.0375276, 0.135359, -0.370744)
+
+[node name="StorageBoxStatic8" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic4" instance=ExtResource("8_ffutk")]
+transform = Transform3D(-0.996332, 0, 0.0855735, 0, 1, 0, -0.0855735, 0, -0.996332, -0.0373793, 1.00661, -0.270741)
+
+[node name="StorageShelfStatic7" parent="NavigationRegion3D/Warehouse/IndoorDecor" instance=ExtResource("7_xhnnc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5348, 1, 15.5703)
+
+[node name="StorageBoxStatic5" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic7" instance=ExtResource("8_ffutk")]
+transform = Transform3D(-0.00935491, 0, -0.999956, 0, 1, 0, 0.999956, 0, -0.00935491, -0.0361919, 0.135359, 0.529258)
+
+[node name="StorageBoxStatic6" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic7" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0.995564, 0, 0.0940909, 0, 1, 0, -0.0940909, 0, 0.995564, -0.0375276, 0.135359, -0.370744)
+
+[node name="StorageBoxStatic8" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic7" instance=ExtResource("8_ffutk")]
+transform = Transform3D(-0.996332, 0, 0.0855735, 0, 1, 0, -0.0855735, 0, -0.996332, -0.0373793, 1.00661, -0.270741)
+
+[node name="StorageShelfStatic6" parent="NavigationRegion3D/Warehouse/IndoorDecor" instance=ExtResource("7_xhnnc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.23585, 1, 15.5703)
+
+[node name="StorageShelfStatic5" parent="NavigationRegion3D/Warehouse/IndoorDecor" instance=ExtResource("7_xhnnc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.23585, 1, 19.3048)
+
+[node name="StorageShelfStatic9" parent="NavigationRegion3D/Warehouse/IndoorDecor" instance=ExtResource("7_xhnnc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.23585, 1, 21.497)
+
+[node name="StorageShelfStatic2" parent="NavigationRegion3D/Warehouse/IndoorDecor" instance=ExtResource("7_xhnnc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.08585, 1, 17.0703)
+
+[node name="StorageBoxStatic5" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic2" instance=ExtResource("8_ffutk")]
+transform = Transform3D(-0.00935474, 0, -0.999956, 0, 1, 0, 0.999956, 0, -0.00935474, 0.000593662, 0.135359, 0.423677)
+
+[node name="StorageBoxStatic6" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic2" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0.995564, 0, 0.0940911, 0, 1, 0, -0.0940911, 0, 0.995564, -0.000741959, 0.135359, -0.476322)
+
+[node name="StorageShelfStatic3" parent="NavigationRegion3D/Warehouse/IndoorDecor" instance=ExtResource("7_xhnnc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.08585, 1, 19.1203)
+
+[node name="StorageBoxStatic5" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic3" instance=ExtResource("8_ffutk")]
+transform = Transform3D(-0.995702, 0, -0.092614, 0, 1, 0, 0.092614, 0, -0.995702, 0, 0.135359, 0.689499)
+
+[node name="StorageBoxStatic6" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic3" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0.0729771, 0, -0.997334, 0, 1, 0, 0.997334, 0, 0.0729771, 0, 1.00661, -0.310501)
+
+[node name="StorageBoxStatic" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic3" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0.89301, 0, -0.450036, 0, 1, 0, 0.450036, 0, 0.89301, -0.232409, 0.00165999, 1.64427)
+
+[node name="StorageBoxStatic2" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic3" instance=ExtResource("8_ffutk")]
+transform = Transform3D(-0.138257, 0, 0.990396, 0, 1, 0, -0.990396, 0, -0.138257, -0.232409, 0.771688, 1.64427)
+
+[node name="StorageShelfStatic8" parent="NavigationRegion3D/Warehouse/IndoorDecor" instance=ExtResource("7_xhnnc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -14.741, 1, 16.9987)
+
+[node name="StorageBoxStatic5" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic8" instance=ExtResource("8_ffutk")]
+transform = Transform3D(-0.995702, 0, -0.092614, 0, 1, 0, 0.092614, 0, -0.995702, 0, 0.135359, 0.689499)
+
+[node name="StorageBoxStatic6" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic8" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0.0729771, 0, -0.997334, 0, 1, 0, 0.997334, 0, 0.0729771, 0, 1.00661, -0.310501)
+
+[node name="StorageBoxStatic" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic8" instance=ExtResource("8_ffutk")]
+transform = Transform3D(-0.763942, 0, -0.645284, 0, 1, 0, 0.645284, 0, -0.763942, 0.239696, 0.00165999, 1.64427)
+
+[node name="StorageBoxStatic2" parent="NavigationRegion3D/Warehouse/IndoorDecor/StorageShelfStatic8" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0.965382, 0, -0.260842, 0, 1, 0, 0.260842, 0, 0.965382, 0.239696, 0.771688, 1.64427)
+
+[node name="IndoorWall" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/IndoorDecor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.68585, 2.7, 13.4203)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 3.4, 1)
+material = ExtResource("4_glscd")
+
+[node name="IndoorWall2" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/IndoorDecor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1396, 2.7, 13.4203)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 3.4, 1)
+material = ExtResource("4_glscd")
+
+[node name="IndoorWall5" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/IndoorDecor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.68585, 2.7, 33.4203)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 3.4, 1)
+material = ExtResource("4_glscd")
+
+[node name="IndoorWall6" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/IndoorDecor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1396, 2.7, 33.4203)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 3.4, 1)
+material = ExtResource("4_glscd")
+
+[node name="IndoorWall3" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/IndoorDecor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.68585, 2.7, 23.4203)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 3.4, 1)
+material = ExtResource("4_glscd")
+
+[node name="IndoorWall4" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/IndoorDecor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.1396, 2.7, 23.4203)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 3.4, 1)
+material = ExtResource("4_glscd")
+
+[node name="IndoorWall8" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/IndoorDecor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5977, 2.7, 13.4203)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 3.4, 1)
+material = ExtResource("4_glscd")
+
+[node name="IndoorWall10" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/IndoorDecor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5977, 2.7, 33.4203)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 3.4, 1)
+material = ExtResource("4_glscd")
+
+[node name="IndoorWall12" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/IndoorDecor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5977, 2.7, 23.4203)
+use_collision = true
+collision_mask = 0
+size = Vector3(2, 3.4, 1)
+material = ExtResource("4_glscd")
+
+[node name="StorageShelfStatic" parent="NavigationRegion3D/Warehouse" instance=ExtResource("7_xhnnc")]
+transform = Transform3D(-7.57104e-09, 0.173205, -0.1, -0.2, -8.74228e-09, 0, -4.37114e-09, 0.1, 0.173205, -2.79986, 0.312295, 3.82697)
+
+[node name="StorageBoxStatic" parent="NavigationRegion3D/Warehouse" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0, 0.2, 0, -0.2, 0, 0, 0, 0, 0.2, -2.2, 0.281632, 4)
+
+[node name="StorageBoxStatic2" parent="NavigationRegion3D/Warehouse" instance=ExtResource("8_ffutk")]
+transform = Transform3D(0, -8.74228e-09, -0.2, -0.2, 0, 0, 0, 0.2, -8.74228e-09, -2.33484, 0.281632, 4.32345)
+
+[node name="ConstructionLampStatic" parent="NavigationRegion3D/Warehouse" instance=ExtResource("9_bxino")]
+transform = Transform3D(0.178334, 0, 0.0905368, 0, 0.2, 0, -0.0905368, 0, 0.178334, -1.57045, 0.200332, 4.93899)
+
+[node name="RightLampSconce" parent="NavigationRegion3D/Warehouse/ConstructionLampStatic/ConstructionLamp/Node/ConstructionLamp" index="5"]
+transform = Transform3D(0.950434, 0, 0.310925, 0, 1, 0, -0.310925, 0, 0.950434, -0.25, 1.625, 0)
+
+[node name="RightLamp2" parent="NavigationRegion3D/Warehouse/ConstructionLampStatic/ConstructionLamp/Node/ConstructionLamp/RightLampSconce" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.990469, 0.137738, 0, -0.137738, 0.990469, 0, 0.0625, 0)
+
+[node name="LeftLampSconce" parent="NavigationRegion3D/Warehouse/ConstructionLampStatic/ConstructionLamp/Node/ConstructionLamp" index="6"]
+transform = Transform3D(0.987458, 0, -0.157882, 0, 1, 0, 0.157882, 0, 0.987458, 0.25, 1.625, 0)
+
+[node name="LeftLamp2" parent="NavigationRegion3D/Warehouse/ConstructionLampStatic/ConstructionLamp/Node/ConstructionLamp/LeftLampSconce" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.978932, 0.204189, 0, -0.204189, 0.978932, 0, 0.0625, 0)
+
+[node name="ConstructionLampStatic2" parent="NavigationRegion3D/Warehouse" instance=ExtResource("9_bxino")]
+transform = Transform3D(-0.19462, 0, -0.0460779, 0, 0.2, 0, 0.0460779, 0, -0.19462, -3.94942, 0.200332, 2.36781)
+
+[node name="RightLampSconce" parent="NavigationRegion3D/Warehouse/ConstructionLampStatic2/ConstructionLamp/Node/ConstructionLamp" index="5"]
+transform = Transform3D(0.981584, 0, 0.191032, 0, 1, 0, -0.191032, 0, 0.981584, -0.25, 1.625, 0)
+
+[node name="RightLamp2" parent="NavigationRegion3D/Warehouse/ConstructionLampStatic2/ConstructionLamp/Node/ConstructionLamp/RightLampSconce" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.9942, -0.107548, 0, 0.107548, 0.9942, 0, 0.0625, 0)
+
+[node name="LeftLampSconce" parent="NavigationRegion3D/Warehouse/ConstructionLampStatic2/ConstructionLamp/Node/ConstructionLamp" index="6"]
+transform = Transform3D(0.956824, 0, -0.290669, 0, 1, 0, 0.290669, 0, 0.956824, 0.25, 1.625, 0)
+
+[node name="LeftLamp2" parent="NavigationRegion3D/Warehouse/ConstructionLampStatic2/ConstructionLamp/Node/ConstructionLamp/LeftLampSconce" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.976867, -0.213849, 0, 0.213849, 0.976867, 0, 0.0625, 0)
+
+[node name="StaticClutter" type="Node3D" parent="NavigationRegion3D"]
+
+[node name="RustyTruckStatic" parent="NavigationRegion3D/StaticClutter" instance=ExtResource("10_vmqs7")]
+transform = Transform3D(0.991234, 0, -0.132118, 0, 1, 0, 0.132118, 0, 0.991234, -4.07023, 0.0681114, 7.11398)
+
+[node name="TruckStack" type="Node3D" parent="NavigationRegion3D/StaticClutter"]
+transform = Transform3D(-0.445854, 0, 0.895106, 0, 1, 0, -0.895106, 0, -0.445854, 6.98256, 0, -3.94469)
+
+[node name="RustyTruckStatic" parent="NavigationRegion3D/StaticClutter/TruckStack" instance=ExtResource("10_vmqs7")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.622285, 0)
+
+[node name="RustyTruckStatic2" parent="NavigationRegion3D/StaticClutter/TruckStack" instance=ExtResource("10_vmqs7")]
+transform = Transform3D(4.84851e-08, -0.787193, -0.616706, -1, -3.86694e-08, -2.926e-08, -8.14412e-10, 0.616707, -0.787193, 2.38604, 0.622285, -0.604486)
+
+[node name="RustyTruckStatic3" parent="NavigationRegion3D/StaticClutter/TruckStack" instance=ExtResource("10_vmqs7")]
+transform = Transform3D(0.833674, -0.394087, -0.38689, 4.09782e-08, -0.700561, 0.713592, -0.552257, -0.594903, -0.584039, 0.967422, 1.85846, 1.14405)
+
+[node name="DumpsterStatic" parent="NavigationRegion3D/StaticClutter" instance=ExtResource("12_t8t72")]
+transform = Transform3D(-0.981448, -0.0544622, -0.183833, -0.0535313, 0.998516, -0.0100268, 0.184106, 5.61118e-09, -0.982906, -6.09844, 0.245282, -8.61901)
+
+[node name="DumpsterStatic2" parent="NavigationRegion3D/StaticClutter" instance=ExtResource("12_t8t72")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.49844, 0.0617102, -8.61901)
+
+[node name="TrashbagStatic" parent="NavigationRegion3D/StaticClutter" instance=ExtResource("13_qguhb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.13805, -2.38419e-07, -6.98041)
+
+[node name="TrashbagStatic3" parent="NavigationRegion3D/StaticClutter" instance=ExtResource("13_qguhb")]
+transform = Transform3D(-0.846252, -0.190185, -0.497682, 0.0277739, 0.9171, -0.397688, 0.532059, -0.350367, -0.770815, -4.52811, 0.792335, -7.06394)
+
+[node name="TrashbagStatic2" parent="NavigationRegion3D/StaticClutter" instance=ExtResource("13_qguhb")]
+transform = Transform3D(-0.0687817, -0.68092, -0.72912, 0.0273179, 0.729292, -0.683657, 0.997258, -0.0669411, -0.0315606, -3.98738, 0.021917, -7.20235)
+
+[node name="RustyTruckStatic" parent="NavigationRegion3D" instance=ExtResource("10_vmqs7")]
+transform = Transform3D(0.999985, 0, -0.00539304, 0, 1, 0, 0.00539304, 0, 0.999985, -6.11245, 0.0681114, 6.89442)
+
+[node name="RustyTruckStatic2" parent="NavigationRegion3D" instance=ExtResource("10_vmqs7")]
+transform = Transform3D(-0.984488, 0, 0.175453, 0, 1, 0, -0.175453, 0, -0.984488, -8.17952, 0.0681114, 6.76308)
+
+[node name="RustyTruckStatic3" parent="NavigationRegion3D" instance=ExtResource("10_vmqs7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3641, 0.0681114, 6.23885)
+
+[node name="Rock1" parent="." instance=ExtResource("14_3esui")]
+transform = Transform3D(0.77259, 0, -0.634906, 0, 1, 0, 0.634906, 0, 0.77259, 400.895, 0.832705, 624.333)
+
+[node name="Rock2" parent="." instance=ExtResource("14_3esui")]
+transform = Transform3D(-0.898764, -0.435828, 0.0477156, -0.435215, 0.90003, 0.0231057, -0.0530156, 0, -0.998594, 400.082, 0.832705, 624.069)
+
+[node name="MassiveRock1" parent="." instance=ExtResource("15_08h5l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 393.768, 4.76837e-07, 627.385)
+
+[node name="MassiveRock2" parent="." instance=ExtResource("15_08h5l")]
+transform = Transform3D(-0.00137882, 0, -0.999999, 0, 1, 0, 0.999999, 0, -0.00137882, 393.588, -4.76837e-07, 645.654)
+
+[node name="MassiveRock3" parent="." instance=ExtResource("15_08h5l")]
+transform = Transform3D(-0.00108115, -0.620614, -0.784115, -0.000855714, 0.784116, -0.620614, 0.999999, 0, -0.00137882, 390.064, -1.06099, 649.496)
+
+[node name="MassiveRock4" parent="." instance=ExtResource("15_08h5l")]
+transform = Transform3D(0.855524, 0.355848, -0.3761, 0.000949203, 0.725314, 0.688417, 0.517762, -0.589314, 0.620186, 387.926, -1.06099, 652.534)
+
+[node name="AgaveModel" parent="." instance=ExtResource("16_n8tcb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 397, 0.86494, 642)
+
+[node name="AgaveModel5" parent="." instance=ExtResource("16_n8tcb")]
+transform = Transform3D(-1.24495, 0, 1.56528, 0, 2, 0, -1.56528, 0, -1.24495, 395.274, 0.864942, 646.535)
+
+[node name="AgaveModel3" parent="." instance=ExtResource("16_n8tcb")]
+transform = Transform3D(0.99782, 0, 0.0659953, 0, 1, 0, -0.0659953, 0, 0.99782, 397.847, 0.864941, 646.214)
+
+[node name="AgaveModel4" parent="." instance=ExtResource("16_n8tcb")]
+transform = Transform3D(0.778199, 0, 0.628017, 0.0554996, 0.996087, -0.0687716, -0.62556, 0.0883728, 0.775155, 397.898, 0.825667, 647.198)
+
+[editable path="NavigationRegion3D/Warehouse/ConstructionLampStatic"]
+[editable path="NavigationRegion3D/Warehouse/ConstructionLampStatic/ConstructionLamp"]
+[editable path="NavigationRegion3D/Warehouse/ConstructionLampStatic2"]
+[editable path="NavigationRegion3D/Warehouse/ConstructionLampStatic2/ConstructionLamp"]

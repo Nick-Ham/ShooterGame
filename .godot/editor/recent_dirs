@@ -1,5 +1,13 @@
-res://Assets/Models/Environment/Props
 res://Assets/Models/Environment/Plant
+res://Assets/Models/Environment/Rocks
+res://Data/TerrainData/DesertLevel
+res://Data/TerrainData
+C:/GODOT/ShooterGame/Assets/Maps
+res://Assets/Models/Effects
+res://Assets/MeshLibraries
+res://Scenes/MeshLibraries
+res://Assets/Models/Environment/Props
+res://Assets/Models/HammerGun
 res://Assets/Models/Environment/Truck
 res://Assets/Audio/Explosion
 res://Assets/Audio/GunParts
@@ -12,11 +20,3 @@ res://Scripts/Weapon/WeaponStates
 res://Assets/Models/ShortGun
 res://Scenes/Environment
 res://Assets/Models/SmallRobot
-res://Assets/Materials
-res://Assets/Models/Environment/RollingDoor
-res://Assets/Models/Key
-res://Scripts/UI
-res://Scenes/UI
-res://Assets/NoiseTextures
-res://Scripts/Effects
-res://Scenes/Effects

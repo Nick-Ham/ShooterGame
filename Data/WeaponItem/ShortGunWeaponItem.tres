@@ -6,4 +6,4 @@
 [resource]
 script = ExtResource("1_1tlm8")
 weaponData = ExtResource("2_mi8pp")
-name = "Item"
+name = "Short Gun"

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://wy8ktrfe0dmv"]
+
+[ext_resource type="Script" path="res://DataTypes/WeaponData.gd" id="1_pbh41"]
+[ext_resource type="PackedScene" uid="uid://c34hxdni7tr37" path="res://Assets/Models/HammerGun/HammerGunModel.tscn" id="2_r5dtx"]
+[ext_resource type="PackedScene" uid="uid://qeh27jig7xvv" path="res://Scenes/Weapon/HammerGunWeapon.tscn" id="3_tdp3u"]
+
+[sub_resource type="Curve" id="Curve_owbpf"]
+_data = [Vector2(0, 0), 0.0, 2.82192, 0, 0, Vector2(0.070922, 0.571429), 5.81044, 5.81044, 0, 0, Vector2(0.144208, 1), 0.127969, 0.0, 0, 0]
+point_count = 3
+
+[resource]
+script = ExtResource("1_pbh41")
+weaponName = "Hammer"
+weaponScene = ExtResource("3_tdp3u")
+weaponModelScene = ExtResource("2_r5dtx")
+useMaxBloom = true
+shotCount = 16
+isProjectile = false
+defaultDamage = 128.0
+firingDelay = 0.15
+magazineSize = 3
+baseBloomRadius = 0.0
+maxBloomRadius = 0.009
+bloomDecaySpeed = 3.0
+bloomCurve = SubResource("Curve_owbpf")
+recoilRotationPitchRange = Vector2(5, 20)
+recoilRotationYawRange = Vector2(-3, 3)
+recoilRotationRollRange = Vector2(-0.2, 0.2)
+recoilTranslationForwardRange = Vector2(0.05, 0.1)
+recoilTranslationRightRange = Vector2(-0.01, 0.01)
+recoilTranslationUpRange = Vector2(0, 0)

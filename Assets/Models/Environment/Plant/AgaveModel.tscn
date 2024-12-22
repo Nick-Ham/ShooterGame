@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://478h2rn35hke"]
+
+[ext_resource type="PackedScene" uid="uid://bphkdn2reo8p8" path="res://Assets/Models/Environment/Plant/Agave.gltf" id="1_akocb"]
+
+[node name="AgaveModel" instance=ExtResource("1_akocb")]

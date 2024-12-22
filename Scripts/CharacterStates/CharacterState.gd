@@ -7,7 +7,7 @@ class_name CharacterState
 @export var maxSpeedEnforcement : float = 10.0
 @export var friction : float = 15.0
 @export var slowingFrictionScalar : float = 1.0
-@export var jumpVelocity : float = 4.5
+@export var jumpVelocity : float = 5.0
 
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
