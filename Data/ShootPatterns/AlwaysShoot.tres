@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AIShootPattern" load_steps=2 format=3 uid="uid://c3kgiytrbx7ce"]
+
+[ext_resource type="Script" path="res://DataTypes/AIShootPattern.gd" id="1_murnc"]
+
+[resource]
+script = ExtResource("1_murnc")
+patternName = "AlwaysShoot"
+shotPattern = Array[float]([0.01])
+useRandomInitialPosition = true

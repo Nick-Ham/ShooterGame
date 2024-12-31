@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt25rffiq21ij"]
+[gd_scene load_steps=5 format=3 uid="uid://bt25rffiq21ij"]
 
 [ext_resource type="Script" path="res://Scripts/UI/PlayerHUD.gd" id="1_j8bj0"]
+[ext_resource type="Texture2D" uid="uid://280j3b3tncq0" path="res://Assets/32xIcons/HealthIcon.png" id="2_1qsd7"]
 [ext_resource type="Script" path="res://Prototyping/FPSDisplay.gd" id="2_3teit"]
+[ext_resource type="Texture2D" uid="uid://cnv2aor753yqs" path="res://Assets/32xIcons/ArmorIcon.png" id="3_plolt"]
 
-[node name="PlayerHUD" type="CanvasLayer" node_paths=PackedStringArray("shieldBar", "ammoLabel")]
+[node name="PlayerHUD" type="CanvasLayer" node_paths=PackedStringArray("healthLabel", "armorLabel", "ammoLabel", "armorHBox")]
 script = ExtResource("1_j8bj0")
-shieldBar = NodePath("Control/VBoxContainer/HBoxContainer/MarginContainer/ProgressBar")
+healthLabel = NodePath("Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/HealthHBox/HealthLabel")
+armorLabel = NodePath("Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/ArmorHBox/ArmorLabel")
 ammoLabel = NodePath("Control/VBoxContainer/HBoxContainer/MarginContainer2/AmmoLabel")
+armorHBox = NodePath("Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/ArmorHBox")
 capturesMouse = true
 
 [node name="Control" type="Control" parent="."]
@@ -35,7 +39,7 @@ size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/margin_left = 35
@@ -43,13 +47,39 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 30
 
-[node name="ProgressBar" type="ProgressBar" parent="Control/VBoxContainer/HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(300, 40)
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-mouse_filter = 2
-show_percentage = false
+
+[node name="HealthHBox" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="HealthIcon" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/HealthHBox"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_1qsd7")
+stretch_mode = 3
+
+[node name="HealthLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/HealthHBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+text = "100"
+
+[node name="ArmorHBox" type="HBoxContainer" parent="Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="ArmorIcon" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/ArmorHBox"]
+layout_mode = 2
+texture = ExtResource("3_plolt")
+stretch_mode = 3
+
+[node name="ArmorLabel" type="Label" parent="Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/ArmorHBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+text = "100"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Control/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)

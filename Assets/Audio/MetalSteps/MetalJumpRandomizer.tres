@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://d1twb1233o7oo"]
+
+[ext_resource type="AudioStream" uid="uid://dj5x0u34ax35e" path="res://Assets/Audio/MetalSteps/MetalJump1.ogg" id="1_s280r"]
+
+[resource]
+random_pitch = 1.3
+streams_count = 1
+stream_0/stream = ExtResource("1_s280r")

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp47ul7t5vyv"]
+
+[ext_resource type="PackedScene" uid="uid://dayl6da3ljumr" path="res://Assets/Models/Building/Fence.gltf" id="1_t0nbn"]
+
+[node name="Fence" instance=ExtResource("1_t0nbn")]

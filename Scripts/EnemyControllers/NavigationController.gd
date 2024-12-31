@@ -13,6 +13,9 @@ func _ready() -> void:
 
 	setupNavigation.call_deferred()
 
+func _physics_process(_delta: float) -> void:
+	get_next_path_position()
+
 func updateNavTarget(inGlobalPosition : Vector3) -> void:
 	target_position = inGlobalPosition
 

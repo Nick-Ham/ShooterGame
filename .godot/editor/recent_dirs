@@ -1,3 +1,14 @@
+res://Data/ShootPatterns
+res://Assets/Models/Robots/Robot/Animations
+res://Scripts/LevelUtil
+res://Assets/Models/Robots/SmallRobot/Animations
+res://Assets/Models/Robots/SmallRobot
+res://Assets/Models/Building
+res://Assets/Audio/MetalSteps
+res://Data/FootstepPatterns
+res://Assets/Models/Environment/SemiTruck
+res://Assets/Models/Environment/Props
+res://Scenes/Environment/Decor
 res://Assets/Models/Environment/Plant
 res://Assets/Models/Environment/Rocks
 res://Data/TerrainData/DesertLevel
@@ -6,17 +17,7 @@ C:/GODOT/ShooterGame/Assets/Maps
 res://Assets/Models/Effects
 res://Assets/MeshLibraries
 res://Scenes/MeshLibraries
-res://Assets/Models/Environment/Props
 res://Assets/Models/HammerGun
 res://Assets/Models/Environment/Truck
 res://Assets/Audio/Explosion
-res://Assets/Audio/GunParts
 C:/Program Files/JetBrains/JetBrains Rider 2024.3/bin
-res://Prototyping
-res://Assets/Models/JunkBarrel
-res://Data/WeaponItem
-res://Scripts/Weapon
-res://Scripts/Weapon/WeaponStates
-res://Assets/Models/ShortGun
-res://Scenes/Environment
-res://Assets/Models/SmallRobot

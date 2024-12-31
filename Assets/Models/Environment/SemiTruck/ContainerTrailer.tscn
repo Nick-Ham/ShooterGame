@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmskhosfwdfc3"]
+
+[ext_resource type="PackedScene" uid="uid://hb83jjtt08bm" path="res://Assets/Models/Environment/SemiTruck/ContainerTrailer.gltf" id="1_52vuq"]
+
+[node name="ContainerTrailer" instance=ExtResource("1_52vuq")]

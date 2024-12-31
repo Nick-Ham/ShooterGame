@@ -75,13 +75,6 @@ func on_environment_sound_triggered(inSource : Node3D) -> void:
 
 	investigationManager.createInvestigation(sourceAsCharacter)
 
-	#var sourcePosition : Vector3 = inSource.global_position
-	#var sourceAsCharacter : Character = inSource as Character
-	#if sourceAsCharacter:
-		#sourcePosition = sourceAsCharacter.getHeadGlobalPosition()
-#
-	#positionOfInterest = sourcePosition
-
 func on_character_lost(inCharacter : Character, inLossReason : LOSTracker.LossReason) -> void:
 	if !inCharacter == target:
 		return

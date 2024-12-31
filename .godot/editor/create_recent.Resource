@@ -1,4 +1,6 @@
 AudioStreamRandomizer
+FootstepPattern
+Resource
 WeaponItem
 WeaponData
 Shader

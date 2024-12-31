@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://beo3nw2i8daco"]
+
+[ext_resource type="PackedScene" uid="uid://bp47ul7t5vyv" path="res://Assets/Models/Building/FenceModel.tscn" id="1_tbcup"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wq300"]
+size = Vector3(0.125488, 2.57055, 3.0051)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a11th"]
+size = Vector3(0.0911255, 0.520324, 3.0051)
+
+[node name="FenceStatic" type="StaticBody3D"]
+collision_mask = 0
+
+[node name="Fence" parent="." instance=ExtResource("1_tbcup")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0012207, 1.28701, -1.52588e-05)
+shape = SubResource("BoxShape3D_wq300")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.746023, 0.665921, 0, -0.665921, 0.746023, 0, 0, 0, 1, 0.147591, 2.73224, -1.52588e-05)
+shape = SubResource("BoxShape3D_a11th")

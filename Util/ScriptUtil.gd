@@ -7,6 +7,9 @@ static func safeConnect(inSignal : Signal, inCallable : Callable) -> void:
 	inSignal.connect(inCallable)
 
 static func getChildOfType(inParent : Node, inType : Script) -> Node:
+	if !is_instance_valid(inParent):
+		return null
+
 	for child : Node in inParent.get_children():
 		var instanceOf : bool = is_instance_of(child, inType)
 		if is_instance_of(child, inType):

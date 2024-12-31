@@ -19,6 +19,10 @@ func _ready() -> void:
 	Util.safeConnect(owningCharacter.character_destroyed, on_character_destroyed)
 
 func on_character_destroyed(_inCharacter : Character) -> void:
+	var behaviorTree : BehaviorTree = Util.getChildOfType(owningCharacter, BehaviorTree)
+	if is_instance_valid(behaviorTree):
+		behaviorTree.queue_free()
+
 	queue_free()
 
 func _physics_process(delta: float) -> void:
@@ -45,9 +49,9 @@ func shoot() -> void:
 func getAimCastResult(inBloom : float = 0.0) -> RayCastResult:
 	var weaponManager : WeaponManager = Util.getChildOfType(owningCharacter, WeaponManager)
 	assert(weaponManager, "WeaponManager required for AIController to correctly shoot a weapon")
-	
+
 	var currentWeapon : Weapon = weaponManager.getEquippedWeapon()
 	if !currentWeapon:
 		return null
-	
+
 	return currentWeapon.getBarrelRayCastResult(inBloom)

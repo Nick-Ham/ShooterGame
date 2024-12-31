@@ -112,10 +112,8 @@ script = ExtResource("4_8lui8")
 stateDefault = NodePath("WeaponStateDefault")
 stateOutOfAmmo = NodePath("WeaponStateOutOfAmmo")
 
-[node name="WeaponStateDefault" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("shootSoundPlayer", "damage")]
+[node name="WeaponStateDefault" type="Node" parent="WeaponStateManager"]
 script = ExtResource("5_fv2j3")
-shootSoundPlayer = NodePath("../../ShootPlayer")
-damage = NodePath("Damage")
 
 [node name="Damage" type="Node" parent="WeaponStateManager/WeaponStateDefault"]
 script = ExtResource("6_4metp")

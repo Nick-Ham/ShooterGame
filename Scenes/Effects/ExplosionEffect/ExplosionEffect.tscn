@@ -36,10 +36,10 @@ tracks/1/path = NodePath("OmniLight3D:light_energy")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.133333, 0.3),
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.133333, 0.966667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 16.0, 10.0, 0.0]
+"values": [0.0, 0.0, 5.0, 10.0, 0.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -93,18 +93,6 @@ tracks/5/keys = {
 "method": &"play"
 }]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("OmniLight3D2:light_energy")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1.36604),
-"update": 0,
-"values": [35.0, 0.0]
-}
 
 [sub_resource type="Animation" id="Animation_x5r73"]
 length = 0.001
@@ -155,18 +143,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("OmniLight3D2:light_energy")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f1ihx"]
@@ -239,9 +215,10 @@ alpha_curve = SubResource("CurveTexture_u0b4w")
 
 [sub_resource type="SphereMesh" id="SphereMesh_nj5r3"]
 
-[node name="ExplosionEffect" type="Node3D" node_paths=PackedStringArray("animationPlayer")]
+[node name="ExplosionEffect" type="Node3D" node_paths=PackedStringArray("animationPlayer", "explosionAudioPlayer")]
 script = ExtResource("1_m20mh")
 animationPlayer = NodePath("AnimationPlayer")
+explosionAudioPlayer = NodePath("ExplosionPlayer")
 
 [node name="Streaks" type="GPUParticles3D" parent="."]
 cast_shadow = 0
@@ -327,9 +304,3 @@ draw_pass_1 = SubResource("SphereMesh_nj5r3")
 [node name="ExplosionPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_bil2e")
 pitch_scale = 0.7
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.523135, 0)
-light_color = Color(1, 0.82982, 0.784273, 1)
-light_energy = 0.0
-omni_range = 12.4331

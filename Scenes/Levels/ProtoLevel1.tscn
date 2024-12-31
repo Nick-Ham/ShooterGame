@@ -182,6 +182,13 @@ anchor = 0
 anchor_fixed = true
 material = ExtResource("2_nx6ck")
 
+[node name="Fence5" type="CSGBox3D" parent="NavigationRegion3D/Warehouse/OuterWalls"]
+transform = Transform3D(-1.74846e-09, 0, 0.04, 0, 0.04, 0, -0.04, 0, -1.74846e-09, -5.7306, 1.09763, 5.08023)
+use_collision = true
+collision_mask = 0
+size = Vector3(160.266, 54.8813, 2.80146)
+material = ExtResource("4_vdcpp")
+
 [node name="IndoorDecor" type="Node3D" parent="NavigationRegion3D/Warehouse"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
@@ -388,13 +395,6 @@ transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, 
 use_collision = true
 collision_mask = 0
 size = Vector3(348.627, 35.5084, 2.80146)
-material = ExtResource("4_vdcpp")
-
-[node name="Fence5" type="CSGBox3D" parent="NavigationRegion3D/Walls"]
-transform = Transform3D(-8.74228e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.74228e-09, -28.653, 5.48813, 13.1528)
-use_collision = true
-collision_mask = 0
-size = Vector3(282.75, 54.8813, 2.80146)
 material = ExtResource("4_vdcpp")
 
 [node name="Fence4" type="CSGBox3D" parent="NavigationRegion3D/Walls"]

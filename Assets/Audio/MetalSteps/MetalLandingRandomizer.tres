@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://5lj02xwaa3me"]
+
+[ext_resource type="AudioStream" uid="uid://dc2fjbhj5wwfa" path="res://Assets/Audio/MetalSteps/MetalLanding1.ogg" id="1_2bgwx"]
+
+[resource]
+random_pitch = 1.2
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("1_2bgwx")

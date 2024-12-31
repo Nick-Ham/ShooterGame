@@ -1,0 +1,20 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=8 format=3 uid="uid://chh2b8subebi4"]
+
+[ext_resource type="AudioStream" uid="uid://cgbadw0885ugf" path="res://Assets/Audio/MetalSteps/MetalStep1.ogg" id="1_o786d"]
+[ext_resource type="AudioStream" uid="uid://ccjmykw5jtkaa" path="res://Assets/Audio/MetalSteps/MetalStep2.ogg" id="2_fynwq"]
+[ext_resource type="AudioStream" uid="uid://dsnrl06h6xyp2" path="res://Assets/Audio/MetalSteps/MetalStep3.ogg" id="3_det6q"]
+[ext_resource type="AudioStream" uid="uid://c01y6fngvvkyu" path="res://Assets/Audio/MetalSteps/MetalStep4.ogg" id="4_r7i5a"]
+[ext_resource type="AudioStream" uid="uid://b5g6o0hbuul8g" path="res://Assets/Audio/MetalSteps/MetalStep5.ogg" id="5_q2ies"]
+[ext_resource type="AudioStream" uid="uid://bf4e03gt36boe" path="res://Assets/Audio/MetalSteps/MetalStep6.ogg" id="6_i4tq8"]
+[ext_resource type="AudioStream" uid="uid://caxjfn2kx4aw3" path="res://Assets/Audio/MetalSteps/MetalStep7.ogg" id="7_f47an"]
+
+[resource]
+random_pitch = 1.1
+streams_count = 7
+stream_0/stream = ExtResource("1_o786d")
+stream_1/stream = ExtResource("2_fynwq")
+stream_2/stream = ExtResource("3_det6q")
+stream_3/stream = ExtResource("4_r7i5a")
+stream_4/stream = ExtResource("5_q2ies")
+stream_5/stream = ExtResource("6_i4tq8")
+stream_6/stream = ExtResource("7_f47an")

@@ -2,13 +2,12 @@ extends Node
 class_name Health
 
 @export_category("Config")
-@export var maxHealth : float = 1.0
+@export var maxHealth : float = 100.0
 
 var currentHealth : float = maxHealth
 
 signal health_depleted(health : Health)
-signal health_damaged(damage : float, newHealth : float)
-signal health_restored(amount : float, newHealth : float)
+signal health_changed(inPreviousHealth : float, inNewHealth : float)
 
 var isHealthDepleted : bool = false
 
@@ -31,9 +30,10 @@ func takeDamage(inDamage : float) -> void:
 	if isHealthDepleted:
 		return
 
+	var startingHealth : float = currentHealth
 	currentHealth -= inDamage
 
-	health_damaged.emit(inDamage, currentHealth)
+	health_changed.emit(startingHealth, currentHealth)
 
 	if currentHealth <= 0.0:
 		healthDepleted()
@@ -43,13 +43,15 @@ func healthDepleted() -> void:
 	health_depleted.emit(self)
 
 func restoreHealth(inAmount : float) -> void:
+	var startingHealth : float = currentHealth
+
 	currentHealth += inAmount
 	currentHealth = clampf(currentHealth, 0.0, maxHealth)
 
 	if isHealthDepleted:
 		isHealthDepleted = false
 
-	health_restored.emit(inAmount, currentHealth)
+	health_changed.emit(startingHealth, currentHealth)
 
 func resetHealth() -> void:
 	currentHealth = maxHealth

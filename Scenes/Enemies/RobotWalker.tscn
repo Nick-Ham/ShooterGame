@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateJumping.gd" id="6_w4vp6"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="7_34icv"]
 [ext_resource type="Resource" uid="uid://05st06xuv7q1" path="res://Data/WeaponData/PlasmaBolterWeaponData.tres" id="7_u0mtu"]
-[ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robot/RobotModel.tscn" id="8_8vwp4"]
+[ext_resource type="PackedScene" uid="uid://lyhl4aumierc" path="res://Assets/Models/Robots/Robot/RobotModel.tscn" id="8_8vwp4"]
 [ext_resource type="Script" path="res://Scripts/Enemy/RobotWalker/RobotWalkerAnimationController.gd" id="8_bqjlg"]
 [ext_resource type="Script" path="res://Scripts/Components/Health.gd" id="9_gli1f"]
 [ext_resource type="PackedScene" uid="uid://bxo34hdcbnrh6" path="res://Scenes/Components/Overshield.tscn" id="10_hrsr4"]
@@ -69,6 +69,7 @@ blend_point_4/pos = Vector2(0, 0)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3pyu0"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a540e"]
+graph_offset = Vector2(-172.678, 41.8347)
 nodes/MoveDirection/node = SubResource("AnimationNodeBlendSpace2D_tbqon")
 nodes/MoveDirection/position = Vector2(0, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_3pyu0")
@@ -223,34 +224,37 @@ script = ExtResource("7_34icv")
 
 [node name="Robot" parent="PhysicsInterpolator3D" instance=ExtResource("8_8vwp4")]
 
-[node name="LeftLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="1"]
-transform = Transform3D(0.984808, -0.137764, -0.10571, 0.173648, 0.7813, 0.599513, 0, -0.608761, 0.793354, 0, -0.0625, 0)
+[node name="Robot" parent="PhysicsInterpolator3D/Robot/Node" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.154155, 0)
 
-[node name="LeftLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper" index="1"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.247151, -0.525831, -0.0198207)
+[node name="LeftLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="0"]
+transform = Transform3D(0.974137, -0.181216, -0.134976, 0.222829, 0.671317, 0.706881, -0.0374861, -0.718674, 0.694336, 0, -0.0625, 0)
 
-[node name="LeftLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner" index="1"]
-transform = Transform3D(1, 0, 0, 0, -0.258819, -0.965926, 0, 0.965926, -0.258819, 0, -0.34375, 0.0625)
+[node name="LeftLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.30271, -0.953082, 0, 0.953082, -0.30271, 0.247151, -0.525831, -0.0198207)
 
-[node name="LeftFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner/LeftLegLower" index="1"]
-transform = Transform3D(0.984822, -0.173566, 0.000200477, 0.160251, 0.908829, -0.385163, 0.066669, 0.379349, 0.922849, 0, 0.375, 0)
+[node name="LeftLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.236395, -0.971657, 0, 0.971657, 0.236395, 0, -0.348448, 0.0988925)
 
-[node name="RightLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="2"]
-transform = Transform3D(0.984808, 0.137764, 0.10571, -0.17101, 0.875141, 0.452641, -0.0301537, -0.463841, 0.885405, 0, -0.0625, 0)
+[node name="LeftFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner/LeftLegLower" index="0"]
+transform = Transform3D(0.985578, -0.168345, -0.017159, 0.162131, 0.968477, -0.189122, 0.0484558, 0.183613, 0.981803, 0.000618727, 0.369472, 0.00330738)
 
-[node name="RightLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper" index="1"]
-transform = Transform3D(0.999542, 0.025504, 0.0162952, 0.0204175, -0.170788, -0.985096, -0.0223408, 0.984978, -0.171231, -0.247151, -0.525831, -0.0198207)
+[node name="RightLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="1"]
+transform = Transform3D(0.985662, 0.160512, 0.0520363, -0.168734, 0.939304, 0.298722, -0.000929453, -0.303219, 0.95292, 0, -0.0625, 0)
 
-[node name="RightLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner" index="1"]
-transform = Transform3D(0.999542, 0.00913909, -0.0288526, -0.0223409, -0.420328, -0.907097, -0.0204176, 0.907326, -0.419931, 0, -0.34375, 0.0625)
+[node name="RightLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.0406354, -0.999174, 0, 0.999173, -0.0406354, -0.247151, -0.525831, -0.0198207)
 
-[node name="RightFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower" index="1"]
-transform = Transform3D(0.984797, 0.150534, 0.0866856, -0.160381, 0.97963, 0.120841, -0.0667291, -0.132907, 0.988879, 0.00188168, 0.387245, -0.00166134)
+[node name="RightLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner" index="0"]
+transform = Transform3D(1, 0, 0, 0, -0.35847, -0.93354, 0, 0.93354, -0.35847, 0, -0.317008, 0.0527723)
+
+[node name="RightFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower" index="0"]
+transform = Transform3D(0.984519, 0.155529, 0.0808362, -0.159689, 0.986011, 0.0477914, -0.0722724, -0.0599603, 0.995581, -0.00461968, 0.348857, -0.00624662)
 
 [node name="Head" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0)
+transform = Transform3D(0.999883, -0.0152572, 0.00102488, 0.0152916, 0.99778, -0.064816, -3.36927e-05, 0.0648241, 0.997896, 0, 0, 0)
 
-[node name="Gun" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm" index="1"]
+[node name="Gun" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm" index="0"]
 visible = false
 
 [node name="Aim" type="Marker3D" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel" index="0"]
@@ -281,7 +285,7 @@ shieldMeshes = NodePath("../../PhysicsInterpolator3D/Robot/Node/Robot")
 root_node = NodePath("../PhysicsInterpolator3D/Robot")
 tree_root = SubResource("AnimationNodeBlendTree_a540e")
 anim_player = NodePath("../PhysicsInterpolator3D/Robot/AnimationPlayer")
-parameters/MoveDirection/blend_position = Vector2(0, 0)
+parameters/MoveDirection/blend_position = Vector2(0, -1)
 parameters/TimeScale/scale = 1.0
 
 [node name="BehaviorTree" type="Node" parent="."]
