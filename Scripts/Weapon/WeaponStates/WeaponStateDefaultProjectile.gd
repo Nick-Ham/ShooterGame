@@ -73,12 +73,13 @@ func shoot() -> void:
 
 	var projectileInstance : Projectile = weaponData.projectileScene.instantiate()
 
-	projectileInstance.injectSource(owningCharacter)
-
 	var game : Game = Game.getGame(get_tree())
 	var level : Level = game.getLevel()
 
 	level.add_child(projectileInstance)
+
+	projectileInstance.injectSource(owningCharacter)
+	projectileInstance.setDamage(weaponData.defaultDamage)
 
 	projectileInstance.global_position = barrelEnd.global_position
 	setProjectileBasis(projectileInstance, controller, 1.0)

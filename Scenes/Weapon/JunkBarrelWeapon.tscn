@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bo25k4ifklv0"]
+[gd_scene load_steps=15 format=3 uid="uid://bo25k4ifklv0"]
 
 [ext_resource type="Script" path="res://Scripts/Weapon/Weapon.gd" id="1_52m3y"]
 [ext_resource type="AudioStream" uid="uid://cdel5wf3bfrw0" path="res://Assets/Audio/Gunshots/Gunshot2Randomizer.tres" id="2_ukqud"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="4_8lui8"]
 [ext_resource type="AudioStream" uid="uid://dt00i5wvj2uae" path="res://Assets/Audio/GunParts/MagazineRemove1Randomizer.tres" id="5_04how"]
 [ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefault.gd" id="5_fv2j3"]
-[ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="6_4metp"]
 [ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateOutOfAmmo.gd" id="6_bqdll"]
 [ext_resource type="PackedScene" uid="uid://da7fvlcloss0y" path="res://Assets/Models/JunkBarrel/JunkBarrelModel.tscn" id="6_u7whc"]
 [ext_resource type="Script" path="res://Scripts/Weapon/WeaponAnimationController.gd" id="12_0rd3o"]
@@ -114,9 +113,6 @@ stateOutOfAmmo = NodePath("WeaponStateOutOfAmmo")
 
 [node name="WeaponStateDefault" type="Node" parent="WeaponStateManager"]
 script = ExtResource("5_fv2j3")
-
-[node name="Damage" type="Node" parent="WeaponStateManager/WeaponStateDefault"]
-script = ExtResource("6_4metp")
 
 [node name="WeaponStateOutOfAmmo" type="Node" parent="WeaponStateManager" node_paths=PackedStringArray("emptyFirePlayer")]
 script = ExtResource("6_bqdll")

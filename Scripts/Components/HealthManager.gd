@@ -24,3 +24,7 @@ func on_health_depleted(_inHealth : Health) -> void:
 	var overshieldHealth : OvershieldHealth = Util.getChildOfType(character, OvershieldHealth)
 	if overshieldHealth:
 		overshieldHealth.queue_free()
+
+	var controller : Controller = Util.getChildOfType(character, Controller)
+	if is_instance_valid(controller):
+		controller.queue_free()

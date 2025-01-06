@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvwcr3vt2er7n"]
+
+[ext_resource type="PackedScene" uid="uid://c434g5j0o743d" path="res://Assets/Models/Robots/Skitterer/Skitterer.gltf" id="1_3uc36"]
+
+[node name="SkittererModel" instance=ExtResource("1_3uc36")]
+
+[node name="brokenCasing" parent="Node/SmallRobot/Head/ExplosionCasing" index="1"]
+visible = false

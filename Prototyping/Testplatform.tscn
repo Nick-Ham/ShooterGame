@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyqejtiisx226"]
+
+[ext_resource type="Script" path="res://Prototyping/TestPlatform.gd" id="1_dtmwe"]
+[ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="2_cp2qv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6lgya"]
+size = Vector3(3.49466, 0.500854, 4.83911)
+
+[sub_resource type="Animation" id="Animation_cmyxd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cui2l"]
+resource_name = "wobble"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qd174"]
+_data = {
+"RESET": SubResource("Animation_cmyxd"),
+"wobble": SubResource("Animation_cui2l")
+}
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_dtmwe")
+
+[node name="Testplatform" type="AnimatableBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testplatform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.356644, -0.249573, -0.48938)
+shape = SubResource("BoxShape3D_6lgya")
+
+[node name="PhysicsInterpolator3D" type="Node3D" parent="Testplatform"]
+script = ExtResource("2_cp2qv")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Testplatform/PhysicsInterpolator3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.333344, -0.254395, -0.495514)
+size = Vector3(3.51996, 0.491211, 4.84283)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Testplatform")
+libraries = {
+"": SubResource("AnimationLibrary_qd174")
+}

@@ -47,9 +47,14 @@ func _ready() -> void:
 	if controller:
 		bindToController(controller)
 
+	Util.safeConnect(character.character_destroyed, on_character_destroyed)
+
 	bindToStates()
 
 	changeState(stateDefault)
+
+func on_character_destroyed(_inCharacter : Character) -> void:
+	lastInputDirection = Vector2()
 
 func forceChangeState(inStateKey : String) -> void:
 	# might want to do something different later

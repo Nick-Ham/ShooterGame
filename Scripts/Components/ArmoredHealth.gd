@@ -9,6 +9,8 @@ var currentArmor : float = 100.0
 signal armor_depleted
 signal armor_changed(inPreviousArmor : float, inNewArmor : float)
 
+const armorDamageAbsorption : float = .66 # 0 -> 1.0
+
 func getMaxArmor() -> float:
 	return maxArmor
 
@@ -25,17 +27,21 @@ func takeDamage(inDamage : float) -> void:
 	var startingArmor : float = currentArmor
 	var startingHealth : float = currentHealth
 
-	if inDamage < currentArmor:
-		currentArmor -= inDamage / 2.0
-		currentHealth -= inDamage / 2.0
-	else:
-		var armorDamage : float = currentArmor
-		var remainingDamage : float = inDamage - armorDamage
-		currentArmor = 0
-		currentHealth -= armorDamage + remainingDamage
+	var damageToArmor : float = inDamage * armorDamageAbsorption
+	var damageToHealth : float = inDamage * (1.0 - armorDamageAbsorption)
 
-	armor_changed.emit(startingArmor, currentArmor)
-	health_changed.emit(startingHealth, currentHealth)
+	currentArmor -= damageToArmor
+	if currentArmor < 0.0:
+		damageToHealth += abs(currentArmor)
+		currentArmor = 0.0
+
+	currentHealth -= damageToHealth
+
+	if !is_equal_approx(startingArmor, currentArmor):
+		armor_changed.emit(startingArmor, currentArmor)
+
+	if !is_equal_approx(startingHealth, currentHealth):
+		health_changed.emit(startingHealth, currentHealth)
 
 	if !startingArmor <= 0 and currentArmor <= 0:
 		armor_depleted.emit()

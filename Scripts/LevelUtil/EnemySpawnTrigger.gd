@@ -13,6 +13,10 @@ func _ready() -> void:
 	body_entered.connect(on_body_entered)
 
 func on_body_entered(_inBody : PhysicsBody3D) -> void:
+	var level : Level = Game.getGame(get_tree()).getLevel()
+	if !level.getSpawnTriggersEnabled():
+		return
+
 	for spawnMarker : SpawnMarker in spawnMarkers:
 		spawnMarker.spawn()
 

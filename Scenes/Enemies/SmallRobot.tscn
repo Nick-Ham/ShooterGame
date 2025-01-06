@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://dmdf1kchqjj6o"]
+[gd_scene load_steps=54 format=4 uid="uid://dmdf1kchqjj6o"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_ogiuy"]
 [ext_resource type="Script" path="res://Scripts/EnemyControllers/AIController.gd" id="2_fy22f"]
@@ -19,13 +19,13 @@
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Interrupts/BTDamageTakenInterrupter.gd" id="19_70o6w"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Interrupts/BTTargetFoundInterrupter.gd" id="20_52vdl"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Composite/BTSelector.gd" id="21_cmold"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTChase.gd" id="22_1fewa"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Composite/BTSequencer.gd" id="22_x74xj"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Decorators/BTInverter.gd" id="23_h3c68"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Conditions/BTHasTargetCondition.gd" id="24_2tpvu"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Conditions/BTHasInvestigations.gd" id="25_33r0q"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Conditions/BTTargetWithinRange.gd" id="26_1vpx6"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTStopShooting.gd" id="26_wmphv"]
-[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTChaseAndShoot.gd" id="27_a4pno"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTMoveToInvestigate.gd" id="27_v2wkw"]
 [ext_resource type="Resource" uid="uid://c3kgiytrbx7ce" path="res://Data/ShootPatterns/AlwaysShoot.tres" id="28_bfmwk"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTLookForTarget.gd" id="28_ssytl"]
@@ -37,8 +37,8 @@
 [ext_resource type="Script" path="res://Scripts/Components/HealthManager.gd" id="34_evgj4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_auq48"]
-radius = 0.287807
-height = 4.0885
+radius = 0.458298
+height = 4.69606
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uc3a3"]
 radius = 0.439909
@@ -103,6 +103,7 @@ radius = 0.500558
 
 [sub_resource type="Animation" id="Animation_kpuhv"]
 resource_name = "OnDeath"
+length = 0.5
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -145,10 +146,62 @@ tracks/2/keys = {
 "method": &"disable"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PhysicsInterpolator3D/SmallRobotModel:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2.07053, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.137846, 1.79663e-09, 0.122051)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PhysicsInterpolator3D/SmallRobotModel:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2.73208, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.00215338, -0.269032, -0.0384488)]
+}
+
+[sub_resource type="Animation" id="Animation_kcomd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PhysicsInterpolator3D/SmallRobotModel:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PhysicsInterpolator3D/SmallRobotModel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bmp4w"]
 _data = {
-"OnDeath": SubResource("Animation_kpuhv")
+"OnDeath": SubResource("Animation_kpuhv"),
+"RESET": SubResource("Animation_kcomd")
 }
 
 [node name="SmallRobot" type="CharacterBody3D" node_paths=PackedStringArray("aimMarker", "aimCast")]
@@ -156,7 +209,7 @@ collision_layer = 4
 script = ExtResource("1_ogiuy")
 headHeight = 0.6
 minShootAngle = 0.524
-characterRotationSpeed = 25.0
+characterRotationSpeed = 40.0
 maxAngleFromTarget = 2.356
 team = 1
 aimMarker = NodePath("PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim")
@@ -169,16 +222,15 @@ aimRayCast = NodePath("../PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/
 [node name="Targeter" type="Node" parent="." node_paths=PackedStringArray("losTracker")]
 script = ExtResource("3_nghme")
 losTracker = NodePath("../LOSTracker")
-targetLostTime = 10.0
+
+[node name="AIInvestigationManager" type="Node" parent="."]
+script = ExtResource("4_urx78")
 
 [node name="SmallRobotAnimationController" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "modelAnimationTree")]
 script = ExtResource("31_1kjoh")
 animationPlayer = NodePath("../AnimationPlayer")
 modelAnimationTree = NodePath("../AnimationTree")
 animationSpeedTarget = 0.5
-
-[node name="AIInvestigationManager" type="Node" parent="."]
-script = ExtResource("4_urx78")
 
 [node name="AIShootController" type="Node" parent="."]
 script = ExtResource("5_ok1gk")
@@ -195,32 +247,6 @@ characterStateManager = NodePath("../CharacterStateManager")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("16_b4swr")
-maxHealth = 50.0
-
-[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir", "stateDestroyed")]
-script = ExtResource("9_ab1k5")
-enableLogging = true
-loggerCategory = "RobotWalker:StateManager:State"
-stateDefault = NodePath("CharacterStateDefault")
-stateJumping = NodePath("CharacterStateJumping")
-stateInAir = NodePath("CharacterStateInAir")
-stateDestroyed = NodePath("CharacterStateDestroyed")
-
-[node name="CharacterStateDefault" type="Node" parent="CharacterStateManager"]
-script = ExtResource("10_tg7of")
-acceleration = 80.0
-maxSpeed = 4.0
-maxSpeedEnforcement = 30.0
-friction = 33.0
-
-[node name="CharacterStateInAir" type="Node" parent="CharacterStateManager"]
-script = ExtResource("11_2gpj7")
-
-[node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
-script = ExtResource("12_suyfa")
-
-[node name="CharacterStateDestroyed" type="Node" parent="CharacterStateManager"]
-script = ExtResource("13_re7so")
 
 [node name="BehaviorTree" type="Node" parent="."]
 script = ExtResource("18_j7u58")
@@ -264,39 +290,54 @@ script = ExtResource("28_ssytl")
 [node name="BTLookForTarget2" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector"]
 script = ExtResource("28_ssytl")
 
-[node name="Chase_BTSelector" type="Node" parent="BehaviorTree/BTSelector"]
+[node name="Attack_BTSelector" type="Node" parent="BehaviorTree/BTSelector"]
 script = ExtResource("21_cmold")
 
-[node name="BTSequencer" type="Node" parent="BehaviorTree/BTSelector/Chase_BTSelector"]
+[node name="BTSequencer" type="Node" parent="BehaviorTree/BTSelector/Attack_BTSelector"]
 script = ExtResource("22_x74xj")
 
-[node name="BTTargetWithinRange" type="Node" parent="BehaviorTree/BTSelector/Chase_BTSelector/BTSequencer"]
-script = ExtResource("26_1vpx6")
-targetDistance = 5.0
-
-[node name="BTStrafeAndShoot" type="Node" parent="BehaviorTree/BTSelector/Chase_BTSelector/BTSequencer" node_paths=PackedStringArray("leftWallDetector", "rightWallDetector")]
-script = ExtResource("29_xlafi")
-taskDuration = 2.0
-randomDirectionChangeTimeRange = Vector2(4, 5)
-shootPattern = ExtResource("28_bfmwk")
-leftWallDetector = NodePath("../../../../../LeftWallDetector")
-rightWallDetector = NodePath("../../../../../RightWallDetector")
-
-[node name="BTSequencer2" type="Node" parent="BehaviorTree/BTSelector/Chase_BTSelector"]
-script = ExtResource("22_x74xj")
-
-[node name="BTInverter" type="Node" parent="BehaviorTree/BTSelector/Chase_BTSelector/BTSequencer2"]
-script = ExtResource("23_h3c68")
-
-[node name="BTTargetWithinRange" type="Node" parent="BehaviorTree/BTSelector/Chase_BTSelector/BTSequencer2/BTInverter"]
+[node name="BTTargetWithinRange" type="Node" parent="BehaviorTree/BTSelector/Attack_BTSelector/BTSequencer"]
 script = ExtResource("26_1vpx6")
 targetDistance = 4.0
 
-[node name="BTChaseAndShoot" type="Node" parent="BehaviorTree/BTSelector/Chase_BTSelector/BTSequencer2"]
-script = ExtResource("27_a4pno")
+[node name="BTStrafeAndShoot" type="Node" parent="BehaviorTree/BTSelector/Attack_BTSelector/BTSequencer" node_paths=PackedStringArray("leftWallDetector", "rightWallDetector", "leftFloorDetector", "rightFloorDetector")]
+script = ExtResource("29_xlafi")
 shootPattern = ExtResource("28_bfmwk")
+leftWallDetector = NodePath("../../../../../LeftWallDetector")
+rightWallDetector = NodePath("../../../../../RightWallDetector")
+leftFloorDetector = NodePath("../../../../../LeftFloorDetector")
+rightFloorDetector = NodePath("../../../../../RightFloorDetector")
+
+[node name="BTChase" type="Node" parent="BehaviorTree/BTSelector/Attack_BTSelector"]
+script = ExtResource("22_1fewa")
+
+[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir", "stateDestroyed")]
+script = ExtResource("9_ab1k5")
+enableLogging = true
+loggerCategory = "RobotWalker:StateManager:State"
+stateDefault = NodePath("CharacterStateDefault")
+stateJumping = NodePath("CharacterStateJumping")
+stateInAir = NodePath("CharacterStateInAir")
+stateDestroyed = NodePath("CharacterStateDestroyed")
+
+[node name="CharacterStateDefault" type="Node" parent="CharacterStateManager"]
+script = ExtResource("10_tg7of")
+acceleration = 95.0
+maxSpeed = 4.5
+maxSpeedEnforcement = 30.0
+friction = 33.0
+
+[node name="CharacterStateInAir" type="Node" parent="CharacterStateManager"]
+script = ExtResource("11_2gpj7")
+
+[node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
+script = ExtResource("12_suyfa")
+
+[node name="CharacterStateDestroyed" type="Node" parent="CharacterStateManager"]
+script = ExtResource("13_re7so")
 
 [node name="NavigationController" type="NavigationAgent3D" parent="."]
+debug_enabled = true
 script = ExtResource("32_nvdxb")
 
 [node name="PhysicsInterpolator3D" type="Node3D" parent="."]
@@ -305,31 +346,31 @@ script = ExtResource("14_fwnc2")
 [node name="SmallRobotModel" parent="PhysicsInterpolator3D" instance=ExtResource("15_lp6cv")]
 
 [node name="FrontRight_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontRightPivot" index="0"]
-transform = Transform3D(0.706877, 0.241554, -0.664814, -6.4604e-05, 0.939906, 0.341438, 0.707336, -0.241312, 0.664413, 0.04375, 0.03125, -0.04375)
+transform = Transform3D(0.707261, 0.241277, -0.664504, -0.000128008, 0.940001, 0.341172, 0.706951, -0.241213, 0.664858, 0.04375, 0.03125, -0.04375)
 
 [node name="FrontRight_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontRightPivot/FrontRight_UpperLegBone" index="1"]
-transform = Transform3D(1, -0.000312179, -0.000239245, 0.0003121, 1, -0.000331789, 0.000239348, 0.000331714, 1, 0, 0, -0.25)
+transform = Transform3D(1, -0.000230338, 0.000334483, 0.000230532, 1, -0.000580666, -0.00033435, 0.000580743, 1, 0, 0, -0.25)
 
 [node name="FrontLeft_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontLeftPivot" index="0"]
-transform = Transform3D(0.707001, -0.241993, 0.664521, 6.88359e-05, 0.939658, 0.342114, -0.707212, -0.241829, 0.664356, -0.04375, 0.03125, -0.04375)
+transform = Transform3D(0.707127, -0.241973, 0.664394, 6.76512e-05, 0.939646, 0.342148, -0.707086, -0.241897, 0.664465, -0.04375, 0.03125, -0.04375)
 
 [node name="FrontLeft_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontLeftPivot/FrontLeft_UpperLegBone" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, -0.00013544, 0, 0.00013544, 1, 0, 0, -0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 5.38665e-05, 0, -5.38665e-05, 1, 0, 0, -0.25)
 
 [node name="BackLeft_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackLeftPivot" index="0"]
-transform = Transform3D(0.707351, -0.241918, -0.664176, 0.000377767, 0.939743, -0.341886, 0.706862, 0.241583, 0.664819, -0.04375, 0.03125, 0.04375)
+transform = Transform3D(0.706976, -0.241947, -0.664567, 0.000575722, 0.93986, -0.34156, 0.707238, 0.241092, 0.664598, -0.04375, 0.03125, 0.04375)
 
 [node name="BackLeft_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackLeftPivot/BackLeft_UpperLegBone" index="1"]
-transform = Transform3D(1, -0.000115435, -0.000491068, 0.00011526, 0.999999, -0.000354954, 0.00049111, 0.000354897, 0.999999, 0, 0, 0.25)
+transform = Transform3D(1, 0.000187991, -0.000524727, -0.000188121, 0.999999, -0.000248015, 0.000524681, 0.000248114, 0.999999, 0, 0, 0.25)
 
 [node name="BackRight_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackRightPivot" index="0"]
-transform = Transform3D(0.707147, 0.241817, 0.66443, 1.72406e-05, 0.939694, -0.342016, -0.707066, 0.241867, 0.664498, 0.04375, 0.03125, 0.04375)
+transform = Transform3D(0.706908, 0.241952, 0.664634, -3.19481e-05, 0.939684, -0.342045, -0.707305, 0.241774, 0.664276, 0.04375, 0.03125, 0.04375)
 
 [node name="BackRight_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackRightPivot/BackRight_UpperLegBone" index="1"]
-transform = Transform3D(1, 0.000275179, 0.000156233, -0.000275191, 0.999998, 7.7517e-05, -0.000156212, -7.756e-05, 0.999999, 0, 0, 0.25)
+transform = Transform3D(1, 0.000154421, 5.90448e-05, -0.000154443, 0.999997, 0.000371466, -5.89875e-05, -0.000371474, 0.999999, 0, 0, 0.25)
 
 [node name="Head" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot" index="2"]
-transform = Transform3D(1, -0.000123074, 3.88112e-06, 0.000123074, 0.999999, 1.32584e-05, -3.88276e-06, -1.32579e-05, 1, 0, 0.460417, -0.03125)
+transform = Transform3D(1, -0.000121305, 3.29308e-06, 0.000121305, 0.999999, 1.12496e-05, -3.29445e-06, -1.12492e-05, 1, 0, 0.460417, -0.03125)
 
 [node name="Aim" type="Marker3D" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 2.23517e-08, 0.0623288, -0.398363)
@@ -339,13 +380,14 @@ target_position = Vector3(0, 0, 0)
 collide_with_areas = true
 
 [node name="FlamethrowerEffect" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim" instance=ExtResource("14_lsqlk")]
+emitting = false
 
 [node name="FlamethrowerArea3D" type="Area3D" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim"]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerArea3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4.79617e-14, 8.93736e-08, -2.0446)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4.79617e-14, 1.01241e-07, -2.31609)
 shape = SubResource("CapsuleShape3D_auq48")
 
 [node name="AnimationPlayer" parent="PhysicsInterpolator3D/SmallRobotModel" index="1"]
@@ -371,6 +413,7 @@ attenuation_filter_db = -5.0
 
 [node name="LOSTracker" type="Area3D" parent="."]
 script = ExtResource("31_n8o0b")
+acquireTargetVisionRange = 1.3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LOSTracker"]
 shape = SubResource("SphereShape3D_0yxpf")
@@ -386,6 +429,14 @@ shape = SubResource("CylinderShape3D_0t1dn")
 [node name="LeftWallDetector" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554784, 0)
 target_position = Vector3(-1, 0, 0)
+
+[node name="LeftFloorDetector" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555, 0)
+target_position = Vector3(-1.5, -0.75, 0)
+
+[node name="RightFloorDetector" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555, 0)
+target_position = Vector3(1.5, -0.75, 0)
 
 [node name="RightWallDetector" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.554784, 0)

@@ -29,7 +29,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_22kd6"]
 radius = 0.3
-height = 1.5
+height = 1.75
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_brmud"]
 radius = 0.25
@@ -192,10 +192,10 @@ script = ExtResource("7_cdgt3")
 
 [node name="CharacterStateInAir" type="Node" parent="CharacterStateManager"]
 script = ExtResource("5_t1r06")
-acceleration = 15.0
+acceleration = 33.0
 maxSpeed = 2.5
 maxSpeedEnforcement = 5.0
-friction = 2.0
+friction = 1.5
 
 [node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
 script = ExtResource("6_58h4i")
@@ -223,7 +223,7 @@ grow_vertical = 2
 script = ExtResource("9_xcwwv")
 
 [node name="CollisionShapeStanding" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("CapsuleShape3D_22kd6")
 
 [node name="HitboxStanding" type="Area3D" parent="."]

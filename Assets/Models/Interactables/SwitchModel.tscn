@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvukdfdnb7e1o"]
+
+[ext_resource type="PackedScene" uid="uid://t7kfgeolwufe" path="res://Assets/Models/Interactables/Switch.gltf" id="1_d6w3b"]
+
+[node name="SwitchModel" instance=ExtResource("1_d6w3b")]

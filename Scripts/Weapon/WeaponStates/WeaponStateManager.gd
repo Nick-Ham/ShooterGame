@@ -64,6 +64,9 @@ func getIsShooting() -> bool:
 
 	return controller.getIsShooting()
 
+func getWeapon() -> Weapon:
+	return get_parent() as Weapon
+
 func getWeaponData() -> WeaponData:
 	var weapon : Weapon = get_parent() as Weapon
 	return weapon.getWeaponData()

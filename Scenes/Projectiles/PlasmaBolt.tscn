@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://dero46gvnk3p4"]
+[gd_scene load_steps=13 format=3 uid="uid://dero46gvnk3p4"]
 
 [ext_resource type="Script" path="res://Scripts/Projectiles/Projectile.gd" id="1_3xs12"]
-[ext_resource type="Script" path="res://Scripts/Components/Damage.gd" id="3_g5mm2"]
 [ext_resource type="Material" uid="uid://dlxr0hk6awtgc" path="res://Assets/Shader/PlasmaBoltShaderMaterial.tres" id="4_pbdd4"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b0toe"]
@@ -51,10 +50,9 @@ material = ExtResource("4_pbdd4")
 radius = 0.2
 height = 8.372
 
-[node name="PlasmaBolt" type="CharacterBody3D" node_paths=PackedStringArray("damage", "shapeCast")]
+[node name="PlasmaBolt" type="CharacterBody3D" node_paths=PackedStringArray("shapeCast")]
 collision_layer = 16
 script = ExtResource("1_3xs12")
-damage = NodePath("Damage")
 shapeCast = NodePath("ShapeCast3D")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
@@ -67,9 +65,6 @@ draw_pass_1 = SubResource("BoxMesh_4hja5")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.107377)
 shape = SubResource("SphereShape3D_7e7cg")
-
-[node name="Damage" type="Node" parent="."]
-script = ExtResource("3_g5mm2")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_7e7cg")

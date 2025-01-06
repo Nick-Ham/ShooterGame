@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bescl0q1pxxyt"
-path="res://.godot/imported/DesertDuneTextureNormal.png-706c6e613acf27474092c6edb46d3c84.ctex"
+uid="uid://wasbv03gpyd2"
+path="res://.godot/imported/DesertHeightMap.png-6a8e2eb4b6ef35257c2b7a0a6d782923.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/DesertDuneTextureNormal.png"
-dest_files=["res://.godot/imported/DesertDuneTextureNormal.png-706c6e613acf27474092c6edb46d3c84.ctex"]
+source_file="res://Assets/HeightMaps/DesertHeightMap.png"
+dest_files=["res://.godot/imported/DesertHeightMap.png-6a8e2eb4b6ef35257c2b7a0a6d782923.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

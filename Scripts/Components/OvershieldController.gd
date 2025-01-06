@@ -50,8 +50,7 @@ func _ready() -> void:
 	assert(animationPlayer)
 	assert(shieldMeshes)
 
-	Util.safeConnect(health.health_damaged, on_health_damaged)
-	Util.safeConnect(health.health_restored, on_health_restored)
+	Util.safeConnect(health.health_changed, on_health_changed)
 	Util.safeConnect(health.health_depleted, on_health_depleted)
 	Util.safeConnect(health.shield_resetting, on_shield_resetting)
 	Util.safeConnect(health.shield_recharged, on_shield_recharged)
@@ -63,7 +62,7 @@ func on_shield_recharged() -> void:
 
 	refreshMaterialParams()
 
-func on_health_damaged(_inDamage : float, _remainingHealth : float) -> void:
+func on_health_changed(_inPreviousHealth : float, _inNewHealth : float) -> void:
 	if animationPlayer.current_animation == hitFlashAnimationKey and animationPlayer.is_playing():
 		animationPlayer.seek(0)
 	else:
@@ -74,9 +73,6 @@ func on_health_damaged(_inDamage : float, _remainingHealth : float) -> void:
 func on_shield_resetting()-> void:
 	animationPlayer.play(shieldResettingAnimationKey)
 
-	refreshMaterialParams()
-
-func on_health_restored(_inAmount : float, _inNewHealth : float) -> void:
 	refreshMaterialParams()
 
 func on_health_depleted(_inHealth : Health) -> void:

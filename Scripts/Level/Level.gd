@@ -6,6 +6,7 @@ class_name Level
 
 @export_category("Config")
 @export var useSpectator : bool = false
+@export var enableSpawnTriggers : bool = true
 
 ## LevelSystems
 var environmentalEffectManager : EnvironmentEffectManager = null
@@ -13,6 +14,9 @@ var environmentEventBus : EnvironmentEventBus = null
 var levelEventHandler : LevelEventHandler = null
 
 var playerCharacter : Character = null
+
+func getSpawnTriggersEnabled() -> bool:
+	return enableSpawnTriggers
 
 func _enter_tree() -> void:
 	environmentalEffectManager = EnvironmentEffectManager.new()

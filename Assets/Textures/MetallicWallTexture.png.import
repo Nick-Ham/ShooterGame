@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b7fiuvnuamadu"
-path="res://.godot/imported/MetallicWallTexture.png-6f5a9e3c2694685155f3bfbdddd7e8eb.ctex"
+path="res://.godot/imported/MetallicWallTexture.png-ed395a749ca3ca909a1d514fbea176d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/MetallicWallTexture.png"
-dest_files=["res://.godot/imported/MetallicWallTexture.png-6f5a9e3c2694685155f3bfbdddd7e8eb.ctex"]
+source_file="res://Assets/textures/MetallicWallTexture.png"
+dest_files=["res://.godot/imported/MetallicWallTexture.png-ed395a749ca3ca909a1d514fbea176d0.ctex"]
 
 [params]
 

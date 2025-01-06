@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://qeh27jig7xvv"]
 
 [ext_resource type="Script" path="res://Scripts/Weapon/Weapon.gd" id="1_qhirt"]
-[ext_resource type="AudioStream" uid="uid://byeppnbhc472f" path="res://Assets/Audio/Gunshots/Gunshot1Randomizer.tres" id="2_bnqkb"]
+[ext_resource type="AudioStream" uid="uid://domsm2kck0qvd" path="res://Assets/Audio/Gunshots/Shotgun1Randomizer.tres" id="2_nnik1"]
 [ext_resource type="AudioStream" uid="uid://cu7qmxna0l3kt" path="res://Assets/Audio/Clicks/MetalClick.ogg" id="3_fm26l"]
 [ext_resource type="AudioStream" uid="uid://vwi8t88n7qdj" path="res://Assets/Audio/GunParts/MagazineInsert1Randomizer.tres" id="4_e6j67"]
 [ext_resource type="AudioStream" uid="uid://dt00i5wvj2uae" path="res://Assets/Audio/GunParts/MagazineRemove1Randomizer.tres" id="5_vaux1"]
@@ -73,8 +73,9 @@ script = ExtResource("1_qhirt")
 weaponBarrelEnd = NodePath("Marker3D")
 
 [node name="ShootPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_bnqkb")
-volume_db = -18.0
+stream = ExtResource("2_nnik1")
+volume_db = -5.0
+pitch_scale = 0.8
 max_polyphony = 3
 bus = &"WorldSFX"
 

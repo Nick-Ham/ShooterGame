@@ -11,6 +11,11 @@ class_name BTStrafeAndShoot
 @export var leftWallDetector : RayCast3D
 @export var rightWallDetector : RayCast3D
 
+@export_group("FloorDetection")
+@export var useFloorDetection : bool = true
+@export var leftFloorDetector : RayCast3D
+@export var rightFloorDetector : RayCast3D
+
 var isMovingLeft : bool = false
 var isTimeUp : bool = false
 
@@ -55,6 +60,9 @@ func updateNode(inDelta : float) -> BTTickResult:
 	if useWallDetection:
 		runWallDetection()
 
+	if useFloorDetection:
+		runFloorDetection()
+
 	var moveDirection : Vector2 = Vector2.LEFT if isMovingLeft else Vector2.RIGHT
 	controller.setControlDirectionSmooth(moveDirection, inDelta)
 
@@ -68,5 +76,14 @@ func runWallDetection() -> void:
 		return
 
 	if !isMovingLeft and rightWallDetector.is_colliding():
+		isMovingLeft = true
+		return
+
+func runFloorDetection() -> void:
+	if isMovingLeft and !leftFloorDetector.is_colliding():
+		isMovingLeft = false
+		return
+
+	if !isMovingLeft and !rightFloorDetector.is_colliding():
 		isMovingLeft = true
 		return

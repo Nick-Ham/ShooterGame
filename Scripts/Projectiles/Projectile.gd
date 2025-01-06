@@ -2,21 +2,27 @@ extends CharacterBody3D
 class_name Projectile
 
 @export_category("Ref")
-@export var damage : Damage
 @export var shapeCast : ShapeCast3D
 
 @export_category("Config")
-@export var speed : float = 40.0
+@export var speed : float = 50.0
 
 var projection : Vector3 = Vector3.FORWARD * speed * (1.0 / Engine.physics_ticks_per_second)
 
 var source : Node3D = null
 
+@onready var damage : Damage = Damage.new()
+
 func _ready() -> void:
-	assert(damage)
+	assert(shapeCast)
+
+	add_child(damage)
 
 	shapeCast.target_position = projection
 	shapeCast.collision_mask = 9
+
+func setDamage(inDamage : float) -> void:
+	damage.damage = inDamage
 
 func injectSource(inSource : Node3D) -> void:
 	source = inSource

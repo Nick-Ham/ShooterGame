@@ -8,7 +8,7 @@ var navDirection : Vector2 = Vector2()
 var isNavSetup : bool = false
 
 func _ready() -> void:
-	path_desired_distance = 0.5
+	path_desired_distance = 1.0
 	target_desired_distance = chaseDistance
 
 	setupNavigation.call_deferred()

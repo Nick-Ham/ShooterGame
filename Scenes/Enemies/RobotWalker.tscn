@@ -27,7 +27,7 @@
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTMoveToInvestigate.gd" id="27_y621p"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTLookForTarget.gd" id="28_nwp6c"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTStrafeAndShoot.gd" id="29_gcn5k"]
-[ext_resource type="Script" path="res://Scripts/EnemyControllers/Targeter.gd" id="29_wdjxd"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/AdvancedTargeter.gd" id="29_wdjxd"]
 [ext_resource type="Resource" uid="uid://dvc8vuveolu44" path="res://Data/ShootPatterns/FastThenSlow.tres" id="30_2uyqy"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Interrupts/BTTargetFoundInterrupter.gd" id="30_sxvwp"]
 [ext_resource type="Script" path="res://Scripts/EnemyControllers/AIShootController.gd" id="31_b8sev"]
@@ -69,7 +69,6 @@ blend_point_4/pos = Vector2(0, 0)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3pyu0"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a540e"]
-graph_offset = Vector2(-172.678, 41.8347)
 nodes/MoveDirection/node = SubResource("AnimationNodeBlendSpace2D_tbqon")
 nodes/MoveDirection/position = Vector2(0, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_3pyu0")
@@ -224,35 +223,32 @@ script = ExtResource("7_34icv")
 
 [node name="Robot" parent="PhysicsInterpolator3D" instance=ExtResource("8_8vwp4")]
 
-[node name="Robot" parent="PhysicsInterpolator3D/Robot/Node" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.154155, 0)
-
 [node name="LeftLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="0"]
-transform = Transform3D(0.974137, -0.181216, -0.134976, 0.222829, 0.671317, 0.706881, -0.0374861, -0.718674, 0.694336, 0, -0.0625, 0)
+transform = Transform3D(0.984808, -0.137764, -0.10571, 0.173648, 0.781299, 0.599513, 0, -0.60876, 0.793354, 0, -0.0625, 0)
 
 [node name="LeftLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper" index="0"]
-transform = Transform3D(1, 0, 0, 0, -0.30271, -0.953082, 0, 0.953082, -0.30271, 0.247151, -0.525831, -0.0198207)
+transform = Transform3D(1, 0, 0, 0, -4.37113e-08, -0.999999, 0, 0.999999, -4.37113e-08, 0.247151, -0.525831, -0.0198207)
 
 [node name="LeftLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.236395, -0.971657, 0, 0.971657, 0.236395, 0, -0.348448, 0.0988925)
+transform = Transform3D(1, 0, 0, 0, -0.258819, -0.965925, 0, 0.965925, -0.258819, 0, -0.34375, 0.0625)
 
 [node name="LeftFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/LeftLegUpper/LeftLegJoiner/LeftLegLower" index="0"]
-transform = Transform3D(0.985578, -0.168345, -0.017159, 0.162131, 0.968477, -0.189122, 0.0484558, 0.183613, 0.981803, 0.000618727, 0.369472, 0.00330738)
+transform = Transform3D(0.984821, -0.173566, 0.000200476, 0.160251, 0.908829, -0.385162, 0.0666689, 0.379349, 0.922847, 0, 0.375, 0)
 
 [node name="RightLegUpper" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip" index="1"]
-transform = Transform3D(0.985662, 0.160512, 0.0520363, -0.168734, 0.939304, 0.298722, -0.000929453, -0.303219, 0.95292, 0, -0.0625, 0)
+transform = Transform3D(0.984809, 0.137764, 0.10571, -0.17101, 0.87514, 0.452641, -0.0301537, -0.463841, 0.885405, 0, -0.0625, 0)
 
 [node name="RightLegJoiner" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper" index="0"]
-transform = Transform3D(1, 0, 0, 0, -0.0406354, -0.999174, 0, 0.999173, -0.0406354, -0.247151, -0.525831, -0.0198207)
+transform = Transform3D(0.999542, 0.025504, 0.0162952, 0.0204175, -0.170788, -0.985097, -0.0223408, 0.984977, -0.171231, -0.247151, -0.525831, -0.0198207)
 
 [node name="RightLegLower" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner" index="0"]
-transform = Transform3D(1, 0, 0, 0, -0.35847, -0.93354, 0, 0.93354, -0.35847, 0, -0.317008, 0.0527723)
+transform = Transform3D(0.999542, 0.00913909, -0.0288526, -0.0223409, -0.420327, -0.907097, -0.0204176, 0.907326, -0.419931, 0, -0.34375, 0.0625)
 
 [node name="RightFoot" parent="PhysicsInterpolator3D/Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower" index="0"]
-transform = Transform3D(0.984519, 0.155529, 0.0808362, -0.159689, 0.986011, 0.0477914, -0.0722724, -0.0599603, 0.995581, -0.00461968, 0.348857, -0.00624662)
+transform = Transform3D(0.984798, 0.150535, 0.0866857, -0.160382, 0.979632, 0.120841, -0.0667292, -0.132907, 0.98888, 0.00188168, 0.387245, -0.00166134)
 
 [node name="Head" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot" index="0"]
-transform = Transform3D(0.999883, -0.0152572, 0.00102488, 0.0152916, 0.99778, -0.064816, -3.36927e-05, 0.0648241, 0.997896, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0)
 
 [node name="Gun" parent="PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm" index="0"]
 visible = false
@@ -273,7 +269,6 @@ shape = SubResource("CapsuleShape3D_uc3a3")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("9_gli1f")
-maxHealth = 100.0
 
 [node name="OvershieldHealth" parent="." instance=ExtResource("10_hrsr4")]
 maxHealth = 50.0
@@ -285,7 +280,7 @@ shieldMeshes = NodePath("../../PhysicsInterpolator3D/Robot/Node/Robot")
 root_node = NodePath("../PhysicsInterpolator3D/Robot")
 tree_root = SubResource("AnimationNodeBlendTree_a540e")
 anim_player = NodePath("../PhysicsInterpolator3D/Robot/AnimationPlayer")
-parameters/MoveDirection/blend_position = Vector2(0, -1)
+parameters/MoveDirection/blend_position = Vector2(0, 0)
 parameters/TimeScale/scale = 1.0
 
 [node name="BehaviorTree" type="Node" parent="."]
@@ -332,6 +327,7 @@ script = ExtResource("28_nwp6c")
 
 [node name="BTStrafeAndShoot" type="Node" parent="BehaviorTree/BTSelector" node_paths=PackedStringArray("leftWallDetector", "rightWallDetector")]
 script = ExtResource("29_gcn5k")
+randomDirectionChangeTimeRange = Vector2(3, 4.5)
 shootPattern = ExtResource("30_2uyqy")
 leftWallDetector = NodePath("../../../LeftWallDetector")
 rightWallDetector = NodePath("../../../RightWallDetector")

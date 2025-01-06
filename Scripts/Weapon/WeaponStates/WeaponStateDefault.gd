@@ -85,6 +85,8 @@ func shoot() -> void:
 	for currentShot : int in equippedWeaponData.shotCount:
 		var newBloomRadius : float = equippedWeaponData.getBloomRadiusAtTime(currentBloom)
 		var aimCastResult : RayCastResult = controller.getAimCastResult(newBloomRadius)
+
+		addTracer(aimCastResult)
 		drawDebug(aimCastResult)
 
 		if !aimCastResult.hitSuccess:
@@ -140,6 +142,19 @@ func handleHitEnvironment(rayCastResult : RayCastResult) -> void:
 	var environmentalEffectManager : EnvironmentEffectManager = level.getEnvironmentalEffectManager()
 
 	environmentalEffectManager.addBulletImpact(rayCastResult.hitPosition, rayCastResult.hitNormal)
+
+func addTracer(rayCastResult : RayCastResult) -> void:
+	var level : Level = Game.getGame(get_tree()).getLevel()
+	var environmentEffectManager : EnvironmentEffectManager = level.getEnvironmentalEffectManager()
+
+	var weapon : Weapon = weaponStateManager.getWeapon()
+	var barrelEnd : Marker3D = weapon.getBarrelEnd()
+
+	var rayEnd : Vector3 = rayCastResult.hitPosition if rayCastResult.hitSuccess else rayCastResult.rayEndpoint
+
+	environmentEffectManager.addTracer(barrelEnd.global_position, rayEnd)
+
+	return
 
 func drawDebug(rayCastResult : RayCastResult) -> void:
 	if showDebugTrails:

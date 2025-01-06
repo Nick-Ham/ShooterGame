@@ -1,6 +1,5 @@
-[gd_resource type="VisualShader" load_steps=64 format=3 uid="uid://uwiut54n2jk4"]
+[gd_resource type="VisualShader" load_steps=63 format=3 uid="uid://uwiut54n2jk4"]
 
-[ext_resource type="Texture2D" uid="uid://h4j11oeultk8" path="res://Assets/Textures/Noise/DirtyCloudNoiseTexture.png" id="1_t8mda"]
 [ext_resource type="Texture2D" uid="uid://1ctrn4hny67o" path="res://Assets/NoiseTextures/CellularBubbly.tres" id="2_tux7h"]
 
 [sub_resource type="Gradient" id="Gradient_4nkk7"]
@@ -23,7 +22,6 @@ op_type = 3
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_743g7"]
 output_port_for_preview = 0
 linked_parent_graph_frame = 17
-texture = ExtResource("1_t8mda")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_1insx"]

@@ -1,0 +1,17 @@
+// Game: ShooterGame
+// Format: Valve
+// entity 0
+{
+"mapversion" "220"
+"wad" ""
+"classname" "worldspawn"
+// brush 0
+{
+( -64 64 112 ) ( -64 -272 112 ) ( -64 -272 -16 ) MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -64 -272 112 ) ( 64 -272 112 ) ( 64 -272 -16 ) MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 64 -272 -16 ) ( 64 64 -16 ) ( -64 64 -16 ) MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -64 64 112 ) ( 64 64 112 ) ( 64 -272 112 ) MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 64 64 -16 ) ( 64 64 112 ) ( -64 64 112 ) MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 64 -272 112 ) ( 64 64 112 ) ( 64 64 -16 ) MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+}

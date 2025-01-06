@@ -5,7 +5,7 @@ class_name Targeter
 @export var losTracker : LOSTracker
 
 @export_category("Config")
-@export var targetLostTime : float = 2.0
+@export var targetLostTime : float = 10.0
 @export var defaultRememberTargetTime : float = 2.0
 
 var target : Node3D
@@ -30,7 +30,6 @@ func _ready() -> void:
 	var environmentEventBus : EnvironmentEventBus = level.getEnvironmentEventBus()
 
 	Util.safeConnect(environmentEventBus.sound_triggered, on_environment_sound_triggered)
-	Util.safeConnect(losTracker.character_lost, on_character_lost)
 
 func getInterest() -> TargetInterest:
 	var interest : TargetInterest = TargetInterest.new()
@@ -74,20 +73,6 @@ func on_environment_sound_triggered(inSource : Node3D) -> void:
 		return
 
 	investigationManager.createInvestigation(sourceAsCharacter)
-
-func on_character_lost(inCharacter : Character, inLossReason : LOSTracker.LossReason) -> void:
-	if !inCharacter == target:
-		return
-
-	if !target:
-		return
-
-	var currentInterest : TargetInterest = getInterest()
-	positionOfInterest = currentInterest.interestPosition
-
-	var previousTarget : Node3D = target
-	target = null
-	target_lost.emit(previousTarget, inLossReason)
 
 func acquireTarget(inTarget : Node3D = null) -> Node3D:
 	if inTarget:
