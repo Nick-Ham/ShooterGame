@@ -337,7 +337,6 @@ script = ExtResource("12_suyfa")
 script = ExtResource("13_re7so")
 
 [node name="NavigationController" type="NavigationAgent3D" parent="."]
-debug_enabled = true
 script = ExtResource("32_nvdxb")
 
 [node name="PhysicsInterpolator3D" type="Node3D" parent="."]
@@ -346,31 +345,31 @@ script = ExtResource("14_fwnc2")
 [node name="SmallRobotModel" parent="PhysicsInterpolator3D" instance=ExtResource("15_lp6cv")]
 
 [node name="FrontRight_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontRightPivot" index="0"]
-transform = Transform3D(0.707261, 0.241277, -0.664504, -0.000128008, 0.940001, 0.341172, 0.706951, -0.241213, 0.664858, 0.04375, 0.03125, -0.04375)
+transform = Transform3D(0.707612, 0.241517, -0.664043, 9.70139e-05, 0.939739, 0.341892, 0.706599, -0.241992, 0.664948, 0.04375, 0.03125, -0.04375)
 
 [node name="FrontRight_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontRightPivot/FrontRight_UpperLegBone" index="1"]
-transform = Transform3D(1, -0.000230338, 0.000334483, 0.000230532, 1, -0.000580666, -0.00033435, 0.000580743, 1, 0, 0, -0.25)
+transform = Transform3D(1, 6.00018e-05, 0.000717285, -6.01074e-05, 1, 0.000147171, -0.000717275, -0.000147214, 1, 0, 0, -0.25)
 
 [node name="FrontLeft_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontLeftPivot" index="0"]
-transform = Transform3D(0.707127, -0.241973, 0.664394, 6.76512e-05, 0.939646, 0.342148, -0.707086, -0.241897, 0.664465, -0.04375, 0.03125, -0.04375)
+transform = Transform3D(0.707395, -0.241807, 0.664169, 5.55813e-05, 0.93968, 0.342054, -0.706818, -0.241931, 0.664738, -0.04375, 0.03125, -0.04375)
 
 [node name="FrontLeft_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontLeftPivot/FrontLeft_UpperLegBone" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 5.38665e-05, 0, -5.38665e-05, 1, 0, 0, -0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0.000522273, 0, -0.000522273, 1, 0, 0, -0.25)
 
 [node name="BackLeft_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackLeftPivot" index="0"]
-transform = Transform3D(0.706976, -0.241947, -0.664567, 0.000575722, 0.93986, -0.34156, 0.707238, 0.241092, 0.664598, -0.04375, 0.03125, 0.04375)
+transform = Transform3D(0.706605, -0.242144, -0.664889, 5.38305e-05, 0.939645, -0.342151, 0.707608, 0.241729, 0.663972, -0.04375, 0.03125, 0.04375)
 
 [node name="BackLeft_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackLeftPivot/BackLeft_UpperLegBone" index="1"]
-transform = Transform3D(1, 0.000187991, -0.000524727, -0.000188121, 0.999999, -0.000248015, 0.000524681, 0.000248114, 0.999999, 0, 0, 0.25)
+transform = Transform3D(1, -0.000140496, -0.000457419, 0.000140612, 0.999999, 0.0002542, 0.000457384, -0.000254265, 0.999999, 0, 0, 0.25)
 
 [node name="BackRight_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackRightPivot" index="0"]
-transform = Transform3D(0.706908, 0.241952, 0.664634, -3.19481e-05, 0.939684, -0.342045, -0.707305, 0.241774, 0.664276, 0.04375, 0.03125, 0.04375)
+transform = Transform3D(0.706474, 0.242184, 0.665011, -0.00019557, 0.939697, -0.342009, -0.707739, 0.241491, 0.663917, 0.04375, 0.03125, 0.04375)
 
 [node name="BackRight_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackRightPivot/BackRight_UpperLegBone" index="1"]
-transform = Transform3D(1, 0.000154421, 5.90448e-05, -0.000154443, 0.999997, 0.000371466, -5.89875e-05, -0.000371474, 0.999999, 0, 0, 0.25)
+transform = Transform3D(1, -6.46368e-05, -0.000184671, 6.48174e-05, 0.999997, 0.00097719, 0.000184608, -0.0009772, 0.999999, 0, 0, 0.25)
 
 [node name="Head" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot" index="2"]
-transform = Transform3D(1, -0.000121305, 3.29308e-06, 0.000121305, 0.999999, 1.12496e-05, -3.29445e-06, -1.12492e-05, 1, 0, 0.460417, -0.03125)
+transform = Transform3D(1, -9.9376e-05, -3.39935e-06, 9.93762e-05, 0.999999, 1.38161e-05, 3.39798e-06, -1.38164e-05, 1, 0, 0.460417, -0.03125)
 
 [node name="Aim" type="Marker3D" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 2.23517e-08, 0.0623288, -0.398363)

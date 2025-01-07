@@ -13,6 +13,9 @@ class_name ItemPickup
 
 const animationKey : String = "HoverAndSpin"
 
+static var hoverPosition : Vector3 = Vector3(0, 1.2, 0)
+static var hoverTilt : Vector3 = Vector3(0, 0, 34.5)
+
 func _ready() -> void:
 	assert(animationPlayer)
 
@@ -24,8 +27,9 @@ func _ready() -> void:
 	var keyModel : Node = item.getModel().instantiate()
 	pivot.add_child(keyModel)
 
-	animationPlayer.speed_scale = animationSpeed
-	animationPlayer.play(animationKey)
+	if item.useSpin():
+		animationPlayer.speed_scale = animationSpeed
+		animationPlayer.play(animationKey)
 
 	Util.safeConnect(body_entered, on_body_entered)
 

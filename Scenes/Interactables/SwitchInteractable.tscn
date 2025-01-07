@@ -1,0 +1,134 @@
+[gd_scene load_steps=13 format=3 uid="uid://bl86ns3xnb8gi"]
+
+[ext_resource type="Script" path="res://Scripts/Interactable/SwitchInteractable.gd" id="1_ghf41"]
+[ext_resource type="PackedScene" uid="uid://bvukdfdnb7e1o" path="res://Assets/Models/Interactables/SwitchModel.tscn" id="1_qeov7"]
+[ext_resource type="AudioStream" uid="uid://eg5e2v5f6t6w" path="res://Assets/Audio/Mechanical/Switch1Randomizer.tres" id="2_3fd8g"]
+[ext_resource type="AudioStream" uid="uid://beyr71rmrsqaf" path="res://Assets/Audio/Mechanical/Switch2Randomizer.tres" id="3_5t2rk"]
+[ext_resource type="Script" path="res://Scripts/Interactable/Interactable.gd" id="3_7oln8"]
+[ext_resource type="AudioStream" uid="uid://dk4v73syc8jcl" path="res://Assets/Audio/Tones/AcceptTone.ogg" id="6_rq3sy"]
+[ext_resource type="AudioStream" uid="uid://mq157ua84vdw" path="res://Assets/Audio/Tones/RejectTone.ogg" id="7_jww1v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d11ad"]
+size = Vector3(0.25, 0.375, 0.0869141)
+
+[sub_resource type="Animation" id="Animation_u53xu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwitchModel/Node/Switch/Rocker:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.04375, -0.05625)]
+}
+
+[sub_resource type="Animation" id="Animation_f84q0"]
+resource_name = "switchOff"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwitchModel/Node/Switch/Rocker:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector3(0, -0.04375, -0.05625), Vector3(0, 0.0204658, -0.05625)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwitchOffStream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dy215"]
+resource_name = "switchOn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwitchModel/Node/Switch/Rocker:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector3(0, 0.0204658, -0.05625), Vector3(0, -0.04375, -0.05625)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwitchOnStream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ule47"]
+_data = {
+"RESET": SubResource("Animation_u53xu"),
+"switchOff": SubResource("Animation_f84q0"),
+"switchOn": SubResource("Animation_dy215")
+}
+
+[node name="SwitchInteractable" type="StaticBody3D" node_paths=PackedStringArray("rockerPivot", "animationPlayer", "interactable", "inputAcceptStream", "inputRejectStream")]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_ghf41")
+rockerPivot = NodePath("SwitchModel/Node/Switch/Rocker")
+animationPlayer = NodePath("AnimationPlayer")
+interactable = NodePath("Interactable")
+inputAcceptStream = NodePath("InputAcceptStream")
+inputRejectStream = NodePath("InputRejectStream")
+
+[node name="SwitchOnStream" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_3fd8g")
+
+[node name="SwitchOffStream" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_5t2rk")
+
+[node name="Interactable" type="Node" parent="."]
+script = ExtResource("3_7oln8")
+
+[node name="SwitchModel" parent="." instance=ExtResource("1_qeov7")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1875, -0.043457)
+shape = SubResource("BoxShape3D_d11ad")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ule47")
+}
+
+[node name="InputAcceptStream" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_rq3sy")
+volume_db = -15.0
+
+[node name="InputRejectStream" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_jww1v")
+volume_db = -15.0
+
+[editable path="SwitchModel"]

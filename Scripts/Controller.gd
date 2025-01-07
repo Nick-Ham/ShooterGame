@@ -7,6 +7,7 @@ signal input_direction_changed(newDirection : Vector2)
 signal shoot_changed(isShooting : bool)
 signal jump_changed(isJumping : bool)
 signal reload_changed(isReloading : bool)
+signal interact_changed(inIsInteracting : bool)
 
 func getInputDirection() -> Vector2:
 	return inputDirection

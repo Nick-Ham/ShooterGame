@@ -11,3 +11,9 @@ func validate() -> bool:
 	if getModel() == null:
 		return false
 	return true
+
+func useHover() -> bool:
+	return true
+
+func useSpin() -> bool:
+	return true

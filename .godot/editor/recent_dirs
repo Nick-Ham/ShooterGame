@@ -1,3 +1,11 @@
+res://Assets/Models/Items
+res://Data/QuantityItem
+res://Assets/Audio/Tones
+res://Assets/Audio/Thuds
+res://Assets/Audio
+res://Assets/Audio/Mechanical
+res://Scripts/Environment
+res://Scripts/Interactable
 res://Assets/Models/Interactables
 res://Assets/Audio/Gunshots
 res://Assets/Materials
@@ -12,12 +20,4 @@ res://Data/ShootPatterns
 res://Assets/Models/Robots/Robot/Animations
 res://Scripts/LevelUtil
 res://Assets/Models/Robots/SmallRobot/Animations
-res://Assets/Models/Robots/SmallRobot
-res://Assets/Models/Building
-res://Assets/Audio/MetalSteps
-res://Data/FootstepPatterns
-res://Assets/Models/Environment/SemiTruck
-res://Assets/Models/Environment/Props
-res://Scenes/Environment/Decor
-res://Assets/Models/Environment/Plant
 C:/GODOT/ShooterGame/Assets/Maps

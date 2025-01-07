@@ -2,16 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsn66bmlmabl3"
-path="res://.godot/imported/RollingDoor_0.png-bee6efdea684e94101e760127351705b.ctex"
+uid="uid://ccqwhssjee7nw"
+path="res://.godot/imported/Switch_0.png-e1bfecea8fd1024c2b08819de6f19e5a.ctex"
 metadata={
 "vram_texture": false
+}
+generator_parameters={
+"md5": "649862925afb4261c5d491ce231317b6"
 }
 
 [deps]
 
-source_file="res://Assets/Models/Environment/RollingDoor/RollingDoor_0.png"
-dest_files=["res://.godot/imported/RollingDoor_0.png-bee6efdea684e94101e760127351705b.ctex"]
+source_file="res://Assets/Models/Interactables/Switch_0.png"
+dest_files=["res://.godot/imported/Switch_0.png-e1bfecea8fd1024c2b08819de6f19e5a.ctex"]
 
 [params]
 

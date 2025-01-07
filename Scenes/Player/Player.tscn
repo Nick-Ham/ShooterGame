@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://3khvdhi6xjou"]
+[gd_scene load_steps=35 format=3 uid="uid://3khvdhi6xjou"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_2vnqn"]
 [ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_56hl0"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://y7ylwct4yro8" path="res://Assets/Audio/Thuds/ThudsRandomizer.tres" id="16_b7esa"]
 [ext_resource type="Script" path="res://Scripts/Components/Hitbox.gd" id="17_0i7jp"]
 [ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="18_bxbch"]
+[ext_resource type="Script" path="res://Scripts/Interactable/Interactor.gd" id="25_22kx5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerRecoilController.gd" id="27_tf472"]
 [ext_resource type="Script" path="res://Scripts/Item/ItemManager.gd" id="32_8g535"]
 
@@ -265,6 +266,10 @@ subViewport = NodePath("SubViewportContainer/SubViewport")
 viewportCamera = NodePath("SubViewportContainer/SubViewport/Camera3D")
 headPunch = NodePath("Hands/HeldWeaponFollow/RecoilPunch")
 characterStateManager = NodePath("../../../../../CharacterStateManager")
+
+[node name="Interactor" type="RayCast3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView"]
+target_position = Vector3(0, 0, -3)
+script = ExtResource("25_22kx5")
 
 [node name="Hands" type="Node3D" parent="Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14, -0.11, -0.445)

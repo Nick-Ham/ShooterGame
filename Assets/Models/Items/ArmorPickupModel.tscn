@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://46j4eipplpco"]
+
+[ext_resource type="PackedScene" uid="uid://bwq6tmf24vapy" path="res://Assets/Models/Items/ArmorPickup.gltf" id="1_chbr5"]
+
+[node name="ArmorPickup" instance=ExtResource("1_chbr5")]

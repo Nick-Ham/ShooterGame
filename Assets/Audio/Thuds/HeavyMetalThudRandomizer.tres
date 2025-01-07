@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://q66c24a757c7"]
+
+[ext_resource type="AudioStream" uid="uid://cjch1ifuu0yb" path="res://Assets/Audio/Thuds/HeavyMetalThud1.ogg" id="1_yjqcx"]
+
+[resource]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("1_yjqcx")
