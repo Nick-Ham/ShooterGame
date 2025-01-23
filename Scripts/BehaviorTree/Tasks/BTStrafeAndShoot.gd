@@ -24,6 +24,14 @@ var isTimeUp : bool = false
 @onready var shootController : AIShootController = Util.getChildOfType(owningCharacter, AIShootController)
 
 func _ready() -> void:
+	if useWallDetection:
+		assert(leftWallDetector)
+		assert(rightWallDetector)
+
+	if useFloorDetection:
+		assert(leftFloorDetector)
+		assert(rightFloorDetector)
+
 	add_child(taskDurationTimer)
 	taskDurationTimer.autostart = false
 	taskDurationTimer.wait_time = taskDuration

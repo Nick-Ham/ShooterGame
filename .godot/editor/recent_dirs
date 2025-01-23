@@ -1,5 +1,9 @@
 res://Assets/Models/Items
 res://Data/QuantityItem
+res://Assets/Maps/Trenchbroom
+res://Assets/Models/Weapons/Pistol
+res://Assets/Audio/Gunshots
+res://Assets/Audio/WalkCycles
 res://Assets/Audio/Tones
 res://Assets/Audio/Thuds
 res://Assets/Audio
@@ -7,17 +11,13 @@ res://Assets/Audio/Mechanical
 res://Scripts/Environment
 res://Scripts/Interactable
 res://Assets/Models/Interactables
-res://Assets/Audio/Gunshots
 res://Assets/Materials
 res://Scripts/Effects
 res://Assets
 res://Data/FGD
-res://Assets/Maps/Trenchbroom
 C:/Trenchbroom/ShooterGame
 res://Assets/Models/Robots/Skitterer/Animations
 res://Assets/Models/Robots/Skitterer
 res://Data/ShootPatterns
 res://Assets/Models/Robots/Robot/Animations
-res://Scripts/LevelUtil
-res://Assets/Models/Robots/SmallRobot/Animations
 C:/GODOT/ShooterGame/Assets/Maps

@@ -4,23 +4,23 @@ class_name SmallRobotAnimationController
 @export_category("Ref")
 @export var animationPlayer : AnimationPlayer
 @export var modelAnimationTree : AnimationTree
+@export var audioAnimationPlayer : AnimationPlayer
 
 @export_category("Animation")
 @export var animationSpeedTarget : float = 2.5
 @export var directionLerpSpeed : float = 8.0
 
-const moveBlendParam : String = "parameters/MoveDirection/blend_position"
-const animationSpeedParam : String = "parameters/TimeScale/scale"
-
-var animationDirection : Vector2 = Vector2()
-
 @onready var stateManager : CharacterStateManager = Util.getChildOfType(get_parent(), CharacterStateManager)
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 @onready var targeter : Targeter = Util.getChildOfType(owningCharacter, Targeter)
 
+var animationDirection : Vector2 = Vector2()
 var owningCharacterDestroyed : bool = false
 
+const moveBlendParam : String = "parameters/MoveDirection/blend_position"
+const animationSpeedParam : String = "parameters/TimeScale/scale"
 const deathAnimationKey : String = "OnDeath"
+const audioAnimationWalkKey : String = "walking"
 
 const explosionIntensity : float = 0.5
 
@@ -29,12 +29,15 @@ func _ready() -> void:
 	assert(modelAnimationTree)
 	assert(animationPlayer)
 
+	audioAnimationPlayer.play(audioAnimationWalkKey)
+
 	Util.safeConnect(owningCharacter.character_destroyed, on_character_destroyed)
 
 func on_character_destroyed(_inCharacter : Character) -> void:
 	owningCharacterDestroyed = true
 	updateAnimationSpeed(1.0)
 	animationPlayer.play(deathAnimationKey)
+	audioAnimationPlayer.stop()
 
 func explode() -> void:
 	var environmentEffectManager : EnvironmentEffectManager = Game.getGame(get_tree()).getLevel().getEnvironmentalEffectManager()
@@ -57,10 +60,13 @@ func _physics_process(delta: float) -> void:
 func updateAnimationSpeed(inCharacterSpeed : float) -> void:
 	var animationSpeed : float = 1.0
 
-	if inCharacterSpeed > animationSpeedTarget:
-		animationSpeed = inCharacterSpeed / animationSpeedTarget
+	#if inCharacterSpeed > animationSpeedTarget:
+		#animationSpeed = inCharacterSpeed / animationSpeedTarget
+
+	animationSpeed = inCharacterSpeed / animationSpeedTarget
 
 	modelAnimationTree.set(animationSpeedParam, animationSpeed)
+	audioAnimationPlayer.speed_scale = animationSpeed
 
 func getForwardVector() -> Vector3:
 	var characterForward : Vector3 = owningCharacter.global_basis * Vector3.BACK

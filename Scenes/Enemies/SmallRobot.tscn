@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://dmdf1kchqjj6o"]
+[gd_scene load_steps=58 format=4 uid="uid://dmdf1kchqjj6o"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_ogiuy"]
 [ext_resource type="Script" path="res://Scripts/EnemyControllers/AIController.gd" id="2_fy22f"]
@@ -35,6 +35,8 @@
 [ext_resource type="Script" path="res://Scripts/EnemyControllers/NavigationController.gd" id="32_nvdxb"]
 [ext_resource type="Script" path="res://Scripts/Components/CharacterRepelArea.gd" id="33_3sgmk"]
 [ext_resource type="Script" path="res://Scripts/Components/HealthManager.gd" id="34_evgj4"]
+[ext_resource type="AudioStream" uid="uid://ba6hsccavjmmr" path="res://Assets/Audio/WalkCycles/SmallRobotStepRandomizer.tres" id="36_eqxjq"]
+[ext_resource type="AudioStream" uid="uid://cc78dicxxojx6" path="res://Assets/Audio/Loops/FlamethrowerLoop.ogg" id="37_tf6gc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_auq48"]
 radius = 0.458298
@@ -74,6 +76,7 @@ blend_point_4/pos = Vector2(0, 0)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_cggmf"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_y61px"]
+graph_offset = Vector2(-229.818, -12.9091)
 nodes/MoveDirection/node = SubResource("AnimationNodeBlendSpace2D_f1yeq")
 nodes/MoveDirection/position = Vector2(-20, 100)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_cggmf")
@@ -204,6 +207,32 @@ _data = {
 "RESET": SubResource("Animation_kcomd")
 }
 
+[sub_resource type="Animation" id="Animation_bxnjh"]
+resource_name = "walking"
+loop_mode = 1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WalkSoundPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s2q3g"]
+_data = {
+"walking": SubResource("Animation_bxnjh")
+}
+
 [node name="SmallRobot" type="CharacterBody3D" node_paths=PackedStringArray("aimMarker", "aimCast")]
 collision_layer = 4
 script = ExtResource("1_ogiuy")
@@ -226,19 +255,21 @@ losTracker = NodePath("../LOSTracker")
 [node name="AIInvestigationManager" type="Node" parent="."]
 script = ExtResource("4_urx78")
 
-[node name="SmallRobotAnimationController" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "modelAnimationTree")]
+[node name="SmallRobotAnimationController" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "modelAnimationTree", "audioAnimationPlayer")]
 script = ExtResource("31_1kjoh")
 animationPlayer = NodePath("../AnimationPlayer")
 modelAnimationTree = NodePath("../AnimationTree")
+audioAnimationPlayer = NodePath("../AudioAnimationPlayer")
 animationSpeedTarget = 0.5
 
 [node name="AIShootController" type="Node" parent="."]
 script = ExtResource("5_ok1gk")
 
-[node name="SmallRobotFlamethrowerController" type="Node" parent="." node_paths=PackedStringArray("flamethrowerParticle", "flamethrowerHitbox")]
+[node name="SmallRobotFlamethrowerController" type="Node" parent="." node_paths=PackedStringArray("flamethrowerParticle", "flamethrowerHitbox", "flamethrowerSoundLoopPlayer")]
 script = ExtResource("7_k0x3p")
 flamethrowerParticle = NodePath("../PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerEffect")
 flamethrowerHitbox = NodePath("../PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerArea3D")
+flamethrowerSoundLoopPlayer = NodePath("../FlamethrowerPlayer")
 
 [node name="CharacterHealthManager" type="Node" parent="." node_paths=PackedStringArray("health", "characterStateManager")]
 script = ExtResource("34_evgj4")
@@ -345,31 +376,25 @@ script = ExtResource("14_fwnc2")
 [node name="SmallRobotModel" parent="PhysicsInterpolator3D" instance=ExtResource("15_lp6cv")]
 
 [node name="FrontRight_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontRightPivot" index="0"]
-transform = Transform3D(0.707612, 0.241517, -0.664043, 9.70139e-05, 0.939739, 0.341892, 0.706599, -0.241992, 0.664948, 0.04375, 0.03125, -0.04375)
-
-[node name="FrontRight_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontRightPivot/FrontRight_UpperLegBone" index="1"]
-transform = Transform3D(1, 6.00018e-05, 0.000717285, -6.01074e-05, 1, 0.000147171, -0.000717275, -0.000147214, 1, 0, 0, -0.25)
+transform = Transform3D(0.707106, 0.241845, -0.664463, 0, 0.939693, 0.34202, 0.707106, -0.241845, 0.664463, 0.04375, 0.03125, -0.04375)
 
 [node name="FrontLeft_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontLeftPivot" index="0"]
-transform = Transform3D(0.707395, -0.241807, 0.664169, 5.55813e-05, 0.93968, 0.342054, -0.706818, -0.241931, 0.664738, -0.04375, 0.03125, -0.04375)
-
-[node name="FrontLeft_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontLeftPivot/FrontLeft_UpperLegBone" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0.000522273, 0, -0.000522273, 1, 0, 0, -0.25)
+transform = Transform3D(0.707107, -0.241845, 0.664462, -7.45058e-09, 0.939692, 0.34202, -0.707107, -0.241845, 0.664462, -0.04375, 0.03125, -0.04375)
 
 [node name="BackLeft_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackLeftPivot" index="0"]
-transform = Transform3D(0.706605, -0.242144, -0.664889, 5.38305e-05, 0.939645, -0.342151, 0.707608, 0.241729, 0.663972, -0.04375, 0.03125, 0.04375)
+transform = Transform3D(0.707107, -0.241845, -0.664464, 0, 0.939692, -0.342021, 0.707107, 0.241845, 0.664464, -0.04375, 0.03125, 0.04375)
 
 [node name="BackLeft_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackLeftPivot/BackLeft_UpperLegBone" index="1"]
-transform = Transform3D(1, -0.000140496, -0.000457419, 0.000140612, 0.999999, 0.0002542, 0.000457384, -0.000254265, 0.999999, 0, 0, 0.25)
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0.25)
 
 [node name="BackRight_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackRightPivot" index="0"]
-transform = Transform3D(0.706474, 0.242184, 0.665011, -0.00019557, 0.939697, -0.342009, -0.707739, 0.241491, 0.663917, 0.04375, 0.03125, 0.04375)
+transform = Transform3D(0.707107, 0.241845, 0.664461, 0, 0.939693, -0.342019, -0.707107, 0.241845, 0.664461, 0.04375, 0.03125, 0.04375)
 
 [node name="BackRight_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackRightPivot/BackRight_UpperLegBone" index="1"]
-transform = Transform3D(1, -6.46368e-05, -0.000184671, 6.48174e-05, 0.999997, 0.00097719, 0.000184608, -0.0009772, 0.999999, 0, 0, 0.25)
+transform = Transform3D(1, 0, 0, 0, 0.999997, 0, 0, 0, 0.999999, 0, 0, 0.25)
 
 [node name="Head" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot" index="2"]
-transform = Transform3D(1, -9.9376e-05, -3.39935e-06, 9.93762e-05, 0.999999, 1.38161e-05, 3.39798e-06, -1.38164e-05, 1, 0, 0.460417, -0.03125)
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0.460417, -0.03125)
 
 [node name="Aim" type="Marker3D" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 2.23517e-08, 0.0623288, -0.398363)
@@ -400,7 +425,7 @@ shape = SubResource("CapsuleShape3D_uc3a3")
 root_node = NodePath("../PhysicsInterpolator3D/SmallRobotModel")
 tree_root = SubResource("AnimationNodeBlendTree_y61px")
 anim_player = NodePath("../PhysicsInterpolator3D/SmallRobotModel/AnimationPlayer")
-parameters/MoveDirection/blend_position = Vector2(-0.00255316, 0)
+parameters/MoveDirection/blend_position = Vector2(0, 0)
 parameters/TimeScale/scale = 1.0
 
 [node name="ShootPlayer" type="AudioStreamPlayer3D" parent="."]
@@ -445,6 +470,25 @@ target_position = Vector3(1, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_bmp4w")
 }
+
+[node name="AudioAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s2q3g")
+}
+
+[node name="WalkSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("36_eqxjq")
+volume_db = -15.0
+unit_size = 7.0
+pitch_scale = 0.7
+max_polyphony = 4
+
+[node name="FlamethrowerPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("37_tf6gc")
+volume_db = -80.0
+pitch_scale = 0.5
+autoplay = true
+max_polyphony = 4
 
 [editable path="PhysicsInterpolator3D/SmallRobotModel"]
 [editable path="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerEffect"]

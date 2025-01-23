@@ -75,7 +75,7 @@ weaponBarrelEnd = NodePath("Marker3D")
 [node name="ShootPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_ukqud")
 volume_db = -18.0
-max_polyphony = 3
+max_polyphony = 4
 bus = &"WorldSFX"
 
 [node name="EmptyFirePlayer" type="AudioStreamPlayer3D" parent="."]

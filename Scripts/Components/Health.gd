@@ -3,6 +3,9 @@ class_name Health
 
 @export_category("Config")
 @export var maxHealth : float = 100.0
+@export_group("Default")
+@export var useCustomHealth : bool = false
+@export var customHealth : float = 100.0
 
 var currentHealth : float = maxHealth
 
@@ -13,6 +16,9 @@ var isHealthDepleted : bool = false
 
 func _enter_tree() -> void:
 	currentHealth = maxHealth
+
+	if useCustomHealth:
+		currentHealth = customHealth
 
 func isFullHealth() -> bool:
 	return is_equal_approx(currentHealth, maxHealth)

@@ -7,6 +7,8 @@ var currentPosition : int = 0
 
 var totalTime : float = 0.0
 
+@onready var owningCharacter : Character = Character.getOwningCharacter(self)
+
 func _physics_process(delta : float) -> void:
 	if currentPattern.size() == 0:
 		return

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://cmmdky6dnc6mm"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=6 format=3 uid="uid://cmmdky6dnc6mm"]
 
 [ext_resource type="Script" path="res://DataTypes/WeaponData.gd" id="1_2b4i3"]
+[ext_resource type="Resource" uid="uid://bkjtqasjvc7q" path="res://Data/QuantityItem/JunkBarrelAmmoItem.tres" id="2_7p2oi"]
 [ext_resource type="PackedScene" uid="uid://da7fvlcloss0y" path="res://Assets/Models/JunkBarrel/JunkBarrelModel.tscn" id="2_vy3bt"]
 [ext_resource type="PackedScene" uid="uid://bo25k4ifklv0" path="res://Scenes/Weapon/JunkBarrelWeapon.tscn" id="3_5p5wc"]
 
@@ -13,6 +14,9 @@ script = ExtResource("1_2b4i3")
 weaponName = "JunkBarrel"
 weaponScene = ExtResource("3_5p5wc")
 weaponModelScene = ExtResource("2_vy3bt")
+weaponAmmoItem = ExtResource("2_7p2oi")
+maxAmmoStorage = 175
+isAutomatic = true
 useMaxBloom = false
 shotCount = 1
 isProjectile = false
@@ -23,6 +27,8 @@ baseBloomRadius = 0.001
 maxBloomRadius = 0.006
 bloomDecaySpeed = 2.0
 bloomCurve = SubResource("Curve_mggsb")
+useCameraRecoil = true
+cameraRecoil = Vector3(0.75, 0, 0.25)
 recoilRotationPitchRange = Vector2(2.5, 10)
 recoilRotationYawRange = Vector2(-3, 3)
 recoilRotationRollRange = Vector2(-0.2, 0.2)

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckn6icvy6isn6"]
+
+[ext_resource type="PackedScene" uid="uid://djqcjoxv47nlj" path="res://Assets/Models/Items/SMGAmmo.gltf" id="1_cfyfu"]
+
+[node name="SMGAmmoModel" instance=ExtResource("1_cfyfu")]

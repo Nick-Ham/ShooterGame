@@ -9,6 +9,7 @@ class_name Weapon
 var currentWeaponData : WeaponData = null
 
 signal ammo_updated(newAmmo : int)
+signal weapon_unequipped
 
 func _ready() -> void:
 	assert(weaponBarrelEnd)
@@ -20,6 +21,9 @@ func on_ammo_updated(inNewAmmo : int) -> void:
 
 func getBarrelEnd() -> Marker3D:
 	return weaponBarrelEnd
+
+func unequip() -> void:
+	weapon_unequipped.emit()
 
 func readyWeapon() -> void:
 	weaponStateManager.readyWeapon()

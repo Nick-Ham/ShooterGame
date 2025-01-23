@@ -38,10 +38,22 @@ func _ready() -> void:
 	if loggingEnabled:
 		DebugLogger.registerTrackedValue(loggerCategory)
 
-	var weaponData : WeaponData = getWeaponData()
-	currentAmmo = weaponData.magazineSize
+	var ammoManager : AmmoManager = Util.getChildOfType(owningCharacter, AmmoManager)
+	if is_instance_valid(ammoManager):
+		currentAmmo = ammoManager.getMagazineAmmo(getWeaponData())
+	else:
+		currentAmmo = getWeaponData().magazineSize
 
 	bindToStates()
+	Util.safeConnect(getWeapon().weapon_unequipped, on_weapon_unequipped)
+
+func on_weapon_unequipped() -> void:
+	var ammoManager : AmmoManager = Util.getChildOfType(owningCharacter, AmmoManager)
+	if !is_instance_valid(ammoManager):
+		return
+
+	if currentAmmo != 0:
+		ammoManager.setMagazineAmmo(getWeaponData(), currentAmmo)
 
 func on_request_change_state(inStateKey : String) -> void:
 	for state : WeaponState in states:

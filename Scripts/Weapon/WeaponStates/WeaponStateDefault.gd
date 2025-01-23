@@ -27,6 +27,7 @@ signal weapon_fired
 func _ready() -> void:
 	add_child(shootDelayTimer)
 	shootDelayTimer.wait_time = getStateManager().getWeaponData().firingDelay #delayBetweenShots
+
 	Util.safeConnect(shootDelayTimer.timeout, on_shootDelayTimer_timeout)
 
 	add_child(damage)
@@ -44,6 +45,13 @@ func on_shootDelayTimer_timeout() -> void:
 
 	shoot()
 
+func stateEntering() -> void:
+	hasShotOnce = false
+
+	if weaponStateManager.getCurrentAmmo() <= 0:
+		request_change_state.emit(onOutOfAmmoState)
+		return
+
 func _process(delta: float) -> void:
 	var weaponData : WeaponData = getStateManager().getWeaponData()
 	bloomBuildup = lerpf(bloomBuildup, 0.0, clampf(weaponData.bloomDecaySpeed * delta, 0.0, 1.0))
@@ -57,6 +65,11 @@ func getStateKey() -> String:
 func shoot() -> void:
 	if !readyToFire:
 		return
+
+	if !equippedWeaponData.isAutomatic and hasShotOnce:
+		return
+	else:
+		hasShotOnce = true
 
 	readyToFire = false
 
@@ -76,6 +89,14 @@ func shoot() -> void:
 	if playerRecoilController:
 		playerRecoilController.addRecoilRotationPunch(equippedWeaponData.getRandomRecoilRotation())
 		playerRecoilController.addRecoilTranslationPunch(equippedWeaponData.getRandomRecoilTranslation())
+
+	var headPunchController : PlayerHeadPunchController = Util.getChildOfType(owningCharacter, PlayerHeadPunchController)
+	if is_instance_valid(headPunchController) and equippedWeaponData.useCameraRecoil:
+		var cameraRecoilData : Vector3 = equippedWeaponData.cameraRecoil
+		var newCameraRecoil : Vector3 = Vector3()
+		newCameraRecoil.x = cameraRecoilData.x
+		newCameraRecoil.z = randf_range(-abs(cameraRecoilData.z), abs(cameraRecoilData.z))
+		headPunchController.addRotationPunch(newCameraRecoil)
 
 	var controller : Controller = Util.getChildOfType(owningCharacter, Controller)
 	assert(is_instance_valid(controller), "Shoot triggered on a weaponstate with no valid controller... how did you get here?")
@@ -114,8 +135,10 @@ func handleHitEnemy(hitResult : RayCastResult) -> void:
 	if hitBox:
 		hitBox.addImpact(hitResult.hitPosition, hitResult.hitNormal)
 
+var hasShotOnce : bool = false
 func handleOnShootChanged(inIsShooting : bool) -> void:
 	if !inIsShooting:
+		hasShotOnce = false
 		return
 
 	shoot()

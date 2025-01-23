@@ -5,9 +5,9 @@ class_name HeldWeaponFollow
 ## Multiplied by delta, clamped per tick to 1.0. Value should be above 100
 @export var gunLerpSpeed : float = 40.0
 
-const minFollowDistance : float = 0.001
-const catchupDistance : float = 0.05
-const catchupScalar : float = 5.0
+const minFollowDistance : float = 0.0002
+const catchupDistance : float = 0.04
+const catchupScalar : float = 4.0
 
 func _ready() -> void:
 	set_as_top_level(true)

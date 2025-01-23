@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://beo3nw2i8daco" path="res://Scenes/Building/FenceStatic.tscn" id="11_4sndp"]
 [ext_resource type="PackedScene" uid="uid://d2qjhqp4jpee5" path="res://Scenes/Environment/Rocks/MassiveRock1Static.tscn" id="12_r1pd3"]
 [ext_resource type="PackedScene" uid="uid://478h2rn35hke" path="res://Assets/Models/Environment/Plant/AgaveModel.tscn" id="13_eprmf"]
-[ext_resource type="PackedScene" uid="uid://cxebfkaw33wim" path="res://Assets/Maps/Trenchbroom/Testmap.tscn" id="25_ly2of"]
+[ext_resource type="PackedScene" uid="uid://cxebfkaw33wim" path="res://Scenes/Maps/TestMap.tscn" id="25_ly2of"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_4mowe"]
 

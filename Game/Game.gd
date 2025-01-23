@@ -33,7 +33,6 @@ func changeLevel(inLevelScene : PackedScene) -> void:
 
 func _process(_delta: float) -> void:
 	return
-	#print(Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME))
 
 func getLevel() -> Level:
 	return currentLevel

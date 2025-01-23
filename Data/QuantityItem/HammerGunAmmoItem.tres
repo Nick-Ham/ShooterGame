@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="QuantityItem" load_steps=3 format=3 uid="uid://dk55qylp7v583"]
+
+[ext_resource type="PackedScene" uid="uid://d1ypqf0w2750s" path="res://Assets/Models/Items/ShotgunAmmoModel.tscn" id="1_ycwla"]
+[ext_resource type="Script" path="res://DataTypes/QuantityItems/QuantityItem.gd" id="2_fuwft"]
+
+[resource]
+script = ExtResource("2_fuwft")
+quantity = 15
+itemModelScene = ExtResource("1_ycwla")
+name = "Item"

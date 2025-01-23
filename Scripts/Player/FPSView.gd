@@ -19,6 +19,8 @@ func _ready() -> void:
 	Util.safeConnect(viewport.size_changed, on_viewport_size_changed)
 	refreshSubViewport()
 
+	ScreenEffects.trySetup()
+
 func _process(_delta: float) -> void:
 	viewportCamera.global_transform = global_transform
 

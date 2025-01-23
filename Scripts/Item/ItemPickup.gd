@@ -13,9 +13,6 @@ class_name ItemPickup
 
 const animationKey : String = "HoverAndSpin"
 
-static var hoverPosition : Vector3 = Vector3(0, 1.2, 0)
-static var hoverTilt : Vector3 = Vector3(0, 0, 34.5)
-
 func _ready() -> void:
 	assert(animationPlayer)
 
@@ -24,12 +21,13 @@ func _ready() -> void:
 		queue_free()
 		return
 
-	var keyModel : Node = item.getModel().instantiate()
-	pivot.add_child(keyModel)
+	var model : Node = item.getModel().instantiate()
+	pivot.add_child(model)
 
-	if item.useSpin():
-		animationPlayer.speed_scale = animationSpeed
-		animationPlayer.play(animationKey)
+	assert(item.useHover(), "Hover controls not implemented.")
+
+	animationPlayer.speed_scale = animationSpeed
+	animationPlayer.play(animationKey)
 
 	Util.safeConnect(body_entered, on_body_entered)
 

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1ypqf0w2750s"]
+
+[ext_resource type="PackedScene" uid="uid://bdvsrjf5ksrui" path="res://Assets/Models/Items/ShotgunAmmo.gltf" id="1_qiiwx"]
+
+[node name="ShotgunAmmoModel" instance=ExtResource("1_qiiwx")]

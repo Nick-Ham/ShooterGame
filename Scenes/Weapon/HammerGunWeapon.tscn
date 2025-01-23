@@ -118,6 +118,7 @@ emptyFirePlayer = NodePath("../../EmptyFirePlayer")
 
 [node name="WeaponStateDefault" type="Node" parent="WeaponStateManager"]
 script = ExtResource("8_gaswq")
+onOutOfAmmoState = null
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.106143, -0.0895716, -0.420595)

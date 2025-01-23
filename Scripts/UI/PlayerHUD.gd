@@ -12,6 +12,7 @@ var currentWeapon : Weapon = null
 
 @onready var armoredHealth : ArmoredHealth = Util.getChildOfType(player, ArmoredHealth)
 @onready var weaponManager : WeaponManager = Util.getChildOfType(player, WeaponManager)
+@onready var ammoManager : AmmoManager = Util.getChildOfType(player, AmmoManager)
 
 func _ready() -> void:
 	assert(armoredHealth)
@@ -21,6 +22,7 @@ func _ready() -> void:
 	Util.safeConnect(armoredHealth.health_changed, on_health_changed)
 
 	Util.safeConnect(weaponManager.weapon_equipped, on_weapon_equipped)
+	Util.safeConnect(ammoManager.ammo_updated, on_ammo_updated)
 
 	refresh()
 
@@ -48,11 +50,13 @@ func refreshAmmoLabel() -> void:
 		return
 
 	var currentAmmo : int = currentWeapon.getCurrentAmmo()
-	var maxAmmo : int = currentWeapon.getWeaponData().magazineSize
+	var maxAmmo : int = ammoManager.getAmmoSupply(currentWeapon.getWeaponData())
 
 	var ammoText : String = str(currentAmmo) + " / " + str(maxAmmo)
 	ammoLabel.text = ammoText
 
+func on_ammo_updated(_inWeaponData : WeaponData, _inAmmo : int) -> void:
+	refreshAmmoLabel()
 
 func injectPlayer(inPlayer : Character) -> void:
 	player = inPlayer
@@ -67,7 +71,7 @@ func fetchWeapon() -> void:
 	if !currentWeapon:
 		return
 
-	Util.safeConnect(currentWeapon.ammo_updated, on_ammo_updated)
+	Util.safeConnect(currentWeapon.ammo_updated, on_weapon_ammo_updated)
 
-func on_ammo_updated(_inAmount : int) -> void:
+func on_weapon_ammo_updated(_inAmount : int) -> void:
 	refreshAmmoLabel()

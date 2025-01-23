@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4hna7yoh2puk"]
+
+[ext_resource type="PackedScene" uid="uid://ty2htqdhwfe6" path="res://Assets/Models/Items/HealthPickup.gltf" id="1_cujf3"]
+
+[node name="HealthPickup" instance=ExtResource("1_cujf3")]

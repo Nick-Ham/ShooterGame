@@ -9,6 +9,12 @@ signal jump_changed(isJumping : bool)
 signal reload_changed(isReloading : bool)
 signal interact_changed(inIsInteracting : bool)
 
+signal weapon1_triggered
+signal weapon2_triggered
+signal weapon3_triggered
+signal weapon4_triggered
+signal weapon5_triggered
+
 func getInputDirection() -> Vector2:
 	return inputDirection
 

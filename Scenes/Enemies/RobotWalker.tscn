@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://cpurlnxl3pclx"]
+[gd_scene load_steps=54 format=4 uid="uid://cpurlnxl3pclx"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_bbu7p"]
 [ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_lgn8u"]
@@ -26,13 +26,15 @@
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTStopShooting.gd" id="27_nmm6t"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTMoveToInvestigate.gd" id="27_y621p"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTLookForTarget.gd" id="28_nwp6c"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Conditions/BTTargetWithinRange.gd" id="29_bogsc"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTStrafeAndShoot.gd" id="29_gcn5k"]
-[ext_resource type="Script" path="res://Scripts/EnemyControllers/AdvancedTargeter.gd" id="29_wdjxd"]
 [ext_resource type="Resource" uid="uid://dvc8vuveolu44" path="res://Data/ShootPatterns/FastThenSlow.tres" id="30_2uyqy"]
 [ext_resource type="Script" path="res://Scripts/BehaviorTree/Interrupts/BTTargetFoundInterrupter.gd" id="30_sxvwp"]
+[ext_resource type="Script" path="res://Scripts/BehaviorTree/Tasks/BTChaseAndShoot.gd" id="31_6cfsk"]
 [ext_resource type="Script" path="res://Scripts/EnemyControllers/AIShootController.gd" id="31_b8sev"]
 [ext_resource type="Script" path="res://Scripts/Components/LOSTracker.gd" id="32_tld2l"]
 [ext_resource type="Script" path="res://Scripts/Components/CharacterRepelArea.gd" id="35_usdsk"]
+[ext_resource type="Script" path="res://Scripts/EnemyControllers/Targeter.gd" id="36_66f13"]
 [ext_resource type="Script" path="res://Scripts/Components/HealthManager.gd" id="38_6sjf6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uc3a3"]
@@ -168,13 +170,12 @@ team = 1
 aimMarker = NodePath("PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim")
 aimCast = NodePath("PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim/AimRayCast")
 
+[node name="Targeter" type="Node" parent="."]
+script = ExtResource("36_66f13")
+
 [node name="AIController" type="Node" parent="." node_paths=PackedStringArray("aimRayCast")]
 script = ExtResource("2_n60v3")
 aimRayCast = NodePath("../PhysicsInterpolator3D/Robot/Node/Robot/AimDirectionPivot/Head/GunArm/Gun/barrel/Aim/AimRayCast")
-
-[node name="Targeter" type="Node" parent="." node_paths=PackedStringArray("losTracker")]
-script = ExtResource("29_wdjxd")
-losTracker = NodePath("../LOSTracker")
 
 [node name="AIInvestigationManager" type="Node" parent="."]
 script = ExtResource("4_7ltbn")
@@ -325,12 +326,30 @@ script = ExtResource("28_nwp6c")
 [node name="BTLookForTarget2" type="Node" parent="BehaviorTree/BTSelector/Search_BTSequencer/BTSelector"]
 script = ExtResource("28_nwp6c")
 
-[node name="BTStrafeAndShoot" type="Node" parent="BehaviorTree/BTSelector" node_paths=PackedStringArray("leftWallDetector", "rightWallDetector")]
+[node name="Hunt_BTSelector" type="Node" parent="BehaviorTree/BTSelector"]
+script = ExtResource("13_7n237")
+
+[node name="BTSequencer" type="Node" parent="BehaviorTree/BTSelector/Hunt_BTSelector"]
+script = ExtResource("14_djmc6")
+
+[node name="BTTargetWithinRange" type="Node" parent="BehaviorTree/BTSelector/Hunt_BTSelector/BTSequencer"]
+script = ExtResource("29_bogsc")
+targetDistance = 12.0
+
+[node name="BTStrafeAndShoot" type="Node" parent="BehaviorTree/BTSelector/Hunt_BTSelector/BTSequencer" node_paths=PackedStringArray("leftWallDetector", "rightWallDetector", "leftFloorDetector", "rightFloorDetector")]
 script = ExtResource("29_gcn5k")
-randomDirectionChangeTimeRange = Vector2(3, 4.5)
 shootPattern = ExtResource("30_2uyqy")
-leftWallDetector = NodePath("../../../LeftWallDetector")
-rightWallDetector = NodePath("../../../RightWallDetector")
+leftWallDetector = NodePath("../../../../../LeftWallDetector")
+rightWallDetector = NodePath("../../../../../RightWallDetector")
+leftFloorDetector = NodePath("../../../../../LeftFloorDetector")
+rightFloorDetector = NodePath("../../../../../RightFloorDetector")
+
+[node name="BTSequencer2" type="Node" parent="BehaviorTree/BTSelector/Hunt_BTSelector"]
+script = ExtResource("14_djmc6")
+
+[node name="BTChaseAndShoot" type="Node" parent="BehaviorTree/BTSelector/Hunt_BTSelector/BTSequencer2"]
+script = ExtResource("31_6cfsk")
+shootPattern = ExtResource("30_2uyqy")
 
 [node name="ShootPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamRandomizer_41jp0")
@@ -370,9 +389,17 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26504, 0)
 target_position = Vector3(-1, 0, 0)
 
+[node name="LeftFloorDetector" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26504, 0)
+target_position = Vector3(-1.5, -1.5, 0)
+
 [node name="RightWallDetector" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26504, 0)
 target_position = Vector3(1, 0, 0)
+
+[node name="RightFloorDetector" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26504, 0)
+target_position = Vector3(1.5, -1.5, 0)
 
 [editable path="PhysicsInterpolator3D/Robot"]
 [editable path="OvershieldHealth"]

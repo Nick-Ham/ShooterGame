@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://btffik0elil28"]
-
-[ext_resource type="PackedScene" uid="uid://35m6mgsawkrm" path="res://Assets/Models/ShortGun/ShortGun.gltf" id="1_hv7es"]
-
-[node name="ShortGunModel" instance=ExtResource("1_hv7es")]

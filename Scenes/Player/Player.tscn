@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=3 uid="uid://3khvdhi6xjou"]
+[gd_scene load_steps=38 format=3 uid="uid://3khvdhi6xjou"]
 
 [ext_resource type="Script" path="res://Scripts/Character.gd" id="1_2vnqn"]
 [ext_resource type="Script" path="res://Scripts/Components/WeaponManager.gd" id="2_56hl0"]
 [ext_resource type="Script" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="2_sjpk7"]
+[ext_resource type="Script" path="res://Scripts/Player/ScreenEffectController.gd" id="3_0wi8h"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerController.gd" id="3_2w6yp"]
 [ext_resource type="Script" path="res://Scripts/Components/HeadLean.gd" id="4_6ny3q"]
 [ext_resource type="Script" path="res://Scripts/Player/CharacterStateManager.gd" id="4_8v6om"]
@@ -17,8 +18,10 @@
 [ext_resource type="Script" path="res://Scripts/Components/ArmoredHealth.gd" id="9_t5fjf"]
 [ext_resource type="Script" path="res://Scripts/Player/Reticle.gd" id="9_xcwwv"]
 [ext_resource type="Script" path="res://Scripts/CharacterStates/CharacterStateDestroyed.gd" id="10_8wix2"]
+[ext_resource type="Script" path="res://Scripts/Components/AmmoManager.gd" id="10_34wce"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerHeadPunchController.gd" id="11_gj7m3"]
 [ext_resource type="Script" path="res://Scripts/Components/HealthManager.gd" id="12_ijkr7"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerWeaponEquipController.gd" id="12_kn0qb"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerSoundController.gd" id="13_32xeu"]
 [ext_resource type="AudioStream" uid="uid://c12i0eymy6qov" path="res://Assets/Audio/Steps/StepsRandomizer.tres" id="14_j633g"]
 [ext_resource type="AudioStream" uid="uid://y7ylwct4yro8" path="res://Assets/Audio/Thuds/ThudsRandomizer.tres" id="16_b7esa"]
@@ -128,6 +131,9 @@ script = ExtResource("3_2w6yp")
 fpsViewCamera = NodePath("../Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView")
 neck = NodePath("../Neck")
 
+[node name="ScreenEffectController" type="Node" parent="."]
+script = ExtResource("3_0wi8h")
+
 [node name="HeadPunchController" type="Node" parent="." node_paths=PackedStringArray("stateManager", "stateInAir", "headPunch")]
 script = ExtResource("11_gj7m3")
 stateManager = NodePath("../CharacterStateManager")
@@ -159,15 +165,25 @@ stepStreamPlayer = NodePath("../FootstepPlayer")
 
 [node name="ArmoredHealth" type="Node" parent="."]
 script = ExtResource("9_t5fjf")
+useCustomArmor = true
+customArmor = 50.0
+useCustomHealth = true
+customHealth = 50.0
 
 [node name="ItemManager" type="Node" parent="."]
 script = ExtResource("32_8g535")
+
+[node name="AmmoManager" type="Node" parent="."]
+script = ExtResource("10_34wce")
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("weaponModelPivot", "handsAnimationPlayer")]
 script = ExtResource("2_56hl0")
 weaponModelPivot = NodePath("../Neck/PhysicsInterpolator3D/HeadBobAndPunchPivot/LeanPivot/FPSView/Hands/HeldWeaponFollow/RecoilPivot/WeaponModelPivot")
 handsAnimationPlayer = NodePath("../HandsAnimationPlayer")
 useFirstPersonMode = true
+
+[node name="PlayerWeaponEquipController" type="Node" parent="."]
+script = ExtResource("12_kn0qb")
 
 [node name="PlayerRecoilController" type="Node" parent="." node_paths=PackedStringArray("recoilPunch")]
 script = ExtResource("27_tf472")

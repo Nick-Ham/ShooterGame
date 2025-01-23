@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=3 uid="uid://daw6qfdbxjj7m"]
+
+[ext_resource type="Script" path="res://Scripts/Level/Level.gd" id="1_u7b75"]
+[ext_resource type="Material" uid="uid://bsms754sxwy0e" path="res://Prototyping/PrototypingTexture.tres" id="2_256xp"]
+[ext_resource type="Script" path="res://Scripts/Level/PlayerSpawn.gd" id="3_nlm46"]
+[ext_resource type="PackedScene" uid="uid://qj38mu6j5wbp" path="res://Scenes/Environment/ItemPickup.tscn" id="4_2s4uq"]
+[ext_resource type="Resource" uid="uid://d06bih5e3pwjf" path="res://Data/WeaponItem/PistolWeaponItem.tres" id="6_j34x3"]
+[ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="7_h8w51"]
+[ext_resource type="Resource" uid="uid://bq8bwbwoj0bc5" path="res://Data/WeaponItem/JunkBarrelWeaponItem.tres" id="7_jjotj"]
+[ext_resource type="Resource" uid="uid://bkjtqasjvc7q" path="res://Data/QuantityItem/JunkBarrelAmmoItem.tres" id="8_2w3bh"]
+[ext_resource type="Resource" uid="uid://bokdbks7nbkr3" path="res://Data/WeaponItem/HammerGunWeaponItem.tres" id="8_lo7lp"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_cub6k"]
+
+[node name="PinkLevel" type="Node3D"]
+script = ExtResource("1_u7b75")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_cub6k")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.492194, 0)
+use_collision = true
+size = Vector3(250, 1, 250)
+material = ExtResource("2_256xp")
+
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+script = ExtResource("3_nlm46")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.800292, 0.59961, 0, -0.59961, 0.800292, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("7_h8w51")
+
+[node name="ItemPickup" parent="." instance=ExtResource("4_2s4uq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.63364)
+item = ExtResource("6_j34x3")
+
+[node name="ItemPickup2" parent="." instance=ExtResource("4_2s4uq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3.634)
+item = ExtResource("7_jjotj")
+
+[node name="ItemPickup4" parent="." instance=ExtResource("4_2s4uq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -3.634)
+item = ExtResource("8_lo7lp")
+
+[node name="ItemPickup3" parent="." instance=ExtResource("4_2s4uq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3.634)
+item = ExtResource("8_2w3bh")

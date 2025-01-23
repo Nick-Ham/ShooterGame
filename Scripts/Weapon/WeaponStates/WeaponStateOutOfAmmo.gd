@@ -16,7 +16,7 @@ func _ready() -> void:
 	Util.safeConnect(weaponReloadComponent.reload_complete, on_reload_complete)
 
 func stateEntering() -> void:
-	emptyFirePlayer.play()
+	return
 
 func handleOnShootChanged(inIsShooting : bool) -> void:
 	if !inIsShooting:

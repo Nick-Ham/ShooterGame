@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/MetalJump1.ogg-47fa7305d58f5823156aff5135d7e1
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

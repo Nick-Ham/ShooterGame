@@ -71,6 +71,21 @@ func _unhandled_input(event : InputEvent) -> void:
 	if event.is_action_released("Interact"):
 		interact_changed.emit(false)
 
+	if event.is_action_pressed("Weapon1"):
+		weapon1_triggered.emit()
+
+	if event.is_action_pressed("Weapon2"):
+		weapon2_triggered.emit()
+
+	if event.is_action_pressed("Weapon3"):
+		weapon3_triggered.emit()
+
+	if event.is_action_pressed("Weapon4"):
+		weapon4_triggered.emit()
+
+	if event.is_action_pressed("Weapon5"):
+		weapon5_triggered.emit()
+
 func _process(_delta: float) -> void:
 	inputDirection = Vector2()
 	inputDirection = Input.get_vector("Left", "Right", "Forward", "Backward")

@@ -18,8 +18,11 @@ const readyWeaponAnimationKey : String = "ReadyWeapon"
 
 signal weapon_equipped(inWeaponData : WeaponData)
 signal weapon_unequipped
+signal weapon_shot
 
 const handsVisualLayer : int = 2
+
+var addedWeapons : Array[WeaponData] = []
 
 func _ready() -> void:
 	assert(weaponModelPivot)
@@ -36,14 +39,32 @@ func on_item_added(inItem : Item) -> void:
 	if !itemAsWeaponItem:
 		return
 
+	if addedWeapons.has(itemAsWeaponItem.weaponData):
+		return
+
+	# First Find
+	var ammoManager : AmmoManager = Util.getChildOfType(owningCharacter, AmmoManager)
+	if is_instance_valid(ammoManager):
+		ammoManager.setMagazineAmmo(itemAsWeaponItem.weaponData, itemAsWeaponItem.weaponData.magazineSize)
+
+	addedWeapons.append(itemAsWeaponItem.weaponData)
 	equip(itemAsWeaponItem.weaponData, useFirstPersonMode)
+
+func tryEquip(inWeaponData : WeaponData) -> void:
+	if !addedWeapons.has(inWeaponData):
+		return
+
+	equip(inWeaponData, true)
 
 func equip(inWeaponData : WeaponData, firstPersonMode : bool = true) -> void:
 	if !WeaponData.validateWeapon(inWeaponData):
 		return
 
 	if is_instance_valid(equippedWeapon):
-		unequip()
+		if equippedWeapon.getWeaponData() == inWeaponData:
+			return
+		else:
+			unequip()
 
 	equippedWeaponData = inWeaponData
 
@@ -56,14 +77,16 @@ func equip(inWeaponData : WeaponData, firstPersonMode : bool = true) -> void:
 		setModelVisibilityToHands(equippedWeapon)
 
 	if handsAnimationPlayer:
+		handsAnimationPlayer.stop()
 		handsAnimationPlayer.play(readyWeaponAnimationKey)
 	else:
-		call_deferred("readyWeapon") # readyWeapon()
+		readyWeapon.call_deferred()
 
 	weapon_equipped.emit(equippedWeaponData)
 
 func unequip() -> void:
 	equippedWeaponData = null
+	equippedWeapon.unequip()
 	equippedWeapon.queue_free()
 
 	weapon_unequipped.emit()

@@ -1,18 +1,12 @@
 extends Node
 class_name Targeter
 
-@export_category("Ref")
-@export var losTracker : LOSTracker
-
-@export_category("Config")
-@export var targetLostTime : float = 10.0
-@export var defaultRememberTargetTime : float = 2.0
-
 var target : Node3D
 var positionOfInterest : Vector3
 
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 @onready var lastKnownPosition : Vector3 = get_parent().global_position
+@onready var losTracker : LOSTracker = Util.getChildOfType(owningCharacter, LOSTracker)
 
 signal target_acquired(inTarget : Node3D)
 signal target_lost(inTarget : Node3D, lossReason : LOSTracker.LossReason)
@@ -24,7 +18,7 @@ class TargetInterest extends RefCounted:
 	var interestDirection : Vector3 = Vector3()
 
 func _ready() -> void:
-	assert(losTracker)
+	assert(losTracker, "Requires an LOSTracker to function on the parent character.")
 
 	var level : Level = Game.getGame(get_tree()).getLevel()
 	var environmentEventBus : EnvironmentEventBus = level.getEnvironmentEventBus()

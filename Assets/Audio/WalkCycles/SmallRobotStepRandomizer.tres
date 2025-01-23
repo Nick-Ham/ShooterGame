@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://ba6hsccavjmmr"]
+
+[ext_resource type="AudioStream" uid="uid://cu7qmxna0l3kt" path="res://Assets/Audio/Clicks/MetalClick.ogg" id="1_ivt3y"]
+
+[resource]
+random_pitch = 1.2
+random_volume_offset_db = 2.5
+streams_count = 1
+stream_0/stream = ExtResource("1_ivt3y")

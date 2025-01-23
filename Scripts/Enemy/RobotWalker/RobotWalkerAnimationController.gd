@@ -13,7 +13,7 @@ class_name RobotWalkerAnimationController
 @export var targetTrackPitchRange : Vector2 = Vector2(-PI/12.0, PI/6.0)
 
 @export_category("Animation")
-@export var animationSpeedTarget : float = 2.5
+@export var animationSpeedTarget : float = 2.1
 @export var directionLerpSpeed : float = 8.0
 
 const moveBlendParam : String = "parameters/MoveDirection/blend_position"

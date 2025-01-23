@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bc4q2yey6jt0b"]
+[gd_scene load_steps=7 format=3 uid="uid://bc4q2yey6jt0b"]
 
 [ext_resource type="Script" path="res://Scripts/Weapon/Weapon.gd" id="1_uchjy"]
-[ext_resource type="PackedScene" uid="uid://btffik0elil28" path="res://Assets/Models/ShortGun/ShortGunModel.tscn" id="2_siokc"]
 [ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="3_r4hj4"]
 [ext_resource type="Script" path="res://Scripts/Weapon/WeaponAnimationController.gd" id="3_she38"]
 [ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefaultProjectile.gd" id="4_lsx6g"]
@@ -11,8 +10,6 @@
 [node name="PlasmaBolterWeapon" type="Node3D" node_paths=PackedStringArray("weaponBarrelEnd")]
 script = ExtResource("1_uchjy")
 weaponBarrelEnd = NodePath("BarrelEnd")
-
-[node name="ShortGunModel" parent="." instance=ExtResource("2_siokc")]
 
 [node name="WeaponAnimationController" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "audioAnimationPlayer")]
 script = ExtResource("3_she38")
@@ -44,5 +41,3 @@ target_position = Vector3(0, 0, 0)
 
 [node name="WeaponReloadComponent" type="Node" parent="."]
 script = ExtResource("7_n2y0x")
-
-[editable path="ShortGunModel"]

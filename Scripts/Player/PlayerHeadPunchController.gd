@@ -5,6 +5,7 @@ class_name PlayerHeadPunchController
 @export var stateManager : CharacterStateManager
 @export var stateInAir : CharacterStateInAir
 @export var headPunch : Punch
+@export var weaponManager : WeaponManager
 
 @export_category("StateChangeSettings")
 @export var onJumpPunchStrength : Vector2 = Vector2(1.5, 1.75)
@@ -17,6 +18,9 @@ func _ready() -> void:
 	assert(headPunch)
 
 	Util.safeConnect(stateManager.state_changed, on_state_changed)
+
+func addRotationPunch(inRotation : Vector3) -> void:
+	headPunch.addRotationPunch(inRotation)
 
 func on_state_changed(inPreviousState : CharacterState, inNewState : CharacterState) -> void:
 	if inPreviousState is CharacterStateDefault && inNewState is CharacterStateJumping:

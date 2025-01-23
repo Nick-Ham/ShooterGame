@@ -4,6 +4,7 @@ class_name SmallRobotFlamethrowerController
 @export_category("Ref")
 @export var flamethrowerParticle : GPUParticles3D
 @export var flamethrowerHitbox : Area3D
+@export var flamethrowerSoundLoopPlayer : AudioStreamPlayer3D
 
 @export_category("Config")
 @export var damagePerSecond : float = 15.0
@@ -14,10 +15,17 @@ class_name SmallRobotFlamethrowerController
 @onready var targeter : Targeter = Util.getChildOfType(character, Targeter)
 
 var isShooting : bool = false
+var shotLastFrame : bool = false
+
+const flamethrowerMaxAudio : float = -20.0
+const flamethrowerMinAudio : float = -80.0
+
+const flamethrowerAudioLerpSpeed : float = 15.0
 
 func _ready() -> void:
 	assert(flamethrowerParticle)
 	assert(flamethrowerHitbox)
+	assert(flamethrowerSoundLoopPlayer)
 
 	add_child(damage)
 
@@ -26,6 +34,10 @@ func _ready() -> void:
 	Util.safeConnect(controller.shoot_changed, on_shoot_changed)
 
 func _physics_process(delta: float) -> void:
+	updateFlamethrowerAudio(delta)
+
+	shotLastFrame = false
+
 	if !isShooting:
 		return
 
@@ -43,10 +55,16 @@ func _physics_process(delta: float) -> void:
 		return
 
 	flamethrowerParticle.emitting = true
+	shotLastFrame = true
 
 	damage.damage = damagePerSecond * delta
 	for hitCharacter : Character in hitCharacters:
 		damage.dealDamage(hitCharacter, character)
+
+func updateFlamethrowerAudio(inDelta : float) -> void:
+	var targetVolume : float = flamethrowerMaxAudio if shotLastFrame else flamethrowerMinAudio
+
+	flamethrowerSoundLoopPlayer.volume_db = lerp(flamethrowerSoundLoopPlayer.volume_db, targetVolume, flamethrowerAudioLerpSpeed * inDelta)
 
 func on_shoot_changed(inIsShooting : bool) -> void:
 	isShooting = inIsShooting
@@ -55,4 +73,5 @@ func on_shoot_changed(inIsShooting : bool) -> void:
 
 func disable() -> void:
 	isShooting = false
+	flamethrowerSoundLoopPlayer.stop()
 	flamethrowerParticle.emitting = false
