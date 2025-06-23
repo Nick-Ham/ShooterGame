@@ -12,7 +12,7 @@ const catchupScalar : float = 4.0
 func _ready() -> void:
 	set_as_top_level(true)
 
-func _process(delta : float) -> void:
+func _physics_process(delta: float) -> void:
 	global_position = get_parent().global_position
 
 	var targetDirection : Vector3 = -get_parent().global_transform.basis.z

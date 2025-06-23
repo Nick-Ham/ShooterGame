@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cmskhosfwdfc3" path="res://Assets/Models/Environment/SemiTruck/ContainerTrailer.tscn" id="1_hl03r"]
 [ext_resource type="PackedScene" uid="uid://dehn8fjchxty5" path="res://Scenes/Environment/Props/ShippingContainerStatic.tscn" id="2_nag2u"]
-[ext_resource type="Script" path="res://Scripts/Components/StepMaterialProvider.gd" id="3_m1jln"]
+[ext_resource type="Script" uid="uid://cpu080hs28vau" path="res://Scripts/Components/StepMaterialProvider.gd" id="3_m1jln"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e6nly"]
 size = Vector3(4.64673, 0.324341, 1)

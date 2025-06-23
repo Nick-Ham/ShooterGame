@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://cftcw3xhn5kko"
+path="res://.godot/imported/ArenaMap.map-2bf8baffdc658247dbf43fdc8e5daeaf.tres"
+
+[deps]
+
+source_file="res://Assets/Maps/Trenchbroom/ArenaMap.map"
+dest_files=["res://.godot/imported/ArenaMap.map-2bf8baffdc658247dbf43fdc8e5daeaf.tres"]
+
+[params]
+

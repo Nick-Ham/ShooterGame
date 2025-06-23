@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c8tq6ifdv4bex"]
 
 [ext_resource type="PackedScene" uid="uid://b3pyjb6rdppso" path="res://Assets/Models/Environment/Props/DumpsterModel.tscn" id="1_vtbwa"]
-[ext_resource type="Script" path="res://Scripts/Components/StepMaterialProvider.gd" id="2_3exyh"]
+[ext_resource type="Script" uid="uid://cpu080hs28vau" path="res://Scripts/Components/StepMaterialProvider.gd" id="2_3exyh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pwych"]
 size = Vector3(1.37093, 0.0789795, 1.84888)
@@ -15,6 +15,7 @@ collision_mask = 0
 [node name="DumpsterModel" parent="." instance=ExtResource("1_vtbwa")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DumpsterModel/Node/Dumpster/DoorRightPivot/DoorRight" index="1"]
+visible = false
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="DumpsterModel/Node/Dumpster/DoorRightPivot/DoorRight/StaticBody3D"]
 transform = Transform3D(0.999998, -0.000957585, 0.00196627, 0.000901417, 0.999598, 0.0283732, -0.00199264, -0.0283713, 0.999596, -0.00500107, 0.00904977, -0.88757)
@@ -26,6 +27,7 @@ materialType = 1
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="DumpsterModel/Node/Dumpster/DoorLeftPivot/DoorLeft" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108937, 0, 0)
+visible = false
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="DumpsterModel/Node/Dumpster/DoorLeftPivot/DoorLeft/StaticBody3D2"]
 transform = Transform3D(0.999998, -0.000957585, 0.00196627, 0.000901417, 0.999598, 0.0283731, -0.00199264, -0.0283713, 0.999596, 0.0652893, 0.0103108, -0.890357)
@@ -36,6 +38,7 @@ script = ExtResource("2_3exyh")
 materialType = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+visible = false
 shape = SubResource("ConcavePolygonShape3D_v1qdo")
 
 [editable path="DumpsterModel"]

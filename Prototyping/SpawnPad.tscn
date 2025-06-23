@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ujq37wo6xjp0"]
+
+[ext_resource type="Material" uid="uid://bsms754sxwy0e" path="res://Prototyping/PrototypingTexture.tres" id="1_36bc4"]
+[ext_resource type="Script" uid="uid://blytktcs1tjm2" path="res://Prototyping/SpawnPad.gd" id="1_ou0b2"]
+
+[node name="SpawnPad" type="Node3D"]
+script = ExtResource("1_ou0b2")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.025, 0)
+size = Vector3(1, 0.05, 1)
+material = ExtResource("1_36bc4")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.625)
+size = Vector3(0.2, 0.05, 0.25)
+material = ExtResource("1_36bc4")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0.00458869, 0, -0.785984)
+size = Vector3(0.2, 0.04, 0.2)
+material = ExtResource("1_36bc4")

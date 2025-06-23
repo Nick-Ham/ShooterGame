@@ -15,7 +15,7 @@ func _ready() -> void:
 	assert(stateManager, "CharacterStateManager required in order to function " + str(self.name))
 	assert(target, "Must assign target in order to function" + str(self.name))
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var leanDirection : Vector2 = stateManager.getCurrentState().getLeanDirection()
 	leanDirection *= PI * maxLeanDegrees / 180.0
 	targetLean = Vector3(leanDirection.y, 0.0, -leanDirection.x)

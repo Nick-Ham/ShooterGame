@@ -43,11 +43,11 @@ func InitScreenFade(alID: int, afFadeDuration: float, aStartColor: Color=Color(0
 func Process(afDeltaTime : float)->void:
 	if (mbFadeInProgress):
 		mfFadeTimeElapsed += afDeltaTime;
-
+		
 		var fT = mfFadeTimeElapsed / mfFadeDuration;
 		fT = clamp(fT, 0.0, 1.0);
 		mFadeColorOut = LerpToColor(mFadeStartColor, mFadeTargetColor, fT);
-
+		
 		if (mFadeColorOut == mFadeTargetColor):
 			mbFadeInProgress = false;
 			mFadeColorOut = mFadeTargetColor;
@@ -61,11 +61,11 @@ func GetColor()->Color:
 
 func GetEnded()->bool:
 	return mbFadeInProgress == false;
-
+	
 #-------------------------------------------------------
-
+	
 func Stop()->void:
 	mbFadeInProgress = false;
 	mFadeColorOut = Color(0.0, 0.0, 0.0, 0.0);
-
+	
 #-------------------------------------------------------

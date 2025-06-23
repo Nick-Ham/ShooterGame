@@ -1,0 +1,65 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://dwpakiwcuju4v"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_7eeeh"]
+input_name = "screen_uv"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_f2hfd"]
+parameter_name = "Texture2DParameter"
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_dicth"]
+source = 5
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_unb8g"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeVec2Constant" id="VisualShaderNodeVec2Constant_gbkd0"]
+constant = Vector2(1, 1)
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_front, diffuse_lambert, specular_schlick_ggx, unshaded;
+
+uniform sampler2D Texture2DParameter : source_color;
+
+
+
+void fragment() {
+// Input:2
+	vec2 n_out2p0 = SCREEN_UV;
+
+
+// Vector2Constant:6
+	vec2 n_out6p0 = vec2(1.000000, 1.000000);
+
+
+// VectorOp:5
+	vec2 n_out5p0 = n_out2p0 + n_out6p0;
+
+
+	vec4 n_out4p0;
+// Texture2D:4
+	n_out4p0 = texture(Texture2DParameter, n_out5p0);
+
+
+// Output:0
+	ALBEDO = vec3(n_out4p0.xyz);
+
+
+}
+"
+modes/cull = 1
+flags/unshaded = true
+nodes/fragment/0/position = Vector2(580, 180)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_7eeeh")
+nodes/fragment/2/position = Vector2(-460, 120)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_f2hfd")
+nodes/fragment/3/position = Vector2(-380, 440)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_dicth")
+nodes/fragment/4/position = Vector2(120, 120)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_unb8g")
+nodes/fragment/5/position = Vector2(-140, 100)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVec2Constant_gbkd0")
+nodes/fragment/6/position = Vector2(-400, 220)
+nodes/fragment/connections = PackedInt32Array(4, 0, 0, 0, 2, 0, 5, 0, 6, 0, 5, 1, 5, 0, 4, 0, 3, 0, 4, 2)

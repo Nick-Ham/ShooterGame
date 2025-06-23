@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponData" load_steps=6 format=3 uid="uid://cmmdky6dnc6mm"]
 
-[ext_resource type="Script" path="res://DataTypes/WeaponData.gd" id="1_2b4i3"]
+[ext_resource type="Script" uid="uid://p0nghiebok2h" path="res://DataTypes/WeaponData.gd" id="1_2b4i3"]
 [ext_resource type="Resource" uid="uid://bkjtqasjvc7q" path="res://Data/QuantityItem/JunkBarrelAmmoItem.tres" id="2_7p2oi"]
 [ext_resource type="PackedScene" uid="uid://da7fvlcloss0y" path="res://Assets/Models/JunkBarrel/JunkBarrelModel.tscn" id="2_vy3bt"]
 [ext_resource type="PackedScene" uid="uid://bo25k4ifklv0" path="res://Scenes/Weapon/JunkBarrelWeapon.tscn" id="3_5p5wc"]
@@ -16,6 +16,7 @@ weaponScene = ExtResource("3_5p5wc")
 weaponModelScene = ExtResource("2_vy3bt")
 weaponAmmoItem = ExtResource("2_7p2oi")
 maxAmmoStorage = 175
+infiniteAmmo = false
 isAutomatic = true
 useMaxBloom = false
 shotCount = 1

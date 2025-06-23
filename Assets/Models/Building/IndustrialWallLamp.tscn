@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://btlfag2f22juc"]
+
+[ext_resource type="PackedScene" uid="uid://bt0dkd74cqlj5" path="res://Assets/Models/Building/IndustrialWallLight.gltf" id="1_2oojo"]
+[ext_resource type="Texture2D" uid="uid://f5y1oi7ijhkx" path="res://Assets/Models/Building/IndustrialWallLight_0.png" id="2_odyrj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crw78"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("2_odyrj")
+emission_enabled = true
+emission = Color(0.765573, 0.623272, 0.442637, 1)
+emission_energy_multiplier = 1.5
+emission_operator = 1
+emission_texture = ExtResource("2_odyrj")
+texture_filter = 0
+
+[node name="IndustrialWallLamp" instance=ExtResource("1_2oojo")]
+
+[node name="LampBody" parent="Node/Lamp" index="0"]
+cast_shadow = 0
+
+[node name="LampGlass" parent="Node/Lamp" index="1"]
+material_override = SubResource("StandardMaterial3D_crw78")
+cast_shadow = 0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.229343)
+light_color = Color(1, 0.933558, 0.78075, 1)
+light_size = 0.25
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 35.0
+omni_attenuation = 0.3
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.229343)
+visible = false
+light_color = Color(1, 0.344442, 0.29834, 1)
+light_energy = 0.4
+light_size = 0.25
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 0.7

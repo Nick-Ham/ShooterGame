@@ -2,23 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv5y5vk0fmthv"
-path="res://.godot/imported/Trashbag_0.png-c5d963a0649d08299bc38cbb7837f208.ctex"
+uid="uid://b77x5snr4wbhc"
+path.s3tc="res://.godot/imported/Trashbag_0.png-c5d963a0649d08299bc38cbb7837f208.s3tc.ctex"
 metadata={
-"vram_texture": false
-}
-generator_parameters={
-"md5": "718ef182f1f62ef7a691b1aa201e1743"
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Models/Environment/Props/Trashbag_0.png"
-dest_files=["res://.godot/imported/Trashbag_0.png-c5d963a0649d08299bc38cbb7837f208.ctex"]
+dest_files=["res://.godot/imported/Trashbag_0.png-c5d963a0649d08299bc38cbb7837f208.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

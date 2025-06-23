@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://daw6qfdbxjj7m"]
+
+[ext_resource type="Script" path="res://Scripts/Level/Level.gd" id="1_u7b75"]
+[ext_resource type="Material" uid="uid://bsms754sxwy0e" path="res://Prototyping/PrototypingTexture.tres" id="2_256xp"]
+[ext_resource type="Script" path="res://Scripts/Level/PlayerSpawn.gd" id="3_nlm46"]
+[ext_resource type="PackedScene" uid="uid://4f8htrhrh6ud" path="res://Scenes/Enemies/Skitterer.tscn" id="5_bflno"]
+[ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="7_h8w51"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_cub6k"]
+vertices = PackedVector3Array(-124.5, 0.507806, -124.5, -124.5, 0.507806, 124.5, 124.5, 0.507806, 124.5, 124.5, 0.507806, -124.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[node name="PinkLevel" type="Node3D"]
+script = ExtResource("1_u7b75")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_cub6k")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.492194, 0)
+use_collision = true
+size = Vector3(250, 1, 250)
+material = ExtResource("2_256xp")
+
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+script = ExtResource("3_nlm46")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.800292, 0.59961, 0, -0.59961, 0.800292, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("7_h8w51")
+
+[node name="Skitterer" parent="." instance=ExtResource("5_bflno")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389975, 0.00780535, -7.32509)

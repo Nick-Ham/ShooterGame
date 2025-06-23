@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmf8rv3ur1e7f"]
+
+[ext_resource type="Shader" uid="uid://dwpakiwcuju4v" path="res://Prototyping/Spheretest.tres" id="1_xdnox"]
+[ext_resource type="ArrayMesh" uid="uid://budoxowsjpl4t" path="res://Assets/Models/Environment/Plant/TreeCombinedMesh.tres" id="2_qikcw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_083su"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q45nf"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v8fhp"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_xdnox")
+shader_parameter/Texture2DParameter = SubResource("ViewportTexture_q45nf")
+
+[node name="Spheretest" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7779, 0, 5.2764)
+mesh = SubResource("BoxMesh_083su")
+surface_material_override/0 = SubResource("ShaderMaterial_v8fhp")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.47555, -1.55377, -1.15061)
+mesh = ExtResource("2_qikcw")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0992, -1.55377, 1.59519)
+mesh = ExtResource("2_qikcw")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9259, -1.55377, -2.73006)
+mesh = ExtResource("2_qikcw")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.2295, -1.55377, -5.05801)
+mesh = ExtResource("2_qikcw")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.7262, -1.55377, -1.54042)
+mesh = ExtResource("2_qikcw")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.4023, -1.55377, 1.74312)
+mesh = ExtResource("2_qikcw")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9239, -1.55377, 4.56271)
+mesh = ExtResource("2_qikcw")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.68232, -1.55377, 1.84477)
+mesh = ExtResource("2_qikcw")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5913, -1.55378, -5.90473)
+mesh = ExtResource("2_qikcw")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3385, -1.55378, -8.22008)
+mesh = ExtResource("2_qikcw")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.28056, -1.55378, -4.6606)
+mesh = ExtResource("2_qikcw")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(1920, 1024)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(0.227756, 0, 0.973718, 0, 1, 0, -0.973718, 0, 0.227756, 1.53595, 0, -0.869694)
+fov = 125.8

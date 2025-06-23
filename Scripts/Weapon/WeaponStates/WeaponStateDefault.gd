@@ -147,6 +147,10 @@ func handleOnReloadChanged(inIsReloading : bool) -> void:
 	if !inIsReloading:
 		return
 
+	var currentWeaponData : WeaponData = weaponStateManager.getWeaponData()
+	if weaponStateManager.getCurrentAmmo() == currentWeaponData.magazineSize:
+		return
+
 	var weaponReloadComponent : WeaponReloadComponent = Util.getChildOfType(weaponStateManager.get_parent(), WeaponReloadComponent)
 	Util.safeConnect(weaponReloadComponent.reload_complete, on_reload_complete)
 	weaponReloadComponent.reload()

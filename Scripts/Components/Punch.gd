@@ -12,7 +12,7 @@ class_name Punch
 var currentTargetRotation : Vector3 = Vector3()
 var currentTargetTranslation : Vector3 = Vector3()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	target.rotation_degrees = lerp(target.rotation_degrees, currentTargetRotation, delta * punchLerpSpeed)
 	currentTargetRotation = lerp(currentTargetRotation, Vector3(), delta * punchDecayLerpSpeed)
 

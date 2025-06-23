@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+warnings/check_invalid_track_paths=false
+
 [application]
 
 config/name="Shooter"
 run/main_scene="res://Game/DefaultGameScene.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [audio]
@@ -24,6 +28,7 @@ buses/default_bus_layout="res://Game/AudioBusLayout.tres"
 PrototypingUtil="*res://Prototyping/PrototypingUtil.gd"
 DebugLogger="*res://Debug/DebugLogger.gd"
 ScreenEffects="*res://addons/screen_effects/scripts/effects_handler.gd"
+LimboConsole="*res://addons/limbo_console/limbo_console.gd"
 
 [debug]
 
@@ -31,6 +36,10 @@ gdscript/warnings/unused_variable=0
 gdscript/warnings/unused_signal=0
 gdscript/warnings/untyped_declaration=2
 gdscript/warnings/inferred_declaration=1
+
+[debug_draw_3d]
+
+settings/addon_root_folder="res://addons/debug_draw_3d"
 
 [display]
 
@@ -43,7 +52,7 @@ project/assembly_name="Shooter"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/func_godot/plugin.cfg", "res://addons/screen_effects/plugin.cfg", "res://addons/script-tabs/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg", "res://addons/limbo_console/plugin.cfg", "res://addons/screen_effects/plugin.cfg", "res://addons/script-tabs/plugin.cfg")
 
 [input]
 
@@ -149,6 +158,21 @@ Weapon5={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":53,"key_label":0,"unicode":53,"location":0,"echo":false,"script":null)
 ]
 }
+limbo_console_toggle={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":96,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+limbo_auto_complete_reverse={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":true,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194306,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+limbo_console_search_history={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":true,"meta_pressed":false,"pressed":false,"keycode":82,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -166,12 +190,12 @@ Weapon5={
 [physics]
 
 common/physics_jitter_fix=0.0
-3d/physics_engine="JoltPhysics3D"
+3d/physics_engine="Jolt Physics"
 3d/default_gravity=13.0
 common/physics_interpolation=true
 
 [rendering]
 
-textures/decals/filter=0
 anti_aliasing/quality/msaa_3d=2
+textures/decals/filter=0
 occlusion_culling/use_occlusion_culling=true

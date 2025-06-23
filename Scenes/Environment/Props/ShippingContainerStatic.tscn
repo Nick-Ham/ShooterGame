@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dehn8fjchxty5"]
 
 [ext_resource type="PackedScene" uid="uid://b7ipvrfwsjdco" path="res://Assets/Models/Environment/Props/ShippingContainerModel.tscn" id="1_w0jfe"]
-[ext_resource type="Script" path="res://Scripts/Components/StepMaterialProvider.gd" id="2_c4try"]
+[ext_resource type="Script" uid="uid://cpu080hs28vau" path="res://Scripts/Components/StepMaterialProvider.gd" id="2_c4try"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4rdh8"]
 size = Vector3(0.0686035, 2.71658, 1.21588)
@@ -24,9 +24,6 @@ materialType = 1
 
 [node name="ShippingContainer" parent="." instance=ExtResource("1_w0jfe")]
 
-[node name="FrontRightDoor" parent="ShippingContainer/Node/ShippingContainer" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.10625, -1.20625)
-
 [node name="StaticBody3D" type="StaticBody3D" parent="ShippingContainer/Node/ShippingContainer/FrontRightDoor" index="1"]
 collision_mask = 0
 
@@ -37,9 +34,6 @@ shape = SubResource("BoxShape3D_4rdh8")
 [node name="StepMaterialProvider" type="Node" parent="ShippingContainer/Node/ShippingContainer/FrontRightDoor/StaticBody3D"]
 script = ExtResource("2_c4try")
 materialType = 1
-
-[node name="FrontLeftDoor" parent="ShippingContainer/Node/ShippingContainer" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.10625, 1.20625)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="ShippingContainer/Node/ShippingContainer/FrontLeftDoor/Door2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.436764, 0, -0.706672)

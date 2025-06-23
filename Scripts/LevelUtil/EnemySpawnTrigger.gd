@@ -18,6 +18,9 @@ func on_body_entered(_inBody : PhysicsBody3D) -> void:
 		return
 
 	for spawnMarker : SpawnMarker in spawnMarkers:
+		if !spawnMarker:
+			continue
+
 		spawnMarker.spawn()
 
 	queue_free()

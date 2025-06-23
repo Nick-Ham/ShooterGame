@@ -1,6 +1,6 @@
-QuantityItem
-AudioStreamRandomizer
 StandardMaterial3D
+AudioStreamRandomizer
+QuantityItem
 FootstepPattern
 Resource
 WeaponItem

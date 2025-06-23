@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://d1twb1233o7oo" path="res://Assets/Audio/MetalSteps/MetalJumpRandomizer.tres" id="1_gcadf"]
 [ext_resource type="AudioStream" uid="uid://chh2b8subebi4" path="res://Assets/Audio/MetalSteps/MetalStepRandomizer.tres" id="1_xkkgc"]
 [ext_resource type="AudioStream" uid="uid://5lj02xwaa3me" path="res://Assets/Audio/MetalSteps/MetalLandingRandomizer.tres" id="2_0wvgb"]
-[ext_resource type="Script" path="res://DataTypes/FootstepPattern.gd" id="3_csov4"]
+[ext_resource type="Script" uid="uid://b6gfirsld8h13" path="res://DataTypes/FootstepPattern.gd" id="3_csov4"]
 
 [resource]
 script = ExtResource("3_csov4")

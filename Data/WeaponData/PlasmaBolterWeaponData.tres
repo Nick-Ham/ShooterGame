@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponData" load_steps=6 format=3 uid="uid://05st06xuv7q1"]
 
 [ext_resource type="PackedScene" uid="uid://dero46gvnk3p4" path="res://Scenes/Projectiles/PlasmaBolt.tscn" id="1_860co"]
-[ext_resource type="Script" path="res://DataTypes/WeaponData.gd" id="1_wkbnf"]
+[ext_resource type="Script" uid="uid://p0nghiebok2h" path="res://DataTypes/WeaponData.gd" id="1_wkbnf"]
 [ext_resource type="PackedScene" uid="uid://shxmwpsdxqex" path="res://Assets/Models/Key/KeyModel.tscn" id="3_b1cw7"]
 [ext_resource type="PackedScene" uid="uid://bc4q2yey6jt0b" path="res://Scenes/Weapon/PlasmaBolterWeapon.tscn" id="4_s3mk3"]
 
@@ -15,6 +15,7 @@ weaponName = "PlasmaBolter"
 weaponScene = ExtResource("4_s3mk3")
 weaponModelScene = ExtResource("3_b1cw7")
 maxAmmoStorage = 15
+infiniteAmmo = false
 isAutomatic = true
 useMaxBloom = false
 shotCount = 1

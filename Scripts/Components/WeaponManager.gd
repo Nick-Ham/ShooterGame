@@ -8,6 +8,7 @@ class_name WeaponManager
 @export_category("Config")
 @export var defaultWeapon : WeaponData
 @export var useFirstPersonMode : bool
+@export var infiniteAmmo : bool
 
 var equippedWeaponData : WeaponData = null
 var equippedWeapon : Weapon = null
@@ -113,3 +114,16 @@ func setModelVisibilityToHands(inRoot : Node3D) -> void:
 			continue
 
 		childAsMesh.layers = handsVisualLayer
+
+func hasWeaponByName(inWeaponName : String) -> bool:
+	for weaponData : WeaponData in addedWeapons:
+		if weaponData.weaponName == inWeaponName:
+			return true
+
+	return false
+
+func getInfiniteAmmo() -> bool:
+	return infiniteAmmo
+
+func isWeaponEquipped() -> bool:
+	return is_instance_valid(equippedWeapon)

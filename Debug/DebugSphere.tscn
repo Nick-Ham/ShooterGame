@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpksl75kdukor"]
 
-[ext_resource type="Script" path="res://Debug/DebugSphere.gd" id="1_r383c"]
+[ext_resource type="Script" uid="uid://c3mg2kyr41u43" path="res://Debug/DebugSphere.gd" id="1_r383c"]
 [ext_resource type="Material" uid="uid://6xie6i2hbca2" path="res://Debug/DebugRedMaterial.tres" id="2_a3727"]
 
 [node name="DebugSphere" type="Node3D"]

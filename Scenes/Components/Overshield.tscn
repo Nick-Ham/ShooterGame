@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bxo34hdcbnrh6"]
 
-[ext_resource type="Script" path="res://Scripts/Components/OvershieldHealth.gd" id="1_742b5"]
-[ext_resource type="Script" path="res://Scripts/Components/OvershieldController.gd" id="2_ocn31"]
+[ext_resource type="Script" uid="uid://bngjp5mc8jr44" path="res://Scripts/Components/OvershieldHealth.gd" id="1_742b5"]
+[ext_resource type="Script" uid="uid://ko432w01l850" path="res://Scripts/Components/OvershieldController.gd" id="2_ocn31"]
 
 [sub_resource type="Animation" id="Animation_06qja"]
 resource_name = "HitOvershield"
@@ -98,6 +98,22 @@ tracks/1/keys = {
 "values": [1.0, 3.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_ppwxs"]
+resource_name = "ShieldFull"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OvershieldMaterialController:shieldStrength")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.5, 5),
+"transitions": PackedFloat32Array(1, 0.574349, 0.68302),
+"update": 0,
+"values": [1.0, 0.9, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_oadfm"]
 resource_name = "ShieldReset"
 length = 0.5
@@ -126,29 +142,13 @@ tracks/1/keys = {
 "values": [0.0, 1.0]
 }
 
-[sub_resource type="Animation" id="Animation_ppwxs"]
-resource_name = "ShieldFull"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OvershieldMaterialController:shieldStrength")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 3.5, 5),
-"transitions": PackedFloat32Array(1, 0.574349, 0.68302),
-"update": 0,
-"values": [1.0, 0.9, 0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rraee"]
 _data = {
-"HitOvershield": SubResource("Animation_06qja"),
-"RESET": SubResource("Animation_dna7g"),
-"ShieldBreak": SubResource("Animation_tbjq3"),
-"ShieldRecharged": SubResource("Animation_ppwxs"),
-"ShieldReset": SubResource("Animation_oadfm")
+&"HitOvershield": SubResource("Animation_06qja"),
+&"RESET": SubResource("Animation_dna7g"),
+&"ShieldBreak": SubResource("Animation_tbjq3"),
+&"ShieldRecharged": SubResource("Animation_ppwxs"),
+&"ShieldReset": SubResource("Animation_oadfm")
 }
 
 [node name="OvershieldHealth" type="Node"]

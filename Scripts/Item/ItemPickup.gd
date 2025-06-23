@@ -10,16 +10,29 @@ class_name ItemPickup
 @export_category("Ref")
 @export var animationPlayer : AnimationPlayer
 @export var pivot : Node3D
+@export var despawnTimer : Timer
 
 const animationKey : String = "HoverAndSpin"
 
 func _ready() -> void:
 	assert(animationPlayer)
+	assert(despawnTimer)
 
 	if !item or !item.validate():
 		print_debug("Missing item, deleting itempickup.")
 		queue_free()
 		return
+
+	setItem(item)
+
+	Util.safeConnect(body_entered, on_body_entered)
+	Util.safeConnect(despawnTimer.timeout, on_despawnTimer_timeout)
+
+func on_despawnTimer_timeout() -> void:
+	queue_free()
+
+func setItem(inItem : Item) -> void:
+	item = inItem
 
 	var model : Node = item.getModel().instantiate()
 	pivot.add_child(model)
@@ -28,8 +41,6 @@ func _ready() -> void:
 
 	animationPlayer.speed_scale = animationSpeed
 	animationPlayer.play(animationKey)
-
-	Util.safeConnect(body_entered, on_body_entered)
 
 func on_body_entered(inBody : Node3D) -> void:
 	var itemManager : ItemManager = Util.getChildOfType(inBody, ItemManager)

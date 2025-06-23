@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://3he28g28iwdq"]
 
-[ext_resource type="Script" path="res://Scripts/LevelUtil/EnemySpawnTrigger.gd" id="1_jpv0o"]
+[ext_resource type="Script" uid="uid://co5b5vfytoti" path="res://Scripts/LevelUtil/EnemySpawnTrigger.gd" id="1_jpv0o"]
 
 [node name="EnemySpawnTrigger" type="Area3D"]
 collision_layer = 0

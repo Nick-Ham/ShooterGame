@@ -7,6 +7,17 @@ class_name PlayerHUD
 @export var ammoLabel : Label
 @export var armorHBox : HBoxContainer
 
+# ===== Prototype stuff
+@export_category("PrototypeRef")
+@export var pistolDisplayLabel : Label
+@export var junkBarrelDisplayLabel : Label
+@export var hammerGunDisplayLabel : Label
+@export_category("PrototypeWeaponData")
+@export var pistolName : String = "Pistol"
+@export var junkBarrelName : String = "JunkBarrel"
+@export var hammerGunName : String = "Hammer"
+# =====
+
 var player : Character = null
 var currentWeapon : Weapon = null
 
@@ -36,6 +47,34 @@ func refresh() -> void:
 	refreshHealthLabel()
 	refreshArmorLabel()
 	refreshAmmoLabel()
+
+	refreshPrototypeLabels()
+
+func _physics_process(_delta: float) -> void:
+	refreshPrototypeLabels()
+
+func refreshPrototypeLabels() -> void:
+	if !Util.isValid(weaponManager):
+		return
+
+	pistolDisplayLabel.visible = weaponManager.hasWeaponByName(pistolName)
+	junkBarrelDisplayLabel.visible = weaponManager.hasWeaponByName(junkBarrelName)
+	hammerGunDisplayLabel.visible = weaponManager.hasWeaponByName(hammerGunName)
+
+	pistolDisplayLabel.modulate.a = 0.4
+	junkBarrelDisplayLabel.modulate.a = 0.4
+	hammerGunDisplayLabel.modulate.a = 0.4
+
+	if !weaponManager.isWeaponEquipped():
+		return
+
+	if weaponManager.equippedWeaponData.weaponName == pistolName:
+		pistolDisplayLabel.modulate.a = 1.0
+	elif weaponManager.equippedWeaponData.weaponName == junkBarrelName:
+		junkBarrelDisplayLabel.modulate.a = 1.0
+	elif weaponManager.equippedWeaponData.weaponName == hammerGunName:
+		hammerGunDisplayLabel.modulate.a = 1.0
+
 
 func refreshHealthLabel() -> void:
 	healthLabel.text = str(int(armoredHealth.getCurrentHealth()))

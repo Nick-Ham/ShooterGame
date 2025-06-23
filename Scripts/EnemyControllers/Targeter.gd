@@ -4,8 +4,12 @@ class_name Targeter
 var target : Node3D
 var positionOfInterest : Vector3
 
+var targetVar : String = &"target"
+
+@export_category("Ref")
+@export var btPlayer : BTPlayer
+
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
-@onready var lastKnownPosition : Vector3 = get_parent().global_position
 @onready var losTracker : LOSTracker = Util.getChildOfType(owningCharacter, LOSTracker)
 
 signal target_acquired(inTarget : Node3D)
@@ -18,12 +22,13 @@ class TargetInterest extends RefCounted:
 	var interestDirection : Vector3 = Vector3()
 
 func _ready() -> void:
+	assert(btPlayer)
 	assert(losTracker, "Requires an LOSTracker to function on the parent character.")
 
 	var level : Level = Game.getGame(get_tree()).getLevel()
 	var environmentEventBus : EnvironmentEventBus = level.getEnvironmentEventBus()
 
-	Util.safeConnect(environmentEventBus.sound_triggered, on_environment_sound_triggered)
+	Util.safeConnect(losTracker.character_detected, acquireTarget)
 
 func getInterest() -> TargetInterest:
 	var interest : TargetInterest = TargetInterest.new()
@@ -46,32 +51,14 @@ func getInterest() -> TargetInterest:
 	interest.interestPosition = positionOfInterest
 	return interest
 
-func on_environment_sound_triggered(inSource : Node3D) -> void:
-	## This should really be moved to the investigationManager
-	var investigationManager : AIInvestigationManager = Util.getChildOfType(owningCharacter, AIInvestigationManager)
-	if !investigationManager:
-		push_error("Targeter will not function correctly without an AIInvestigationManager")
+func updateBlackboard() -> void:
+	if !Util.isValid(target):
+		btPlayer.blackboard.set_var(targetVar, null)
 		return
 
-	if target:
-		return
+	btPlayer.blackboard.set_var(targetVar, target)
 
-	if inSource == owningCharacter:
-		return
-
-	var sourceAsCharacter : Character = inSource as Character
-	if !sourceAsCharacter:
-		return
-
-	if sourceAsCharacter.team == owningCharacter.team:
-		return
-
-	investigationManager.createInvestigation(sourceAsCharacter)
-
-func acquireTarget(inTarget : Node3D = null) -> Node3D:
-	if inTarget:
-		target = inTarget
-
+func acquireTarget(_inTarget : Node3D = null) -> Node3D:
 	if target:
 		return target
 
@@ -82,6 +69,8 @@ func acquireTarget(inTarget : Node3D = null) -> Node3D:
 
 		target = character
 		target_acquired.emit(target)
+
+		updateBlackboard()
 		return target
 
 	return null
@@ -89,6 +78,7 @@ func acquireTarget(inTarget : Node3D = null) -> Node3D:
 func on_target_destroyed(inCharacter : Character) -> void:
 	target = null
 	target_lost.emit(inCharacter, LOSTracker.LossReason.DESTRUCTION)
+	acquireTarget()
 
 func hasTarget() -> bool:
 	return is_instance_valid(target)

@@ -4,6 +4,9 @@ class_name ArmoredHealth
 static var armorItem : QuantityItem = load("res://Data/QuantityItem/ArmorItem.tres")
 static var healthItem : QuantityItem = load("res://Data/QuantityItem/HealthItem.tres")
 
+@export_group("Cheat")
+@export var immortal : bool = false
+
 @export_category("Config")
 @export var maxArmor : float = 100.0
 @export_group("Default")
@@ -62,6 +65,9 @@ func addArmor(inArmor : float) -> void:
 	armor_changed.emit(previousArmor, currentArmor)
 
 func takeDamage(inDamage : float) -> void:
+	if immortal:
+		return
+
 	if getArmorDepleted():
 		super.takeDamage(inDamage)
 

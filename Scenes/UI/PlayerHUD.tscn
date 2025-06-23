@@ -1,16 +1,19 @@
 [gd_scene load_steps=5 format=3 uid="uid://bt25rffiq21ij"]
 
-[ext_resource type="Script" path="res://Scripts/UI/PlayerHUD.gd" id="1_j8bj0"]
+[ext_resource type="Script" uid="uid://dvytbxi4v5684" path="res://Scripts/UI/PlayerHUD.gd" id="1_j8bj0"]
 [ext_resource type="Texture2D" uid="uid://280j3b3tncq0" path="res://Assets/32xIcons/HealthIcon.png" id="2_1qsd7"]
-[ext_resource type="Script" path="res://Prototyping/FPSDisplay.gd" id="2_3teit"]
+[ext_resource type="Script" uid="uid://bkvk54ftx81hp" path="res://Prototyping/FPSDisplay.gd" id="2_3teit"]
 [ext_resource type="Texture2D" uid="uid://cnv2aor753yqs" path="res://Assets/32xIcons/ArmorIcon.png" id="3_plolt"]
 
-[node name="PlayerHUD" type="CanvasLayer" node_paths=PackedStringArray("healthLabel", "armorLabel", "ammoLabel", "armorHBox")]
+[node name="PlayerHUD" type="CanvasLayer" node_paths=PackedStringArray("healthLabel", "armorLabel", "ammoLabel", "armorHBox", "pistolDisplayLabel", "junkBarrelDisplayLabel", "hammerGunDisplayLabel")]
 script = ExtResource("1_j8bj0")
 healthLabel = NodePath("Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/HealthHBox/HealthLabel")
 armorLabel = NodePath("Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/ArmorHBox/ArmorLabel")
 ammoLabel = NodePath("Control/VBoxContainer/HBoxContainer/MarginContainer2/AmmoLabel")
 armorHBox = NodePath("Control/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/ArmorHBox")
+pistolDisplayLabel = NodePath("VBoxContainer/PistolDisplay")
+junkBarrelDisplayLabel = NodePath("VBoxContainer/JunkBarrelDisplay")
+hammerGunDisplayLabel = NodePath("VBoxContainer/HammerGunDisplay")
 capturesMouse = true
 
 [node name="Control" type="Control" parent="."]
@@ -97,11 +100,38 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 35
 text = "0 / 0"
 
-[node name="FPSDisplay" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 35.0
 offset_top = 36.0
-offset_right = 133.0
-offset_bottom = 81.0
+offset_right = 75.0
+offset_bottom = 76.0
+
+[node name="FPSDisplay" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "test"
 script = ExtResource("2_3teit")
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "F1 to reset level"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="PistolDisplay" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "1 : Pistol"
+
+[node name="JunkBarrelDisplay" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "2 : Junk Barrel"
+
+[node name="HammerGunDisplay" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "3 : Hammer Gun"

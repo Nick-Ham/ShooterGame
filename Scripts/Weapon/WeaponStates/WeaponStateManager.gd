@@ -20,6 +20,7 @@ var lastState : WeaponState = null
 var controller : Controller = null
 
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
+@onready var weaponManager : WeaponManager  = Util.getChildOfType(owningCharacter, WeaponManager)
 
 signal state_changed(lastState : WeaponState, newState : WeaponState)
 signal weapon_fired
@@ -126,6 +127,9 @@ func getCurrentAmmo() -> int:
 	return currentAmmo
 
 func consumeAmmo(inAmount : int) -> void:
+	if weaponManager.getInfiniteAmmo():
+		return
+
 	var weaponData : WeaponData = getWeaponData()
 
 	var lastAmmo : int = currentAmmo

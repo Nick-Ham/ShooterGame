@@ -3,34 +3,60 @@ class_name AIController
 
 @export_category("Ref")
 @export var aimRayCast : RayCast3D
+@export var btPlayer : BTPlayer
 
 @export_category("Config")
 @export var controlDirectionLerpSpeed : float = 3.0
+@export var alwaysFaceTarget : bool = true
 
 @export_category("Shooting")
 @export_flags_3d_physics var shootingAimLayer : int = 9
 
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 @onready var targeter : Targeter = Util.getChildOfType(owningCharacter, Targeter)
+@onready var navigationController : NavigationController = Util.getChildOfType(owningCharacter, NavigationController)
+
+const minRotationDistanceToNavigation : float = 3
 
 func _ready() -> void:
 	assert(aimRayCast)
+	assert(targeter)
+	assert(btPlayer)
 
 	Util.safeConnect(owningCharacter.character_destroyed, on_character_destroyed)
 
 func on_character_destroyed(_inCharacter : Character) -> void:
-	var behaviorTree : BehaviorTree = Util.getChildOfType(owningCharacter, BehaviorTree)
-	if is_instance_valid(behaviorTree):
-		behaviorTree.queue_free()
-
+	cleanupAgent()
 	queue_free()
+
+func cleanupAgent() -> void:
+	if Util.isValid(btPlayer):
+		btPlayer.active = false
+		btPlayer.queue_free()
+
+	if Util.isValid(targeter):
+		targeter.queue_free()
+
+	if Util.isValid(navigationController):
+		navigationController.queue_free()
+
+	var shootController : AIShootController = Util.getChildOfType(owningCharacter, AIShootController)
+	if Util.isValid(shootController):
+		shootController.queue_free()
 
 func _physics_process(delta: float) -> void:
 	var interest : Targeter.TargetInterest = targeter.getInterest()
 	if !interest:
 		return
 
-	owningCharacter.rotateCharacterToTarget(interest.interestPosition, delta)
+	var navigationPoint : Vector3 = navigationController.getNextNavigationPoint()
+	var navigationFinalPosition : Vector3 = navigationController.getTargetPosition()
+
+	if alwaysFaceTarget or owningCharacter.global_position.distance_squared_to(navigationFinalPosition) < minRotationDistanceToNavigation:
+		owningCharacter.rotateCharacterToTarget(interest.interestPosition, delta)
+	else:
+		owningCharacter.rotateCharacterToTarget(navigationPoint, delta)
+
 
 func setControlDirectionSmooth(inDirection : Vector2, inDelta : float) -> void:
 	var newInputDirection : Vector2 = inDirection.normalized()

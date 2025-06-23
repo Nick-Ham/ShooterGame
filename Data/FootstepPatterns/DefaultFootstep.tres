@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="FootstepPattern" load_steps=4 format=3 uid="uid://bh8xcb833ntc5"]
 
-[ext_resource type="Script" path="res://DataTypes/FootstepPattern.gd" id="1_1v1qr"]
+[ext_resource type="Script" uid="uid://b6gfirsld8h13" path="res://DataTypes/FootstepPattern.gd" id="1_1v1qr"]
 [ext_resource type="AudioStream" uid="uid://c12i0eymy6qov" path="res://Assets/Audio/Steps/StepsRandomizer.tres" id="1_gubyv"]
 [ext_resource type="AudioStream" uid="uid://y7ylwct4yro8" path="res://Assets/Audio/Thuds/ThudsRandomizer.tres" id="2_ombqa"]
 

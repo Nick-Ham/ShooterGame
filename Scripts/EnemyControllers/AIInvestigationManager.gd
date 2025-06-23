@@ -13,6 +13,8 @@ var currentInvestigation : Investigation = null
 @onready var targeter : Targeter = Util.getChildOfType(owningCharacter, Targeter)
 
 func _ready() -> void:
+	assert(targeter)
+
 	Util.safeConnect(targeter.target_acquired, on_target_acquired)
 	Util.safeConnect(targeter.target_lost, on_target_lost)
 

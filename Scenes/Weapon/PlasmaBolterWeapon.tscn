@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bc4q2yey6jt0b"]
+[gd_scene load_steps=8 format=3 uid="uid://bc4q2yey6jt0b"]
 
-[ext_resource type="Script" path="res://Scripts/Weapon/Weapon.gd" id="1_uchjy"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="3_r4hj4"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponAnimationController.gd" id="3_she38"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefaultProjectile.gd" id="4_lsx6g"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateOutOfAmmo.gd" id="5_k1ch1"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponReloadComponent.gd" id="7_n2y0x"]
+[ext_resource type="Script" uid="uid://cb5qodwkeqwb4" path="res://Scripts/Weapon/Weapon.gd" id="1_uchjy"]
+[ext_resource type="Script" uid="uid://c4nwhk6g1n5ly" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="3_r4hj4"]
+[ext_resource type="Script" uid="uid://kxjb7dsu7d0t" path="res://Scripts/Weapon/WeaponAnimationController.gd" id="3_she38"]
+[ext_resource type="Script" uid="uid://1c3n6jcf8tet" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefaultProjectile.gd" id="4_lsx6g"]
+[ext_resource type="Script" uid="uid://cbdcuuy1555nh" path="res://Scripts/Weapon/WeaponStates/WeaponStateOutOfAmmo.gd" id="5_k1ch1"]
+[ext_resource type="AudioStream" uid="uid://byeppnbhc472f" path="res://Assets/Audio/Gunshots/Gunshot1Randomizer.tres" id="6_221dq"]
+[ext_resource type="Script" uid="uid://b2w5v7nottcco" path="res://Scripts/Weapon/WeaponReloadComponent.gd" id="7_n2y0x"]
 
 [node name="PlasmaBolterWeapon" type="Node3D" node_paths=PackedStringArray("weaponBarrelEnd")]
 script = ExtResource("1_uchjy")
@@ -36,6 +37,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.225813)
 target_position = Vector3(0, 0, 0)
 
 [node name="ShootSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_221dq")
 
 [node name="PlaceholderAnimationPlayer" type="AnimationPlayer" parent="."]
 

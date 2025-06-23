@@ -5,7 +5,7 @@ class_name Projectile
 @export var shapeCast : ShapeCast3D
 
 @export_category("Config")
-@export var speed : float = 50.0
+@export var speed : float = 37.0
 
 var projection : Vector3 = Vector3.FORWARD * speed * (1.0 / Engine.physics_ticks_per_second)
 

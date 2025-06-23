@@ -1,4 +1,4 @@
-extends Node
+extends Object
 class_name Util
 
 static func safeConnect(inSignal : Signal, inCallable : Callable) -> void:
@@ -37,6 +37,9 @@ static func getChildrenRecursive(inParent : Node) -> Array[Node]:
 		foundChildren.append_array(children)
 
 	return foundChildren
+
+static func isValid(inObject : Variant) -> bool:
+	return is_instance_valid(inObject) and !inObject.is_queued_for_deletion()
 
 static func getParentInTreeOfType(inNode : Node, inType : Script) -> Node:
 	var node : Node = inNode

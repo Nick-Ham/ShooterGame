@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AIShootPattern" load_steps=2 format=3 uid="uid://bvr3p3c1xagn1"]
 
-[ext_resource type="Script" path="res://DataTypes/AIShootPattern.gd" id="1_tdqgy"]
+[ext_resource type="Script" uid="uid://mk0avtbk3gku" path="res://DataTypes/AIShootPattern.gd" id="1_tdqgy"]
 
 [resource]
 script = ExtResource("1_tdqgy")

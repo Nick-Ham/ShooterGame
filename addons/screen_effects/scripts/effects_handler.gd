@@ -40,14 +40,8 @@ var mvCameraAngularVelocity: Vector3 = Vector3(0.0, 0.0, 0.0);
 # CORE FUNCTIONS
 #-------------------------------------------------------
 
-func _ready() -> void:
-	trySetup()
-
-#-------------------------------------------------------
-
-func trySetup() -> void:
+func setup(inCamera : Camera3D) -> void:
 	mCamera = get_viewport().get_camera_3d();
-
 	if (is_instance_valid(mCamera)==false):
 		printerr("[EffectsHandler] No active camera found.");
 		return;
@@ -82,8 +76,7 @@ func trySetup() -> void:
 #-------------------------------------------------------
 
 func _process(afDeltaTime : float)->void:
-	if (is_instance_valid(mCamera) == false):
-		return;
+	if (is_instance_valid(mCamera) == false): return;
 
 	####################################################################################################
 	# Fov Fade

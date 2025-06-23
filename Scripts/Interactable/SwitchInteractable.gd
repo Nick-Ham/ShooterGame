@@ -6,16 +6,21 @@ class_name SwitchInteractable
 @export var canTurnOn : bool = true
 @export var canTurnOff : bool = true
 
+@export_category("SwitchPosition")
+@export_group("SwitchOn")
+@export var switchOnPosition : Vector3 = Vector3()
+@export var switchOnRotation : Vector3 = Vector3()
+@export_group("SwitchOff")
+@export var switchOffPosition : Vector3 = Vector3()
+@export var switchOffRotation : Vector3 = Vector3()
+
 @export_category("Ref")
-@export var rockerPivot : Node3D
+@export var switchPivot : Node3D
 @export var animationPlayer : AnimationPlayer
 @export var interactable : Interactable
 
 @export var inputAcceptStream : AudioStreamPlayer3D
 @export var inputRejectStream : AudioStreamPlayer3D
-
-const switchOnPosition : Vector3 = Vector3(0, -0.044, -0.056)
-const switchOffPosition : Vector3 = Vector3(0, 0.02, -0.056)
 
 const switchOnAnimationKey : String = "switchOn"
 const switchOffAnimationKey : String = "switchOff"
@@ -25,7 +30,7 @@ var isSwitchOn : bool = false
 signal switch_state_changed(isSwitchOn : bool, shouldAnimate : bool)
 
 func _ready() -> void:
-	assert(rockerPivot)
+	assert(switchPivot)
 	assert(animationPlayer)
 	assert(interactable)
 
@@ -57,6 +62,7 @@ func setSwitchState(inIsOn : bool, inShouldAnimate : bool = true) -> void:
 	if inShouldAnimate:
 		animationPlayer.play(switchOnAnimationKey if isSwitchOn else switchOffAnimationKey)
 	else:
-		rockerPivot.position = switchOnPosition if isSwitchOn else switchOffPosition
+		switchPivot.position = switchOnPosition if isSwitchOn else switchOffPosition
+		switchPivot.rotation = switchOnRotation if isSwitchOn else switchOffRotation
 
 	switch_state_changed.emit(isSwitchOn, inShouldAnimate)

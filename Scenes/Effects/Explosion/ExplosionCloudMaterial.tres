@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://djuqliw6asyak"]
+
+[ext_resource type="Shader" uid="uid://uwiut54n2jk4" path="res://Scenes/Effects/Explosion/ExplosionEffectShader.tres" id="1_feeus"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_feeus")
+shader_parameter/EmmissionScalar = 0.3

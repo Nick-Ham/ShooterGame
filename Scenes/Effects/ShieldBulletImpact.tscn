@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d06y3gfxuxbt7"]
 
-[ext_resource type="Script" path="res://Scripts/Effects/Impact.gd" id="1_erqmc"]
+[ext_resource type="Script" uid="uid://mejiabyqcfih" path="res://Scripts/Effects/Impact.gd" id="1_erqmc"]
 [ext_resource type="PackedScene" uid="uid://ni1ih76dcbhb" path="res://Scenes/Effects/ShieldImpactParticles.tscn" id="2_7syyg"]
 
 [node name="Impact" type="Node3D" node_paths=PackedStringArray("pivot", "delayFadeTimer", "fadeDurationTimer")]

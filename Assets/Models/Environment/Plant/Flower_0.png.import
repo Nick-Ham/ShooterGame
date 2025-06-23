@@ -2,23 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djxdbj4xay2kj"
-path="res://.godot/imported/Flower_0.png-c2c5157ae3453f3bb7cd17723d180ee4.ctex"
+uid="uid://bc4h6ljjnkp88"
+path.s3tc="res://.godot/imported/Flower_0.png-c2c5157ae3453f3bb7cd17723d180ee4.s3tc.ctex"
 metadata={
-"vram_texture": false
-}
-generator_parameters={
-"md5": "73de1cb7ebf95edb2ffdc4be20f4218f"
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Models/Environment/Plant/Flower_0.png"
-dest_files=["res://.godot/imported/Flower_0.png-c2c5157ae3453f3bb7cd17723d180ee4.ctex"]
+dest_files=["res://.godot/imported/Flower_0.png-c2c5157ae3453f3bb7cd17723d180ee4.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

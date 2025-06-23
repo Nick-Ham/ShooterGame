@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvoi27upaqn7f"]
 
-[ext_resource type="Script" path="res://Scripts/Effects/MuzzleFlashEffect.gd" id="1_y4607"]
+[ext_resource type="Script" uid="uid://cn1xrmqtr4d8v" path="res://Scripts/Effects/MuzzleFlashEffect.gd" id="1_y4607"]
 [ext_resource type="PackedScene" uid="uid://cv73byy5tvm33" path="res://Assets/Models/Effects/MuzzleFlashModel.tscn" id="2_7p3xt"]
 
 [node name="MuzzleFlashEffect" type="Node3D"]

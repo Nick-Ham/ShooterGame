@@ -126,12 +126,12 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 // Varyings
 varying vec3 var_vertexPosition;
 
-uniform float ColorShift : hint_range(0, 1) = 1;
+uniform float ColorShift : hint_range(0.0, 1.0) = 1.0;
 uniform sampler2D tex_frg_29;
 uniform sampler2D tex_frg_34;
-uniform float ShieldStrengthSwitch : hint_range(0, 1, 1) = 1;
+uniform float ShieldStrengthSwitch : hint_range(0.0, 1.0, 1.0) = 1.0;
 uniform sampler2D tex_frg_35;
-uniform float FlashStrength = 1;
+uniform float FlashStrength = 1.0;
 
 
 

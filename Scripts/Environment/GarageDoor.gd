@@ -54,14 +54,13 @@ func on_interact_changed(inIsInteracting : bool) -> void:
 	if !inIsInteracting:
 		return
 
-	if !is_instance_valid(controllingSwitch):
+	#if !is_instance_valid(controllingSwitch):
 		#setIsOpen(!isOpen, true) # disable manual opening until needed
-		return
+		#return
 
 	if animationPlayer.is_playing() || isOpen:
 		return
 
-	inputRejectStreamPlayer.play()
 	animationPlayer.play(failOpenAnimationKey)
 
 func on_switch_state_changed(inIsSwitchOn : bool, inShouldAnimate : bool) -> void:

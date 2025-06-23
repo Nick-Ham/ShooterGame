@@ -2,7 +2,7 @@ extends Area3D
 class_name LOSTracker
 
 @export_category("Config")
-@export var acquireTargetVisionRange : float = PI / 3.0
+@export var acquireTargetVisionRange : float = 1.5 * PI # heavily widened for prototype PI / 3.0
 @export var loseTargetVisionRange : float = PI / 2.0
 @export_flags_3d_physics var detectorLayer : int = 6
 
@@ -56,6 +56,9 @@ func _physics_process(_delta: float) -> void:
 		if !bodyAsCharacter:
 			continue
 
+		if bodyAsCharacter.getIsDestroyed():
+			continue
+
 		if charactersToRemove.has(bodyAsCharacter):
 			continue
 
@@ -65,5 +68,14 @@ func _physics_process(_delta: float) -> void:
 		if !owningCharacter.canSee(bodyAsCharacter, acquireTargetVisionRange):
 			continue
 
+		Util.safeConnect(bodyAsCharacter.character_destroyed, on_character_destroyed)
+
 		visibleCharacters.append(bodyAsCharacter)
 		character_detected.emit(bodyAsCharacter)
+
+func on_character_destroyed(inCharacter : Character) -> void:
+	if !visibleCharacters.has(inCharacter):
+		return
+
+	visibleCharacters.erase(inCharacter)
+	character_lost.emit(inCharacter, LOSTracker.LossReason.DESTRUCTION)

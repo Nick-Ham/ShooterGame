@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c260fgktr2e1r"]
 
-[ext_resource type="Material" uid="uid://djuqliw6asyak" path="res://Scenes/Effects/ExplosionEffect/ExplosionCloudMaterial.tres" id="1_kmtj1"]
+[ext_resource type="Material" uid="uid://djuqliw6asyak" path="res://Scenes/Effects/Explosion/ExplosionCloudMaterial.tres" id="1_kmtj1"]
 
 [sub_resource type="Curve" id="Curve_pesay"]
 _data = [Vector2(0, 0), 0.0, 0.205479, 0, 0, Vector2(1, 1), 3.80262, 0.0, 0, 0]

@@ -1,0 +1,99 @@
+[gd_resource type="BehaviorTree" load_steps=27 format=3 uid="uid://cuxn1lu24k4bx"]
+
+[ext_resource type="Script" uid="uid://bmrthqey2sm6s" path="res://ai/tasks/actions/BTSetupEnemyAction.gd" id="1_kypj4"]
+[ext_resource type="Script" uid="uid://du4evxc7oqeg0" path="res://ai/tasks/conditions/HasTarget.gd" id="1_tfdim"]
+[ext_resource type="Script" uid="uid://ci4e1l8s7u7k5" path="res://ai/tasks/actions/BTPathToTargetAction.gd" id="3_gvsex"]
+[ext_resource type="Script" uid="uid://cnagccopa15r5" path="res://ai/tasks/conditions/WithinRange.gd" id="3_q2ysw"]
+[ext_resource type="Resource" uid="uid://dvc8vuveolu44" path="res://Data/ShootPatterns/FastThenSlow.tres" id="4_kypj4"]
+[ext_resource type="Script" uid="uid://ct0r7kyf00n3p" path="res://ai/tasks/actions/BTIdleAction.gd" id="5_gvsex"]
+[ext_resource type="Script" uid="uid://c2bv5mfkv5cd4" path="res://ai/tasks/actions/BTStrafeTargetAction.gd" id="6_l1ity"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_hgh78"]
+
+[sub_resource type="BTAction" id="BTAction_gvsex"]
+script = ExtResource("1_kypj4")
+controllerVar = "controller"
+shootControllerVar = "shootController"
+navControllerVar = "navController"
+
+[sub_resource type="BTRunLimit" id="BTRunLimit_q2ysw"]
+children = [SubResource("BTAction_gvsex")]
+
+[sub_resource type="BTCondition" id="BTCondition_xfe3q"]
+script = ExtResource("1_tfdim")
+targetVar = "target"
+
+[sub_resource type="BTCondition" id="BTCondition_q2ysw"]
+script = ExtResource("3_q2ysw")
+useMinDistance = true
+minDistance = 5.0
+useMaxDistance = false
+maxDistance = 0.0
+targetVar = "target"
+
+[sub_resource type="BTAction" id="BTAction_per30"]
+script = ExtResource("3_gvsex")
+minDistance = 5.0
+shootPattern = ExtResource("4_kypj4")
+targetVar = "target"
+controllerVar = "controller"
+shootControllerVar = "shootController"
+navControllerVar = "navController"
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_q2ysw"]
+time_limit = 3.0
+children = [SubResource("BTAction_per30")]
+
+[sub_resource type="BTSequence" id="BTSequence_per30"]
+children = [SubResource("BTCondition_xfe3q"), SubResource("BTCondition_q2ysw"), SubResource("BTTimeLimit_q2ysw")]
+
+[sub_resource type="BTCondition" id="BTCondition_3l3t4"]
+script = ExtResource("1_tfdim")
+targetVar = "target"
+
+[sub_resource type="BTCondition" id="BTCondition_l1ity"]
+script = ExtResource("3_q2ysw")
+useMinDistance = true
+minDistance = 3.0
+useMaxDistance = true
+maxDistance = 10.0
+targetVar = "target"
+
+[sub_resource type="BTAction" id="BTAction_ks2ry"]
+script = ExtResource("6_l1ity")
+shootPattern = ExtResource("4_kypj4")
+requireSight = true
+targetVar = "target"
+controllerVar = "controller"
+shootControllerVar = "shootController"
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_xm6pk"]
+time_limit = 3.0
+children = [SubResource("BTAction_ks2ry")]
+
+[sub_resource type="BTSequence" id="BTSequence_6flri"]
+children = [SubResource("BTCondition_3l3t4"), SubResource("BTCondition_l1ity"), SubResource("BTTimeLimit_xm6pk")]
+
+[sub_resource type="BTCondition" id="BTCondition_ks2ry"]
+script = ExtResource("1_tfdim")
+targetVar = "target"
+
+[sub_resource type="BTInvert" id="BTInvert_xm6pk"]
+children = [SubResource("BTCondition_ks2ry")]
+
+[sub_resource type="BTAction" id="BTAction_6flri"]
+script = ExtResource("5_gvsex")
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_gnbp6"]
+time_limit = 1.0
+children = [SubResource("BTAction_6flri")]
+
+[sub_resource type="BTSequence" id="BTSequence_qgcwi"]
+children = [SubResource("BTInvert_xm6pk"), SubResource("BTTimeLimit_gnbp6")]
+
+[sub_resource type="BTSelector" id="BTSelector_hgh78"]
+children = [SubResource("BTRunLimit_q2ysw"), SubResource("BTSequence_per30"), SubResource("BTSequence_6flri"), SubResource("BTSequence_qgcwi")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_hgh78")
+root_task = SubResource("BTSelector_hgh78")

@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=3 uid="uid://dsfis7xn6fanq"]
+
+[ext_resource type="Script" uid="uid://smopmobttlnl" path="res://Scripts/Interactable/SwitchInteractable.gd" id="1_l8svq"]
+[ext_resource type="PackedScene" uid="uid://bkw5rrnc15y3g" path="res://Assets/Models/Interactables/ControlStationModel.tscn" id="2_060bv"]
+[ext_resource type="Script" uid="uid://fd33bjmoymau" path="res://Scripts/Interactable/Interactable.gd" id="3_nf3e1"]
+[ext_resource type="AudioStream" uid="uid://dk4v73syc8jcl" path="res://Assets/Audio/Tones/AcceptTone.ogg" id="4_nec1x"]
+[ext_resource type="AudioStream" uid="uid://lsivdxoaolu2" path="res://Assets/Audio/Tones/MinorRejectTone.ogg" id="5_pngpl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mrd8l"]
+size = Vector3(0.434082, 0.300659, 0.353027)
+
+[sub_resource type="Animation" id="Animation_olt1x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlStationModel/Node/ControlStation/Lever:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.261799, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_remph"]
+resource_name = "switchOn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlStationModel/Node/ControlStation/Lever:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector3(1.309, 0, 0), Vector3(0.261799, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fku75"]
+resource_name = "switchOff"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ControlStationModel/Node/ControlStation/Lever:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector3(0.261799, 0, 0), Vector3(1.309, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0w586"]
+_data = {
+&"RESET": SubResource("Animation_olt1x"),
+&"switchOff": SubResource("Animation_remph"),
+&"switchOn": SubResource("Animation_fku75")
+}
+
+[node name="ControlStationInteractable" type="StaticBody3D" node_paths=PackedStringArray("switchPivot", "animationPlayer", "interactable", "inputAcceptStream", "inputRejectStream")]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_l8svq")
+canTurnOff = false
+switchOnPosition = Vector3(-0.1875, 1, -0.4375)
+switchOnRotation = Vector3(1.309, 0, 0)
+switchOffPosition = Vector3(-0.1875, 1, -0.4375)
+switchOffRotation = Vector3(0.261799, 0, 0)
+switchPivot = NodePath("ControlStationModel/Node/ControlStation/Lever")
+animationPlayer = NodePath("AnimationPlayer")
+interactable = NodePath("Interactable")
+inputAcceptStream = NodePath("AcceptSound")
+inputRejectStream = NodePath("RejectSound")
+
+[node name="ControlStationModel" parent="." instance=ExtResource("2_060bv")]
+
+[node name="Lever" parent="ControlStationModel/Node/ControlStation" index="4"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, -0.1875, 1, -0.4375)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.313232, 1.11995, -0.559914)
+shape = SubResource("BoxShape3D_mrd8l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0w586")
+}
+
+[node name="Interactable" type="Node" parent="."]
+script = ExtResource("3_nf3e1")
+
+[node name="AcceptSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_nec1x")
+volume_db = -15.0
+bus = &"WorldSFX"
+
+[node name="RejectSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_pngpl")
+volume_db = -15.0
+bus = &"WorldSFX"
+
+[editable path="ControlStationModel"]

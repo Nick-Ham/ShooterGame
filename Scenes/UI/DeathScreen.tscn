@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://p6k6ic58y56g"]
 
-[ext_resource type="Script" path="res://Scripts/UI/DeathScreen.gd" id="1_clagh"]
+[ext_resource type="Script" uid="uid://bvdapnh0u16bn" path="res://Scripts/UI/DeathScreen.gd" id="1_clagh"]
 [ext_resource type="Shader" uid="uid://cucpyxnw61t6" path="res://Scenes/UI/AlphaTransitionShader.tres" id="3_wtpoq"]
 
 [sub_resource type="Animation" id="Animation_ckc4y"]
@@ -60,8 +60,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6illl"]
 _data = {
-"DeathScreenFadeIn": SubResource("Animation_ckc4y"),
-"RESET": SubResource("Animation_a800k")
+&"DeathScreenFadeIn": SubResource("Animation_ckc4y"),
+&"RESET": SubResource("Animation_a800k")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2dkhe"]

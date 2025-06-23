@@ -1,15 +1,15 @@
 [gd_scene load_steps=15 format=3 uid="uid://cmm4pfi1pp17c"]
 
-[ext_resource type="Script" path="res://Scripts/Weapon/Weapon.gd" id="1_rfqyw"]
+[ext_resource type="Script" uid="uid://cb5qodwkeqwb4" path="res://Scripts/Weapon/Weapon.gd" id="1_rfqyw"]
 [ext_resource type="AudioStream" uid="uid://blt7lph2g6vyu" path="res://Assets/Audio/Gunshots/Pistol1Randomizer.tres" id="2_n10dt"]
 [ext_resource type="AudioStream" uid="uid://cu7qmxna0l3kt" path="res://Assets/Audio/Clicks/MetalClick.ogg" id="3_c8mpi"]
 [ext_resource type="AudioStream" uid="uid://vwi8t88n7qdj" path="res://Assets/Audio/GunParts/MagazineInsert1Randomizer.tres" id="4_qdjya"]
 [ext_resource type="AudioStream" uid="uid://dt00i5wvj2uae" path="res://Assets/Audio/GunParts/MagazineRemove1Randomizer.tres" id="5_wkbtk"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponAnimationController.gd" id="6_hmiqs"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponReloadComponent.gd" id="7_5lss7"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="8_y0isp"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefault.gd" id="9_nrjx5"]
-[ext_resource type="Script" path="res://Scripts/Weapon/WeaponStates/WeaponStateOutOfAmmo.gd" id="10_6duwt"]
+[ext_resource type="Script" uid="uid://kxjb7dsu7d0t" path="res://Scripts/Weapon/WeaponAnimationController.gd" id="6_hmiqs"]
+[ext_resource type="Script" uid="uid://b2w5v7nottcco" path="res://Scripts/Weapon/WeaponReloadComponent.gd" id="7_5lss7"]
+[ext_resource type="Script" uid="uid://c4nwhk6g1n5ly" path="res://Scripts/Weapon/WeaponStates/WeaponStateManager.gd" id="8_y0isp"]
+[ext_resource type="Script" uid="uid://cheh74dr42a85" path="res://Scripts/Weapon/WeaponStates/WeaponStateDefault.gd" id="9_nrjx5"]
+[ext_resource type="Script" uid="uid://cbdcuuy1555nh" path="res://Scripts/Weapon/WeaponStates/WeaponStateOutOfAmmo.gd" id="10_6duwt"]
 [ext_resource type="PackedScene" uid="uid://cul6h3vg5ht5d" path="res://Assets/Models/Weapons/Pistol/PistolModel.tscn" id="11_x172m"]
 
 [sub_resource type="Animation" id="Animation_2oko0"]
@@ -64,11 +64,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6qihg"]
 _data = {
-"reload": SubResource("Animation_2oko0"),
-"shoot": SubResource("Animation_my5c4")
+&"reload": SubResource("Animation_2oko0"),
+&"shoot": SubResource("Animation_my5c4")
 }
 
-[node name="JunkBarrelWeapon" type="Node3D" node_paths=PackedStringArray("weaponBarrelEnd")]
+[node name="PistolWeapon" type="Node3D" node_paths=PackedStringArray("weaponBarrelEnd")]
 script = ExtResource("1_rfqyw")
 weaponBarrelEnd = NodePath("Marker3D")
 
@@ -127,7 +127,7 @@ target_position = Vector3(0, 0, 0)
 
 [node name="AudioAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_6qihg")
+&"": SubResource("AnimationLibrary_6qihg")
 }
 
 [node name="PistolModel" parent="." instance=ExtResource("11_x172m")]

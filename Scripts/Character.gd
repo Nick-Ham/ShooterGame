@@ -7,9 +7,6 @@ class_name Character
 @export var characterRotationSpeed : float = 3.0
 @export var maxAngleFromTarget : float = PI/3.0
 
-@export_group("Physics")
-@export var mass : float = 1.0
-
 @export_category("Team")
 @export_enum("TEAM1", "TEAM2") var team : int = 0
 
@@ -22,8 +19,19 @@ class_name Character
 
 signal character_destroyed(character : Character)
 
+var isDestroyed : bool = false
+
+var decayTimer : SceneTreeTimer
+
 func destroyCharacter() -> void:
+	isDestroyed = true
 	character_destroyed.emit(self)
+
+	await get_tree().create_timer(20.0).timeout
+	queue_free()
+
+func getIsDestroyed() -> bool:
+	return isDestroyed
 
 func getHeadHeight() -> float:
 	return headHeight
@@ -101,3 +109,6 @@ func rotateCharacterToTarget(inTarget : Vector3, inDelta : float) -> void:
 		return
 
 	rotate_y(angleToTarget * inDelta * characterRotationSpeed)
+
+func addVelocity(inVelocity : Vector3) -> void:
+	velocity += inVelocity

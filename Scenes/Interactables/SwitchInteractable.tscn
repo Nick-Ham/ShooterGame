@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://bl86ns3xnb8gi"]
 
-[ext_resource type="Script" path="res://Scripts/Interactable/SwitchInteractable.gd" id="1_ghf41"]
+[ext_resource type="Script" uid="uid://smopmobttlnl" path="res://Scripts/Interactable/SwitchInteractable.gd" id="1_ghf41"]
 [ext_resource type="PackedScene" uid="uid://bvukdfdnb7e1o" path="res://Assets/Models/Interactables/SwitchModel.tscn" id="1_qeov7"]
 [ext_resource type="AudioStream" uid="uid://eg5e2v5f6t6w" path="res://Assets/Audio/Mechanical/Switch1Randomizer.tres" id="2_3fd8g"]
 [ext_resource type="AudioStream" uid="uid://beyr71rmrsqaf" path="res://Assets/Audio/Mechanical/Switch2Randomizer.tres" id="3_5t2rk"]
-[ext_resource type="Script" path="res://Scripts/Interactable/Interactable.gd" id="3_7oln8"]
+[ext_resource type="Script" uid="uid://fd33bjmoymau" path="res://Scripts/Interactable/Interactable.gd" id="3_7oln8"]
 [ext_resource type="AudioStream" uid="uid://dk4v73syc8jcl" path="res://Assets/Audio/Tones/AcceptTone.ogg" id="6_rq3sy"]
 [ext_resource type="AudioStream" uid="uid://mq157ua84vdw" path="res://Assets/Audio/Tones/RejectTone.ogg" id="7_jww1v"]
 
@@ -88,16 +88,18 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ule47"]
 _data = {
-"RESET": SubResource("Animation_u53xu"),
-"switchOff": SubResource("Animation_f84q0"),
-"switchOn": SubResource("Animation_dy215")
+&"RESET": SubResource("Animation_u53xu"),
+&"switchOff": SubResource("Animation_f84q0"),
+&"switchOn": SubResource("Animation_dy215")
 }
 
-[node name="SwitchInteractable" type="StaticBody3D" node_paths=PackedStringArray("rockerPivot", "animationPlayer", "interactable", "inputAcceptStream", "inputRejectStream")]
+[node name="SwitchInteractable" type="StaticBody3D" node_paths=PackedStringArray("switchPivot", "animationPlayer", "interactable", "inputAcceptStream", "inputRejectStream")]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_ghf41")
-rockerPivot = NodePath("SwitchModel/Node/Switch/Rocker")
+switchOnPosition = Vector3(0, -0.044, -0.056)
+switchOffPosition = Vector3(0, 0.02, -0.056)
+switchPivot = NodePath("SwitchModel/Node/Switch/Rocker")
 animationPlayer = NodePath("AnimationPlayer")
 interactable = NodePath("Interactable")
 inputAcceptStream = NodePath("InputAcceptStream")
@@ -126,9 +128,11 @@ libraries = {
 [node name="InputAcceptStream" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_rq3sy")
 volume_db = -15.0
+bus = &"WorldSFX"
 
 [node name="InputRejectStream" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_jww1v")
 volume_db = -15.0
+bus = &"WorldSFX"
 
 [editable path="SwitchModel"]

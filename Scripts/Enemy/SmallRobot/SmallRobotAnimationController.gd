@@ -23,6 +23,7 @@ const deathAnimationKey : String = "OnDeath"
 const audioAnimationWalkKey : String = "walking"
 
 const explosionIntensity : float = 0.5
+const randomDeathExplosionTimeMax : float = 0.1
 
 func _ready() -> void:
 	assert(stateManager)
@@ -40,8 +41,11 @@ func on_character_destroyed(_inCharacter : Character) -> void:
 	audioAnimationPlayer.stop()
 
 func explode() -> void:
+	var randomTime : float = randf_range(0.0, randomDeathExplosionTimeMax)
+	await get_tree().create_timer(randomTime).timeout
+
 	var environmentEffectManager : EnvironmentEffectManager = Game.getGame(get_tree()).getLevel().getEnvironmentalEffectManager()
-	var explosion : ExplosionEffect = environmentEffectManager.addExplosion(owningCharacter.getHeadGlobalPosition())
+	var explosion : Explosion = environmentEffectManager.addExplosion(owningCharacter.getHeadGlobalPosition())
 	explosion.updateIntensity(explosionIntensity)
 
 func _physics_process(delta: float) -> void:
@@ -59,9 +63,6 @@ func _physics_process(delta: float) -> void:
 
 func updateAnimationSpeed(inCharacterSpeed : float) -> void:
 	var animationSpeed : float = 1.0
-
-	#if inCharacterSpeed > animationSpeedTarget:
-		#animationSpeed = inCharacterSpeed / animationSpeedTarget
 
 	animationSpeed = inCharacterSpeed / animationSpeedTarget
 

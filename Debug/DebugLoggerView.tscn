@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://djrdomjwtuthy"]
 
-[ext_resource type="Script" path="res://Debug/DebugLoggerView.gd" id="1_sovrk"]
+[ext_resource type="Script" uid="uid://3ofh7iekuxli" path="res://Debug/DebugLoggerView.gd" id="1_sovrk"]
 
 [node name="DebugLoggerView" type="CanvasLayer" node_paths=PackedStringArray("vBox")]
 script = ExtResource("1_sovrk")

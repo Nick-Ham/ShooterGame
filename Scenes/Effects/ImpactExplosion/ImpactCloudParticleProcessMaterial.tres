@@ -1,0 +1,45 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=9 format=3 uid="uid://dkjwjouw2crko"]
+
+[sub_resource type="Curve" id="Curve_8irtw"]
+_data = [Vector2(0, 0), 0.0, 0.197183, 0, 0, Vector2(0.879121, 0.285714), 1.25, 1.25, 0, 0, Vector2(1, 1), 9.81819, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2bbv5"]
+curve = SubResource("Curve_8irtw")
+
+[sub_resource type="Gradient" id="Gradient_f4n07"]
+offsets = PackedFloat32Array(0.0519481, 0.0844156)
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1xcxc"]
+gradient = SubResource("Gradient_f4n07")
+
+[sub_resource type="Curve" id="Curve_p8r2n"]
+_data = [Vector2(0, 1), 0.0, -1.46073, 0, 0, Vector2(0.263736, 0.230769), -0.727273, -0.727273, 0, 0, Vector2(1, 0), -0.0909091, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_86hp1"]
+curve = SubResource("Curve_p8r2n")
+
+[sub_resource type="Curve" id="Curve_friyd"]
+_data = [Vector2(0, 0.252747), 0.0, 1.1282, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tfviq"]
+curve = SubResource("Curve_friyd")
+
+[resource]
+emission_shape = 1
+emission_sphere_radius = 0.2
+angle_min = -180.0
+angle_max = 180.0
+radial_velocity_min = 1.99998
+radial_velocity_max = 2.99998
+radial_velocity_curve = SubResource("CurveTexture_86hp1")
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_tfviq")
+color_ramp = SubResource("GradientTexture1D_1xcxc")
+alpha_curve = SubResource("CurveTexture_2bbv5")
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.122

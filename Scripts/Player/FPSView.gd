@@ -19,9 +19,9 @@ func _ready() -> void:
 	Util.safeConnect(viewport.size_changed, on_viewport_size_changed)
 	refreshSubViewport()
 
-	ScreenEffects.trySetup()
+	ScreenEffects.setup(self)
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	viewportCamera.global_transform = global_transform
 
 func on_viewport_size_changed() -> void:

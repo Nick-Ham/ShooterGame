@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="QuantityItem" load_steps=3 format=3 uid="uid://gkb0li43iv8k"]
 
 [ext_resource type="PackedScene" uid="uid://b4hna7yoh2puk" path="res://Assets/Models/Items/HealthPickupModel.tscn" id="1_bqlwr"]
-[ext_resource type="Script" path="res://DataTypes/QuantityItems/QuantityItem.gd" id="2_odww0"]
+[ext_resource type="Script" uid="uid://cpp3c8lk5tfw7" path="res://DataTypes/QuantityItems/QuantityItem.gd" id="2_odww0"]
 
 [resource]
 script = ExtResource("2_odww0")
 quantity = 25
 itemModelScene = ExtResource("1_bqlwr")
-name = "Item"
+name = "Health"

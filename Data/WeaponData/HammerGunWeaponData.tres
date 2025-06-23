@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponData" load_steps=6 format=3 uid="uid://wy8ktrfe0dmv"]
 
-[ext_resource type="Script" path="res://DataTypes/WeaponData.gd" id="1_pbh41"]
+[ext_resource type="Script" uid="uid://p0nghiebok2h" path="res://DataTypes/WeaponData.gd" id="1_pbh41"]
 [ext_resource type="Resource" uid="uid://dk55qylp7v583" path="res://Data/QuantityItem/HammerGunAmmoItem.tres" id="2_74r3p"]
 [ext_resource type="PackedScene" uid="uid://c34hxdni7tr37" path="res://Assets/Models/HammerGun/HammerGunModel.tscn" id="2_r5dtx"]
 [ext_resource type="PackedScene" uid="uid://qeh27jig7xvv" path="res://Scenes/Weapon/HammerGunWeapon.tscn" id="3_tdp3u"]
@@ -16,6 +16,7 @@ weaponScene = ExtResource("3_tdp3u")
 weaponModelScene = ExtResource("2_r5dtx")
 weaponAmmoItem = ExtResource("2_74r3p")
 maxAmmoStorage = 30
+infiniteAmmo = false
 isAutomatic = false
 useMaxBloom = true
 shotCount = 8

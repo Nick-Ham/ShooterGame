@@ -40,3 +40,6 @@ func getDirectionFromNavigation() -> Vector2:
 
 func getNextNavigationPoint() -> Vector3:
 	return get_next_path_position()
+
+func getTargetPosition() -> Vector3:
+	return target_position

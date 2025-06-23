@@ -6,21 +6,40 @@ class_name ScreenEffectController
 @export var armorIncreasedEffectColor : Color = Color("4fafff9b")
 @export var healthIncreasedEffectColor : Color = Color("00ba0d9b")
 @export var otherEffectColor : Color = Color("ffffff64")
+@export var damageEffectColor : Color = Color("ff584b2b")
 @export_group("FadeModifier")
 @export var otherEffectFadeModifier : float = 0.5
 
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 @onready var itemManager : ItemManager = Util.getChildOfType(owningCharacter, ItemManager)
+@onready var health : Health = Util.getChildOfType(owningCharacter, Health)
 
 var armorScreenEffectID : int = -1
 var healthScreenEffectID : int = -1
+var damageScreenEffectID : int = -1
 var otherScreenEffectID : int = -1
 
 func _ready() -> void:
 	assert(owningCharacter)
 	assert(itemManager)
+	assert(health)
 
 	Util.safeConnect(itemManager.item_added, on_item_added)
+	Util.safeConnect(health.health_changed, on_health_changed)
+
+	setupEffectDefaults()
+
+func setupEffectDefaults() -> void:
+
+	ScreenEffects.mbMotionBlurActive = false
+
+	return
+
+func on_health_changed(inPreviousHealth : float, inNewHealth : float) -> void:
+	if inPreviousHealth < inNewHealth:
+		return
+
+	addDamageEffect()
 
 func on_item_added(inItem : Item) -> void:
 	if inItem == ArmoredHealth.armorItem:
@@ -40,7 +59,7 @@ func addOtherEffect() -> void:
 			screenFade.Stop()
 			otherScreenEffectID = -1
 
-	otherScreenEffectID = ScreenEffects.AddScreenFade(fadeSpeed, otherEffectColor)
+	otherScreenEffectID = ScreenEffects.AddScreenFade(fadeSpeed * otherEffectFadeModifier, otherEffectColor)
 
 func addArmorEffect() -> void:
 	if armorScreenEffectID != -1:
@@ -53,9 +72,18 @@ func addArmorEffect() -> void:
 
 func addHealthEffect() -> void:
 	if healthScreenEffectID != -1:
-		var screenFade : cScreenFade = ScreenEffects.GetScreenFadeInstanceById(armorScreenEffectID)
+		var screenFade : cScreenFade = ScreenEffects.GetScreenFadeInstanceById(healthScreenEffectID)
 		if is_instance_valid(screenFade):
 			screenFade.Stop()
 			healthScreenEffectID = -1
 
-	healthScreenEffectID = ScreenEffects.AddScreenFade(fadeSpeed * otherEffectFadeModifier, healthIncreasedEffectColor)
+	healthScreenEffectID = ScreenEffects.AddScreenFade(fadeSpeed, healthIncreasedEffectColor)
+
+func addDamageEffect() -> void:
+	if damageScreenEffectID != -1:
+		var screenFade : cScreenFade = ScreenEffects.GetScreenFadeInstanceById(damageScreenEffectID)
+		if is_instance_valid(screenFade):
+			screenFade.Stop()
+			damageScreenEffectID = -1
+
+	damageScreenEffectID = ScreenEffects.AddScreenFade(fadeSpeed, damageEffectColor)

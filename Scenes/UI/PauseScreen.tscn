@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://sgxef2pl8dxy"]
+
+[node name="PauseScreen" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.560784)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1

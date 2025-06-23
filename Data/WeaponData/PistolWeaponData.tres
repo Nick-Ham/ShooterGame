@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=5 format=3 uid="uid://q0ey4wvr3mfj"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=6 format=3 uid="uid://q0ey4wvr3mfj"]
 
-[ext_resource type="Script" path="res://DataTypes/WeaponData.gd" id="1_31j1j"]
+[ext_resource type="Script" uid="uid://p0nghiebok2h" path="res://DataTypes/WeaponData.gd" id="1_31j1j"]
+[ext_resource type="Resource" uid="uid://dic56yxwf4kxg" path="res://Data/QuantityItem/PistolAmmoItem.tres" id="2_2orjt"]
 [ext_resource type="PackedScene" uid="uid://cul6h3vg5ht5d" path="res://Assets/Models/Weapons/Pistol/PistolModel.tscn" id="2_ant3y"]
 [ext_resource type="PackedScene" uid="uid://cmm4pfi1pp17c" path="res://Scenes/Weapon/PistolWeapon.tscn" id="3_4wtd6"]
 
@@ -13,23 +14,25 @@ script = ExtResource("1_31j1j")
 weaponName = "Pistol"
 weaponScene = ExtResource("3_4wtd6")
 weaponModelScene = ExtResource("2_ant3y")
-maxAmmoStorage = 15
+weaponAmmoItem = ExtResource("2_2orjt")
+maxAmmoStorage = 60
+infiniteAmmo = false
 isAutomatic = false
 useMaxBloom = false
 shotCount = 1
 isProjectile = false
-defaultDamage = 25.0
+defaultDamage = 20.0
 firingDelay = 0.08
 magazineSize = 15
-baseBloomRadius = 0.001
-maxBloomRadius = 0.004
+baseBloomRadius = 0.0
+maxBloomRadius = 0.006
 bloomDecaySpeed = 3.1
 bloomCurve = SubResource("Curve_owbpf")
 useCameraRecoil = true
 cameraRecoil = Vector3(1.15, 0, 0.25)
-recoilRotationPitchRange = Vector2(2.5, 10)
+recoilRotationPitchRange = Vector2(10, 45)
 recoilRotationYawRange = Vector2(-3, 3)
 recoilRotationRollRange = Vector2(-0.2, 0.2)
-recoilTranslationForwardRange = Vector2(0.05, 0.1)
+recoilTranslationForwardRange = Vector2(0.1, 0.2)
 recoilTranslationRightRange = Vector2(-0.01, 0.01)
 recoilTranslationUpRange = Vector2(0, 0)

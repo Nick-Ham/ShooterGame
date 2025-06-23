@@ -11,6 +11,7 @@ class_name WeaponData
 @export_category("AmmoInfo")
 @export var weaponAmmoItem : QuantityItem = null
 @export var maxAmmoStorage : int = 0
+@export var infiniteAmmo : bool = false
 
 @export_category("WeaponTypeConfig")
 @export var isAutomatic : bool = false

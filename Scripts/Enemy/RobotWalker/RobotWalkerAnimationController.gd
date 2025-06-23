@@ -29,6 +29,8 @@ var owningCharacterDestroyed : bool = false
 
 const deathAnimationKey : String = "OnDeath"
 
+const randomDeathExplosionTimeMax : float = 0.1
+
 func _ready() -> void:
 	assert(stateManager)
 	assert(modelAnimationTree)
@@ -42,6 +44,9 @@ func on_character_destroyed(_inCharacter : Character) -> void:
 	animationPlayer.play(deathAnimationKey)
 
 func explode() -> void:
+	var randomTime : float = randf_range(0.0, randomDeathExplosionTimeMax)
+	await get_tree().create_timer(randomTime).timeout
+
 	var environmentEffectManager : EnvironmentEffectManager = Game.getGame(get_tree()).getLevel().getEnvironmentalEffectManager()
 	environmentEffectManager.addExplosion(owningCharacter.getHeadGlobalPosition())
 

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://mh04372mf3bv"]
 
-[ext_resource type="Script" path="res://DataTypes/WeaponItem.gd" id="1_7i3go"]
+[ext_resource type="Script" uid="uid://v2apubl0rs3r" path="res://DataTypes/WeaponItem.gd" id="1_7i3go"]
 [ext_resource type="Resource" uid="uid://05st06xuv7q1" path="res://Data/WeaponData/PlasmaBolterWeaponData.tres" id="2_nditm"]
 
 [resource]

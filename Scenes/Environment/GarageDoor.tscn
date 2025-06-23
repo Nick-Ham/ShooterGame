@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://uq0dr1xpg6a5"]
 
-[ext_resource type="Script" path="res://Scripts/Environment/GarageDoor.gd" id="1_ntfh1"]
+[ext_resource type="Script" uid="uid://bbexs7xi73lm3" path="res://Scripts/Environment/GarageDoor.gd" id="1_ntfh1"]
 [ext_resource type="PackedScene" uid="uid://dtrny6bm804fr" path="res://Assets/Models/Environment/RollingDoor/RollingDoor.tscn" id="1_wloaf"]
-[ext_resource type="Script" path="res://Scripts/Interactable/Interactable.gd" id="2_yvdm1"]
+[ext_resource type="Script" uid="uid://fd33bjmoymau" path="res://Scripts/Interactable/Interactable.gd" id="2_yvdm1"]
 [ext_resource type="AudioStream" uid="uid://cctcrlipyyuk1" path="res://Assets/Audio/Interact/MetalInteractRandomizer.tres" id="4_qr5qm"]
 [ext_resource type="AudioStream" uid="uid://c2fmc6dlx6qsd" path="res://Assets/Audio/Mechanical/GarageDoorMech.ogg" id="5_upc24"]
 [ext_resource type="AudioStream" uid="uid://q66c24a757c7" path="res://Assets/Audio/Thuds/HeavyMetalThudRandomizer.tres" id="6_xuh57"]
@@ -29,7 +29,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0, 2.5, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -46,7 +46,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_vmjdv"]
 resource_name = "FailOpen"
-length = 0.3
+length = 0.35
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -85,6 +85,20 @@ tracks/2/keys = {
 "method": &"play"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("InputRejectStream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_mwml8"]
 resource_name = "ToggleRollingDoor"
@@ -104,9 +118,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rign2"]
 _data = {
-"RESET": SubResource("Animation_1b47u"),
-"failOpen": SubResource("Animation_vmjdv"),
-"toggleDoor": SubResource("Animation_mwml8")
+&"RESET": SubResource("Animation_1b47u"),
+&"failOpen": SubResource("Animation_vmjdv"),
+&"toggleDoor": SubResource("Animation_mwml8")
 }
 
 [node name="GarageDoor" type="StaticBody3D" node_paths=PackedStringArray("doorPivot", "interactable", "animationPlayer", "failOpenStreamPlayer", "metalThudStreamPlayer", "garageDoorMechStreamPlayer", "inputRejectStreamPlayer")]
@@ -121,6 +135,9 @@ garageDoorMechStreamPlayer = NodePath("GarageDoorMechStream")
 inputRejectStreamPlayer = NodePath("InputRejectStream")
 
 [node name="RollingDoor" parent="." instance=ExtResource("1_wloaf")]
+
+[node name="Door2" parent="RollingDoor/Node/RollingDoor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="RollingDoor/Node/RollingDoor/Door2" index="2"]
 collision_layer = 33
@@ -147,24 +164,28 @@ shape = SubResource("BoxShape3D_6ay44")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_rign2")
+&"": SubResource("AnimationLibrary_rign2")
 }
 
 [node name="FailOpenStream" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_qr5qm")
 pitch_scale = 0.6
+bus = &"WorldSFX"
 
 [node name="GarageDoorMechStream" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_upc24")
 volume_db = -15.0
+bus = &"WorldSFX"
 
 [node name="MetalThudStream" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_xuh57")
 volume_db = -10.0
 pitch_scale = 0.9
+bus = &"WorldSFX"
 
 [node name="InputRejectStream" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_7io1m")
 volume_db = -15.0
+bus = &"WorldSFX"
 
 [editable path="RollingDoor"]

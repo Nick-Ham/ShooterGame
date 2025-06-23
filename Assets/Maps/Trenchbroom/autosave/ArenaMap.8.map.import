@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://cvfvelsjtl1ss"
+path="res://.godot/imported/ArenaMap.8.map-cefee11fa59146bf2063df3331cb69b0.tres"
+
+[deps]
+
+source_file="res://Assets/Maps/Trenchbroom/autosave/ArenaMap.8.map"
+dest_files=["res://.godot/imported/ArenaMap.8.map-cefee11fa59146bf2063df3331cb69b0.tres"]
+
+[params]
+

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://lyhl4aumierc"]
 
 [ext_resource type="PackedScene" uid="uid://ggh5yag4aifh" path="res://Assets/Models/Robots/Robot/Robot.gltf" id="1_ybl1a"]
-[ext_resource type="Script" path="res://Scripts/Components/Hitbox.gd" id="2_xytk7"]
+[ext_resource type="Script" uid="uid://du3ici8voo71" path="res://Scripts/Components/Hitbox.gd" id="2_xytk7"]
 [ext_resource type="Material" uid="uid://cim7dxub5kkxd" path="res://Assets/Materials/GlowingMaterial.tres" id="3_hy881"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rqrm3"]
@@ -69,7 +69,7 @@ transform = Transform3D(1, -4.44089e-16, -7.10543e-15, 0, 1, 0, 0, 0, 1, 0, 0, 0
 shape = SubResource("ConcavePolygonShape3D_bf1nn")
 
 [node name="frontLights" parent="Node/Robot/AimDirectionPivot/Head" index="3"]
-surface_material_override/0 = ExtResource("3_hy881")
+material_override = ExtResource("3_hy881")
 
 [node name="AnimationPlayer" parent="." index="1"]
 reset_on_save = false
