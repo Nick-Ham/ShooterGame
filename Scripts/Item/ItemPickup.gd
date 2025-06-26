@@ -18,11 +18,6 @@ func _ready() -> void:
 	assert(animationPlayer)
 	assert(despawnTimer)
 
-	if !item or !item.validate():
-		print_debug("Missing item, deleting itempickup.")
-		queue_free()
-		return
-
 	setItem(item)
 
 	Util.safeConnect(body_entered, on_body_entered)

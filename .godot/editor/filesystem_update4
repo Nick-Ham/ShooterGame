@@ -1,5 +1,5 @@
 res://Game/AudioBusLayout.tres
-res://Scenes/Enemies/Skitterer/Skitterer.tscn
+res://Scenes/Levels/PinkLevel.tscn
 res://addons/func_godot/fgd/func_godot_fgd.tres
 res://addons/func_godot/textures/default_material.tres
 res://Assets/Audio/Gunshots/Pistol1Randomizer.tres
@@ -54,11 +54,4 @@ res://Assets/Materials/OvershieldMaterial.tres
 res://Assets/Effects/ImpactParticles.tres
 res://Prototyping/Spheretest.tres
 res://Game/DefaultGameScene.tscn
-res://Scenes/Levels/PinkLevel.tscn
 res://Scenes/Player/Player.tscn
-res://Scenes/UI/PlayerHUD.tscn
-res://Scenes/Enemies/RobotWalker/RobotWalker.tscn
-res://Scenes/Weapon/PistolWeapon.tscn
-res://Scripts/Weapon/WeaponStates/WeaponStateDefault.gd
-res://Scenes/Enemies/SmallRobot/SmallRobot.tscn
-res://Scripts/Weapon/WeaponReloadComponent.gd

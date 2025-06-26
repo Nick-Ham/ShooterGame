@@ -91,3 +91,6 @@ func forceUpdatePositionOfInterest(inPosition : Vector3) -> void:
 
 func forceClearPositionOfInterest() -> void:
 	positionOfInterest = Vector3()
+
+func clearTarget() -> void:
+	target = null

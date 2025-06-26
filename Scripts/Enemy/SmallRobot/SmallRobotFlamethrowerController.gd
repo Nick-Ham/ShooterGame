@@ -51,6 +51,9 @@ func _physics_process(delta: float) -> void:
 
 		hitCharacters.append(owningCharacter)
 
+	if !Util.isValid(targeter):
+		return
+
 	if !targeter.hasTarget() or !hitCharacters.has(targeter.getTarget() as Character):
 		return
 

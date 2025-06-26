@@ -295,6 +295,9 @@ transform = Transform3D(0.999542, 0.00913909, -0.0288526, -0.0223409, -0.420327,
 [node name="RightFoot" parent="Robot/Node/Robot/Hip/RightLegUpper/RightLegJoiner/RightLegLower" index="0"]
 transform = Transform3D(0.984798, 0.150535, 0.0866857, -0.160382, 0.979632, 0.120841, -0.0667292, -0.132907, 0.98888, 0.00188168, 0.387245, -0.00166134)
 
+[node name="Head" parent="Robot/Node/Robot/AimDirectionPivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999048, -0.0436194, 0, 0.0436194, 0.999048, 0, 0, 0)
+
 [node name="Gun" parent="Robot/Node/Robot/AimDirectionPivot/Head/GunArm" index="0"]
 visible = false
 
@@ -317,6 +320,7 @@ shape = SubResource("CapsuleShape3D_uc3a3")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("9_gli1f")
+maxHealth = 80.0
 
 [node name="OvershieldHealth" parent="." instance=ExtResource("10_hrsr4")]
 maxHealth = 50.0

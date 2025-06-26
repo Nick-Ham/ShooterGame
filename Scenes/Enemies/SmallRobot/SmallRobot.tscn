@@ -319,6 +319,7 @@ metadata/_custom_type_script = "uid://bsae7om1gs73x"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("16_b4swr")
+maxHealth = 80.0
 
 [node name="BTPlayer" type="BTPlayer" parent="."]
 behavior_tree = ExtResource("9_i4jnj")

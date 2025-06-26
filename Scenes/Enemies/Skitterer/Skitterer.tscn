@@ -421,7 +421,7 @@ characterStateManager = NodePath("../CharacterStateManager")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("9_pgkdf")
-maxHealth = 75.0
+maxHealth = 60.0
 
 [node name="SkittererExplodeHandler" type="Node" parent="." node_paths=PackedStringArray("animationPlayer")]
 script = ExtResource("8_joo7x")

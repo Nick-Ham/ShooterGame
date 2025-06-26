@@ -198,6 +198,7 @@ stateDestroyed = NodePath("CharacterStateDestroyed")
 
 [node name="CharacterStateDefault" type="Node" parent="CharacterStateManager"]
 script = ExtResource("5_018c5")
+maxSpeed = 2.5
 
 [node name="HeadBobSettings" type="Node" parent="CharacterStateManager/CharacterStateDefault"]
 script = ExtResource("7_cdgt3")
@@ -205,9 +206,9 @@ script = ExtResource("7_cdgt3")
 [node name="CharacterStateInAir" type="Node" parent="CharacterStateManager"]
 script = ExtResource("5_t1r06")
 acceleration = 33.0
-maxSpeed = 2.5
-maxSpeedEnforcement = 5.0
-friction = 0.25
+maxSpeed = 3.0
+maxSpeedEnforcement = 4.0
+friction = 10.0
 
 [node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
 script = ExtResource("6_58h4i")

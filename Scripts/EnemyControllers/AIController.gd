@@ -35,6 +35,7 @@ func cleanupAgent() -> void:
 		btPlayer.queue_free()
 
 	if Util.isValid(targeter):
+		targeter.clearTarget()
 		targeter.queue_free()
 
 	if Util.isValid(navigationController):
