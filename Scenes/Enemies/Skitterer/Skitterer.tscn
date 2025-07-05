@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://4f8htrhrh6ud"]
+[gd_scene load_steps=56 format=4 uid="uid://4f8htrhrh6ud"]
 
 [ext_resource type="Script" uid="uid://dwetkrpdbb22e" path="res://Scripts/Character.gd" id="1_hxqh2"]
 [ext_resource type="Script" uid="uid://cvxdlnu3b2oks" path="res://Scripts/EnemyControllers/AIController.gd" id="2_cno6n"]
@@ -27,7 +27,6 @@
 [ext_resource type="Script" uid="uid://cbnps1thx75gm" path="res://Scripts/CharacterStates/CharacterStateDestroyed.gd" id="14_h26cd"]
 [ext_resource type="PackedScene" uid="uid://bvwcr3vt2er7n" path="res://Assets/Models/Robots/Skitterer/SkittererModel.tscn" id="27_6477h"]
 [ext_resource type="Script" uid="uid://d0prp1dabj5jn" path="res://Scripts/EnemyControllers/NavigationController.gd" id="30_5etgs"]
-[ext_resource type="Script" uid="uid://cvhn6gh5sqxvy" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="31_e8o15"]
 [ext_resource type="Shader" uid="uid://cojwqt0y1hmb8" path="res://Assets/Shader/SkittererCanisterShader.tres" id="32_dvkk2"]
 [ext_resource type="Script" uid="uid://dvlefq5ss71xi" path="res://Scripts/Components/LOSTracker.gd" id="34_gi3gc"]
 [ext_resource type="AudioStream" uid="uid://ba6hsccavjmmr" path="res://Assets/Audio/WalkCycles/SmallRobotStepRandomizer.tres" id="34_oep00"]
@@ -115,7 +114,7 @@ resource_name = "Explode"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/ExplosionCasing/cylinder:material_override:shader_parameter/RedShift")
+tracks/0/path = NodePath("SkittererModel/Node/SmallRobot/Head/ExplosionCasing/cylinder:material_override:shader_parameter/RedShift")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -155,7 +154,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/ExplosionCasing/brokenCasing:visible")
+tracks/3/path = NodePath("SkittererModel/Node/SmallRobot/Head/ExplosionCasing/brokenCasing:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -167,7 +166,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/ExplosionCasing/cylinder:visible")
+tracks/4/path = NodePath("SkittererModel/Node/SmallRobot/Head/ExplosionCasing/cylinder:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -211,7 +210,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/ExplosionCasing/cylinder:visible")
+tracks/1/path = NodePath("SkittererModel/Node/SmallRobot/Head/ExplosionCasing/cylinder:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -223,7 +222,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/ExplosionCasing/brokenCasing:visible")
+tracks/2/path = NodePath("SkittererModel/Node/SmallRobot/Head/ExplosionCasing/brokenCasing:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -235,7 +234,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot:position")
+tracks/3/path = NodePath("SkittererModel/Node/SmallRobot:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -247,7 +246,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot:rotation")
+tracks/4/path = NodePath("SkittererModel/Node/SmallRobot:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -259,7 +258,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/FrontLights:material_override:emission_energy_multiplier")
+tracks/5/path = NodePath("SkittererModel/Node/SmallRobot/Head/FrontLights:material_override:emission_energy_multiplier")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -274,7 +273,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/ExplosionCasing/cylinder:material_override:shader_parameter/RedShift")
+tracks/0/path = NodePath("SkittererModel/Node/SmallRobot/Head/ExplosionCasing/cylinder:material_override:shader_parameter/RedShift")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -286,7 +285,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/ExplosionCasing/brokenCasing:visible")
+tracks/1/path = NodePath("SkittererModel/Node/SmallRobot/Head/ExplosionCasing/brokenCasing:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -298,7 +297,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/ExplosionCasing/cylinder:visible")
+tracks/2/path = NodePath("SkittererModel/Node/SmallRobot/Head/ExplosionCasing/cylinder:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -310,7 +309,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot:position")
+tracks/3/path = NodePath("SkittererModel/Node/SmallRobot:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -322,7 +321,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot:rotation")
+tracks/4/path = NodePath("SkittererModel/Node/SmallRobot:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -334,7 +333,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/FrontLights:material_override:emission_energy_multiplier")
+tracks/5/path = NodePath("SkittererModel/Node/SmallRobot/Head/FrontLights:material_override:emission_energy_multiplier")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -388,8 +387,8 @@ minShootAngle = 0.524
 characterRotationSpeed = 20.0
 maxAngleFromTarget = 2.356
 team = 1
-aimMarker = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/FrontLights/Aim")
-aimCast = NodePath("PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/FrontLights/Aim/AimRayCast")
+aimMarker = NodePath("SkittererModel/Node/SmallRobot/Head/FrontLights/Aim")
+aimCast = NodePath("SkittererModel/Node/SmallRobot/Head/FrontLights/Aim/AimRayCast")
 
 [node name="PrototypeItemSpawner" type="Node" parent="."]
 script = ExtResource("2_g057s")
@@ -398,7 +397,7 @@ metadata/_custom_type_script = "uid://pbkftv4f3bi7"
 
 [node name="AIController" type="Node" parent="." node_paths=PackedStringArray("aimRayCast", "btPlayer")]
 script = ExtResource("2_cno6n")
-aimRayCast = NodePath("../PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/FrontLights/Aim/AimRayCast")
+aimRayCast = NodePath("../SkittererModel/Node/SmallRobot/Head/FrontLights/Aim/AimRayCast")
 btPlayer = NodePath("../BTPlayer")
 alwaysFaceTarget = false
 
@@ -469,49 +468,46 @@ script = ExtResource("14_h26cd")
 [node name="NavigationController" type="NavigationAgent3D" parent="."]
 script = ExtResource("30_5etgs")
 
-[node name="PhysicsInterpolator3D" type="Node3D" parent="."]
-script = ExtResource("31_e8o15")
+[node name="SkittererModel" parent="." instance=ExtResource("27_6477h")]
 
-[node name="SkittererModel" parent="PhysicsInterpolator3D" instance=ExtResource("27_6477h")]
-
-[node name="FrontRight_UpperLegBone" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Hip2/FrontRightPivot" index="0"]
+[node name="FrontRight_UpperLegBone" parent="SkittererModel/Node/SmallRobot/Hip2/FrontRightPivot" index="0"]
 transform = Transform3D(0.707107, 0.241845, -0.664463, 0, 0.939693, 0.34202, 0.707107, -0.241845, 0.664463, 0.04375, 5.55112e-17, -0.04375)
 
-[node name="MiddleRightPivot" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Hip2" index="1"]
+[node name="MiddleRightPivot" parent="SkittererModel/Node/SmallRobot/Hip2" index="1"]
 transform = Transform3D(0.737277, 0, -0.67559, 0, 1, 0, 0.67559, 0, 0.737277, 0.0625, 0.375, 0.09375)
 
-[node name="MiddleRight_UpperLegBone2" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Hip2/MiddleRightPivot" index="0"]
+[node name="MiddleRight_UpperLegBone2" parent="SkittererModel/Node/SmallRobot/Hip2/MiddleRightPivot" index="0"]
 transform = Transform3D(0.707107, 0.241845, -0.664463, 0, 0.939693, 0.34202, 0.707107, -0.241845, 0.664463, 0.04375, -0.0125, -0.04375)
 
-[node name="MiddleLeftPivot" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Hip2" index="2"]
+[node name="MiddleLeftPivot" parent="SkittererModel/Node/SmallRobot/Hip2" index="2"]
 transform = Transform3D(0.737277, 0, 0.67559, 0, 1, 0, -0.67559, 0, 0.737277, -0.0625, 0.375, 0.09375)
 
-[node name="MiddleLeft_UpperLegBone3" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Hip2/MiddleLeftPivot" index="0"]
+[node name="MiddleLeft_UpperLegBone3" parent="SkittererModel/Node/SmallRobot/Hip2/MiddleLeftPivot" index="0"]
 transform = Transform3D(0.707107, -0.241845, 0.664463, 0, 0.939693, 0.34202, -0.707107, -0.241845, 0.664463, -0.04375, -0.0125, -0.04375)
 
-[node name="FrontLeft_UpperLegBone" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Hip2/FrontLeftPivot" index="0"]
+[node name="FrontLeft_UpperLegBone" parent="SkittererModel/Node/SmallRobot/Hip2/FrontLeftPivot" index="0"]
 transform = Transform3D(0.707107, -0.241845, 0.664463, -7.45058e-09, 0.939693, 0.34202, -0.707107, -0.241845, 0.664463, -0.04375, 1.11022e-16, -0.04375)
 
-[node name="BackLeft_UpperLegBone" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Hip2/BackLeftPivot" index="0"]
+[node name="BackLeft_UpperLegBone" parent="SkittererModel/Node/SmallRobot/Hip2/BackLeftPivot" index="0"]
 transform = Transform3D(0.707107, -0.241845, -0.664463, 0, 0.939693, -0.34202, 0.707107, 0.241845, 0.664463, -0.0625, -0.025, -0.125)
 
-[node name="BackRight_UpperLegBone" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Hip2/BackRightPivot" index="0"]
+[node name="BackRight_UpperLegBone" parent="SkittererModel/Node/SmallRobot/Hip2/BackRightPivot" index="0"]
 transform = Transform3D(0.707107, 0.241845, 0.664463, 0, 0.939693, -0.34202, -0.707107, 0.241845, 0.664463, 0.0625, -0.025, -0.125)
 
-[node name="Head" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot" index="2"]
+[node name="Head" parent="SkittererModel/Node/SmallRobot" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0.460417, -0.03125)
 
-[node name="FrontLights" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head" index="0"]
+[node name="FrontLights" parent="SkittererModel/Node/SmallRobot/Head" index="0"]
 material_override = SubResource("StandardMaterial3D_5wxa7")
 
-[node name="Aim" type="Marker3D" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/FrontLights" index="0"]
+[node name="Aim" type="Marker3D" parent="SkittererModel/Node/SmallRobot/Head/FrontLights" index="0"]
 transform = Transform3D(-1, -8.74228e-08, -7.64274e-15, -8.74228e-08, 1, 8.74228e-08, -7.62305e-22, 8.74228e-08, -1, 0, -8.66963e-16, 0.0813431)
 
-[node name="AimRayCast" type="RayCast3D" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/FrontLights/Aim"]
+[node name="AimRayCast" type="RayCast3D" parent="SkittererModel/Node/SmallRobot/Head/FrontLights/Aim"]
 target_position = Vector3(0, 0, 0)
 collide_with_areas = true
 
-[node name="cylinder" parent="PhysicsInterpolator3D/SkittererModel/Node/SmallRobot/Head/ExplosionCasing" index="1"]
+[node name="cylinder" parent="SkittererModel/Node/SmallRobot/Head/ExplosionCasing" index="1"]
 material_override = SubResource("ShaderMaterial_i38ec")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -519,9 +515,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
 shape = SubResource("CapsuleShape3D_uc3a3")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../PhysicsInterpolator3D/SkittererModel")
+root_node = NodePath("../SkittererModel")
 tree_root = SubResource("AnimationNodeBlendTree_y61px")
-anim_player = NodePath("../PhysicsInterpolator3D/SkittererModel/AnimationPlayer")
+anim_player = NodePath("../SkittererModel/AnimationPlayer")
 parameters/MoveDirection/blend_position = Vector2(0, 0)
 parameters/TimeScale/scale = 1.0
 
@@ -584,4 +580,4 @@ target_position = Vector3(-1, -1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.535688, 0)
 target_position = Vector3(1, -1, 0)
 
-[editable path="PhysicsInterpolator3D/SkittererModel"]
+[editable path="SkittererModel"]

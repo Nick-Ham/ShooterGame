@@ -1,5 +1,5 @@
 res://Game/AudioBusLayout.tres
-res://Scenes/Levels/PinkLevel.tscn
+res://Game/DefaultGameScene.tscn
 res://addons/func_godot/fgd/func_godot_fgd.tres
 res://addons/func_godot/textures/default_material.tres
 res://Assets/Audio/Gunshots/Pistol1Randomizer.tres
@@ -25,6 +25,7 @@ res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres
 res://Scenes/UI/AlphaTransitionShader.tres
 res://Prototyping/PrototypingTexture.tres
 res://Data/FGD/ShooterGameFGD.tres
+res://Assets/Shader/ItemFlashShader.tres
 res://Data/ShootPatterns/StopShooting.tres
 res://Scenes/Enemies/Skitterer/SkittererBT.tres
 res://Assets/Materials/GlowingMaterial.tres
@@ -53,5 +54,3 @@ res://Assets/Effects/Overshield/OvershieldMaterialShader.tres
 res://Assets/Materials/OvershieldMaterial.tres
 res://Assets/Effects/ImpactParticles.tres
 res://Prototyping/Spheretest.tres
-res://Game/DefaultGameScene.tscn
-res://Scenes/Player/Player.tscn

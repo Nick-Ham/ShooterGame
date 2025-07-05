@@ -1123,11 +1123,6 @@ transform = Transform3D(1.96221, 0.386309, -0.0223742, -0.386184, 1.94771, -0.23
 [node name="AgaveModel2" parent="." instance=ExtResource("25_jk0dc")]
 transform = Transform3D(0.648126, 0.00889704, 0.761482, -0.11413, 0.989773, 0.0855761, -0.752933, -0.142372, 0.642513, -4.77458, 5.30741, 15.2218)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(2.6242e-08, 0.473981, -0.880535, -1.41257e-08, 0.880535, 0.473981, 1, 0, 2.98023e-08, -13.3337, 14.9681, -2.96783)
-spot_range = 15.0
-spot_angle = 27.5877
-
 [node name="SpawnPad" parent="." instance=ExtResource("28_l7yqu")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12.5561, 5.5, 4.23563)
 

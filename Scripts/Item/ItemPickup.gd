@@ -6,6 +6,7 @@ class_name ItemPickup
 
 @export_category("Anim")
 @export var animationSpeed : float = 0.25
+@export var flashShader : Shader
 
 @export_category("Ref")
 @export var animationPlayer : AnimationPlayer
@@ -36,6 +37,18 @@ func setItem(inItem : Item) -> void:
 
 	animationPlayer.speed_scale = animationSpeed
 	animationPlayer.play(animationKey)
+
+	addFlashShader(model)
+
+func addFlashShader(node : Node) -> void:
+	var meshInstance : MeshInstance3D = node as MeshInstance3D
+	if (meshInstance):
+		var materialOverlay : ShaderMaterial = ShaderMaterial.new()
+		materialOverlay.shader = flashShader
+		meshInstance.material_overlay = materialOverlay
+
+	for child : Node in node.get_children():
+		addFlashShader(child)
 
 func on_body_entered(inBody : Node3D) -> void:
 	var itemManager : ItemManager = Util.getChildOfType(inBody, ItemManager)

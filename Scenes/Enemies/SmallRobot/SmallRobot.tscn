@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://dmdf1kchqjj6o"]
+[gd_scene load_steps=55 format=4 uid="uid://dmdf1kchqjj6o"]
 
 [ext_resource type="Script" uid="uid://dwetkrpdbb22e" path="res://Scripts/Character.gd" id="1_ogiuy"]
 [ext_resource type="Script" uid="uid://cvxdlnu3b2oks" path="res://Scripts/EnemyControllers/AIController.gd" id="2_fy22f"]
@@ -21,7 +21,6 @@
 [ext_resource type="Resource" uid="uid://gkb0li43iv8k" path="res://Data/QuantityItem/HealthItem.tres" id="11_dmw3w"]
 [ext_resource type="Script" uid="uid://dj8shf04nmcj3" path="res://Scripts/CharacterStates/CharacterStateJumping.gd" id="12_suyfa"]
 [ext_resource type="Script" uid="uid://cbnps1thx75gm" path="res://Scripts/CharacterStates/CharacterStateDestroyed.gd" id="13_re7so"]
-[ext_resource type="Script" uid="uid://cvhn6gh5sqxvy" path="res://Scripts/Components/PhysicsInterpolator3D.gd" id="14_fwnc2"]
 [ext_resource type="PackedScene" uid="uid://c260fgktr2e1r" path="res://Scenes/Effects/FlamethrowerEffect/FlamethrowerEffect.tscn" id="14_lsqlk"]
 [ext_resource type="PackedScene" uid="uid://cb1fuqxc1k76d" path="res://Assets/Models/Robots/SmallRobot/SmallRobotModel.tscn" id="15_lp6cv"]
 [ext_resource type="Script" uid="uid://cvylrjrxuatj" path="res://Scripts/Components/Health.gd" id="16_b4swr"]
@@ -157,7 +156,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PhysicsInterpolator3D/SmallRobotModel:rotation")
+tracks/3/path = NodePath("SmallRobotModel:rotation")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -169,7 +168,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PhysicsInterpolator3D/SmallRobotModel:position")
+tracks/4/path = NodePath("SmallRobotModel:position")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -181,7 +180,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/FrontLights:material_override:emission_energy_multiplier")
+tracks/5/path = NodePath("SmallRobotModel/Node/SmallRobot/Head/FrontLights:material_override:emission_energy_multiplier")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -196,7 +195,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PhysicsInterpolator3D/SmallRobotModel:rotation")
+tracks/0/path = NodePath("SmallRobotModel:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -208,7 +207,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PhysicsInterpolator3D/SmallRobotModel:position")
+tracks/1/path = NodePath("SmallRobotModel:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -220,7 +219,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/FrontLights:material_override:emission_energy_multiplier")
+tracks/2/path = NodePath("SmallRobotModel/Node/SmallRobot/Head/FrontLights:material_override:emission_energy_multiplier")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -270,8 +269,8 @@ minShootAngle = 0.524
 characterRotationSpeed = 40.0
 maxAngleFromTarget = 2.356
 team = 1
-aimMarker = NodePath("PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim")
-aimCast = NodePath("PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/AimRayCast")
+aimMarker = NodePath("SmallRobotModel/Node/SmallRobot/Head/Gun/Aim")
+aimCast = NodePath("SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/AimRayCast")
 
 [node name="PrototypeItemSpawner" type="Node" parent="."]
 script = ExtResource("24_246p5")
@@ -280,7 +279,7 @@ metadata/_custom_type_script = "uid://pbkftv4f3bi7"
 
 [node name="AIController" type="Node" parent="." node_paths=PackedStringArray("aimRayCast", "btPlayer")]
 script = ExtResource("2_fy22f")
-aimRayCast = NodePath("../PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/AimRayCast")
+aimRayCast = NodePath("../SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/AimRayCast")
 btPlayer = NodePath("../BTPlayer")
 
 [node name="SmallRobotAnimationController" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "modelAnimationTree", "audioAnimationPlayer")]
@@ -300,8 +299,8 @@ metadata/_custom_type_script = "uid://fnc8tq3w7h5w"
 
 [node name="SmallRobotFlamethrowerController" type="Node" parent="." node_paths=PackedStringArray("flamethrowerParticle", "flamethrowerHitbox", "flamethrowerSoundLoopPlayer")]
 script = ExtResource("7_k0x3p")
-flamethrowerParticle = NodePath("../PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerEffect")
-flamethrowerHitbox = NodePath("../PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerArea3D")
+flamethrowerParticle = NodePath("../SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerEffect")
+flamethrowerHitbox = NodePath("../SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerArea3D")
 flamethrowerSoundLoopPlayer = NodePath("../FlamethrowerPlayer")
 
 [node name="CharacterHealthManager" type="Node" parent="." node_paths=PackedStringArray("health", "characterStateManager")]
@@ -353,54 +352,51 @@ script = ExtResource("13_re7so")
 [node name="NavigationController" type="NavigationAgent3D" parent="."]
 script = ExtResource("32_nvdxb")
 
-[node name="PhysicsInterpolator3D" type="Node3D" parent="."]
-script = ExtResource("14_fwnc2")
+[node name="SmallRobotModel" parent="." instance=ExtResource("15_lp6cv")]
 
-[node name="SmallRobotModel" parent="PhysicsInterpolator3D" instance=ExtResource("15_lp6cv")]
-
-[node name="FrontRight_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontRightPivot" index="0"]
+[node name="FrontRight_UpperLegBone" parent="SmallRobotModel/Node/SmallRobot/Hip2/FrontRightPivot" index="0"]
 transform = Transform3D(0.707106, 0.241845, -0.664463, 0, 0.939693, 0.34202, 0.707106, -0.241845, 0.664463, 0.04375, 0.03125, -0.04375)
 
-[node name="FrontLeft_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/FrontLeftPivot" index="0"]
+[node name="FrontLeft_UpperLegBone" parent="SmallRobotModel/Node/SmallRobot/Hip2/FrontLeftPivot" index="0"]
 transform = Transform3D(0.707107, -0.241845, 0.664462, -7.45058e-09, 0.939692, 0.34202, -0.707107, -0.241845, 0.664462, -0.04375, 0.03125, -0.04375)
 
-[node name="BackLeft_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackLeftPivot" index="0"]
+[node name="BackLeft_UpperLegBone" parent="SmallRobotModel/Node/SmallRobot/Hip2/BackLeftPivot" index="0"]
 transform = Transform3D(0.707107, -0.241845, -0.664464, 0, 0.939692, -0.342021, 0.707107, 0.241845, 0.664464, -0.04375, 0.03125, 0.04375)
 
-[node name="BackLeft_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackLeftPivot/BackLeft_UpperLegBone" index="1"]
+[node name="BackLeft_LowerLegBone" parent="SmallRobotModel/Node/SmallRobot/Hip2/BackLeftPivot/BackLeft_UpperLegBone" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0.25)
 
-[node name="BackRight_UpperLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackRightPivot" index="0"]
+[node name="BackRight_UpperLegBone" parent="SmallRobotModel/Node/SmallRobot/Hip2/BackRightPivot" index="0"]
 transform = Transform3D(0.707107, 0.241845, 0.664461, 0, 0.939693, -0.342019, -0.707107, 0.241845, 0.664461, 0.04375, 0.03125, 0.04375)
 
-[node name="BackRight_LowerLegBone" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Hip2/BackRightPivot/BackRight_UpperLegBone" index="1"]
+[node name="BackRight_LowerLegBone" parent="SmallRobotModel/Node/SmallRobot/Hip2/BackRightPivot/BackRight_UpperLegBone" index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.999997, 0, 0, 0, 0.999999, 0, 0, 0.25)
 
-[node name="Head" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot" index="2"]
+[node name="Head" parent="SmallRobotModel/Node/SmallRobot" index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 0, 0.460417, -0.03125)
 
-[node name="FrontLights" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head" index="0"]
+[node name="FrontLights" parent="SmallRobotModel/Node/SmallRobot/Head" index="0"]
 material_override = SubResource("StandardMaterial3D_qnpxv")
 
-[node name="Aim" type="Marker3D" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun" index="0"]
+[node name="Aim" type="Marker3D" parent="SmallRobotModel/Node/SmallRobot/Head/Gun" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 2.23517e-08, 0.0623288, -0.398363)
 
-[node name="AimRayCast" type="RayCast3D" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim"]
+[node name="AimRayCast" type="RayCast3D" parent="SmallRobotModel/Node/SmallRobot/Head/Gun/Aim"]
 target_position = Vector3(0, 0, 0)
 collide_with_areas = true
 
-[node name="FlamethrowerEffect" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim" instance=ExtResource("14_lsqlk")]
+[node name="FlamethrowerEffect" parent="SmallRobotModel/Node/SmallRobot/Head/Gun/Aim" instance=ExtResource("14_lsqlk")]
 emitting = false
 
-[node name="FlamethrowerArea3D" type="Area3D" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim"]
+[node name="FlamethrowerArea3D" type="Area3D" parent="SmallRobotModel/Node/SmallRobot/Head/Gun/Aim"]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerArea3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4.79617e-14, 1.01241e-07, -2.31609)
 shape = SubResource("CapsuleShape3D_auq48")
 
-[node name="AnimationPlayer" parent="PhysicsInterpolator3D/SmallRobotModel" index="1"]
+[node name="AnimationPlayer" parent="SmallRobotModel" index="1"]
 speed_scale = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -408,9 +404,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
 shape = SubResource("CapsuleShape3D_uc3a3")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../PhysicsInterpolator3D/SmallRobotModel")
+root_node = NodePath("../SmallRobotModel")
 tree_root = SubResource("AnimationNodeBlendTree_y61px")
-anim_player = NodePath("../PhysicsInterpolator3D/SmallRobotModel/AnimationPlayer")
+anim_player = NodePath("../SmallRobotModel/AnimationPlayer")
 parameters/MoveDirection/blend_position = Vector2(0, 0)
 parameters/TimeScale/scale = 1.0
 
@@ -477,5 +473,5 @@ autoplay = true
 max_polyphony = 4
 bus = &"WorldSFX"
 
-[editable path="PhysicsInterpolator3D/SmallRobotModel"]
-[editable path="PhysicsInterpolator3D/SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerEffect"]
+[editable path="SmallRobotModel"]
+[editable path="SmallRobotModel/Node/SmallRobot/Head/Gun/Aim/FlamethrowerEffect"]
