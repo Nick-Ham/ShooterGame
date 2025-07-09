@@ -31,11 +31,11 @@ func healthDepleted() -> void:
 
 	super.healthDepleted()
 
-func takeDamage(inDamage : float) -> void:
+func takeDamage(inDamage : float, inIsCrit : bool = false) -> void:
 	if isHealthDepleted:
 		return
 
-	super.takeDamage(inDamage)
+	super.takeDamage(inDamage, inIsCrit)
 
 	rechargeDelayTimer.start()
 	isRecharged = false

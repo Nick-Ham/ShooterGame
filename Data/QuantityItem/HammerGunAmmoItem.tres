@@ -7,4 +7,5 @@
 script = ExtResource("2_fuwft")
 quantity = 15
 itemModelScene = ExtResource("1_ycwla")
+itemCategory = 2
 name = "Hammer Gun Ammo"

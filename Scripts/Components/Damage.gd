@@ -4,7 +4,9 @@ class_name Damage
 @export_category("Config")
 @export var damage : float = 1.0
 
-func dealDamage(inTarget : Node3D, inSource : Node3D, inModifier : float = 1.0) -> bool:
+static var critMultiplier : float = 1.5
+
+func dealDamage(inTarget : Node3D, inSource : Node3D, inModifier : float = 1.0, inIsCrit : bool = false) -> bool:
 	var overshieldHealth : OvershieldHealth = Util.getChildOfType(inTarget, OvershieldHealth)
 	if overshieldHealth and !overshieldHealth.isHealthDepleted:
 		overshieldHealth.takeDamage(damage * inModifier)

@@ -37,6 +37,7 @@ material_override = ExtResource("4_bx8og")
 
 [node name="Hitbox" type="Area3D" parent="Node/SmallRobot/Head/ExplosionCasing/cylinder" index="0"]
 script = ExtResource("2_lnsh6")
+canCrit = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Node/SmallRobot/Head/ExplosionCasing/cylinder/Hitbox" index="0"]
 shape = SubResource("ConcavePolygonShape3D_hndmy")

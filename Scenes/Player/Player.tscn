@@ -164,6 +164,7 @@ stepStreamPlayer = NodePath("../FootstepPlayer")
 
 [node name="ArmoredHealth" type="Node" parent="."]
 script = ExtResource("9_t5fjf")
+immortal = true
 
 [node name="ItemManager" type="Node" parent="."]
 script = ExtResource("32_8g535")

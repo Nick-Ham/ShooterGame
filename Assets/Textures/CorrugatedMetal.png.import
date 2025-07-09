@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dd73metyqsr3j"
-path="res://.godot/imported/CorrugatedMetal.png-19d812c58d080b4fb6b4155b6e985217.ctex"
+path="res://.godot/imported/CorrugatedMetal.png-877b5a409dbf67e2e2221b52dd6c4ebf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/textures/CorrugatedMetal.png"
-dest_files=["res://.godot/imported/CorrugatedMetal.png-19d812c58d080b4fb6b4155b6e985217.ctex"]
+source_file="res://Assets/Textures/CorrugatedMetal.png"
+dest_files=["res://.godot/imported/CorrugatedMetal.png-877b5a409dbf67e2e2221b52dd6c4ebf.ctex"]
 
 [params]
 

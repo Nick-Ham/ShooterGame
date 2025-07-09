@@ -5,6 +5,9 @@ var shieldImpacts : Array[Impact]
 
 @onready var owningCharacter : Character = Character.getOwningCharacter(self)
 
+@export_category("Config")
+@export var canCrit : bool = false
+
 const hitboxLayers : int = 8
 
 func _ready() -> void:

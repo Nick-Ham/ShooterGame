@@ -6,6 +6,10 @@ class_name QuantityItem
 
 @export_category("Config")
 @export var itemModelScene : PackedScene
+@export var itemCategory : ItemCategory = ItemCategory.Default
+
+func getItemCategory() -> ItemCategory:
+	return itemCategory
 
 func getModel() -> PackedScene:
 	return itemModelScene

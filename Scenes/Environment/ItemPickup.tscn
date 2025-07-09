@@ -80,6 +80,7 @@ gradient = SubResource("Gradient_3c3dx")
 fill_to = Vector2(0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rgl5"]
+resource_local_to_scene = true
 blend_mode = 1
 shading_mode = 0
 albedo_color = Color(0.954604, 0.465182, 1.34766e-06, 1)
@@ -128,7 +129,7 @@ _data = {
 &"RESET": SubResource("Animation_3c3dx")
 }
 
-[node name="ItemPickup" type="Area3D" node_paths=PackedStringArray("animationPlayer", "pivot", "despawnTimer")]
+[node name="ItemPickup" type="Area3D" node_paths=PackedStringArray("animationPlayer", "pivot", "despawnTimer", "flagMesh")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_lq4jr")
@@ -136,6 +137,7 @@ flashShader = ExtResource("2_3c3dx")
 animationPlayer = NodePath("AnimationPlayer")
 pivot = NodePath("Pivot")
 despawnTimer = NodePath("DespawnTimer")
+flagMesh = NodePath("FlagPivot/FlagMesh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00638, 0)
@@ -164,7 +166,7 @@ omni_attenuation = 2.0
 [node name="FlagPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="FlagPivot"]
+[node name="FlagMesh" type="MeshInstance3D" parent="FlagPivot"]
 transform = Transform3D(1, 0, 0, 0, 1.60388, 0, 0, 0, 1, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_ucr7y")

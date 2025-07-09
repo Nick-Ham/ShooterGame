@@ -32,7 +32,7 @@ func getCurrentHealth() -> float:
 func getHealthDepleted() -> bool:
 	return isHealthDepleted
 
-func takeDamage(inDamage : float) -> void:
+func takeDamage(inDamage : float, _inIsCrit : bool = false) -> void:
 	if isHealthDepleted:
 		return
 

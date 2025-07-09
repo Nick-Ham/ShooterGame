@@ -19,6 +19,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		Game.getGame(get_tree()).resetCurrentLevel()
 
 func _ready() -> void:
+	await get_tree().process_frame
 	changeLevel(initialLevelScene)
 
 func changeLevel(inLevelScene : PackedScene) -> void:

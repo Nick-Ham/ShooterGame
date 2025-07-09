@@ -7,4 +7,5 @@
 script = ExtResource("2_odww0")
 quantity = 25
 itemModelScene = ExtResource("1_bqlwr")
+itemCategory = 3
 name = "Health"

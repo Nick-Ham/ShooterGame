@@ -64,7 +64,7 @@ func addArmor(inArmor : float) -> void:
 	currentArmor = clampf(currentArmor + inArmor, 0.0, maxArmor)
 	armor_changed.emit(previousArmor, currentArmor)
 
-func takeDamage(inDamage : float) -> void:
+func takeDamage(inDamage : float, _inIsCrit : bool = false) -> void:
 	if immortal:
 		return
 

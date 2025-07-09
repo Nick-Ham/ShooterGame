@@ -12,8 +12,12 @@ class_name ItemPickup
 @export var animationPlayer : AnimationPlayer
 @export var pivot : Node3D
 @export var despawnTimer : Timer
+@export var flagMesh : MeshInstance3D
 
 const animationKey : String = "HoverAndSpin"
+const flashShaderColorKey : String = "FlashColor"
+
+var flashShaders : Array[ShaderMaterial] = []
 
 func _ready() -> void:
 	assert(animationPlayer)
@@ -27,6 +31,13 @@ func _ready() -> void:
 func on_despawnTimer_timeout() -> void:
 	queue_free()
 
+func setColor(inColor : Color) -> void:
+	var flagMaterial : StandardMaterial3D = flagMesh.get_surface_override_material(0) as StandardMaterial3D
+	flagMaterial.albedo_color = inColor
+	
+	for material : ShaderMaterial in flashShaders:
+		material.set_shader_parameter(flashShaderColorKey, inColor)
+
 func setItem(inItem : Item) -> void:
 	item = inItem
 
@@ -39,11 +50,13 @@ func setItem(inItem : Item) -> void:
 	animationPlayer.play(animationKey)
 
 	addFlashShader(model)
+	setColor(Item.getCategoryColor(item.getItemCategory()))
 
 func addFlashShader(node : Node) -> void:
 	var meshInstance : MeshInstance3D = node as MeshInstance3D
 	if (meshInstance):
 		var materialOverlay : ShaderMaterial = ShaderMaterial.new()
+		flashShaders.append(materialOverlay)
 		materialOverlay.shader = flashShader
 		meshInstance.material_overlay = materialOverlay
 

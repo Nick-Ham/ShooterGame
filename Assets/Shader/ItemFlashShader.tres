@@ -49,6 +49,7 @@ operator = 4
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_cisa5"]
 
 [resource]
+resource_local_to_scene = true
 code = "shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
 
@@ -120,6 +121,7 @@ void fragment() {
 
 }
 "
+preview_params/FlashColor = "Color(1, 0.494118, 0, 1)"
 nodes/fragment/0/position = Vector2(680, 140)
 nodes/fragment/2/node = SubResource("VisualShaderNodeInput_h1ykl")
 nodes/fragment/2/position = Vector2(-2060, 520)
