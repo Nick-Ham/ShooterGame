@@ -4,6 +4,12 @@ FPS prototype featuring multiple weapons (and swapping), several enemy types, he
 Models, textures, final audio, and effects made by me. Some samples used as original audio sources, credits listed within the asset readme.
 
 Gameplay Demo:
+Playable infinite arena.
+
+https://github.com/user-attachments/assets/1a17897c-78d0-4242-b0ee-cf0c02a3a9ee
+
+
+Older Level Protoype:
 
 https://github.com/user-attachments/assets/09292b04-9d8a-4282-91b0-1153524e17c5
 
