@@ -79,6 +79,7 @@ func shoot() -> void:
 	level.add_child(projectileInstance)
 
 	projectileInstance.injectSource(owningCharacter)
+	projectileInstance.setWeaponData(weaponData)
 	projectileInstance.setDamage(weaponData.defaultDamage)
 
 	projectileInstance.global_position = barrelEnd.global_position

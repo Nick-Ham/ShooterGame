@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://4f8htrhrh6ud" path="res://Scenes/Enemies/Skitterer/Skitterer.tscn" id="4_oje5r"]
 [ext_resource type="Material" uid="uid://bbfmdqbhu6cup" path="res://Assets/textures/DarkConcreteTexture.tres" id="5_f45ig"]
 [ext_resource type="PackedScene" uid="uid://dmdf1kchqjj6o" path="res://Scenes/Enemies/SmallRobot/SmallRobot.tscn" id="5_p75wf"]
-[ext_resource type="PackedScene" uid="uid://qj38mu6j5wbp" path="res://Scenes/Environment/ItemPickup.tscn" id="5_qmcej"]
+[ext_resource type="PackedScene" uid="uid://dwiixlrq1bqht" path="res://Scenes/Environment/ItemPickup.tscn" id="5_qmcej"]
 [ext_resource type="Resource" uid="uid://bq8bwbwoj0bc5" path="res://Data/WeaponItem/JunkBarrelWeaponItem.tres" id="6_3ivr3"]
 [ext_resource type="Material" uid="uid://bymbdwwuyy3um" path="res://Assets/textures/MetallicWallTexture.tres" id="6_f3hfi"]
 [ext_resource type="Resource" uid="uid://bkjtqasjvc7q" path="res://Data/QuantityItem/JunkBarrelAmmoItem.tres" id="7_2vver"]

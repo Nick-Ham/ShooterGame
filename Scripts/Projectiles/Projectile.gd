@@ -10,6 +10,7 @@ class_name Projectile
 var projection : Vector3 = Vector3.FORWARD * speed * (1.0 / Engine.physics_ticks_per_second)
 
 var source : Node3D = null
+var weaponData : WeaponData = null
 
 @onready var damage : Damage = Damage.new()
 
@@ -23,6 +24,9 @@ func _ready() -> void:
 
 func setDamage(inDamage : float) -> void:
 	damage.damage = inDamage
+
+func setWeaponData(inWeaponData : WeaponData) -> void:
+	weaponData = inWeaponData
 
 func injectSource(inSource : Node3D) -> void:
 	source = inSource
@@ -60,10 +64,22 @@ func projectShape() -> void:
 	queue_free()
 
 func handleHitEnemy(hitResult : RayCastResult) -> void:
-	damage.dealDamage(Character.getOwningCharacter(hitResult.collider), source)
+	var hitCharacter : Character = Character.getOwningCharacter(hitResult.collider)
+
+	var isCrit : bool = false
+	var damageMod : float = 1.0
 	var hitBox : Hitbox = hitResult.collider as Hitbox
 	if hitBox:
 		hitBox.addImpact(hitResult.hitPosition, hitResult.hitNormal)
+		isCrit = hitBox.isCrit()
+		damageMod = hitBox.getCritModifier()
+
+	damage.dealDamage(hitCharacter, source, damageMod, isCrit)
+
+	if is_zero_approx(weaponData.bulletKnockback):
+		return
+
+	hitCharacter.addVelocity(velocity.normalized() * weaponData.bulletKnockback)
 
 func handleHitEnvironment(rayCastResult : RayCastResult) -> void:
 	var game : Game = get_tree().current_scene as Game

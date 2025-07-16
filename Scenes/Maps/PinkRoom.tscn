@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnuu8tcarru28"]
+
+[ext_resource type="Script" uid="uid://bkyuvyinw2n35" path="res://Scripts/Level/Level.gd" id="1_bpe5u"]
+[ext_resource type="Material" uid="uid://bsms754sxwy0e" path="res://Prototyping/PrototypingTexture.tres" id="1_dav4y"]
+[ext_resource type="Script" uid="uid://mb6ytkx2be4g" path="res://Scripts/Level/PlayerSpawn.gd" id="2_bpe5u"]
+[ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="3_tc7ve"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_8iiai"]
+
+[node name="PinkRoom" type="Node3D"]
+script = ExtResource("1_bpe5u")
+metadata/_custom_type_script = "uid://bkyuvyinw2n35"
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_8iiai")
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+use_collision = true
+size = Vector3(250, 1, 250)
+material = ExtResource("1_dav4y")
+metadata/_edit_lock_ = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -2.96455, -0.221007, -1.8125)
+use_collision = true
+collision_mask = 0
+size = Vector3(6.9707, 1, 4.625)
+material = ExtResource("1_dav4y")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, -1.21751, -0.378978, 2.81316)
+use_collision = true
+collision_mask = 0
+size = Vector3(5.75, 1, 4.625)
+material = ExtResource("1_dav4y")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.842509, -0.378978, 7.43816)
+use_collision = true
+collision_mask = 0
+size = Vector3(5.75, 1, 4.625)
+material = ExtResource("1_dav4y")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, -0.647219, -0.378978, 12.0632)
+use_collision = true
+collision_mask = 0
+size = Vector3(5.75, 1, 4.625)
+material = ExtResource("1_dav4y")
+
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -5.36318, -0.155617, -5.29749)
+script = ExtResource("2_bpe5u")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.800292, 0.59961, 0, -0.59961, 0.800292, 0, 0, 0)
+light_color = Color(1, 0.701961, 0.360784, 1)
+light_energy = 0.3
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_tc7ve")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.11001, 0)
+layers = 3
+light_energy = 0.2
+omni_range = 57.0813
+omni_attenuation = -0.3

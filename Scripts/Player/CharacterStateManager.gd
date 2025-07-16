@@ -1,21 +1,11 @@
 extends Node
 class_name CharacterStateManager
 
-@export_category("Config")
-@export var enableLogging : bool = false
-@export var loggerCategory : String = "Player:StateManager:State"
-
-@export_category("States")
+@export_category("DefaultStates")
 @export var stateDefault : CharacterStateDefault
-@export var stateJumping : CharacterStateJumping
-@export var stateInAir : CharacterStateInAir
-@export var stateDestroyed : CharacterStateDestroyed
 
 @onready var states : Array[CharacterState] = [
 	stateDefault,
-	stateJumping,
-	stateInAir,
-	stateDestroyed
 ]
 
 var character : CharacterBody3D = null
@@ -40,18 +30,29 @@ func _ready() -> void:
 
 	assert(character, "CharacterStateManager only valid on a Character3D")
 
-	if enableLogging:
-		DebugLogger.registerTrackedValue(loggerCategory)
-
 	controller = Controller.getController(character)
 	if controller:
 		bindToController(controller)
+
+	fetchStates()
 
 	Util.safeConnect(character.character_destroyed, on_character_destroyed)
 
 	bindToStates()
 
 	changeState(stateDefault)
+
+func fetchStates() -> void:
+	var children : Array[Node] = get_children()
+	for child : Node in children:
+		var state : CharacterState = child as CharacterState
+		if !state:
+			continue
+
+		if states.has(state):
+			continue
+
+		states.append(state)
 
 func on_character_destroyed(_inCharacter : Character) -> void:
 	lastInputDirection = Vector2()
@@ -73,12 +74,16 @@ func addController(inController : Controller) -> void:
 func bindToController(inController : Controller) -> void:
 	Util.safeConnect(inController.input_direction_changed, on_input_direction_changed)
 	Util.safeConnect(inController.jump_changed, on_jump_changed)
+	Util.safeConnect(inController.crouch_changed, on_crouch_changed)
 
 func on_input_direction_changed(inputDirection : Vector2) -> void:
 	lastInputDirection = inputDirection
 
 func on_jump_changed(inIsJumping : bool) -> void:
 	currentState.handleOnJumpChanged(inIsJumping)
+
+func on_crouch_changed(inIsCrouching : bool) -> void:
+	currentState.handleOnCrouchChanged(inIsCrouching)
 
 func _process(delta: float) -> void:
 	if updatePhysicsInProcess:
@@ -105,9 +110,6 @@ func changeState(inNewState : CharacterState) -> void:
 
 	currentState = inNewState
 	currentState.stateEntering()
-
-	if enableLogging:
-		DebugLogger.updateTrackedValue(loggerCategory, currentState.name)
 
 	state_changed.emit(lastState, currentState)
 

@@ -73,6 +73,16 @@ func shoot() -> void:
 	await get_tree().physics_frame
 	shoot_changed.emit(false)
 
+func getAimDirection() -> Vector3:
+	var weaponManager : WeaponManager = Util.getChildOfType(owningCharacter, WeaponManager)
+	assert(weaponManager, "WeaponManager required for AIController to correctly shoot a weapon")
+
+	var currentWeapon : Weapon = weaponManager.getEquippedWeapon()
+	if !currentWeapon:
+		return Vector3()
+
+	return currentWeapon.getBarrelEnd().basis * Vector3.FORWARD
+
 func getAimCastResult(inBloom : float = 0.0) -> RayCastResult:
 	var weaponManager : WeaponManager = Util.getChildOfType(owningCharacter, WeaponManager)
 	assert(weaponManager, "WeaponManager required for AIController to correctly shoot a weapon")

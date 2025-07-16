@@ -31,6 +31,9 @@ func refreshSubViewport() -> void:
 	var viewport : Viewport = get_viewport()
 	subViewport.size = viewport.size
 
+func getCameraFacing() -> Basis:
+	return viewportCamera.basis
+
 func getCameraCastResult(inBloom : float = 0.0) -> RayCastResult:
 	var worldReference : World3D = get_world_3d()
 	var spaceState : PhysicsDirectSpaceState3D = worldReference.direct_space_state

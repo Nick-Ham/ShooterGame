@@ -23,6 +23,8 @@ class_name WeaponData
 @export_category("WeaponStats")
 @export var defaultDamage : float = 25.0
 @export var firingDelay : float = 0.1
+@export var bulletKnockback : float = 1.0
+@export var shooterKnockback : float = 0.0
 @export var magazineSize : int = 15
 @export var baseBloomRadius : float = 0.0
 @export var maxBloomRadius : float = 0.003
