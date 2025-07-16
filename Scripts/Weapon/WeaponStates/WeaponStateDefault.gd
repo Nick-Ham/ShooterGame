@@ -123,6 +123,10 @@ func shoot() -> void:
 	if !equippedWeaponData.useMaxBloom:
 		bloomBuildup = clampf(bloomBuildup + equippedWeaponData.firingDelay, 0.0, 1.0)
 
+	if !is_zero_approx(equippedWeaponData.shooterKnockback):
+		var aimDirection : Vector3 = controller.getAimDirection()
+		owningCharacter.addVelocity(-aimDirection * equippedWeaponData.shooterKnockback)
+
 	isCurrentlyShooting = true
 	weapon_fired.emit()
 
@@ -130,10 +134,25 @@ func shoot() -> void:
 		request_change_state.emit(onOutOfAmmoState)
 
 func handleHitEnemy(hitResult : RayCastResult) -> void:
-	damage.dealDamage(Character.getOwningCharacter(hitResult.collider), owningCharacter)
+	var hitCharacter : Character = Character.getOwningCharacter(hitResult.collider)
+
+	var isCrit : bool = false
+	var damageMod : float = 1.0
 	var hitBox : Hitbox = hitResult.collider as Hitbox
 	if hitBox:
 		hitBox.addImpact(hitResult.hitPosition, hitResult.hitNormal)
+		isCrit = hitBox.isCrit()
+		damageMod = hitBox.getCritModifier()
+
+	damage.dealDamage(hitCharacter, owningCharacter, damageMod, isCrit)
+
+	if is_zero_approx(equippedWeaponData.bulletKnockback):
+		return
+
+	var rayVector : Vector3 = hitResult.rayEndpoint - hitResult.rayOrigin
+	var rayDirection : Vector3 = rayVector.normalized()
+
+	hitCharacter.addVelocity(rayDirection * equippedWeaponData.bulletKnockback)
 
 var hasShotOnce : bool = false
 func handleOnShootChanged(inIsShooting : bool) -> void:

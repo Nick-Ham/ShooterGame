@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://3khvdhi6xjou"]
+[gd_scene load_steps=39 format=3 uid="uid://3khvdhi6xjou"]
 
 [ext_resource type="Script" uid="uid://dwetkrpdbb22e" path="res://Scripts/Character.gd" id="1_2vnqn"]
 [ext_resource type="Script" uid="uid://do550rjsw4xqv" path="res://Scripts/Components/WeaponManager.gd" id="2_56hl0"]
@@ -27,7 +27,6 @@
 [ext_resource type="AudioStream" uid="uid://y7ylwct4yro8" path="res://Assets/Audio/Thuds/ThudsRandomizer.tres" id="16_b7esa"]
 [ext_resource type="Script" uid="uid://du3ici8voo71" path="res://Scripts/Components/Hitbox.gd" id="17_0i7jp"]
 [ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="18_bxbch"]
-[ext_resource type="Script" uid="uid://dl43yxq7q6nxt" path="res://Scripts/CharacterStates/CharacterStateCrouching.gd" id="23_g7gci"]
 [ext_resource type="Script" uid="uid://ddqa37nhogyv7" path="res://Scripts/Interactable/Interactor.gd" id="25_22kx5"]
 [ext_resource type="Script" uid="uid://goc6kg2yspkm" path="res://Scripts/Player/PlayerRecoilController.gd" id="27_tf472"]
 [ext_resource type="Script" uid="uid://huiiayreq8j5" path="res://Scripts/Item/ItemManager.gd" id="32_8g535"]
@@ -205,9 +204,12 @@ script = ExtResource("12_ijkr7")
 health = NodePath("../ArmoredHealth")
 characterStateManager = NodePath("../CharacterStateManager")
 
-[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault")]
+[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir", "stateDestroyed")]
 script = ExtResource("4_8v6om")
 stateDefault = NodePath("CharacterStateDefault")
+stateJumping = NodePath("CharacterStateJumping")
+stateInAir = NodePath("CharacterStateInAir")
+stateDestroyed = NodePath("CharacterStateDestroyed")
 
 [node name="CharacterStateDefault" type="Node" parent="CharacterStateManager"]
 script = ExtResource("5_018c5")
@@ -229,10 +231,6 @@ maxSpeed = 4.0
 
 [node name="CharacterStateDestroyed" type="Node" parent="CharacterStateManager"]
 script = ExtResource("10_8wix2")
-
-[node name="CharacterStateCrouching" type="Node" parent="CharacterStateManager"]
-script = ExtResource("23_g7gci")
-metadata/_custom_type_script = "uid://dl43yxq7q6nxt"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -290,6 +288,7 @@ layers = 4
 radius = 0.169382
 
 [node name="FPSView" type="Camera3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot" node_paths=PackedStringArray("subViewport", "viewportCamera", "headPunch", "characterStateManager")]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 3.47323, 0, 0)
 cull_mask = 1047553
 current = true
 script = ExtResource("6_knxow")
@@ -373,7 +372,7 @@ volume_db = -10.0
 bus = &"WorldSFX"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.706736, 0.286414, -0.646909, 0, 0.914388, 0.404839, 0.707477, -0.286114, 0.646231, -2.59444, 3.74238, 1.96478)
+transform = Transform3D(0.706736, 0.286414, -0.646909, 0, 0.914388, 0.404838, 0.707477, -0.286114, 0.646231, -2.59444, 3.74238, 1.96478)
 
 [node name="HandsAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -2,12 +2,12 @@ extends CharacterState
 class_name CharacterStateInAir
 
 @export_category("Config")
-@export var landingStateKey : String = "default"
+@export var landingStateKey : String = CharacterStateLibrary.defaultStateKey
 
 var lastVelocity : Vector3 = Vector3()
 
 func getStateKey() -> String:
-	return "inAir"
+	return CharacterStateLibrary.inAirStateKey
 
 func update_physics(inDelta : float) -> void:
 	var character : Character = getStateManager().getCharacter()

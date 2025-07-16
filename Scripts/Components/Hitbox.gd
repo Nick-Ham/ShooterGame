@@ -7,6 +7,7 @@ var shieldImpacts : Array[Impact]
 
 @export_category("Config")
 @export var canCrit : bool = false
+@export var critModifier : float = 1.5
 
 const hitboxLayers : int = 8
 
@@ -17,6 +18,12 @@ func _ready() -> void:
 	var shieldHealth : OvershieldHealth = Util.getChildOfType(owningCharacter, OvershieldHealth)
 	if shieldHealth:
 		Util.safeConnect(shieldHealth.health_depleted, on_shield_depleted)
+
+func isCrit() -> bool:
+	return canCrit
+
+func getCritModifier() -> float:
+	return critModifier
 
 func on_shield_depleted(_inHealth : Health) -> void:
 	for impact : Impact in shieldImpacts:

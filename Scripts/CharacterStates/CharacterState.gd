@@ -19,6 +19,9 @@ func getStateKey() -> String:
 func handleOnJumpChanged(_inIsJumping : bool) -> void:
 	return
 
+func handleOnCrouchChanged(_inIsCrouching : bool) -> void:
+	return
+
 func stateEntering() -> void:
 	pass
 

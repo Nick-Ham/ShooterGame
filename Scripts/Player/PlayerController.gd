@@ -59,6 +59,12 @@ func _unhandled_input(event : InputEvent) -> void:
 	if event.is_action_released("Jump"):
 		jump_changed.emit(false)
 
+	if event.is_action_pressed("Crouch"):
+		crouch_changed.emit(true)
+
+	if event.is_action_released("Crouch"):
+		crouch_changed.emit(false)
+
 	if event.is_action_pressed("Reload"):
 		reload_changed.emit(true)
 
@@ -94,6 +100,9 @@ func _process(_delta: float) -> void:
 
 func getIsShooting() -> bool:
 	return isShooting
+
+func getAimDirection() -> Vector3:
+	return fpsViewCamera.getCameraFacing() * Vector3.FORWARD
 
 func getInputDirection() -> Vector2:
 	return inputDirection

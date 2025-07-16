@@ -3,6 +3,7 @@ class_name ItemPickup
 
 @export_category("Config")
 @export var item : Item
+@export var useDespawnTimer : bool = true
 
 @export_category("Anim")
 @export var animationSpeed : float = 0.25
@@ -26,7 +27,9 @@ func _ready() -> void:
 	setItem(item)
 
 	Util.safeConnect(body_entered, on_body_entered)
-	Util.safeConnect(despawnTimer.timeout, on_despawnTimer_timeout)
+
+	if useDespawnTimer:
+		Util.safeConnect(despawnTimer.timeout, on_despawnTimer_timeout)
 
 func on_despawnTimer_timeout() -> void:
 	queue_free()
@@ -34,11 +37,15 @@ func on_despawnTimer_timeout() -> void:
 func setColor(inColor : Color) -> void:
 	var flagMaterial : StandardMaterial3D = flagMesh.get_surface_override_material(0) as StandardMaterial3D
 	flagMaterial.albedo_color = inColor
-	
+
 	for material : ShaderMaterial in flashShaders:
 		material.set_shader_parameter(flashShaderColorKey, inColor)
 
 func setItem(inItem : Item) -> void:
+	if !inItem:
+		push_error("Tried to set item with no valid item.")
+		return
+
 	item = inItem
 
 	var model : Node = item.getModel().instantiate()

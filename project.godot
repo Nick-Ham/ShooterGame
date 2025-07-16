@@ -52,7 +52,7 @@ project/assembly_name="Shooter"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/func_godot/plugin.cfg", "res://addons/limbo_console/plugin.cfg", "res://addons/screen_effects/plugin.cfg", "res://addons/script-tabs/plugin.cfg")
+enabled=PackedStringArray("res://addons/limbo_console/plugin.cfg", "res://addons/screen_effects/plugin.cfg", "res://addons/script-tabs/plugin.cfg")
 
 [input]
 

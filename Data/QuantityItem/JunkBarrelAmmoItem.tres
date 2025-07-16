@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_fw4sh")
-quantity = 35
+quantity = 60
 itemModelScene = ExtResource("1_pmd27")
 itemCategory = 2
 name = "Junk Barrel Ammo"

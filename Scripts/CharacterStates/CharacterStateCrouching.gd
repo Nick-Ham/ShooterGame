@@ -1,10 +1,9 @@
 extends CharacterState
-class_name CharacterStateDefault
+class_name CharacterStateCrouching
 
 @export_category("Config")
-@export var stateOnJumpKey : String = CharacterStateLibrary.jumpingStateKey
-@export var stateOnFallKey : String = CharacterStateLibrary.inAirStateKey
-@export var stateOnCrouchKey : String = CharacterStateLibrary.crouchingStateKey
+@export var stateOnJumpKey : String = "jumping"
+@export var stateOnFallKey : String = "inAir"
 
 var timeInAir : float = 0.0
 const maxAirTime : float = 0.5
@@ -21,7 +20,7 @@ func update_physics(inDelta : float) -> void:
 		request_change_state.emit(stateOnFallKey)
 
 func getStateKey() -> String:
-	return CharacterStateLibrary.defaultStateKey
+	return "crouching"
 
 func handleOnJumpChanged(inIsJumping : bool) -> void:
 	if !inIsJumping:
@@ -31,7 +30,3 @@ func handleOnJumpChanged(inIsJumping : bool) -> void:
 	if character.is_on_floor():
 		character.velocity.y += jumpVelocity
 		request_change_state.emit(stateOnJumpKey)
-
-func handleOnCrouchChanged(inIsCrouching : bool) -> void:
-	if !inIsCrouching:
-		return
