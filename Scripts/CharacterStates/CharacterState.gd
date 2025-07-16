@@ -16,16 +16,19 @@ signal request_change_state(inStateKey : String)
 func getStateKey() -> String:
 	return ""
 
+func getIsCrouchingState() -> bool:
+	return false
+
 func handleOnJumpChanged(_inIsJumping : bool) -> void:
 	return
 
 func handleOnCrouchChanged(_inIsCrouching : bool) -> void:
 	return
 
-func stateEntering() -> void:
+func stateEntering(_inLastState : CharacterState) -> void:
 	pass
 
-func stateExiting() -> void:
+func stateExiting(_inNewState : CharacterState) -> void:
 	pass
 
 func _ready() -> void:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://e2q5617q6cek"]
 
 [ext_resource type="Script" uid="uid://chp7tx86u752e" path="res://Game/Game.gd" id="1_l1jsu"]
-[ext_resource type="PackedScene" uid="uid://daw6qfdbxjj7m" path="res://Scenes/Levels/DemoLevel.tscn" id="2_ap1ne"]
+[ext_resource type="PackedScene" uid="uid://cnuu8tcarru28" path="res://Scenes/Maps/PinkRoom.tscn" id="2_ap1ne"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_l1jsu")

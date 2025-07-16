@@ -20,7 +20,13 @@ func _ready() -> void:
 
 	Util.safeConnect(characterStateManager.state_changed, on_state_changed)
 
-func on_state_changed(lastState : CharacterState, newState : CharacterState) -> void:
-	#if lastState.getStateKey() == CharacterStateLibrary.crouchingStateKey:
-
+func on_state_changed(_lastState : CharacterState, newState : CharacterState) -> void:
+	var isCrouchingState : bool = newState.getIsCrouchingState()
+	
+	var newNeckPosition : Vector3 = crouchingNeckPosition.position if isCrouchingState else standingNeckPosition.position
+	neck.position = newNeckPosition
+	
+	collisionShapeCrouching.disabled = !isCrouchingState
+	collisionShapeStanding.disabled = isCrouchingState
+	
 	return

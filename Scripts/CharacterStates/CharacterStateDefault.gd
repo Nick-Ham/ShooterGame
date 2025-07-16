@@ -5,6 +5,7 @@ class_name CharacterStateDefault
 @export var stateOnJumpKey : String = CharacterStateLibrary.jumpingStateKey
 @export var stateOnFallKey : String = CharacterStateLibrary.inAirStateKey
 @export var stateOnCrouchKey : String = CharacterStateLibrary.crouchingStateKey
+@export var stateOnCrouchInAirKey : String = CharacterStateLibrary.crouchingStateKey
 
 var timeInAir : float = 0.0
 const maxAirTime : float = 0.5
@@ -35,3 +36,10 @@ func handleOnJumpChanged(inIsJumping : bool) -> void:
 func handleOnCrouchChanged(inIsCrouching : bool) -> void:
 	if !inIsCrouching:
 		return
+	
+	var character : CharacterBody3D = getStateManager().getCharacter()
+	if character.is_on_floor():
+		request_change_state.emit(stateOnCrouchKey)
+		return
+	
+	request_change_state.emit(stateOnCrouchInAirKey)

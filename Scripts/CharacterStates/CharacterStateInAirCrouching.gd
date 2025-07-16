@@ -1,15 +1,18 @@
 extends CharacterState
-class_name CharacterStateInAir
+class_name CharacterStateInAirCrouching
 
 @export_category("Config")
-@export var landingStateKey : String = CharacterStateLibrary.defaultStateKey
-@export var onCrouchStateKey : String = CharacterStateLibrary.inAirCrouchingStateKey
-@export var onCrouchHeightBump : float = (1.5 - 1.0) / 2.0 # standing neck height vs crouching neck height, halved
+@export var landingStateKey : String = CharacterStateLibrary.crouchingStateKey
+@export var stateOnCrouchEndInAirKey : String = CharacterStateLibrary.inAirStateKey
+@export var stateOnCrouchEndOnFloorKey : String = CharacterStateLibrary.defaultStateKey
 
 var lastVelocity : Vector3 = Vector3()
 
 func getStateKey() -> String:
-	return CharacterStateLibrary.inAirStateKey
+	return CharacterStateLibrary.inAirCrouchingStateKey
+
+func getIsCrouchingState() -> bool:
+	return true
 
 func update_physics(inDelta : float) -> void:
 	var character : Character = getStateManager().getCharacter()
@@ -27,13 +30,11 @@ func getLastVelocity() -> Vector3:
 	return lastVelocity
 
 func handleOnCrouchChanged(inIsCrouching : bool) -> void:
-	if !inIsCrouching:
+	if inIsCrouching:
 		return
-	
-	request_change_state.emit(onCrouchStateKey)
 
-func stateExiting(inNewState : CharacterState) -> void:
-	if inNewState.getStateKey() != onCrouchStateKey:
+	if getStateManager().getCharacter().is_on_floor():
+		request_change_state.emit(stateOnCrouchEndOnFloorKey)
 		return
 	
-	getStateManager().getCharacter().global_position.y += onCrouchHeightBump
+	request_change_state.emit(stateOnCrouchEndInAirKey)

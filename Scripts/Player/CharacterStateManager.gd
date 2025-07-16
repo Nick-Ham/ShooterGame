@@ -104,12 +104,12 @@ func getLastInputDirection() -> Vector2:
 
 func changeState(inNewState : CharacterState) -> void:
 	if currentState != null:
-		currentState.stateExiting()
+		currentState.stateExiting(inNewState)
 
 	lastState = currentState
 
 	currentState = inNewState
-	currentState.stateEntering()
+	currentState.stateEntering(lastState)
 
 	state_changed.emit(lastState, currentState)
 

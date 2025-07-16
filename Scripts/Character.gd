@@ -3,6 +3,7 @@ class_name Character
 
 @export_category("CharacterConfig")
 @export var headHeight : float = 1.5
+@export var crouchHeight : float = 1.0
 @export var minShootAngle : float = PI/10.0
 @export var characterRotationSpeed : float = 3.0
 @export var maxAngleFromTarget : float = PI/3.0

@@ -1,5 +1,4 @@
-res://Game/AudioBusLayout.tres
-res://Scenes/Maps/PinkRoom.tscn
+res://Scenes/Player/Player.tscn
 res://Assets/NoiseTextures/CellularBubbly.tres
 res://Scenes/Effects/Explosion/ExplosionEffectShader.tres
 res://Scenes/Effects/ImpactExplosion/ImpactCloudParticleProcessMaterial.tres
@@ -11,9 +10,6 @@ res://Data/WeaponData/JunkBarrelWeaponData.tres
 res://Data/WeaponData/HammerGunWeaponData.tres
 res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres
 res://Scenes/UI/AlphaTransitionShader.tres
-res://Scripts/Player/PlayerCrouchController.gd
-res://Game/DefaultGameScene.tscn
-res://Scenes/Player/Player.tscn
 res://Assets/Shader/ItemFlashShader.tres
 res://Scenes/Enemies/Skitterer/SkittererBT.tres
 res://Assets/Shader/SkittererCanisterShader.tres
@@ -24,3 +20,15 @@ res://Assets/Shader/PlasmaBoltShader.tres
 res://Assets/Shader/PlasmaBoltShaderMaterial.tres
 res://Data/WeaponData/PlasmaBolterWeaponData.tres
 res://Assets/Effects/Overshield/OvershieldMaterialShader.tres
+res://Game/DefaultGameScene.tscn
+res://Scenes/Maps/PinkRoom.tscn
+res://Scripts/CharacterStates/CharacterState.gd
+res://Scripts/Player/PlayerCrouchController.gd
+res://Scripts/CharacterStates/CharacterStateCrouching.gd
+res://Scripts/CharacterStates/CharacterStateDefault.gd
+res://Scripts/CharacterStates/CharacterStateLibrary.gd
+res://Scripts/CharacterStates/CharacterStateInAirCrouching.gd
+res://Scripts/CharacterStates/CharacterStateInAir.gd
+res://Scripts/CharacterStates/CharacterStateJumping.gd
+res://Scripts/Player/CharacterStateManager.gd
+res://Scripts/Character.gd
