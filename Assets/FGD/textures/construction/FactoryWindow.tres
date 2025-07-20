@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dqxc0t1rpoxjb"]
+
+[ext_resource type="Texture2D" uid="uid://bgbe1jvggn7cu" path="res://Assets/FGD/textures/construction/FactoryWindow.png" id="1_wwk6b"]
+
+[resource]
+transparency = 4
+albedo_texture = ExtResource("1_wwk6b")
+metallic_specular = 0.0
+emission = Color(0.679864, 0.41768, 0.216064, 1)
+emission_energy_multiplier = 0.21
+backlight = Color(1, 1, 1, 1)
+refraction_scale = 0.0
+texture_filter = 2

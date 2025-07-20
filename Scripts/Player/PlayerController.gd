@@ -92,6 +92,14 @@ func _unhandled_input(event : InputEvent) -> void:
 	if event.is_action_pressed("Weapon5"):
 		weapon5_triggered.emit()
 
+func getIsCrouching() -> bool:
+	var isCrouching : bool = Input.is_action_pressed("Crouch")
+	return isCrouching
+
+func getIsJumping() -> bool:
+	var isJumping : bool = Input.is_action_pressed("Jump")
+	return isJumping
+
 func _process(_delta: float) -> void:
 	inputDirection = Vector2()
 	inputDirection = Input.get_vector("Left", "Right", "Forward", "Backward")

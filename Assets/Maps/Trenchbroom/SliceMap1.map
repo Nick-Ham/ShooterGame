@@ -1,0 +1,797 @@
+// Game: ShooterGame
+// Format: Valve
+// entity 0
+{
+"mapversion" "220"
+"wad" ""
+"classname" "worldspawn"
+// brush 0
+{
+( -64 -64 -16 ) ( -64 -63 -16 ) ( -64 -64 -15 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -64 -256 -16 ) ( -64 -256 -15 ) ( -63 -256 -16 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -64 -64 -64 ) ( -63 -64 -64 ) ( -64 -63 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 64 64 0 ) ( 64 65 0 ) ( 65 64 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 64 256 16 ) ( 65 256 16 ) ( 64 256 17 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 64 64 16 ) ( 64 64 17 ) ( 64 65 16 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 1
+{
+( 64 -256 0 ) ( 64 -128 -64 ) ( 64 -128 0 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 192 -256 0 ) ( 64 -256 -64 ) ( 64 -256 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 192 -128 -64 ) ( 64 -256 -64 ) ( 192 -256 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 192 -128 0 ) ( 64 -256 0 ) ( 64 -128 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 192 -128 0 ) ( 64 -128 -64 ) ( 192 -128 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 192 -128 0 ) ( 192 -256 -64 ) ( 192 -256 0 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 2
+{
+( 192 -448 -16 ) ( 192 -447 -16 ) ( 192 -448 -15 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 192 -640 -16 ) ( 192 -640 -15 ) ( 193 -640 -16 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 192 -448 -64 ) ( 193 -448 -64 ) ( 192 -447 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 320 -320 0 ) ( 320 -319 0 ) ( 321 -320 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 320 -128 16 ) ( 321 -128 16 ) ( 320 -128 17 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 320 -320 16 ) ( 320 -320 17 ) ( 320 -319 16 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+}
+// brush 3
+{
+( -192 128 0 ) ( -192 256 -64 ) ( -192 256 0 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -64 128 0 ) ( -192 128 -64 ) ( -192 128 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -64 256 -64 ) ( -192 128 -64 ) ( -64 128 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -64 256 0 ) ( -192 128 0 ) ( -192 256 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -64 256 0 ) ( -192 256 -64 ) ( -64 256 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -64 256 0 ) ( -64 128 -64 ) ( -64 128 0 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 4
+{
+( -320 320 -16 ) ( -320 321 -16 ) ( -320 320 -15 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( -320 128 -16 ) ( -320 128 -15 ) ( -319 128 -16 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -320 320 -64 ) ( -319 320 -64 ) ( -320 321 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -192 448 0 ) ( -192 449 0 ) ( -191 448 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -192 512 16 ) ( -191 512 16 ) ( -192 512 17 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -192 448 16 ) ( -192 448 17 ) ( -192 449 16 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 5
+{
+( 64 128 0 ) ( 64 256 -64 ) ( 64 256 0 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 192 128 0 ) ( 64 128 -64 ) ( 64 128 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 192 256 -64 ) ( 64 128 -64 ) ( 192 128 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 192 256 0 ) ( 64 128 0 ) ( 64 256 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 192 256 0 ) ( 64 256 -64 ) ( 192 256 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 192 256 0 ) ( 192 128 -64 ) ( 192 128 0 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 6
+{
+( 192 320 -16 ) ( 192 321 -16 ) ( 192 320 -15 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 192 128 -16 ) ( 192 128 -15 ) ( 193 128 -16 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 192 320 -64 ) ( 193 320 -64 ) ( 192 321 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 320 448 0 ) ( 320 449 0 ) ( 321 448 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 320 640 16 ) ( 321 640 16 ) ( 320 640 17 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 320 448 16 ) ( 320 448 17 ) ( 320 449 16 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+}
+// brush 7
+{
+( 320 512 0 ) ( 320 640 -64 ) ( 320 640 0 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 448 512 0 ) ( 320 512 -64 ) ( 320 512 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 448 640 -64 ) ( 320 512 -64 ) ( 448 512 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 448 640 0 ) ( 320 512 0 ) ( 320 640 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 448 640 0 ) ( 320 640 -64 ) ( 448 640 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 640 0 ) ( 576 512 -64 ) ( 576 512 0 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 8
+{
+( 320 128 0 ) ( 320 256 -64 ) ( 320 256 0 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 448 128 0 ) ( 320 128 -64 ) ( 320 128 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 448 256 -64 ) ( 320 128 -64 ) ( 448 128 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 448 256 0 ) ( 320 128 0 ) ( 320 256 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 448 256 0 ) ( 320 256 -64 ) ( 448 256 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 832 256 0 ) ( 832 128 -64 ) ( 832 128 0 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 9
+{
+( 704 256 0 ) ( 704 384 -64 ) ( 704 384 0 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 832 256 0 ) ( 704 256 -64 ) ( 704 256 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 832 384 -64 ) ( 704 256 -64 ) ( 832 256 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 832 384 0 ) ( 704 256 0 ) ( 704 384 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 832 384 0 ) ( 704 384 -64 ) ( 832 384 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 832 384 0 ) ( 832 256 -64 ) ( 832 256 0 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 10
+{
+( 64 128 0 ) ( 64 64 0 ) ( 64 64 -64 ) construction/SoftSandTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 64 128 0 ) ( 192 64 64 ) ( 64 64 0 ) construction/SoftSandTexture [ 0.7999999999999992 0 0.4000000000000016 12.8 ] [ 0 -1 0 0 ] 0 1 1
+( 64 64 0 ) ( 192 64 64 ) ( 192 64 -64 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 192 64 -64 ) ( 192 128 -64 ) ( 64 128 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 64 128 0 ) ( 192 128 0 ) ( 192 64 64 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 -0.4999999999999979 0.5000000000000021 0 ] 0 1 1
+( 192 128 -64 ) ( 192 128 0 ) ( 64 128 0 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 192 64 64 ) ( 192 128 0 ) ( 192 128 -64 ) construction/SoftSandTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 11
+{
+( 64 64 0 ) ( 64 0 0 ) ( 64 0 -64 ) construction/SoftSandTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 64 64 0 ) ( 128 64 32 ) ( 128 0 32 ) construction/SoftSandTexture [ 0.7999999999999992 0 0.4000000000000016 12.8 ] [ 0 -1 0 0 ] 180 1 1
+( 64 0 0 ) ( 128 0 32 ) ( 128 0 -64 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 128 0 -64 ) ( 128 64 -64 ) ( 64 64 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 128 64 -64 ) ( 128 64 32 ) ( 64 64 0 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 128 0 32 ) ( 128 64 32 ) ( 128 64 -64 ) construction/SoftSandTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 12
+{
+( -320 128 0 ) ( -320 64 64 ) ( -320 64 -64 ) construction/SoftSandTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -320 128 0 ) ( -192 64 96 ) ( -320 64 64 ) construction/SoftSandTexture [ 0.9696969696969744 0.12121212121210244 0.12121212121210247 -25.212122 ] [ -0.12121212121212227 -0.5151515151515109 0.4848484848484891 -36.848484 ] 189.875 1 1
+( -320 64 64 ) ( -192 64 96 ) ( -192 64 -64 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -192 64 -64 ) ( -192 128 -64 ) ( -320 128 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( -320 128 0 ) ( -192 128 0 ) ( -192 64 96 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 -0.3076923076923067 0.4615384615384621 -24.615385 ] 180 1 1
+( -192 128 -64 ) ( -192 128 0 ) ( -320 128 0 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -192 64 96 ) ( -192 128 0 ) ( -192 128 -64 ) construction/SoftSandTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 13
+{
+( 256 -64 0 ) ( 256 0 -64 ) ( 256 0 0 ) construction/SoftSandTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 384 -128 0 ) ( 256 -128 -64 ) ( 256 -128 0 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 384 0 -64 ) ( 256 -64 -64 ) ( 384 -64 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 384 0 0 ) ( 256 -64 0 ) ( 256 0 0 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 384 0 0 ) ( 256 0 -64 ) ( 384 0 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 320 0 0 ) ( 320 -64 -64 ) ( 320 -64 0 ) construction/SoftSandTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 14
+{
+( 256 0 0 ) ( 256 64 -64 ) ( 256 64 0 ) construction/SoftSandTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 512 0 0 ) ( 384 0 -64 ) ( 384 0 0 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 512 64 -64 ) ( 384 0 -64 ) ( 512 0 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 512 64 0 ) ( 384 0 0 ) ( 384 64 0 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 512 64 0 ) ( 384 64 -64 ) ( 512 64 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 512 64 0 ) ( 512 0 -64 ) ( 512 0 0 ) construction/SoftSandTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+}
+// brush 15
+{
+( 448 64 0 ) ( 448 128 -64 ) ( 448 128 0 ) construction/SoftSandTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 576 64 0 ) ( 448 64 -64 ) ( 448 64 0 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 576 128 -64 ) ( 448 64 -64 ) ( 576 64 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 576 128 0 ) ( 448 64 0 ) ( 448 128 0 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 576 128 0 ) ( 448 128 -64 ) ( 576 128 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 512 128 0 ) ( 512 64 -64 ) ( 512 64 0 ) construction/SoftSandTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 16
+{
+( 320 384 0 ) ( 320 256 0 ) ( 320 256 -64 ) construction/SoftSandTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 320 384 0 ) ( 448 384 32 ) ( 320 256 0 ) construction/SoftSandTexture [ 0.9411764705882338 0 0.2352941176470646 18.82353 ] [ 0 -1 0 0 ] 0 1 1
+( 320 256 0 ) ( 448 256 0 ) ( 448 256 -64 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 320 256 0 ) ( 448 384 32 ) ( 448 256 0 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 -0.9411764705882338 -0.2352941176470646 -15.058824 ] 0 1 1
+( 448 256 -64 ) ( 448 384 -64 ) ( 320 384 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 448 384 -64 ) ( 448 384 32 ) ( 320 384 0 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 448 256 0 ) ( 448 384 32 ) ( 448 384 -64 ) construction/SoftSandTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+}
+// brush 17
+{
+( 320 704 64 ) ( 320 640 0 ) ( 320 640 -64 ) construction/SoftSandTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 320 640 0 ) ( 448 640 0 ) ( 448 640 -64 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 320 704 64 ) ( 448 640 0 ) ( 320 640 0 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 -0.499999999999998 -0.500000000000002 0 ] 180 1 1
+( 448 640 -64 ) ( 448 704 -64 ) ( 320 704 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 448 704 -64 ) ( 448 704 32 ) ( 320 704 64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 320 704 64 ) ( 448 704 32 ) ( 448 640 0 ) construction/SoftSandTexture [ 0.952380952380948 0.09523809523810409 -0.1904761904762082 -39.61905 ] [ -0.09523809523810417 -0.8095238095237915 -0.3809523809524167 48.761906 ] 186.2268 1 1
+( 448 640 0 ) ( 448 704 32 ) ( 448 704 -64 ) construction/SoftSandTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 18
+{
+( 704 -320 0 ) ( 704 -448 0 ) ( 704 -448 -64 ) construction/SoftSandTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 704 -320 0 ) ( 832 -448 32 ) ( 704 -448 0 ) construction/SoftSandTexture [ 0.9411764705882338 0 0.2352941176470646 41.411766 ] [ 0 -1 0 0 ] 270 1 1
+( 704 -448 0 ) ( 832 -448 32 ) ( 832 -448 -64 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 832 -448 -64 ) ( 832 -320 -64 ) ( 704 -320 -64 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 704 -320 0 ) ( 832 -320 0 ) ( 832 -448 32 ) construction/SoftSandTexture [ 1 0 0 0 ] [ 0 -0.9411764705882338 0.2352941176470646 18.82353 ] 270 1 1
+( 832 -320 -64 ) ( 832 -320 0 ) ( 704 -320 0 ) construction/SoftSandTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 832 -448 32 ) ( 832 -320 0 ) ( 832 -320 -64 ) construction/SoftSandTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 19
+{
+( 576 -704 0 ) ( 576 -640 -64 ) ( 576 -640 0 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 704 -704 0 ) ( 576 -704 -64 ) ( 576 -704 0 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 704 -640 -64 ) ( 576 -704 -64 ) ( 704 -704 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 704 -640 128 ) ( 576 -704 128 ) ( 576 -640 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 704 -640 0 ) ( 576 -640 -64 ) ( 704 -640 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 704 -640 0 ) ( 704 -704 -64 ) ( 704 -704 0 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 20
+{
+( 704 -704 0 ) ( 704 -640 -64 ) ( 704 -640 0 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 832 -704 0 ) ( 704 -704 -64 ) ( 704 -704 0 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 832 -640 -64 ) ( 704 -704 -64 ) ( 832 -704 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 832 -640 128 ) ( 704 -704 128 ) ( 704 -640 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 832 -448 0 ) ( 704 -448 -64 ) ( 832 -448 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 768 -640 0 ) ( 768 -704 -64 ) ( 768 -704 0 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 21
+{
+( 768 -512 128 ) ( 768 -448 -64 ) ( 768 -448 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 864 -512 128 ) ( 768 -512 -64 ) ( 768 -512 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 864 -448 -64 ) ( 768 -512 -64 ) ( 864 -512 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 864 -448 128 ) ( 768 -512 128 ) ( 768 -448 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 864 -448 128 ) ( 768 -448 -64 ) ( 864 -448 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 896 -448 128 ) ( 896 -512 -64 ) ( 896 -512 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 22
+{
+( 832 -448 128 ) ( 832 -384 -64 ) ( 832 -384 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 928 -448 128 ) ( 832 -448 -64 ) ( 832 -448 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 928 -384 -64 ) ( 832 -448 -64 ) ( 928 -448 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 928 -384 128 ) ( 832 -448 128 ) ( 832 -384 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 928 -320 128 ) ( 832 -320 -64 ) ( 928 -320 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 896 -384 128 ) ( 896 -448 -64 ) ( 896 -448 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 23
+{
+( 704 -320 128 ) ( 704 -256 -64 ) ( 704 -256 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 800 -320 128 ) ( 704 -320 -64 ) ( 704 -320 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 800 -256 -64 ) ( 704 -320 -64 ) ( 800 -320 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 800 -256 128 ) ( 704 -320 128 ) ( 704 -256 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 800 -256 128 ) ( 704 -256 -64 ) ( 800 -256 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 896 -256 128 ) ( 896 -320 -64 ) ( 896 -320 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 24
+{
+( 704 -256 128 ) ( 704 -192 -64 ) ( 704 -192 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 800 -256 128 ) ( 704 -256 -64 ) ( 704 -256 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 800 -192 -64 ) ( 704 -256 -64 ) ( 800 -256 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 800 -192 128 ) ( 704 -256 128 ) ( 704 -192 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 800 128 128 ) ( 704 128 -64 ) ( 800 128 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 768 -192 128 ) ( 768 -256 -64 ) ( 768 -256 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 25
+{
+( 768 64 128 ) ( 768 128 -64 ) ( 768 128 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 864 64 128 ) ( 768 64 -64 ) ( 768 64 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 864 128 -64 ) ( 768 64 -64 ) ( 864 64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 864 128 128 ) ( 768 64 128 ) ( 768 128 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 864 128 128 ) ( 768 128 -64 ) ( 864 128 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 896 128 128 ) ( 896 64 -64 ) ( 896 64 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 26
+{
+( 832 128 128 ) ( 832 192 -64 ) ( 832 192 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 928 128 128 ) ( 832 128 -64 ) ( 832 128 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 928 192 -64 ) ( 832 128 -64 ) ( 928 128 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 928 192 128 ) ( 832 128 128 ) ( 832 192 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 928 896 128 ) ( 832 896 -64 ) ( 928 896 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 896 192 128 ) ( 896 128 -64 ) ( 896 128 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 27
+{
+( 448 256 128 ) ( 448 320 -64 ) ( 448 320 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 736 256 128 ) ( 640 256 -64 ) ( 640 256 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 736 320 -64 ) ( 640 256 -64 ) ( 736 256 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 736 320 128 ) ( 640 256 128 ) ( 640 320 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 736 384 128 ) ( 640 384 -64 ) ( 736 384 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 704 320 128 ) ( 704 256 -64 ) ( 704 256 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 28
+{
+( 320 384 128 ) ( 320 448 -64 ) ( 320 448 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 608 384 128 ) ( 512 384 -64 ) ( 512 384 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 608 448 -64 ) ( 512 384 -64 ) ( 608 384 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 608 448 128 ) ( 512 384 128 ) ( 512 448 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 608 512 128 ) ( 512 512 -64 ) ( 608 512 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 576 448 128 ) ( 576 384 -64 ) ( 576 384 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 29
+{
+( 448 640 128 ) ( 448 704 -64 ) ( 448 704 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 608 640 128 ) ( 512 640 -64 ) ( 512 640 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 608 704 -64 ) ( 512 640 -64 ) ( 608 640 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 608 704 128 ) ( 512 640 128 ) ( 512 704 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 608 704 128 ) ( 512 704 -64 ) ( 608 704 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 576 704 128 ) ( 576 640 -64 ) ( 576 640 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+}
+// brush 30
+{
+( 320 704 128 ) ( 320 768 -64 ) ( 320 768 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 544 704 128 ) ( 448 704 -64 ) ( 448 704 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 544 768 -64 ) ( 448 704 -64 ) ( 544 704 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 544 768 128 ) ( 448 704 128 ) ( 448 768 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 544 768 128 ) ( 448 768 -64 ) ( 544 768 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 512 768 128 ) ( 512 704 -64 ) ( 512 704 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 31
+{
+( 256 640 128 ) ( 256 704 -64 ) ( 256 704 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 352 640 128 ) ( 256 640 -64 ) ( 256 640 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 352 704 -64 ) ( 256 640 -64 ) ( 352 640 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 352 704 128 ) ( 256 640 128 ) ( 256 704 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 352 768 128 ) ( 256 768 -64 ) ( 352 768 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 320 704 128 ) ( 320 640 -64 ) ( 320 640 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+}
+// brush 32
+{
+( 192 640 128 ) ( 192 704 -64 ) ( 192 704 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 288 640 128 ) ( 192 640 -64 ) ( 192 640 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 288 704 -64 ) ( 192 640 -64 ) ( 288 640 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 288 704 128 ) ( 192 640 128 ) ( 192 704 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 288 704 128 ) ( 192 704 -64 ) ( 288 704 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 256 704 128 ) ( 256 640 -64 ) ( 256 640 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+}
+// brush 33
+{
+( 128 608 128 ) ( 128 672 -64 ) ( 128 672 128 ) construction/MetallicWallTexture [ 0 -1 0 32 ] [ 0 0 -1 0 ] 270 1 1
+( 224 384 128 ) ( 128 384 -64 ) ( 128 384 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 224 672 -64 ) ( 128 608 -64 ) ( 224 608 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 32 ] 270 1 1
+( 224 672 128 ) ( 128 608 128 ) ( 128 672 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 32 ] 270 1 1
+( 224 704 128 ) ( 128 704 -64 ) ( 224 704 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 192 672 128 ) ( 192 608 -64 ) ( 192 608 128 ) construction/MetallicWallTexture [ 0 1 0 -32 ] [ 0 0 -1 0 ] 90 1 1
+}
+// brush 34
+{
+( -384 768 128 ) ( -384 832 -64 ) ( -384 832 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -32 768 128 ) ( -128 768 -64 ) ( -128 768 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -32 832 -64 ) ( -128 768 -64 ) ( -32 768 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -32 832 128 ) ( -128 768 128 ) ( -128 832 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -32 832 128 ) ( -128 832 -64 ) ( -32 832 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -64 832 128 ) ( -64 768 -64 ) ( -64 768 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 35
+{
+( -448 768 128 ) ( -448 832 -64 ) ( -448 832 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -352 512 128 ) ( -448 512 -64 ) ( -448 512 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -352 832 -64 ) ( -448 768 -64 ) ( -352 768 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( -352 832 128 ) ( -448 768 128 ) ( -448 832 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( -352 832 128 ) ( -448 832 -64 ) ( -352 832 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -384 832 128 ) ( -384 768 -64 ) ( -384 768 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 36
+{
+( -448 448 128 ) ( -448 512 -64 ) ( -448 512 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -352 448 128 ) ( -448 448 -64 ) ( -448 448 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -352 512 -64 ) ( -448 448 -64 ) ( -352 448 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( -352 512 128 ) ( -448 448 128 ) ( -448 512 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( -352 512 128 ) ( -448 512 -64 ) ( -352 512 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -320 512 128 ) ( -320 448 -64 ) ( -320 448 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 37
+{
+( -384 384 128 ) ( -384 448 -64 ) ( -384 448 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -288 64 128 ) ( -384 64 -64 ) ( -384 64 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -288 448 -64 ) ( -384 384 -64 ) ( -288 384 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -288 448 128 ) ( -384 384 128 ) ( -384 448 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -288 448 128 ) ( -384 448 -64 ) ( -288 448 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -320 448 128 ) ( -320 384 -64 ) ( -320 384 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 38
+{
+( -192 64 128 ) ( -192 128 -64 ) ( -192 128 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -96 64 128 ) ( -192 64 -64 ) ( -192 64 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -96 128 -64 ) ( -192 64 -64 ) ( -96 64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -96 128 128 ) ( -192 64 128 ) ( -192 128 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -96 128 128 ) ( -192 128 -64 ) ( -96 128 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -64 128 128 ) ( -64 64 -64 ) ( -64 64 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 39
+{
+( -384 0 128 ) ( -384 64 -64 ) ( -384 64 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -96 0 128 ) ( -192 0 -64 ) ( -192 0 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -96 64 -64 ) ( -192 0 -64 ) ( -96 0 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -96 64 128 ) ( -192 0 128 ) ( -192 64 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -96 64 128 ) ( -192 64 -64 ) ( -96 64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( -128 64 128 ) ( -128 0 -64 ) ( -128 0 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 40
+{
+( -128 0 128 ) ( -128 64 -64 ) ( -128 64 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -32 -256 128 ) ( -128 -256 -64 ) ( -128 -256 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -32 64 -64 ) ( -128 0 -64 ) ( -32 0 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( -32 64 128 ) ( -128 0 128 ) ( -128 64 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( -32 64 128 ) ( -128 64 -64 ) ( -32 64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -64 64 128 ) ( -64 0 -64 ) ( -64 0 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 41
+{
+( -128 -320 128 ) ( -128 -256 -64 ) ( -128 -256 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -32 -320 128 ) ( -128 -320 -64 ) ( -128 -320 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -32 -256 -64 ) ( -128 -320 -64 ) ( -32 -320 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( -32 -256 128 ) ( -128 -320 128 ) ( -128 -256 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( -32 -256 128 ) ( -128 -256 -64 ) ( -32 -256 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 192 -256 128 ) ( 192 -320 -64 ) ( 192 -320 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 42
+{
+( 128 -384 128 ) ( 128 -320 -64 ) ( 128 -320 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 224 -640 128 ) ( 128 -640 -64 ) ( 128 -640 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 224 -320 -64 ) ( 128 -384 -64 ) ( 224 -384 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 224 -320 128 ) ( 128 -384 128 ) ( 128 -320 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 224 -320 128 ) ( 128 -320 -64 ) ( 224 -320 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 192 -320 128 ) ( 192 -384 -64 ) ( 192 -384 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 43
+{
+( 128 -704 128 ) ( 128 -640 -64 ) ( 128 -640 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 224 -704 128 ) ( 128 -704 -64 ) ( 128 -704 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 224 -640 -64 ) ( 128 -704 -64 ) ( 224 -704 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 224 -640 128 ) ( 128 -704 128 ) ( 128 -640 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 224 -640 128 ) ( 128 -640 -64 ) ( 224 -640 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 320 -640 128 ) ( 320 -704 -64 ) ( 320 -704 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 44
+{
+( 64 -128 128 ) ( 64 -64 -64 ) ( 64 -64 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 160 -128 128 ) ( 64 -128 -64 ) ( 64 -128 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 160 -64 -64 ) ( 64 -128 -64 ) ( 160 -128 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 160 -64 96 ) ( 64 -128 96 ) ( 64 -64 96 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 160 0 128 ) ( 64 0 -64 ) ( 160 0 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 256 -64 128 ) ( 256 -128 -64 ) ( 256 -128 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 45
+{
+( 128 0 128 ) ( 128 64 -64 ) ( 128 64 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 224 0 128 ) ( 128 0 -64 ) ( 128 0 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 224 64 -64 ) ( 128 0 -64 ) ( 224 0 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 224 64 160 ) ( 128 0 160 ) ( 128 64 160 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 224 64 128 ) ( 128 64 -64 ) ( 224 64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 256 64 128 ) ( 256 0 -64 ) ( 256 0 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 46
+{
+( 192 64 128 ) ( 192 128 -64 ) ( 192 128 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 288 64 128 ) ( 192 64 -64 ) ( 192 64 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 288 128 -64 ) ( 192 64 -64 ) ( 288 64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 288 128 64 ) ( 192 64 64 ) ( 192 128 64 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 288 128 128 ) ( 192 128 -64 ) ( 288 128 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 448 128 128 ) ( 448 64 -64 ) ( 448 64 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 47
+{
+( 512 64 128 ) ( 512 128 -64 ) ( 512 128 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 608 0 128 ) ( 512 0 -64 ) ( 512 0 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 608 128 -64 ) ( 512 64 -64 ) ( 608 64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 608 128 96 ) ( 512 64 96 ) ( 512 128 96 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 608 128 128 ) ( 512 128 -64 ) ( 608 128 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 576 128 128 ) ( 576 64 -64 ) ( 576 64 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 48
+{
+( 448 -96 32 ) ( 448 0 -64 ) ( 448 0 32 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 576 -96 32 ) ( 512 -96 -64 ) ( 512 -96 32 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 0 -64 ) ( 512 -96 -64 ) ( 576 -96 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 576 0 96 ) ( 512 -96 96 ) ( 512 0 96 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 576 0 32 ) ( 512 0 -64 ) ( 576 0 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 0 32 ) ( 576 -96 -64 ) ( 576 -96 32 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 49
+{
+( 320 -96 32 ) ( 320 0 -64 ) ( 320 0 32 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 512 -96 32 ) ( 448 -96 -64 ) ( 448 -96 32 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 512 0 -64 ) ( 448 -96 -64 ) ( 512 -96 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 512 0 96 ) ( 448 -96 96 ) ( 448 0 96 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 512 0 32 ) ( 448 0 -64 ) ( 512 0 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 384 0 32 ) ( 384 -96 -64 ) ( 384 -96 32 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+}
+// brush 50
+{
+( 384 -320 64 ) ( 384 -192 32 ) ( 384 -192 64 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 512 -320 64 ) ( 384 -320 32 ) ( 384 -320 64 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 512 -192 32 ) ( 384 -320 32 ) ( 512 -320 32 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 512 -192 96 ) ( 384 -320 96 ) ( 384 -192 96 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 512 -192 64 ) ( 384 -192 32 ) ( 512 -192 32 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 448 -192 64 ) ( 448 -320 32 ) ( 448 -320 64 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 51
+{
+( 128 256 32 ) ( 128 384 -64 ) ( 128 384 32 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 160 256 32 ) ( 128 256 -64 ) ( 128 256 32 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 160 384 -64 ) ( 128 256 -64 ) ( 160 256 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 160 384 128 ) ( 128 256 128 ) ( 128 384 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 160 384 32 ) ( 128 384 -64 ) ( 160 384 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 192 384 32 ) ( 192 256 -64 ) ( 192 256 32 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 52
+{
+( -192 384 224 ) ( -192 448 32 ) ( -192 448 224 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 32 ] 270 1 1
+( 32 384 224 ) ( -64 384 32 ) ( -64 384 224 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 32 ] 90 1 1
+( 32 448 32 ) ( -64 384 32 ) ( 32 384 32 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 32 448 96 ) ( -64 384 96 ) ( -64 448 96 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 32 512 224 ) ( -64 512 32 ) ( 32 512 32 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 32 ] 0 1 1
+( 128 448 224 ) ( 128 384 32 ) ( 128 384 224 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 32 ] 180 1 1
+}
+// brush 53
+{
+( 704 128 128 ) ( 896 128 192 ) ( 896 -320 192 ) construction/CorrugatedMetal [ 0.9000000000000055 0 0.29999999999998384 31.999998 ] [ 0 -1 0 0 ] 180 1 1
+( 704 -320 128 ) ( 896 -320 192 ) ( 896 -320 128 ) construction/CorrugatedMetal [ 1 0 0 0 ] [ 0 0 -0.5 0 ] 270 1 1
+( 896 -320 128 ) ( 896 128 128 ) ( 704 128 128 ) construction/CorrugatedMetal [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 896 128 128 ) ( 896 128 192 ) ( 704 128 128 ) construction/CorrugatedMetal [ -1 0 0 0 ] [ 0 0 -0.5 0 ] 270 1 1
+( 896 -320 192 ) ( 896 128 192 ) ( 896 128 128 ) construction/CorrugatedMetal [ 0 1 0 0 ] [ 0 0 -0.5 0 ] 270 1 1
+}
+// brush 54
+{
+( 704 -448 128 ) ( 896 -448 192 ) ( 896 -896 192 ) construction/CorrugatedMetal [ 0.9000000000000055 0 0.29999999999998384 -32 ] [ 0 -1 0 0 ] 0 1 1
+( 704 -896 128 ) ( 896 -896 192 ) ( 896 -896 128 ) construction/CorrugatedMetal [ 1 0 0 0 ] [ 0 0 -0.5 0 ] 90 1 1
+( 896 -896 128 ) ( 896 -448 128 ) ( 704 -448 128 ) construction/CorrugatedMetal [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 896 -448 128 ) ( 896 -448 192 ) ( 704 -448 128 ) construction/CorrugatedMetal [ -1 0 0 0 ] [ 0 0 -0.5 0 ] 90 1 1
+( 896 -896 192 ) ( 896 -448 192 ) ( 896 -448 128 ) construction/CorrugatedMetal [ 0 1 0 0 ] [ 0 0 -0.5 0 ] 90 1 1
+}
+// brush 55
+{
+( -128 -256 192 ) ( -128 -704 192 ) ( -128 -704 128 ) construction/CorrugatedMetal [ -1.4901161316312335e-08 -0.9999999999999998 0 0 ] [ 0 0 -0.5 0 ] 180 1 1
+( 0 -704 128 ) ( 0 -704 192 ) ( 192 -704 128 ) construction/CorrugatedMetal [ 0.9999999999999999 -1.4901161316312335e-08 0 0 ] [ 0 0 -0.5 0 ] 270 1 1
+( 0 -256 128 ) ( 0 -704 128 ) ( 192 -704 128 ) construction/CorrugatedMetal [ 0.9999999999999999 -1.4901161316312335e-08 0 0 ] [ 1.4901161316312335e-08 0.9999999999999998 0 0 ] 0 1 1
+( 192 -256 128 ) ( 0 -256 192 ) ( 0 -256 128 ) construction/CorrugatedMetal [ -0.9999999999999999 1.4901161316312335e-08 0 0 ] [ 0 0 -0.5 0 ] 270 1 1
+( 192 -704 128 ) ( 0 -704 192 ) ( 0 -256 192 ) construction/CorrugatedMetal [ -0.9000000000000054 1.3411045184681182e-08 0.29999999999998384 6.400036 ] [ 1.4901161316312335e-08 0.9999999999999998 0 0 ] 180 1 1
+}
+// brush 56
+{
+( -256 64 192 ) ( -256 -384 192 ) ( -256 -384 128 ) construction/CorrugatedMetal [ -1.2246467991473532e-16 -1 0 0 ] [ 0 0 -0.5 0 ] 90 1 1
+( -256 -256 128 ) ( -256 -256 192 ) ( -64 -256 128 ) construction/CorrugatedMetal [ 1 -1.2246467991473532e-16 0 0 ] [ 0 0 -0.5 0 ] 0 1 1
+( -256 64 128 ) ( -256 -384 128 ) ( -64 -384 128 ) construction/CorrugatedMetal [ 1 -1.2246467991473532e-16 0 0 ] [ 1.2246467991473532e-16 1 0 0 ] 180 1 1
+( -64 64 128 ) ( -256 64 192 ) ( -256 64 128 ) construction/CorrugatedMetal [ -1 1.2246467991473532e-16 0 0 ] [ 0 0 -0.5 0 ] 90 1 1
+( -64 -384 128 ) ( -256 -384 192 ) ( -256 64 192 ) construction/CorrugatedMetal [ -0.9000000000000055 1.1021821192326246e-16 0.29999999999998384 32.00006 ] [ 1.2246467991473532e-16 1 0 0 ] 0 1 1
+}
+// brush 57
+{
+( 64 512 32 ) ( 64 320 32 ) ( 64 256 0 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 64 256 0 ) ( 128 256 0 ) ( 128 256 -64 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 64 320 32 ) ( 128 320 32 ) ( 128 256 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 128 256 -64 ) ( 128 512 -64 ) ( 64 512 -64 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 64 512 32 ) ( 128 512 32 ) ( 128 320 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 128 512 -64 ) ( 128 512 32 ) ( 64 512 32 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 128 320 32 ) ( 128 512 32 ) ( 128 512 -64 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 58
+{
+( 56 256 48 ) ( 56 336 32 ) ( 56 336 48 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 64 256 48 ) ( 56 256 32 ) ( 56 256 48 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 64 336 32 ) ( 56 256 32 ) ( 64 256 32 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 64 336 48 ) ( 56 256 48 ) ( 56 336 48 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 64 336 48 ) ( 56 336 32 ) ( 64 336 32 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 64 336 48 ) ( 64 256 32 ) ( 64 256 48 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 59
+{
+( 384 -64 32 ) ( 384 -256 32 ) ( 384 -256 -64 ) construction/MetallicWallTexture [ -1.2246467991473532e-16 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 384 -64 -64 ) ( 384 -64 32 ) ( 448 -64 32 ) construction/MetallicWallTexture [ -1 1.2246467991473532e-16 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 384 0 -64 ) ( 384 -256 -64 ) ( 448 -256 -64 ) construction/MetallicWallTexture [ -1 1.2246467991473532e-16 0 0 ] [ 1.2246467991473532e-16 1 0 0 ] 0 1 1
+( 448 -64 32 ) ( 384 -64 32 ) ( 384 0 0 ) construction/DarkConcreteTexture [ -1 1.2246467991473532e-16 0 0 ] [ 1.2246467991473532e-16 1 0 0 ] 0 1 1
+( 448 0 0 ) ( 384 0 0 ) ( 384 0 -64 ) construction/MetallicWallTexture [ -1 1.2246467991473532e-16 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 448 -256 32 ) ( 448 -64 32 ) ( 448 0 0 ) construction/MetallicWallTexture [ -1.2246467991473532e-16 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 60
+{
+( 384 -64 32 ) ( 384 -96 32 ) ( 384 -96 -64 ) construction/MetallicWallTexture [ -1.2246467991473532e-16 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 384 -96 32 ) ( 448 -96 32 ) ( 448 -96 -64 ) construction/MetallicWallTexture [ -1 1.2246467991473532e-16 0 0 ] [ 0 0 -1.1666666666666667 -10.666667 ] 90 1 1
+( 448 -96 -64 ) ( 448 -64 -64 ) ( 384 -64 -64 ) construction/MetallicWallTexture [ -1 1.2246467991473532e-16 0 0 ] [ 1.2246467991473532e-16 1 0 0 ] 0 1 1
+( 384 -64 32 ) ( 448 -64 32 ) ( 448 -96 32 ) construction/DarkConcreteTexture [ -1 1.2246467991473532e-16 5.4767869826420534e-17 0 ] [ 1.2246467991473532e-16 1 0.4472135954999601 -14.310835 ] 90 1 1
+( 448 -64 -64 ) ( 448 -64 32 ) ( 384 -64 32 ) construction/MetallicWallTexture [ -1 1.2246467991473532e-16 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 448 -96 32 ) ( 448 -64 32 ) ( 448 -64 -64 ) construction/MetallicWallTexture [ -1.2246467991473532e-16 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 61
+{
+( 320 -64 128 ) ( 320 0 -64 ) ( 320 0 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 608 -384 128 ) ( 512 -384 -64 ) ( 512 -384 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 608 0 -64 ) ( 512 -64 -64 ) ( 608 -64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 608 0 32 ) ( 512 -64 32 ) ( 512 0 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 544 -320 32 ) ( 576 -320 32 ) ( 576 -320 160 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 576 0 128 ) ( 576 -64 -64 ) ( 576 -64 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 62
+{
+( 320 -64 128 ) ( 320 0 -64 ) ( 320 0 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 544 -192 32 ) ( 576 -192 160 ) ( 576 -192 32 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 608 0 -64 ) ( 512 -64 -64 ) ( 608 -64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 608 0 32 ) ( 512 -64 32 ) ( 512 0 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 608 -96 128 ) ( 512 -96 -64 ) ( 608 -96 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 576 0 128 ) ( 576 -64 -64 ) ( 576 -64 128 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 63
+{
+( 512 -192 32 ) ( 512 -320 32 ) ( 512 -320 -64 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 512 -320 32 ) ( 576 -320 0 ) ( 576 -320 -64 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 -320 -64 ) ( 576 -192 -64 ) ( 512 -192 -64 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 576 -192 -64 ) ( 576 -192 0 ) ( 512 -192 32 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 512 -192 32 ) ( 576 -192 0 ) ( 576 -320 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 576 -320 0 ) ( 576 -192 0 ) ( 576 -192 -64 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 64
+{
+( 504 -320 48 ) ( 504 -328 32 ) ( 504 -320 32 ) construction/MetallicWallTexture [ 2.1592137092929455e-15 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 576 -328 48 ) ( 496 -328 32 ) ( 496 -328 48 ) construction/MetallicWallTexture [ 1 2.1592137092929455e-15 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 496 -320 32 ) ( 576 -328 32 ) ( 576 -320 32 ) construction/MetallicWallTexture [ 2.1592137092929455e-15 -1 0 0 ] [ 1 2.1592137092929455e-15 0 0 ] 270 1 1
+( 496 -320 48 ) ( 576 -328 48 ) ( 496 -328 48 ) construction/MetallicWallTexture [ -2.1592137092929455e-15 1 0 0 ] [ 1 2.1592137092929455e-15 0 0 ] 90 1 1
+( 496 -320 48 ) ( 576 -320 32 ) ( 576 -320 48 ) construction/MetallicWallTexture [ -1 -2.1592137092929455e-15 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 576 -320 48 ) ( 576 -328 32 ) ( 576 -328 48 ) construction/MetallicWallTexture [ -2.1592137092929455e-15 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 65
+{
+( 504 -184 48 ) ( 504 -192 32 ) ( 504 -184 32 ) construction/MetallicWallTexture [ 2.1592137092929455e-15 -1 0 8 ] [ 0 0 -1 0 ] 0 1 1
+( 576 -192 48 ) ( 496 -192 32 ) ( 496 -192 48 ) construction/MetallicWallTexture [ 1 2.1592137092929455e-15 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 496 -184 32 ) ( 576 -192 32 ) ( 576 -184 32 ) construction/MetallicWallTexture [ 2.1592137092929455e-15 -1 0 8 ] [ 1 2.1592137092929455e-15 0 0 ] 90 1 1
+( 496 -184 48 ) ( 576 -192 48 ) ( 496 -192 48 ) construction/MetallicWallTexture [ -2.1592137092929455e-15 1 0 -8 ] [ 1 2.1592137092929455e-15 0 0 ] 270 1 1
+( 496 -184 48 ) ( 576 -184 32 ) ( 576 -184 48 ) construction/MetallicWallTexture [ -1 -2.1592137092929455e-15 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 -184 48 ) ( 576 -192 32 ) ( 576 -192 48 ) construction/MetallicWallTexture [ -2.1592137092929455e-15 1 0 -8 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 66
+{
+( 320 -136 48 ) ( 320 -56 32 ) ( 320 -56 48 ) construction/MetallicWallTexture [ 1.9755166894208424e-15 -1 0 56 ] [ 0 0 -1 0 ] 180 1 1
+( 328 -192 48 ) ( 320 -192 32 ) ( 320 -192 48 ) construction/MetallicWallTexture [ 1 1.9755166894208424e-15 0 -8 ] [ 0 0 -1 0 ] 90 1 1
+( 328 -56 32 ) ( 320 -136 32 ) ( 328 -136 32 ) construction/MetallicWallTexture [ -1 -1.9755166894208424e-15 0 8 ] [ 1.9755166894208424e-15 -1 0 56 ] 180 1 1
+( 328 -56 48 ) ( 320 -136 48 ) ( 320 -56 48 ) construction/MetallicWallTexture [ 1 1.9755166894208424e-15 0 -8 ] [ 1.9755166894208424e-15 -1 0 56 ] 180 1 1
+( 328 -96 48 ) ( 320 -96 32 ) ( 328 -96 32 ) construction/MetallicWallTexture [ -1 -1.9755166894208424e-15 0 8 ] [ 0 0 -1 0 ] 270 1 1
+( 328 -56 48 ) ( 328 -136 32 ) ( 328 -136 48 ) construction/MetallicWallTexture [ -1.9755166894208424e-15 1 0 -56 ] [ 0 0 -1 0 ] 180 1 1
+}
+// brush 67
+{
+( 568 -128 48 ) ( 568 -48 32 ) ( 568 -48 48 ) construction/MetallicWallTexture [ 1.9755166894208424e-15 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 576 -184 48 ) ( 568 -184 32 ) ( 568 -184 48 ) construction/MetallicWallTexture [ 1 1.9755166894208424e-15 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 -48 32 ) ( 568 -128 32 ) ( 576 -128 32 ) construction/MetallicWallTexture [ -1 -1.9755166894208424e-15 0 0 ] [ 1.9755166894208424e-15 -1 0 0 ] 90 1 1
+( 576 -48 48 ) ( 568 -128 48 ) ( 568 -48 48 ) construction/MetallicWallTexture [ 1 1.9755166894208424e-15 0 0 ] [ 1.9755166894208424e-15 -1 0 0 ] 90 1 1
+( 576 -96 48 ) ( 568 -96 32 ) ( 576 -96 32 ) construction/MetallicWallTexture [ -1 -1.9755166894208424e-15 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 576 -48 48 ) ( 576 -128 32 ) ( 576 -128 48 ) construction/MetallicWallTexture [ -1.9755166894208424e-15 1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+}
+// brush 68
+{
+( 568 -360 48 ) ( 568 -280 32 ) ( 568 -280 48 ) construction/MetallicWallTexture [ 1.9755166894208424e-15 -1 0 -40 ] [ 0 0 -1 0 ] 270 1 1
+( 576 -384 48 ) ( 568 -384 32 ) ( 568 -384 48 ) construction/MetallicWallTexture [ 1 1.9755166894208424e-15 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 576 -280 32 ) ( 568 -360 32 ) ( 576 -360 32 ) construction/MetallicWallTexture [ -1 -1.9755166894208424e-15 0 0 ] [ 1.9755166894208424e-15 -1 0 -40 ] 270 1 1
+( 576 -280 48 ) ( 568 -360 48 ) ( 568 -280 48 ) construction/MetallicWallTexture [ 1 1.9755166894208424e-15 0 0 ] [ 1.9755166894208424e-15 -1 0 -40 ] 270 1 1
+( 576 -328 48 ) ( 568 -328 32 ) ( 576 -328 32 ) construction/MetallicWallTexture [ -1 -1.9755166894208424e-15 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 576 -280 48 ) ( 576 -360 32 ) ( 576 -360 48 ) construction/MetallicWallTexture [ -1.9755166894208424e-15 1 0 40 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 69
+{
+( 352 -264 32 ) ( 352 -208 32 ) ( 352 -208 160 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 544 -320 32 ) ( 576 -320 160 ) ( 576 -320 32 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 608 0 -64 ) ( 512 -64 -64 ) ( 608 -64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 608 0 32 ) ( 512 -64 32 ) ( 512 0 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 544 -192 32 ) ( 576 -192 32 ) ( 576 -192 160 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 512 -224 32 ) ( 512 -288 32 ) ( 512 -288 160 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 70
+{
+( 320 -64 128 ) ( 320 0 -64 ) ( 320 0 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 344 -224 32 ) ( 320 -224 32 ) ( 320 -224 160 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 608 0 -64 ) ( 512 -64 -64 ) ( 608 -64 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 608 0 32 ) ( 512 -64 32 ) ( 512 0 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 544 -192 32 ) ( 576 -192 32 ) ( 576 -192 160 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 352 -264 32 ) ( 352 -208 160 ) ( 352 -208 32 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 71
+{
+( 320 -224 32 ) ( 320 -256 28 ) ( 320 -256 -64 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 320 -224 32 ) ( 352 -256 32 ) ( 320 -256 28 ) construction/DarkConcreteTexture [ 0.9848484848484848 -0.015151515151515325 0.12121212121212245 -2.424242 ] [ 0.015151515151515266 -0.9848484848484846 -0.12121212121212259 2.424242 ] 204.83533 1 1
+( 320 -256 28 ) ( 352 -256 32 ) ( 352 -256 -64 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 352 -256 -64 ) ( 352 -224 -64 ) ( 320 -224 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 320 -224 32 ) ( 352 -224 32 ) ( 352 -256 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 352 -224 -64 ) ( 352 -224 32 ) ( 320 -224 32 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 352 -256 32 ) ( 352 -224 32 ) ( 352 -224 -64 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 72
+{
+( 320 -256 24 ) ( 320 -320 32 ) ( 320 -320 -64 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 320 -256 24 ) ( 352 -256 32 ) ( 320 -320 32 ) construction/DarkConcreteTexture [ 0.9420289855072488 0.028985507246375622 0.23188405797100498 20.405798 ] [ -0.028985507246382464 -0.9855072463768088 0.11594202898552985 10.202899 ] 180.85217 1 1
+( 320 -320 32 ) ( 352 -320 32 ) ( 352 -320 -64 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 352 -320 -64 ) ( 352 -256 -64 ) ( 320 -256 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 320 -320 32 ) ( 352 -256 32 ) ( 352 -320 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 352 -256 -64 ) ( 352 -256 32 ) ( 320 -256 24 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 352 -320 32 ) ( 352 -256 32 ) ( 352 -256 -64 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 73
+{
+( 320 -336 48 ) ( 320 -256 32 ) ( 320 -256 48 ) construction/MetallicWallTexture [ 1.9755166894208424e-15 -1 0 -16 ] [ 0 0 -1 0 ] 270 1 1
+( 328 -384 48 ) ( 320 -384 32 ) ( 320 -384 48 ) construction/MetallicWallTexture [ 1 1.9755166894208424e-15 0 -8 ] [ 0 0 -1 0 ] 90 1 1
+( 328 -256 32 ) ( 320 -336 32 ) ( 328 -336 32 ) construction/MetallicWallTexture [ -1 -1.9755166894208424e-15 0 8 ] [ 1.9755166894208424e-15 -1 0 -16 ] 270 1 1
+( 328 -256 48 ) ( 320 -336 48 ) ( 320 -256 48 ) construction/MetallicWallTexture [ 1 1.9755166894208424e-15 0 -8 ] [ 1.9755166894208424e-15 -1 0 -16 ] 270 1 1
+( 320 -320 40 ) ( 320 -320 32 ) ( 448 -320 32 ) construction/MetallicWallTexture [ -1 0 0 8 ] [ 0 0 -1 0 ] 270 1 1
+( 328 -256 48 ) ( 328 -336 32 ) ( 328 -336 48 ) construction/MetallicWallTexture [ -1.9755166894208424e-15 1 0 16 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 74
+{
+( 320 -288 48 ) ( 320 -320 48 ) ( 320 -320 32 ) construction/MetallicWallTexture [ 1.9755166894208424e-15 -1 0 -16 ] [ 0 0 -1 0 ] 270 1 1
+( 320 -320 48 ) ( 328 -320 48 ) ( 328 -320 32 ) construction/MetallicWallTexture [ 1 0 0 -8 ] [ 0 0 -1 0 ] 90 1 1
+( 320 -320 32 ) ( 328 -320 32 ) ( 320 -288 28 ) construction/MetallicWallTexture [ -1 -1.945124124968216e-15 2.4314051562101393e-16 8 ] [ 1.9755166894208424e-15 -0.9846153846153856 0.12307692307691659 -15.015385 ] 90 1 1
+( 320 -288 48 ) ( 328 -288 48 ) ( 328 -320 48 ) construction/MetallicWallTexture [ 1 1.9755166894208424e-15 0 -8 ] [ 1.9755166894208424e-15 -1 0 -16 ] 270 1 1
+( 328 -288 30 ) ( 328 -288 48 ) ( 320 -288 48 ) construction/MetallicWallTexture [ -1 -1.9755166894208424e-15 0 8 ] [ 0 0 -1 0 ] 270 1 1
+( 328 -320 32 ) ( 328 -288 30 ) ( 320 -288 28 ) construction/MetallicWallTexture [ -0.9413919413919406 -0.014652014652016817 -0.23443223443223746 -8.410255 ] [ -0.014652014652009488 -0.9963369963369971 0.05860805860804577 -11.897436 ] 0.38101196 1 1
+( 328 -320 48 ) ( 328 -288 48 ) ( 328 -288 30 ) construction/MetallicWallTexture [ -1.9755166894208424e-15 1 0 16 ] [ 0 0 -1 0 ] 270 1 1
+}
+// brush 75
+{
+( -192 256 128 ) ( -192 320 -64 ) ( -192 320 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -128 384 32 ) ( -192 384 32 ) ( -192 384 160 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 160 320 -64 ) ( 64 256 -64 ) ( 160 256 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 160 320 32 ) ( 64 256 32 ) ( 64 320 32 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( 160 512 128 ) ( 64 512 -64 ) ( 160 512 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 64 320 32 ) ( 64 256 32 ) ( 64 256 160 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 76
+{
+( -160 256 128 ) ( -160 320 -64 ) ( -160 320 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 160 256 128 ) ( 64 256 -64 ) ( 64 256 128 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 160 320 -64 ) ( 64 256 -64 ) ( 160 256 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 160 320 32 ) ( 64 256 32 ) ( 64 320 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 90 1 1
+( -128 384 32 ) ( -192 384 160 ) ( -192 384 32 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 64 320 32 ) ( 64 256 32 ) ( 64 256 160 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 77
+{
+( -192 352 32 ) ( -192 320 28 ) ( -192 320 -64 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -192 352 32 ) ( -160 320 32 ) ( -192 320 28 ) construction/DarkConcreteTexture [ 0.9848484848484848 -0.015151515151515325 0.12121212121212245 -1.4545441 ] [ 0.015151515151515266 -0.9848484848484846 -0.12121212121212259 -62.54544 ] 208.36133 1 1
+( -192 320 28 ) ( -160 320 32 ) ( -160 320 -64 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -160 320 -64 ) ( -160 352 -64 ) ( -192 352 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -192 352 32 ) ( -160 352 32 ) ( -160 320 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( -160 352 -64 ) ( -160 352 32 ) ( -192 352 32 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -160 320 32 ) ( -160 352 32 ) ( -160 352 -64 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 78
+{
+( -192 320 24 ) ( -192 256 32 ) ( -192 256 -64 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -192 320 24 ) ( -160 320 32 ) ( -192 256 32 ) construction/DarkConcreteTexture [ 0.9420289855072488 0.028985507246375622 0.23188405797100498 38.028976 ] [ -0.028985507246382464 -0.9855072463768088 0.11594202898552985 -12.985535 ] 173.95667 1 1
+( -192 256 32 ) ( -160 256 32 ) ( -160 256 -64 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -160 256 -64 ) ( -160 320 -64 ) ( -192 320 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( -192 256 32 ) ( -160 320 32 ) ( -160 256 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( -160 320 -64 ) ( -160 320 32 ) ( -192 320 24 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -160 256 32 ) ( -160 320 32 ) ( -160 320 -64 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 79
+{
+( -192 512 128 ) ( -192 576 -64 ) ( -192 576 128 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -168 352 32 ) ( -192 352 32 ) ( -192 352 160 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( 96 576 -64 ) ( 0 512 -64 ) ( 96 512 -64 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 96 576 32 ) ( 0 512 32 ) ( 0 576 32 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 32 384 32 ) ( 64 384 32 ) ( 64 384 160 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 90 1 1
+( -160 312 32 ) ( -160 368 160 ) ( -160 368 32 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 80
+{
+( 512 256 96 ) ( 512 188 96 ) ( 512 256 0 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 188 0 ) ( 512 188 0 ) ( 576 188 96 ) construction/MetallicWallTexture [ -1 0 0 -40 ] [ 0 0 -1 20 ] 90 1 1
+( 512 256 0 ) ( 512 188 0 ) ( 576 256 0 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 576 256 96 ) ( 576 188 96 ) ( 512 256 96 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 512 256 0 ) ( 576 256 0 ) ( 512 256 96 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 256 0 ) ( 576 188 0 ) ( 576 256 96 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 81
+{
+( 512 128 0 ) ( 512 164 0 ) ( 512 128 96 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 512 128 96 ) ( 576 128 96 ) ( 512 128 0 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 128 0 ) ( 576 164 0 ) ( 512 128 0 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 512 128 96 ) ( 512 164 96 ) ( 576 128 96 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 512 164 96 ) ( 512 164 0 ) ( 576 164 96 ) construction/MetallicWallTexture [ 1 0 0 40 ] [ 0 0 -1 20 ] 180 1 1
+( 576 128 96 ) ( 576 164 96 ) ( 576 128 0 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 82
+{
+( 512 164 96 ) ( 512 164 44 ) ( 512 188 96 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 164 96 ) ( 576 164 44 ) ( 512 164 96 ) construction/MetallicWallTexture [ 1 0 0 40 ] [ 0 0 -1 20 ] 180 1 1
+( 512 188 44 ) ( 512 164 44 ) ( 576 188 44 ) construction/MetallicWallTexture [ 1 0 0 40 ] [ 0 -1 0 -4 ] 180 1 1
+( 576 188 96 ) ( 576 164 96 ) ( 512 188 96 ) construction/MetallicWallTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 512 188 96 ) ( 512 188 44 ) ( 576 188 96 ) construction/MetallicWallTexture [ -1 0 0 -40 ] [ 0 0 -1 20 ] 90 1 1
+( 576 188 96 ) ( 576 188 44 ) ( 576 164 96 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 83
+{
+( 512 188 0 ) ( 512 188 20 ) ( 512 164 0 ) construction/MetallicWallTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 512 164 0 ) ( 512 164 20 ) ( 576 164 0 ) construction/MetallicWallTexture [ 1 0 0 40 ] [ 0 0 -1 20 ] 180 1 1
+( 512 188 0 ) ( 512 164 0 ) ( 576 188 0 ) construction/MetallicWallTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 576 164 20 ) ( 512 164 20 ) ( 576 188 20 ) construction/DarkConcreteTexture [ -1 0 0 -40 ] [ 0 -1 0 -4 ] 180 1 1
+( 576 188 0 ) ( 576 188 20 ) ( 512 188 0 ) construction/MetallicWallTexture [ -1 0 0 -40 ] [ 0 0 -1 20 ] 90 1 1
+( 576 164 0 ) ( 576 164 20 ) ( 576 188 0 ) construction/MetallicWallTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 84
+{
+( 576 0 0 ) ( 576 128 -64 ) ( 576 128 0 ) construction/DarkConcreteTexture [ 0 -1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 704 -640 0 ) ( 576 -640 -64 ) ( 576 -640 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 704 128 -64 ) ( 576 0 -64 ) ( 704 0 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 704 128 0 ) ( 576 0 0 ) ( 576 128 0 ) construction/DarkConcreteTexture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 704 128 0 ) ( 576 128 -64 ) ( 704 128 -64 ) construction/DarkConcreteTexture [ -1 0 0 0 ] [ 0 0 -1 0 ] 180 1 1
+( 704 128 0 ) ( 704 0 -64 ) ( 704 0 0 ) construction/DarkConcreteTexture [ 0 1 0 0 ] [ 0 0 -1 0 ] 180 1 1
+}
+}
+// entity 1
+{
+"classname" "DoorPiecePlaceholder"
+"origin" "448 -512 0"
+"direction" "1"
+}
+// entity 2
+{
+"classname" "DoorPiecePlaceholder"
+"origin" "704 512 0"
+"direction" "3"
+}
+// entity 3
+{
+"classname" "DoorPiecePlaceholder"
+"origin" "-256 640 0"
+}

@@ -36,5 +36,5 @@ func handleOnCrouchChanged(inIsCrouching : bool) -> void:
 	if getStateManager().getCharacter().is_on_floor():
 		request_change_state.emit(stateOnCrouchEndOnFloorKey)
 		return
-	
+
 	request_change_state.emit(stateOnCrouchEndInAirKey)

@@ -4,7 +4,6 @@ class_name CharacterStateInAir
 @export_category("Config")
 @export var landingStateKey : String = CharacterStateLibrary.defaultStateKey
 @export var onCrouchStateKey : String = CharacterStateLibrary.inAirCrouchingStateKey
-@export var onCrouchHeightBump : float = (1.5 - 1.0) / 2.0 # standing neck height vs crouching neck height, halved
 
 var lastVelocity : Vector3 = Vector3()
 
@@ -29,11 +28,5 @@ func getLastVelocity() -> Vector3:
 func handleOnCrouchChanged(inIsCrouching : bool) -> void:
 	if !inIsCrouching:
 		return
-	
-	request_change_state.emit(onCrouchStateKey)
 
-func stateExiting(inNewState : CharacterState) -> void:
-	if inNewState.getStateKey() != onCrouchStateKey:
-		return
-	
-	getStateManager().getCharacter().global_position.y += onCrouchHeightBump
+	request_change_state.emit(onCrouchStateKey)

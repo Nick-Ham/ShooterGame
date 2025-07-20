@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dufcf71ggkb2f"
+path="res://.godot/imported/DoorAndRoom.map-d2ec19ce2378ddb9851ae4cb3a1c55f4.tres"
+
+[deps]
+
+source_file="res://Assets/Maps/Trenchbroom/Pieces/DoorAndRoom.map"
+dest_files=["res://.godot/imported/DoorAndRoom.map-d2ec19ce2378ddb9851ae4cb3a1c55f4.tres"]
+
+[params]
+

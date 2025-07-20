@@ -1,4 +1,14 @@
-CharacterStateInAirCrouching
-CharacterStateCrouching
+CharacterStateCrouchJumping
+CenterContainer
+Control
+MeshInstance3D
+SubViewport
+CanvasLayer
+Label
+CSGBox3D
+FuncGodotMap
+PlayerSpawn
+NavigationRegion3D
 Level
-PlayerCrouchController
+Camera3D
+SubViewportContainer

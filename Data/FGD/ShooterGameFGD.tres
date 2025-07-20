@@ -1,12 +1,7 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=9 format=3 uid="uid://bhpoh2w3np3jp"]
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=4 format=3 uid="uid://bhpoh2w3np3jp"]
 
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_dj11q"]
-[ext_resource type="Resource" uid="uid://nayxb8n7see2" path="res://addons/func_godot/fgd/phong_base.tres" id="2_3ohvb"]
-[ext_resource type="Resource" uid="uid://bdji3873bg32h" path="res://addons/func_godot/fgd/worldspawn.tres" id="3_n0nyg"]
-[ext_resource type="Resource" uid="uid://b70vf4t5dc70t" path="res://addons/func_godot/fgd/func_geo.tres" id="4_nt0ei"]
-[ext_resource type="Resource" uid="uid://cxy7jnh6d7msn" path="res://addons/func_godot/fgd/func_detail.tres" id="5_dqw5r"]
-[ext_resource type="Resource" uid="uid://ch3e0dix85uhb" path="res://addons/func_godot/fgd/func_detail_illusionary.tres" id="6_g8gk2"]
-[ext_resource type="Resource" uid="uid://dg5x44cc7flew" path="res://addons/func_godot/fgd/func_illusionary.tres" id="7_ks1xg"]
+[ext_resource type="Resource" uid="uid://c8bs4q8oqvks7" path="res://Data/FGD/Entities/MapPiecePlaceholder.tres" id="2_418dc"]
 [ext_resource type="Script" uid="uid://dqri05d0rrcu4" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="8_wcg0i"]
 
 [resource]
@@ -15,4 +10,4 @@ export_file = false
 target_map_editor = 1
 fgd_name = "ShooterGame"
 base_fgd_files = Array[Resource]([ExtResource("1_dj11q")])
-entity_definitions = Array[Resource]([ExtResource("2_3ohvb"), ExtResource("3_n0nyg"), ExtResource("4_nt0ei"), ExtResource("5_dqw5r"), ExtResource("6_g8gk2"), ExtResource("7_ks1xg")])
+entity_definitions = Array[Resource]([ExtResource("2_418dc")])

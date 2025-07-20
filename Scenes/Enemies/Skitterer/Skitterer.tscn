@@ -267,6 +267,20 @@ tracks/5/keys = {
 "update": 0,
 "values": [10.0, 0.5]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DetonationSoundPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_kcomd"]
 length = 0.001
@@ -440,14 +454,9 @@ leftWallDetector = NodePath("../LeftWallDetector")
 rightWallDetector = NodePath("../RightWallDetector")
 metadata/_custom_type_script = "uid://bsae7om1gs73x"
 
-[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault", "stateJumping", "stateInAir", "stateDestroyed")]
+[node name="CharacterStateManager" type="Node" parent="." node_paths=PackedStringArray("stateDefault")]
 script = ExtResource("10_ubih8")
-enableLogging = true
-loggerCategory = "RobotWalker:StateManager:State"
 stateDefault = NodePath("CharacterStateDefault")
-stateJumping = NodePath("CharacterStateJumping")
-stateInAir = NodePath("CharacterStateInAir")
-stateDestroyed = NodePath("CharacterStateDestroyed")
 
 [node name="CharacterStateDefault" type="Node" parent="CharacterStateManager"]
 script = ExtResource("11_1co25")

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDPointClass" load_steps=3 format=3 uid="uid://c8bs4q8oqvks7"]
+
+[ext_resource type="Script" uid="uid://cln5vq0cwidyq" path="res://addons/func_godot/src/fgd/func_godot_fgd_point_class.gd" id="1_uy6ac"]
+[ext_resource type="Script" uid="uid://b41vn6ihbrlsl" path="res://Scripts/FGDEntity/MapPieceMarker.gd" id="2_ph8bn"]
+
+[resource]
+script = ExtResource("1_uy6ac")
+script_class = ExtResource("2_ph8bn")
+apply_rotation_on_map_build = false
+classname = "DoorPiecePlaceholder"
+description = ""
+func_godot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {
+"direction": 0
+}
+class_property_descriptions = {
+"direction": "facing direction from 0: N, E, S, W"
+}
+auto_apply_to_matching_node_properties = false
+meta_properties = {
+"color": Color(1, 0.0578532, 0.857743, 1),
+"size": AABB(-128, -128, -64, 128, 128, 0)
+}
+node_class = "Node3D"
+name_property = ""
+metadata/_custom_type_script = "uid://cln5vq0cwidyq"

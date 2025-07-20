@@ -44,7 +44,6 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 [display]
 
 window/size/mode=3
-window/vsync/vsync_mode=0
 
 [dotnet]
 
@@ -52,7 +51,7 @@ project/assembly_name="Shooter"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/limbo_console/plugin.cfg", "res://addons/screen_effects/plugin.cfg", "res://addons/script-tabs/plugin.cfg")
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg", "res://addons/limbo_console/plugin.cfg", "res://addons/screen_effects/plugin.cfg", "res://addons/script-tabs/plugin.cfg")
 
 [input]
 

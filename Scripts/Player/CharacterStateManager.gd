@@ -12,6 +12,7 @@ var character : CharacterBody3D = null
 var controller : Controller = null
 var lastState : CharacterState = null
 var currentState : CharacterState = null
+var nextState : CharacterState = null
 var lastInputDirection : Vector2 = Vector2()
 
 signal state_changed(lastState : CharacterState, newState : CharacterState)
@@ -20,7 +21,6 @@ signal head_punch_triggered(punch : Vector2)
 const minSpeed : float = 0.08
 
 const maxDelta : float = 0.1
-const updatePhysicsInProcess : bool = false
 
 func _ready() -> void:
 	if !character:
@@ -85,19 +85,30 @@ func on_jump_changed(inIsJumping : bool) -> void:
 func on_crouch_changed(inIsCrouching : bool) -> void:
 	currentState.handleOnCrouchChanged(inIsCrouching)
 
-func _process(delta: float) -> void:
-	if updatePhysicsInProcess:
-		currentState.update_physics(clampf(delta, 0.0, maxDelta))
-
 func _physics_process(delta: float) -> void:
-	if !updatePhysicsInProcess:
-		currentState.update_physics(delta)
+	if Util.isValid(nextState):
+		changeState(nextState)
+		nextState = null
+
+	currentState.update_physics(delta)
 
 func getCharacterController() -> Controller:
 	return Controller.getController(character)
 
 func getCharacter() -> CharacterBody3D:
 	return character
+
+func getIsJumping() -> bool:
+	if !controller:
+		return false
+
+	return controller.getIsJumping()
+
+func getIsCrouching() -> bool:
+	if !controller:
+		return false
+
+	return controller.getIsCrouching()
 
 func getLastInputDirection() -> Vector2:
 	return lastInputDirection
@@ -114,10 +125,13 @@ func changeState(inNewState : CharacterState) -> void:
 	state_changed.emit(lastState, currentState)
 
 func on_request_change_state(inStateKey : String) -> void:
+	if Util.isValid(nextState): # only allow one change of state per frame (signals are latent)
+		return
+
 	for state : CharacterState in states:
 		if state.getStateKey() == inStateKey:
-			changeState(state)
-			break
+			nextState = state
+			return
 
 func bindToStates() -> void:
 	for state : CharacterState in states:

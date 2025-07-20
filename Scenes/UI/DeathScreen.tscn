@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://p6k6ic58y56g"]
 
 [ext_resource type="Script" uid="uid://bvdapnh0u16bn" path="res://Scripts/UI/DeathScreen.gd" id="1_clagh"]
-[ext_resource type="Shader" uid="uid://cucpyxnw61t6" path="res://Scenes/UI/AlphaTransitionShader.tres" id="3_wtpoq"]
+[ext_resource type="Shader" uid="uid://cucpyxnw61t6" path="res://Assets/Shader/AlphaTransitionShader.tres" id="3_wtpoq"]
 
 [sub_resource type="Animation" id="Animation_ckc4y"]
 resource_name = "DeathScreenFadIn"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dero46gvnk3p4"]
 
 [ext_resource type="Script" uid="uid://b1eyaouqemr6g" path="res://Scripts/Projectiles/Projectile.gd" id="1_3xs12"]
-[ext_resource type="Material" uid="uid://dlxr0hk6awtgc" path="res://Assets/Shader/PlasmaBoltShaderMaterial.tres" id="4_pbdd4"]
+[ext_resource type="Material" uid="uid://dlxr0hk6awtgc" path="res://Assets/Materials/PlasmaBoltShaderMaterial.tres" id="4_pbdd4"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b0toe"]
 direction = Vector3(0, 1, 0)

@@ -4,6 +4,9 @@ class_name Level
 @onready var playerScene : PackedScene = preload("res://Scenes/Player/Player.tscn")
 @onready var spectatorScene : PackedScene = preload("res://Scenes/Player/Spectator.tscn")
 
+@export_category("Ref")
+@export var navRegion : NavigationRegion3D
+
 @export_category("Config")
 @export var useSpectator : bool = false
 @export var enableSpawnTriggers : bool = true
@@ -12,6 +15,7 @@ class_name Level
 var environmentalEffectManager : EnvironmentEffectManager = null
 var environmentEventBus : EnvironmentEventBus = null
 var levelEventHandler : LevelEventHandler = null
+var levelBuilder : LevelBuilder = null
 
 var playerCharacter : Character = null
 
@@ -28,10 +32,19 @@ func _enter_tree() -> void:
 	levelEventHandler = LevelEventHandler.new()
 	add_child(levelEventHandler)
 
+	levelBuilder = LevelBuilder.new()
+	add_child(levelBuilder)
+
 func _ready() -> void:
-	spawnPlayer()
+	assert(navRegion)
 
 	bindLevelEventHandler()
+
+	levelBuilder.buildMap()
+	spawnPlayer()
+
+	# skip rebake for now, not even sure if its a problem
+	#navRegion.bake_navigation_mesh(true)
 
 func bindLevelEventHandler() -> void:
 	if playerCharacter:
@@ -42,6 +55,9 @@ func getEnvironmentEventBus() -> EnvironmentEventBus:
 
 func getEnvironmentalEffectManager() -> EnvironmentEffectManager:
 	return environmentalEffectManager
+
+func getLevelBuilder() -> LevelBuilder:
+	return levelBuilder
 
 func spawnPlayer() -> void:
 	var playerSpawn : PlayerSpawn = Util.getChildOfType(self, PlayerSpawn)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://3khvdhi6xjou"]
+[gd_scene load_steps=44 format=3 uid="uid://3khvdhi6xjou"]
 
 [ext_resource type="Script" uid="uid://dwetkrpdbb22e" path="res://Scripts/Character.gd" id="1_2vnqn"]
 [ext_resource type="Script" uid="uid://do550rjsw4xqv" path="res://Scripts/Components/WeaponManager.gd" id="2_56hl0"]
@@ -23,15 +23,17 @@
 [ext_resource type="Script" uid="uid://cyiab3mimdorl" path="res://Scripts/Player/PlayerWeaponEquipController.gd" id="12_kn0qb"]
 [ext_resource type="Script" uid="uid://dausdwr1nkdv1" path="res://Scripts/Player/PlayerSoundController.gd" id="13_32xeu"]
 [ext_resource type="AudioStream" uid="uid://c12i0eymy6qov" path="res://Assets/Audio/Steps/StepsRandomizer.tres" id="14_j633g"]
-[ext_resource type="Script" uid="uid://bj3ieidkqmlhg" path="res://Scripts/Player/PlayerCrouchController.gd" id="14_wid83"]
+[ext_resource type="Script" uid="uid://bj3ieidkqmlhg" path="res://Scripts/Player/CrouchController.gd" id="14_wid83"]
+[ext_resource type="Curve" uid="uid://bxnmm8kibly5p" path="res://Assets/Curves/CrouchSpeedCurve.tres" id="15_jbjyn"]
 [ext_resource type="AudioStream" uid="uid://y7ylwct4yro8" path="res://Assets/Audio/Thuds/ThudsRandomizer.tres" id="16_b7esa"]
 [ext_resource type="Script" uid="uid://du3ici8voo71" path="res://Scripts/Components/Hitbox.gd" id="17_0i7jp"]
-[ext_resource type="Environment" uid="uid://kooncs6pbi5u" path="res://Assets/WorldEnvironments/DefaultWorldEnvironment.tres" id="18_bxbch"]
 [ext_resource type="Script" uid="uid://vt43p4qxufeq" path="res://Scripts/CharacterStates/CharacterStateCrouching.gd" id="23_g7gci"]
 [ext_resource type="Script" uid="uid://c4pqnhvnh4d1w" path="res://Scripts/CharacterStates/CharacterStateInAirCrouching.gd" id="24_r6t50"]
 [ext_resource type="Script" uid="uid://ddqa37nhogyv7" path="res://Scripts/Interactable/Interactor.gd" id="25_22kx5"]
+[ext_resource type="Script" uid="uid://jn2mquj3o6o4" path="res://Scripts/Player/Neck.gd" id="27_6rswy"]
 [ext_resource type="Script" uid="uid://goc6kg2yspkm" path="res://Scripts/Player/PlayerRecoilController.gd" id="27_tf472"]
 [ext_resource type="Script" uid="uid://huiiayreq8j5" path="res://Scripts/Item/ItemManager.gd" id="32_8g535"]
+[ext_resource type="Environment" uid="uid://scw82564vpjg" path="res://Assets/WorldEnvironments/IntakeWorldEnvironment.tres" id="32_jbjyn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_22kd6"]
 radius = 0.3
@@ -41,9 +43,9 @@ height = 1.75
 radius = 0.3
 height = 1.25
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_brmud"]
-radius = 0.25
-height = 1.75
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jbjyn"]
+height = 1.11108
+radius = 0.22
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v53qw"]
 radius = 0.25
@@ -127,6 +129,9 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfv8i"]
 radius = 0.24
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_jbjyn"]
+radius = 0.25
+
 [node name="Player" type="CharacterBody3D"]
 physics_interpolation_mode = 1
 collision_layer = 6
@@ -195,6 +200,7 @@ collisionShapeCrouching = NodePath("../CollisionShapeCrouching")
 standingNeckPosition = NodePath("../StandingNeckPosition")
 crouchingNeckPosition = NodePath("../CrouchingNeckPosition")
 neck = NodePath("../Neck")
+heightModCurve = ExtResource("15_jbjyn")
 metadata/_custom_type_script = "uid://bj3ieidkqmlhg"
 
 [node name="PlayerRecoilController" type="Node" parent="." node_paths=PackedStringArray("recoilPunch")]
@@ -217,6 +223,21 @@ maxSpeed = 2.5
 [node name="HeadBobSettings" type="Node" parent="CharacterStateManager/CharacterStateDefault"]
 script = ExtResource("7_cdgt3")
 
+[node name="CharacterStateCrouching" type="Node" parent="CharacterStateManager" node_paths=PackedStringArray("standingShapeCast")]
+script = ExtResource("23_g7gci")
+standingShapeCast = NodePath("../../StandingShapeCast")
+stateOnJumpKey = "crouchJumping"
+acceleration = 40.0
+maxSpeed = 1.75
+friction = 18.0
+jumpVelocity = 3.8
+metadata/_custom_type_script = "uid://vt43p4qxufeq"
+
+[node name="HeadBobSettings" type="Node" parent="CharacterStateManager/CharacterStateCrouching"]
+script = ExtResource("7_cdgt3")
+periodScalar = 0.75
+amplitudeScalar = 1.5
+
 [node name="CharacterStateInAir" type="Node" parent="CharacterStateManager"]
 script = ExtResource("5_t1r06")
 acceleration = 33.0
@@ -224,20 +245,29 @@ maxSpeed = 3.0
 maxSpeedEnforcement = 4.0
 friction = 10.0
 
+[node name="CharacterStateInAirCrouching" type="Node" parent="CharacterStateManager"]
+script = ExtResource("24_r6t50")
+acceleration = 33.0
+maxSpeed = 3.0
+maxSpeedEnforcement = 4.0
+friction = 10.0
+metadata/_custom_type_script = "uid://c4pqnhvnh4d1w"
+
 [node name="CharacterStateJumping" type="Node" parent="CharacterStateManager"]
 script = ExtResource("6_58h4i")
 maxSpeed = 4.0
 
+[node name="CharacterStateCrouchJumping" type="Node" parent="CharacterStateManager"]
+script = ExtResource("6_58h4i")
+stateKey = "crouchJumping"
+postJumpState = "inAirCrouching"
+onCrouchStateKey = "inAir"
+isCrouchedState = true
+acceleration = 25.0
+maxSpeed = 4.0
+
 [node name="CharacterStateDestroyed" type="Node" parent="CharacterStateManager"]
 script = ExtResource("10_8wix2")
-
-[node name="CharacterStateCrouching" type="Node" parent="CharacterStateManager"]
-script = ExtResource("23_g7gci")
-metadata/_custom_type_script = "uid://vt43p4qxufeq"
-
-[node name="CharacterStateInAirCrouching" type="Node" parent="CharacterStateManager"]
-script = ExtResource("24_r6t50")
-metadata/_custom_type_script = "uid://c4pqnhvnh4d1w"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -272,8 +302,8 @@ monitoring = false
 script = ExtResource("17_0i7jp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxStanding"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
-shape = SubResource("CapsuleShape3D_brmud")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.680542, 0)
+shape = SubResource("CylinderShape3D_jbjyn")
 
 [node name="StandingNeckPosition" type="Marker3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5, 0)
@@ -281,8 +311,13 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.5
 [node name="CrouchingNeckPosition" type="Marker3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1, 0)
 
-[node name="Neck" type="Node3D" parent="."]
+[node name="Neck" type="Node3D" parent="." node_paths=PackedStringArray("standingNeckPosition", "crouchingNeckPosition", "characterStateManager")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("27_6rswy")
+standingNeckPosition = NodePath("../StandingNeckPosition")
+crouchingNeckPosition = NodePath("../CrouchingNeckPosition")
+characterStateManager = NodePath("../CharacterStateManager")
+cameraUpdateCurve = ExtResource("15_jbjyn")
 
 [node name="HeadBobAndPunchPivot" type="Node3D" parent="Neck"]
 
@@ -349,7 +384,7 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Neck/HeadBobAndPunchPivot/LeanPivot/FPSView/SubViewportContainer/SubViewport"]
 cull_mask = 2
-environment = ExtResource("18_bxbch")
+environment = ExtResource("32_jbjyn")
 current = true
 fov = 55.0
 
@@ -387,5 +422,12 @@ libraries = {
 
 [node name="GroundShapecast" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.195474, 0)
+visible = false
 shape = SubResource("SphereShape3D_gfv8i")
 target_position = Vector3(0, -0.05, 0)
+
+[node name="StandingShapeCast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
+shape = SubResource("SphereShape3D_jbjyn")
+target_position = Vector3(0, 1, 0)

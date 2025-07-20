@@ -10,6 +10,10 @@ class_name CharacterStateDefault
 var timeInAir : float = 0.0
 const maxAirTime : float = 0.5
 
+func stateEntering(_inLastState : CharacterState) -> void:
+	if getStateManager().getIsCrouching():
+		request_change_state.emit(stateOnCrouchKey)
+
 func update_physics(inDelta : float) -> void:
 	super.update_physics(inDelta)
 
@@ -19,7 +23,10 @@ func update_physics(inDelta : float) -> void:
 		timeInAir = 0.0
 
 	if timeInAir > maxAirTime:
-		request_change_state.emit(stateOnFallKey)
+		onCoyoteTimeEnd()
+
+func onCoyoteTimeEnd() -> void:
+	request_change_state.emit(stateOnFallKey)
 
 func getStateKey() -> String:
 	return CharacterStateLibrary.defaultStateKey
@@ -36,10 +43,10 @@ func handleOnJumpChanged(inIsJumping : bool) -> void:
 func handleOnCrouchChanged(inIsCrouching : bool) -> void:
 	if !inIsCrouching:
 		return
-	
+
 	var character : CharacterBody3D = getStateManager().getCharacter()
 	if character.is_on_floor():
 		request_change_state.emit(stateOnCrouchKey)
 		return
-	
+
 	request_change_state.emit(stateOnCrouchInAirKey)

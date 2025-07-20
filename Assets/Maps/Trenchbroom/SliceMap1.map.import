@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://bbalyi5ry3lfy"
+path="res://.godot/imported/SliceMap1.map-a948ad702b40eeff0b4913df798ceca3.tres"
+
+[deps]
+
+source_file="res://Assets/Maps/Trenchbroom/SliceMap1.map"
+dest_files=["res://.godot/imported/SliceMap1.map-a948ad702b40eeff0b4913df798ceca3.tres"]
+
+[params]
+

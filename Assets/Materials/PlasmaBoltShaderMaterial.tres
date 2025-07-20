@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dlxr0hk6awtgc"]
+
+[ext_resource type="Shader" uid="uid://d2myo75421lxc" path="res://Assets/Shader/OutlineShader.tres" id="1_h75ra"]
+[ext_resource type="Shader" uid="uid://dohcdoqxbli6g" path="res://Assets/Shader/PlasmaBoltShader.tres" id="2_vj63y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7utr"]
+render_priority = 0
+shader = ExtResource("1_h75ra")
+
+[resource]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_m7utr")
+shader = ExtResource("2_vj63y")

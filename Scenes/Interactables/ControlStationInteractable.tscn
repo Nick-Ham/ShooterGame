@@ -89,7 +89,7 @@ shape = SubResource("BoxShape3D_mrd8l")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_0w586")
+&"": SubResource("AnimationLibrary_0w586")
 }
 
 [node name="Interactable" type="Node" parent="."]

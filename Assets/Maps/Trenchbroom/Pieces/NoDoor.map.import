@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://di1cryg6ayy4p"
+path="res://.godot/imported/NoDoor.map-ba6fde3074a494f81be67b9cf8acc793.tres"
+
+[deps]
+
+source_file="res://Assets/Maps/Trenchbroom/Pieces/NoDoor.map"
+dest_files=["res://.godot/imported/NoDoor.map-ba6fde3074a494f81be67b9cf8acc793.tres"]
+
+[params]
+
